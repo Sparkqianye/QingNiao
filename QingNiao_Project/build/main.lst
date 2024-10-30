@@ -1,0 +1,362 @@
+ARM GAS  /tmp/cckhSQu8.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "./User/main.c"
+  20              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+  21              		.align	2
+  22              	.LC0:
+  23 0000 44617461 		.ascii	"Data:%d\015\012\000"
+  23      3A25640D 
+  23      0A00
+  24              		.section	.text.main,"ax",%progbits
+  25              		.align	1
+  26              		.global	main
+  27              		.syntax unified
+  28              		.thumb
+  29              		.thumb_func
+  31              	main:
+  32              	.LFB123:
+   1:./User/main.c **** #include "stm32f4xx.h"                  // Device header
+   2:./User/main.c **** #include "main.h"
+   3:./User/main.c **** 
+   4:./User/main.c **** 
+   5:./User/main.c **** static __IO uint32_t uwTimingDelay;
+   6:./User/main.c **** RCC_ClocksTypeDef RCC_Clocks;
+   7:./User/main.c **** 
+   8:./User/main.c **** extern void LED_Init(void);
+   9:./User/main.c **** uint32_t Data, Duty;
+  10:./User/main.c **** 
+  11:./User/main.c **** int main(void)
+  12:./User/main.c **** {
+  33              		.loc 1 12 1 view -0
+  34              		.cfi_startproc
+  35              		@ Volatile: function does not return.
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 0, uses_anonymous_args = 0
+  38 0000 08B5     		push	{r3, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 8
+  41              		.cfi_offset 3, -8
+  42              		.cfi_offset 14, -4
+  13:./User/main.c **** //  LED_Init();
+  14:./User/main.c ****   GY86_Init();
+ARM GAS  /tmp/cckhSQu8.s 			page 2
+
+
+  43              		.loc 1 14 3 view .LVU1
+  44 0002 FFF7FEFF 		bl	GY86_Init
+  45              	.LVL0:
+  15:./User/main.c ****   Serial_Init();
+  46              		.loc 1 15 3 view .LVU2
+  47 0006 FFF7FEFF 		bl	Serial_Init
+  48              	.LVL1:
+  16:./User/main.c ****   PWM_Init();
+  49              		.loc 1 16 3 view .LVU3
+  50 000a FFF7FEFF 		bl	PWM_Init
+  51              	.LVL2:
+  17:./User/main.c ****   ICTIM2CH1_2_Init();
+  52              		.loc 1 17 3 view .LVU4
+  53 000e FFF7FEFF 		bl	ICTIM2CH1_2_Init
+  54              	.LVL3:
+  55              	.L2:
+  18:./User/main.c ****   
+  19:./User/main.c ****   while(1){   
+  56              		.loc 1 19 3 discriminator 1 view .LVU5
+  20:./User/main.c ****     
+  21:./User/main.c **** //  int16_t hmcX,hmcY,hmcZ;
+  22:./User/main.c **** //	HMC5883L_GetData(&hmcX,&hmcY,&hmcZ);
+  23:./User/main.c **** //  Serial_Printf("hmcX = %d\r\n",hmcX);
+  24:./User/main.c **** //  Delay_ms(100);
+  25:./User/main.c **** //  Serial_Printf("hmcY = %d\r\n",hmcY);
+  26:./User/main.c **** //  Delay_ms(100);
+  27:./User/main.c **** //  Serial_Printf("hmcZ = %d\r\n",hmcZ);
+  28:./User/main.c **** //  Delay_ms(100);
+  29:./User/main.c **** //    
+  30:./User/main.c **** //  int16_t mpuX,mpuY,mpuZ,gyroX,gyroY,gyroZ;
+  31:./User/main.c **** //	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
+  32:./User/main.c **** //	Serial_Printf("mpuX = %d\r\n",mpuX);
+  33:./User/main.c **** //  Delay_ms(100);
+  34:./User/main.c **** //  Serial_Printf("mpuY = %d\r\n",mpuY);
+  35:./User/main.c **** //  Delay_ms(100);
+  36:./User/main.c **** //  Serial_Printf("mpuZ = %d\r\n",mpuZ);
+  37:./User/main.c **** //  Delay_ms(100);
+  38:./User/main.c **** //  Serial_Printf("gyroX = %d\r\n",gyroX);
+  39:./User/main.c **** //  Delay_ms(100);
+  40:./User/main.c **** //  Serial_Printf("gyroY = %d\r\n",gyroY);
+  41:./User/main.c **** //  Delay_ms(100);
+  42:./User/main.c **** //  Serial_Printf("gyroZ = %d\r\n",gyroZ);
+  43:./User/main.c **** //  Delay_ms(100);
+  44:./User/main.c ****     
+  45:./User/main.c ****     
+  46:./User/main.c **** 		Data = (TIM_GetCapture2(TIM2)+1)*10/(TIM_GetCapture1(TIM2)+1);
+  57              		.loc 1 46 3 discriminator 1 view .LVU6
+  58              		.loc 1 46 11 is_stmt 0 discriminator 1 view .LVU7
+  59 0012 4FF08040 		mov	r0, #1073741824
+  60 0016 FFF7FEFF 		bl	TIM_GetCapture2
+  61              	.LVL4:
+  62              		.loc 1 46 35 discriminator 1 view .LVU8
+  63 001a 0130     		adds	r0, r0, #1
+  64 001c 00EB8000 		add	r0, r0, r0, lsl #2
+  65 0020 4400     		lsls	r4, r0, #1
+  66              		.loc 1 46 40 discriminator 1 view .LVU9
+  67 0022 4FF08040 		mov	r0, #1073741824
+ARM GAS  /tmp/cckhSQu8.s 			page 3
+
+
+  68 0026 FFF7FEFF 		bl	TIM_GetCapture1
+  69              	.LVL5:
+  70              		.loc 1 46 61 discriminator 1 view .LVU10
+  71 002a 0130     		adds	r0, r0, #1
+  72              		.loc 1 46 38 discriminator 1 view .LVU11
+  73 002c B4FBF0F3 		udiv	r3, r4, r0
+  74              		.loc 1 46 8 discriminator 1 view .LVU12
+  75 0030 0E4A     		ldr	r2, .L4
+  76 0032 1360     		str	r3, [r2]
+  47:./User/main.c **** //		Data = TIM_GetCapture1(TIM2);
+  48:./User/main.c **** 	
+  49:./User/main.c **** 		Duty = Data*5/7;
+  77              		.loc 1 49 3 is_stmt 1 discriminator 1 view .LVU13
+  78              		.loc 1 49 14 is_stmt 0 discriminator 1 view .LVU14
+  79 0034 03EB8303 		add	r3, r3, r3, lsl #2
+  80              		.loc 1 49 16 discriminator 1 view .LVU15
+  81 0038 0D48     		ldr	r0, .L4+4
+  82 003a A0FB0320 		umull	r2, r0, r0, r3
+  83 003e 1B1A     		subs	r3, r3, r0
+  84 0040 00EB5300 		add	r0, r0, r3, lsr #1
+  85 0044 8008     		lsrs	r0, r0, #2
+  86              		.loc 1 49 8 discriminator 1 view .LVU16
+  87 0046 0B4C     		ldr	r4, .L4+8
+  88 0048 2060     		str	r0, [r4]
+  50:./User/main.c ****     PWM_SetDuty1(Duty);
+  89              		.loc 1 50 5 is_stmt 1 discriminator 1 view .LVU17
+  90 004a 80B2     		uxth	r0, r0
+  91 004c FFF7FEFF 		bl	PWM_SetDuty1
+  92              	.LVL6:
+  51:./User/main.c **** 		PWM_SetDuty2(Duty);
+  93              		.loc 1 51 3 discriminator 1 view .LVU18
+  94 0050 2088     		ldrh	r0, [r4]
+  95 0052 FFF7FEFF 		bl	PWM_SetDuty2
+  96              	.LVL7:
+  52:./User/main.c **** 		PWM_SetDuty3(Duty);
+  97              		.loc 1 52 3 discriminator 1 view .LVU19
+  98 0056 2088     		ldrh	r0, [r4]
+  99 0058 FFF7FEFF 		bl	PWM_SetDuty3
+ 100              	.LVL8:
+  53:./User/main.c **** 		PWM_SetDuty4(Duty);
+ 101              		.loc 1 53 3 discriminator 1 view .LVU20
+ 102 005c 2088     		ldrh	r0, [r4]
+ 103 005e FFF7FEFF 		bl	PWM_SetDuty4
+ 104              	.LVL9:
+  54:./User/main.c **** 		
+  55:./User/main.c **** 		Serial_Printf("Data:%d\r\n",Duty);
+ 105              		.loc 1 55 3 discriminator 1 view .LVU21
+ 106 0062 2168     		ldr	r1, [r4]
+ 107 0064 0448     		ldr	r0, .L4+12
+ 108 0066 FFF7FEFF 		bl	Serial_Printf
+ 109              	.LVL10:
+  19:./User/main.c ****     
+ 110              		.loc 1 19 8 discriminator 1 view .LVU22
+ 111 006a D2E7     		b	.L2
+ 112              	.L5:
+ 113              		.align	2
+ 114              	.L4:
+ARM GAS  /tmp/cckhSQu8.s 			page 4
+
+
+ 115 006c 00000000 		.word	Data
+ 116 0070 25499224 		.word	613566757
+ 117 0074 00000000 		.word	Duty
+ 118 0078 00000000 		.word	.LC0
+ 119              		.cfi_endproc
+ 120              	.LFE123:
+ 122              		.section	.text.TimingDelay_Decrement,"ax",%progbits
+ 123              		.align	1
+ 124              		.global	TimingDelay_Decrement
+ 125              		.syntax unified
+ 126              		.thumb
+ 127              		.thumb_func
+ 129              	TimingDelay_Decrement:
+ 130              	.LFB125:
+  56:./User/main.c **** //    PWM_SetDuty1(10);//PC6
+  57:./User/main.c **** //    PWM_SetDuty2(12);//PC7
+  58:./User/main.c **** //    PWM_SetDuty3(14);//PC8
+  59:./User/main.c **** //    PWM_SetDuty4(8);//PC9
+  60:./User/main.c ****     
+  61:./User/main.c ****     
+  62:./User/main.c **** //    Serial_Printf("TIM2_CH1_2:\r\n");//PA0
+  63:./User/main.c **** //    Serial_Printf("CH1:%d\r\n",TIM_GetCapture1(TIM2));
+  64:./User/main.c **** //    Serial_Printf("CH2:%d\r\n",TIM_GetCapture2(TIM2));
+  65:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture1(TIM2)+1)));
+  66:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n",(TIM_GetCapture2(TIM2)+1)*100/(TIM_GetCapture1(TIM2)+1));
+  67:./User/main.c **** //    
+  68:./User/main.c **** //    Serial_Printf("TIM5_CH1_2:\r\n");//PA1
+  69:./User/main.c **** //    Serial_Printf("CH1:%d\r\n",TIM_GetCapture1(TIM5));
+  70:./User/main.c **** //    Serial_Printf("CH2:%d\r\n",TIM_GetCapture2(TIM5));
+  71:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture2(TIM5)+1)));
+  72:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n",(TIM_GetCapture1(TIM5)+1)*100/(TIM_GetCapture2(TIM5)+1));
+  73:./User/main.c **** //    
+  74:./User/main.c **** //    Serial_Printf("TIM4_CH1_2:\r\n");//PB6
+  75:./User/main.c **** //    Serial_Printf("CH1:%d\r\n",TIM_GetCapture1(TIM4));
+  76:./User/main.c **** //    Serial_Printf("CH2:%d\r\n",TIM_GetCapture2(TIM4));
+  77:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture1(TIM4)+1)));
+  78:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n",(TIM_GetCapture2(TIM4)+1)*100/(TIM_GetCapture1(TIM4)+1));
+  79:./User/main.c ****     
+  80:./User/main.c **** //    Serial_Printf("TIM4_CH3_4:\r\n");//PB8
+  81:./User/main.c **** //    Serial_Printf("CH3:%d\r\n",TIM_GetCapture3(TIM4));
+  82:./User/main.c **** //    Serial_Printf("CH4:%d\r\n",TIM_GetCapture4(TIM4));
+  83:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture3(TIM4)+1)));
+  84:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n\r\n",((TIM_GetCapture4(TIM4)+1)*100/(TIM_GetCapture3(TIM4)+1))
+  85:./User/main.c **** //    Delay_s(2);
+  86:./User/main.c **** //    Serial_Printf("TIM2_CH3_4:\r\n");//PA2
+  87:./User/main.c **** //    Serial_Printf("CH3:%d\r\n",TIM_GetCapture3(TIM2));
+  88:./User/main.c **** //    Serial_Printf("CH4:%d\r\n",TIM_GetCapture4(TIM2));
+  89:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture3(TIM2)+1)));
+  90:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n\r\n",((TIM_GetCapture4(TIM2)+1)*100/(TIM_GetCapture3(TIM2)+1))
+  91:./User/main.c ****     //PWM: PC6789   TIM3_CH1234
+  92:./User/main.c ****     //考虑改为：PA0--TIM2CH1  PA1--TIM5CH2  PA2--TIM2CH3  PA3--TIM5CH4  PB8--TIM4CH3  PB6--TIM
+  93:./User/main.c ****     
+  94:./User/main.c ****     
+  95:./User/main.c ****   }
+  96:./User/main.c ****   
+  97:./User/main.c **** }
+  98:./User/main.c **** 
+ARM GAS  /tmp/cckhSQu8.s 			page 5
+
+
+  99:./User/main.c **** 
+ 100:./User/main.c **** /**
+ 101:./User/main.c ****   * @brief  Inserts a delay time.
+ 102:./User/main.c ****   * @param  nTime: specifies the delay time length, in milliseconds.
+ 103:./User/main.c ****   * @retval None
+ 104:./User/main.c ****   */
+ 105:./User/main.c **** void Delay(__IO uint32_t nTime)
+ 106:./User/main.c **** { 
+ 107:./User/main.c ****   uwTimingDelay = nTime;
+ 108:./User/main.c **** 
+ 109:./User/main.c ****   while(uwTimingDelay != 0);
+ 110:./User/main.c **** }
+ 111:./User/main.c **** 
+ 112:./User/main.c **** /**
+ 113:./User/main.c ****   * @brief  Decrements the TimingDelay variable.
+ 114:./User/main.c ****   * @param  None
+ 115:./User/main.c ****   * @retval None
+ 116:./User/main.c ****   */
+ 117:./User/main.c **** void TimingDelay_Decrement(void)
+ 118:./User/main.c **** {
+ 131              		.loc 1 118 1 view -0
+ 132              		.cfi_startproc
+ 133              		@ args = 0, pretend = 0, frame = 0
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135              		@ link register save eliminated.
+ 119:./User/main.c ****   if (uwTimingDelay != 0x00)
+ 136              		.loc 1 119 3 view .LVU24
+ 137              		.loc 1 119 21 is_stmt 0 view .LVU25
+ 138 0000 034B     		ldr	r3, .L8
+ 139 0002 1B68     		ldr	r3, [r3]
+ 140              		.loc 1 119 6 view .LVU26
+ 141 0004 1BB1     		cbz	r3, .L6
+ 120:./User/main.c ****   { 
+ 121:./User/main.c ****     uwTimingDelay--;
+ 142              		.loc 1 121 5 is_stmt 1 view .LVU27
+ 143              		.loc 1 121 18 is_stmt 0 view .LVU28
+ 144 0006 024A     		ldr	r2, .L8
+ 145 0008 1368     		ldr	r3, [r2]
+ 146 000a 013B     		subs	r3, r3, #1
+ 147 000c 1360     		str	r3, [r2]
+ 148              	.L6:
+ 122:./User/main.c ****   }
+ 123:./User/main.c **** }
+ 149              		.loc 1 123 1 view .LVU29
+ 150 000e 7047     		bx	lr
+ 151              	.L9:
+ 152              		.align	2
+ 153              	.L8:
+ 154 0010 00000000 		.word	uwTimingDelay
+ 155              		.cfi_endproc
+ 156              	.LFE125:
+ 158              		.global	Duty
+ 159              		.section	.bss.Duty,"aw",%nobits
+ 160              		.align	2
+ 163              	Duty:
+ 164 0000 00000000 		.space	4
+ 165              		.global	Data
+ARM GAS  /tmp/cckhSQu8.s 			page 6
+
+
+ 166              		.section	.bss.Data,"aw",%nobits
+ 167              		.align	2
+ 170              	Data:
+ 171 0000 00000000 		.space	4
+ 172              		.global	RCC_Clocks
+ 173              		.section	.bss.RCC_Clocks,"aw",%nobits
+ 174              		.align	2
+ 177              	RCC_Clocks:
+ 178 0000 00000000 		.space	16
+ 178      00000000 
+ 178      00000000 
+ 178      00000000 
+ 179              		.section	.bss.uwTimingDelay,"aw",%nobits
+ 180              		.align	2
+ 183              	uwTimingDelay:
+ 184 0000 00000000 		.space	4
+ 185              		.text
+ 186              	.Letext0:
+ 187              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
+ 188              		.file 3 "./CORE/stm32f4xx.h"
+ 189              		.file 4 "./Library/stm32f4xx_rcc.h"
+ 190              		.file 5 "./Hardware/Serial.h"
+ 191              		.file 6 "./Hardware/PWM.h"
+ 192              		.file 7 "./Library/stm32f4xx_tim.h"
+ 193              		.file 8 "./Hardware/Receiver.h"
+ 194              		.file 9 "./Hardware/gy86.h"
+ARM GAS  /tmp/cckhSQu8.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+     /tmp/cckhSQu8.s:21     .rodata.main.str1.4:0000000000000000 $d
+     /tmp/cckhSQu8.s:25     .text.main:0000000000000000 $t
+     /tmp/cckhSQu8.s:31     .text.main:0000000000000000 main
+     /tmp/cckhSQu8.s:115    .text.main:000000000000006c $d
+     /tmp/cckhSQu8.s:170    .bss.Data:0000000000000000 Data
+     /tmp/cckhSQu8.s:163    .bss.Duty:0000000000000000 Duty
+     /tmp/cckhSQu8.s:123    .text.TimingDelay_Decrement:0000000000000000 $t
+     /tmp/cckhSQu8.s:129    .text.TimingDelay_Decrement:0000000000000000 TimingDelay_Decrement
+     /tmp/cckhSQu8.s:154    .text.TimingDelay_Decrement:0000000000000010 $d
+     /tmp/cckhSQu8.s:183    .bss.uwTimingDelay:0000000000000000 uwTimingDelay
+     /tmp/cckhSQu8.s:160    .bss.Duty:0000000000000000 $d
+     /tmp/cckhSQu8.s:167    .bss.Data:0000000000000000 $d
+     /tmp/cckhSQu8.s:177    .bss.RCC_Clocks:0000000000000000 RCC_Clocks
+     /tmp/cckhSQu8.s:174    .bss.RCC_Clocks:0000000000000000 $d
+     /tmp/cckhSQu8.s:180    .bss.uwTimingDelay:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+GY86_Init
+Serial_Init
+PWM_Init
+ICTIM2CH1_2_Init
+TIM_GetCapture2
+TIM_GetCapture1
+PWM_SetDuty1
+PWM_SetDuty2
+PWM_SetDuty3
+PWM_SetDuty4
+Serial_Printf

@@ -1,0 +1,530 @@
+ARM GAS  /tmp/ccZjJzuU.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"Serial.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "./Hardware/Serial.c"
+  20              		.section	.text.Serial_Init,"ax",%progbits
+  21              		.align	1
+  22              		.global	Serial_Init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	Serial_Init:
+  28              	.LFB126:
+   1:./Hardware/Serial.c **** #include "stm32f4xx.h"                  // Device header
+   2:./Hardware/Serial.c **** #include <stdio.h>
+   3:./Hardware/Serial.c **** #include <stdarg.h>
+   4:./Hardware/Serial.c **** 
+   5:./Hardware/Serial.c **** void Serial_Init()
+   6:./Hardware/Serial.c **** {
+  29              		.loc 1 6 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 24
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 30B5     		push	{r4, r5, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 12
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 5, -8
+  38              		.cfi_offset 14, -4
+  39 0002 87B0     		sub	sp, sp, #28
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 40
+   7:./Hardware/Serial.c ****   
+   8:./Hardware/Serial.c ****   RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+  42              		.loc 1 8 3 view .LVU1
+  43 0004 0121     		movs	r1, #1
+  44 0006 1020     		movs	r0, #16
+  45 0008 FFF7FEFF 		bl	RCC_APB2PeriphClockCmd
+  46              	.LVL0:
+   9:./Hardware/Serial.c ****   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);//PA9TX,PA10RX
+  47              		.loc 1 9 3 view .LVU2
+  48 000c 0121     		movs	r1, #1
+  49 000e 0846     		mov	r0, r1
+ARM GAS  /tmp/ccZjJzuU.s 			page 2
+
+
+  50 0010 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+  51              	.LVL1:
+  10:./Hardware/Serial.c ****   
+  11:./Hardware/Serial.c ****   GPIO_PinAFConfig(GPIOA,GPIO_PinSource9,GPIO_AF_USART1);
+  52              		.loc 1 11 3 view .LVU3
+  53 0014 1C4D     		ldr	r5, .L3
+  54 0016 0722     		movs	r2, #7
+  55 0018 0921     		movs	r1, #9
+  56 001a 2846     		mov	r0, r5
+  57 001c FFF7FEFF 		bl	GPIO_PinAFConfig
+  58              	.LVL2:
+  12:./Hardware/Serial.c ****   GPIO_PinAFConfig(GPIOA,GPIO_PinSource10,GPIO_AF_USART1);
+  59              		.loc 1 12 3 view .LVU4
+  60 0020 0722     		movs	r2, #7
+  61 0022 0A21     		movs	r1, #10
+  62 0024 2846     		mov	r0, r5
+  63 0026 FFF7FEFF 		bl	GPIO_PinAFConfig
+  64              	.LVL3:
+  13:./Hardware/Serial.c ****   
+  14:./Hardware/Serial.c ****   GPIO_InitTypeDef GPIO_InitStructure;
+  65              		.loc 1 14 3 view .LVU5
+  15:./Hardware/Serial.c **** 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+  66              		.loc 1 15 2 view .LVU6
+  67              		.loc 1 15 31 is_stmt 0 view .LVU7
+  68 002a 0223     		movs	r3, #2
+  69 002c 8DF81430 		strb	r3, [sp, #20]
+  16:./Hardware/Serial.c ****   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  70              		.loc 1 16 3 is_stmt 1 view .LVU8
+  71              		.loc 1 16 33 is_stmt 0 view .LVU9
+  72 0030 0024     		movs	r4, #0
+  73 0032 8DF81640 		strb	r4, [sp, #22]
+  17:./Hardware/Serial.c ****   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  74              		.loc 1 17 3 is_stmt 1 view .LVU10
+  75              		.loc 1 17 32 is_stmt 0 view .LVU11
+  76 0036 8DF81740 		strb	r4, [sp, #23]
+  18:./Hardware/Serial.c ****   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10;
+  77              		.loc 1 18 3 is_stmt 1 view .LVU12
+  78              		.loc 1 18 31 is_stmt 0 view .LVU13
+  79 003a 4FF4C063 		mov	r3, #1536
+  80 003e 0493     		str	r3, [sp, #16]
+  19:./Hardware/Serial.c ****   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+  81              		.loc 1 19 3 is_stmt 1 view .LVU14
+  82              		.loc 1 19 33 is_stmt 0 view .LVU15
+  83 0040 0323     		movs	r3, #3
+  84 0042 8DF81530 		strb	r3, [sp, #21]
+  20:./Hardware/Serial.c **** 	GPIO_Init(GPIOA, &GPIO_InitStructure);
+  85              		.loc 1 20 2 is_stmt 1 view .LVU16
+  86 0046 04A9     		add	r1, sp, #16
+  87 0048 2846     		mov	r0, r5
+  88 004a FFF7FEFF 		bl	GPIO_Init
+  89              	.LVL4:
+  21:./Hardware/Serial.c ****   
+  22:./Hardware/Serial.c ****   USART_InitTypeDef USART_InitStructure;
+  90              		.loc 1 22 3 view .LVU17
+  23:./Hardware/Serial.c ****   USART_InitStructure.USART_BaudRate = 9600;
+  91              		.loc 1 23 3 view .LVU18
+  92              		.loc 1 23 38 is_stmt 0 view .LVU19
+ARM GAS  /tmp/ccZjJzuU.s 			page 3
+
+
+  93 004e 4FF41653 		mov	r3, #9600
+  94 0052 0093     		str	r3, [sp]
+  24:./Hardware/Serial.c ****   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+  95              		.loc 1 24 3 is_stmt 1 view .LVU20
+  96              		.loc 1 24 49 is_stmt 0 view .LVU21
+  97 0054 ADF80C40 		strh	r4, [sp, #12]	@ movhi
+  25:./Hardware/Serial.c ****   USART_InitStructure.USART_Mode = USART_Mode_Rx|USART_Mode_Tx;
+  98              		.loc 1 25 3 is_stmt 1 view .LVU22
+  99              		.loc 1 25 34 is_stmt 0 view .LVU23
+ 100 0058 0C23     		movs	r3, #12
+ 101 005a ADF80A30 		strh	r3, [sp, #10]	@ movhi
+  26:./Hardware/Serial.c ****   USART_InitStructure.USART_Parity = USART_Parity_No;
+ 102              		.loc 1 26 3 is_stmt 1 view .LVU24
+ 103              		.loc 1 26 36 is_stmt 0 view .LVU25
+ 104 005e ADF80840 		strh	r4, [sp, #8]	@ movhi
+  27:./Hardware/Serial.c ****   USART_InitStructure.USART_StopBits = USART_StopBits_1;
+ 105              		.loc 1 27 3 is_stmt 1 view .LVU26
+ 106              		.loc 1 27 38 is_stmt 0 view .LVU27
+ 107 0062 ADF80640 		strh	r4, [sp, #6]	@ movhi
+  28:./Hardware/Serial.c ****   USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+ 108              		.loc 1 28 3 is_stmt 1 view .LVU28
+ 109              		.loc 1 28 40 is_stmt 0 view .LVU29
+ 110 0066 ADF80440 		strh	r4, [sp, #4]	@ movhi
+  29:./Hardware/Serial.c ****   USART_Init(USART1, &USART_InitStructure);
+ 111              		.loc 1 29 3 is_stmt 1 view .LVU30
+ 112 006a 04F18044 		add	r4, r4, #1073741824
+ 113 006e 04F58834 		add	r4, r4, #69632
+ 114 0072 6946     		mov	r1, sp
+ 115 0074 2046     		mov	r0, r4
+ 116 0076 FFF7FEFF 		bl	USART_Init
+ 117              	.LVL5:
+  30:./Hardware/Serial.c ****   
+  31:./Hardware/Serial.c ****   
+  32:./Hardware/Serial.c ****   
+  33:./Hardware/Serial.c ****   USART_Cmd(USART1, ENABLE);
+ 118              		.loc 1 33 3 view .LVU31
+ 119 007a 0121     		movs	r1, #1
+ 120 007c 2046     		mov	r0, r4
+ 121 007e FFF7FEFF 		bl	USART_Cmd
+ 122              	.LVL6:
+  34:./Hardware/Serial.c ****   
+  35:./Hardware/Serial.c **** }
+ 123              		.loc 1 35 1 is_stmt 0 view .LVU32
+ 124 0082 07B0     		add	sp, sp, #28
+ 125              	.LCFI2:
+ 126              		.cfi_def_cfa_offset 12
+ 127              		@ sp needed
+ 128 0084 30BD     		pop	{r4, r5, pc}
+ 129              	.L4:
+ 130 0086 00BF     		.align	2
+ 131              	.L3:
+ 132 0088 00000240 		.word	1073872896
+ 133              		.cfi_endproc
+ 134              	.LFE126:
+ 136              		.section	.text.Serial_SendByte,"ax",%progbits
+ 137              		.align	1
+ 138              		.global	Serial_SendByte
+ARM GAS  /tmp/ccZjJzuU.s 			page 4
+
+
+ 139              		.syntax unified
+ 140              		.thumb
+ 141              		.thumb_func
+ 143              	Serial_SendByte:
+ 144              	.LVL7:
+ 145              	.LFB127:
+  36:./Hardware/Serial.c **** 
+  37:./Hardware/Serial.c **** void Serial_SendByte(uint8_t Byte)
+  38:./Hardware/Serial.c **** {
+ 146              		.loc 1 38 1 is_stmt 1 view -0
+ 147              		.cfi_startproc
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150              		.loc 1 38 1 is_stmt 0 view .LVU34
+ 151 0000 08B5     		push	{r3, lr}
+ 152              	.LCFI3:
+ 153              		.cfi_def_cfa_offset 8
+ 154              		.cfi_offset 3, -8
+ 155              		.cfi_offset 14, -4
+ 156 0002 0146     		mov	r1, r0
+  39:./Hardware/Serial.c **** 	USART_SendData(USART1, Byte);
+ 157              		.loc 1 39 2 is_stmt 1 view .LVU35
+ 158 0004 0448     		ldr	r0, .L8
+ 159              	.LVL8:
+ 160              		.loc 1 39 2 is_stmt 0 view .LVU36
+ 161 0006 FFF7FEFF 		bl	USART_SendData
+ 162              	.LVL9:
+  40:./Hardware/Serial.c **** 	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+ 163              		.loc 1 40 2 is_stmt 1 view .LVU37
+ 164              	.L6:
+ 165              		.loc 1 40 53 discriminator 1 view .LVU38
+ 166              		.loc 1 40 9 is_stmt 0 discriminator 1 view .LVU39
+ 167 000a 8021     		movs	r1, #128
+ 168 000c 0248     		ldr	r0, .L8
+ 169 000e FFF7FEFF 		bl	USART_GetFlagStatus
+ 170              	.LVL10:
+ 171              		.loc 1 40 53 discriminator 1 view .LVU40
+ 172 0012 0028     		cmp	r0, #0
+ 173 0014 F9D0     		beq	.L6
+  41:./Hardware/Serial.c **** }
+ 174              		.loc 1 41 1 view .LVU41
+ 175 0016 08BD     		pop	{r3, pc}
+ 176              	.L9:
+ 177              		.align	2
+ 178              	.L8:
+ 179 0018 00100140 		.word	1073811456
+ 180              		.cfi_endproc
+ 181              	.LFE127:
+ 183              		.section	.text.Serial_SendArray,"ax",%progbits
+ 184              		.align	1
+ 185              		.global	Serial_SendArray
+ 186              		.syntax unified
+ 187              		.thumb
+ 188              		.thumb_func
+ 190              	Serial_SendArray:
+ 191              	.LVL11:
+ 192              	.LFB128:
+ARM GAS  /tmp/ccZjJzuU.s 			page 5
+
+
+  42:./Hardware/Serial.c **** 
+  43:./Hardware/Serial.c **** void Serial_SendArray(uint8_t *Array, uint16_t Length)
+  44:./Hardware/Serial.c **** {
+ 193              		.loc 1 44 1 is_stmt 1 view -0
+ 194              		.cfi_startproc
+ 195              		@ args = 0, pretend = 0, frame = 0
+ 196              		@ frame_needed = 0, uses_anonymous_args = 0
+ 197              		.loc 1 44 1 is_stmt 0 view .LVU43
+ 198 0000 70B5     		push	{r4, r5, r6, lr}
+ 199              	.LCFI4:
+ 200              		.cfi_def_cfa_offset 16
+ 201              		.cfi_offset 4, -16
+ 202              		.cfi_offset 5, -12
+ 203              		.cfi_offset 6, -8
+ 204              		.cfi_offset 14, -4
+ 205 0002 0646     		mov	r6, r0
+ 206 0004 0D46     		mov	r5, r1
+  45:./Hardware/Serial.c **** 	uint16_t i;
+ 207              		.loc 1 45 2 is_stmt 1 view .LVU44
+  46:./Hardware/Serial.c **** 	for (i = 0; i < Length; i ++)
+ 208              		.loc 1 46 2 view .LVU45
+ 209              	.LVL12:
+ 210              		.loc 1 46 9 is_stmt 0 view .LVU46
+ 211 0006 0024     		movs	r4, #0
+ 212              		.loc 1 46 2 view .LVU47
+ 213 0008 04E0     		b	.L11
+ 214              	.LVL13:
+ 215              	.L12:
+  47:./Hardware/Serial.c **** 	{
+  48:./Hardware/Serial.c **** 		Serial_SendByte(Array[i]);
+ 216              		.loc 1 48 3 is_stmt 1 discriminator 3 view .LVU48
+ 217 000a 305D     		ldrb	r0, [r6, r4]	@ zero_extendqisi2
+ 218 000c FFF7FEFF 		bl	Serial_SendByte
+ 219              	.LVL14:
+  46:./Hardware/Serial.c **** 	for (i = 0; i < Length; i ++)
+ 220              		.loc 1 46 28 discriminator 3 view .LVU49
+ 221 0010 0134     		adds	r4, r4, #1
+ 222              	.LVL15:
+  46:./Hardware/Serial.c **** 	for (i = 0; i < Length; i ++)
+ 223              		.loc 1 46 28 is_stmt 0 discriminator 3 view .LVU50
+ 224 0012 A4B2     		uxth	r4, r4
+ 225              	.LVL16:
+ 226              	.L11:
+  46:./Hardware/Serial.c **** 	for (i = 0; i < Length; i ++)
+ 227              		.loc 1 46 16 is_stmt 1 discriminator 1 view .LVU51
+ 228 0014 AC42     		cmp	r4, r5
+ 229 0016 F8D3     		bcc	.L12
+  49:./Hardware/Serial.c **** 	}
+  50:./Hardware/Serial.c **** }
+ 230              		.loc 1 50 1 is_stmt 0 view .LVU52
+ 231 0018 70BD     		pop	{r4, r5, r6, pc}
+ 232              		.loc 1 50 1 view .LVU53
+ 233              		.cfi_endproc
+ 234              	.LFE128:
+ 236              		.section	.text.Serial_SendString,"ax",%progbits
+ 237              		.align	1
+ 238              		.global	Serial_SendString
+ARM GAS  /tmp/ccZjJzuU.s 			page 6
+
+
+ 239              		.syntax unified
+ 240              		.thumb
+ 241              		.thumb_func
+ 243              	Serial_SendString:
+ 244              	.LVL17:
+ 245              	.LFB129:
+  51:./Hardware/Serial.c **** 
+  52:./Hardware/Serial.c **** void Serial_SendString(char *String)
+  53:./Hardware/Serial.c **** {
+ 246              		.loc 1 53 1 is_stmt 1 view -0
+ 247              		.cfi_startproc
+ 248              		@ args = 0, pretend = 0, frame = 0
+ 249              		@ frame_needed = 0, uses_anonymous_args = 0
+ 250              		.loc 1 53 1 is_stmt 0 view .LVU55
+ 251 0000 38B5     		push	{r3, r4, r5, lr}
+ 252              	.LCFI5:
+ 253              		.cfi_def_cfa_offset 16
+ 254              		.cfi_offset 3, -16
+ 255              		.cfi_offset 4, -12
+ 256              		.cfi_offset 5, -8
+ 257              		.cfi_offset 14, -4
+ 258 0002 0546     		mov	r5, r0
+  54:./Hardware/Serial.c **** 	uint8_t i;
+ 259              		.loc 1 54 2 is_stmt 1 view .LVU56
+  55:./Hardware/Serial.c **** 	for (i = 0; String[i] != '\0'; i ++)
+ 260              		.loc 1 55 2 view .LVU57
+ 261              	.LVL18:
+ 262              		.loc 1 55 9 is_stmt 0 view .LVU58
+ 263 0004 0024     		movs	r4, #0
+ 264              		.loc 1 55 2 view .LVU59
+ 265 0006 03E0     		b	.L15
+ 266              	.LVL19:
+ 267              	.L16:
+  56:./Hardware/Serial.c **** 	{
+  57:./Hardware/Serial.c **** 		Serial_SendByte(String[i]);
+ 268              		.loc 1 57 3 is_stmt 1 discriminator 3 view .LVU60
+ 269 0008 FFF7FEFF 		bl	Serial_SendByte
+ 270              	.LVL20:
+  55:./Hardware/Serial.c **** 	for (i = 0; String[i] != '\0'; i ++)
+ 271              		.loc 1 55 35 discriminator 3 view .LVU61
+ 272 000c 0134     		adds	r4, r4, #1
+ 273              	.LVL21:
+  55:./Hardware/Serial.c **** 	for (i = 0; String[i] != '\0'; i ++)
+ 274              		.loc 1 55 35 is_stmt 0 discriminator 3 view .LVU62
+ 275 000e E4B2     		uxtb	r4, r4
+ 276              	.LVL22:
+ 277              	.L15:
+  55:./Hardware/Serial.c **** 	for (i = 0; String[i] != '\0'; i ++)
+ 278              		.loc 1 55 24 is_stmt 1 discriminator 1 view .LVU63
+  55:./Hardware/Serial.c **** 	for (i = 0; String[i] != '\0'; i ++)
+ 279              		.loc 1 55 20 is_stmt 0 discriminator 1 view .LVU64
+ 280 0010 285D     		ldrb	r0, [r5, r4]	@ zero_extendqisi2
+  55:./Hardware/Serial.c **** 	for (i = 0; String[i] != '\0'; i ++)
+ 281              		.loc 1 55 24 discriminator 1 view .LVU65
+ 282 0012 0028     		cmp	r0, #0
+ 283 0014 F8D1     		bne	.L16
+  58:./Hardware/Serial.c **** 	}
+ARM GAS  /tmp/ccZjJzuU.s 			page 7
+
+
+  59:./Hardware/Serial.c **** }
+ 284              		.loc 1 59 1 view .LVU66
+ 285 0016 38BD     		pop	{r3, r4, r5, pc}
+ 286              		.loc 1 59 1 view .LVU67
+ 287              		.cfi_endproc
+ 288              	.LFE129:
+ 290              		.section	.text.fputc,"ax",%progbits
+ 291              		.align	1
+ 292              		.global	fputc
+ 293              		.syntax unified
+ 294              		.thumb
+ 295              		.thumb_func
+ 297              	fputc:
+ 298              	.LVL23:
+ 299              	.LFB130:
+  60:./Hardware/Serial.c **** 
+  61:./Hardware/Serial.c **** int fputc(int ch, FILE *f)
+  62:./Hardware/Serial.c **** {
+ 300              		.loc 1 62 1 is_stmt 1 view -0
+ 301              		.cfi_startproc
+ 302              		@ args = 0, pretend = 0, frame = 0
+ 303              		@ frame_needed = 0, uses_anonymous_args = 0
+ 304              		.loc 1 62 1 is_stmt 0 view .LVU69
+ 305 0000 10B5     		push	{r4, lr}
+ 306              	.LCFI6:
+ 307              		.cfi_def_cfa_offset 8
+ 308              		.cfi_offset 4, -8
+ 309              		.cfi_offset 14, -4
+ 310 0002 0446     		mov	r4, r0
+  63:./Hardware/Serial.c **** 	Serial_SendByte(ch);
+ 311              		.loc 1 63 2 is_stmt 1 view .LVU70
+ 312 0004 C0B2     		uxtb	r0, r0
+ 313              	.LVL24:
+ 314              		.loc 1 63 2 is_stmt 0 view .LVU71
+ 315 0006 FFF7FEFF 		bl	Serial_SendByte
+ 316              	.LVL25:
+  64:./Hardware/Serial.c **** 	return ch;
+ 317              		.loc 1 64 2 is_stmt 1 view .LVU72
+  65:./Hardware/Serial.c **** }
+ 318              		.loc 1 65 1 is_stmt 0 view .LVU73
+ 319 000a 2046     		mov	r0, r4
+ 320 000c 10BD     		pop	{r4, pc}
+ 321              		.loc 1 65 1 view .LVU74
+ 322              		.cfi_endproc
+ 323              	.LFE130:
+ 325              		.section	.text.Serial_Printf,"ax",%progbits
+ 326              		.align	1
+ 327              		.global	Serial_Printf
+ 328              		.syntax unified
+ 329              		.thumb
+ 330              		.thumb_func
+ 332              	Serial_Printf:
+ 333              	.LVL26:
+ 334              	.LFB131:
+  66:./Hardware/Serial.c **** 
+  67:./Hardware/Serial.c **** void Serial_Printf(char *format, ...)
+  68:./Hardware/Serial.c **** {
+ARM GAS  /tmp/ccZjJzuU.s 			page 8
+
+
+ 335              		.loc 1 68 1 is_stmt 1 view -0
+ 336              		.cfi_startproc
+ 337              		@ args = 4, pretend = 16, frame = 104
+ 338              		@ frame_needed = 0, uses_anonymous_args = 1
+ 339              		.loc 1 68 1 is_stmt 0 view .LVU76
+ 340 0000 0FB4     		push	{r0, r1, r2, r3}
+ 341              	.LCFI7:
+ 342              		.cfi_def_cfa_offset 16
+ 343              		.cfi_offset 0, -16
+ 344              		.cfi_offset 1, -12
+ 345              		.cfi_offset 2, -8
+ 346              		.cfi_offset 3, -4
+ 347 0002 00B5     		push	{lr}
+ 348              	.LCFI8:
+ 349              		.cfi_def_cfa_offset 20
+ 350              		.cfi_offset 14, -20
+ 351 0004 9BB0     		sub	sp, sp, #108
+ 352              	.LCFI9:
+ 353              		.cfi_def_cfa_offset 128
+ 354 0006 1CAA     		add	r2, sp, #112
+ 355 0008 52F8041B 		ldr	r1, [r2], #4
+  69:./Hardware/Serial.c **** 	char String[100];
+ 356              		.loc 1 69 2 is_stmt 1 view .LVU77
+  70:./Hardware/Serial.c **** 	va_list arg;
+ 357              		.loc 1 70 2 view .LVU78
+  71:./Hardware/Serial.c **** 	va_start(arg, format);
+ 358              		.loc 1 71 2 view .LVU79
+ 359 000c 0092     		str	r2, [sp]
+  72:./Hardware/Serial.c **** 	vsprintf(String, format, arg);
+ 360              		.loc 1 72 2 view .LVU80
+ 361 000e 01A8     		add	r0, sp, #4
+ 362 0010 FFF7FEFF 		bl	vsprintf
+ 363              	.LVL27:
+  73:./Hardware/Serial.c **** 	va_end(arg);
+ 364              		.loc 1 73 2 view .LVU81
+  74:./Hardware/Serial.c **** 	Serial_SendString(String);
+ 365              		.loc 1 74 2 view .LVU82
+ 366 0014 01A8     		add	r0, sp, #4
+ 367 0016 FFF7FEFF 		bl	Serial_SendString
+ 368              	.LVL28:
+  75:./Hardware/Serial.c **** }
+ 369              		.loc 1 75 1 is_stmt 0 view .LVU83
+ 370 001a 1BB0     		add	sp, sp, #108
+ 371              	.LCFI10:
+ 372              		.cfi_def_cfa_offset 20
+ 373              		@ sp needed
+ 374 001c 5DF804EB 		ldr	lr, [sp], #4
+ 375              	.LCFI11:
+ 376              		.cfi_restore 14
+ 377              		.cfi_def_cfa_offset 16
+ 378 0020 04B0     		add	sp, sp, #16
+ 379              	.LCFI12:
+ 380              		.cfi_restore 3
+ 381              		.cfi_restore 2
+ 382              		.cfi_restore 1
+ 383              		.cfi_restore 0
+ 384              		.cfi_def_cfa_offset 0
+ARM GAS  /tmp/ccZjJzuU.s 			page 9
+
+
+ 385 0022 7047     		bx	lr
+ 386              		.cfi_endproc
+ 387              	.LFE131:
+ 389              		.text
+ 390              	.Letext0:
+ 391              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
+ 392              		.file 3 "./CORE/stm32f4xx.h"
+ 393              		.file 4 "./Library/stm32f4xx_gpio.h"
+ 394              		.file 5 "./Library/stm32f4xx_usart.h"
+ 395              		.file 6 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdarg.h"
+ 396              		.file 7 "/usr/include/newlib/stdio.h"
+ 397              		.file 8 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stddef.h"
+ 398              		.file 9 "/usr/include/newlib/sys/_types.h"
+ 399              		.file 10 "/usr/include/newlib/sys/reent.h"
+ 400              		.file 11 "/usr/include/newlib/sys/lock.h"
+ 401              		.file 12 "./Library/stm32f4xx_rcc.h"
+ 402              		.file 13 "<built-in>"
+ARM GAS  /tmp/ccZjJzuU.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Serial.c
+     /tmp/ccZjJzuU.s:21     .text.Serial_Init:0000000000000000 $t
+     /tmp/ccZjJzuU.s:27     .text.Serial_Init:0000000000000000 Serial_Init
+     /tmp/ccZjJzuU.s:132    .text.Serial_Init:0000000000000088 $d
+     /tmp/ccZjJzuU.s:137    .text.Serial_SendByte:0000000000000000 $t
+     /tmp/ccZjJzuU.s:143    .text.Serial_SendByte:0000000000000000 Serial_SendByte
+     /tmp/ccZjJzuU.s:179    .text.Serial_SendByte:0000000000000018 $d
+     /tmp/ccZjJzuU.s:184    .text.Serial_SendArray:0000000000000000 $t
+     /tmp/ccZjJzuU.s:190    .text.Serial_SendArray:0000000000000000 Serial_SendArray
+     /tmp/ccZjJzuU.s:237    .text.Serial_SendString:0000000000000000 $t
+     /tmp/ccZjJzuU.s:243    .text.Serial_SendString:0000000000000000 Serial_SendString
+     /tmp/ccZjJzuU.s:291    .text.fputc:0000000000000000 $t
+     /tmp/ccZjJzuU.s:297    .text.fputc:0000000000000000 fputc
+     /tmp/ccZjJzuU.s:326    .text.Serial_Printf:0000000000000000 $t
+     /tmp/ccZjJzuU.s:332    .text.Serial_Printf:0000000000000000 Serial_Printf
+
+UNDEFINED SYMBOLS
+RCC_APB2PeriphClockCmd
+RCC_AHB1PeriphClockCmd
+GPIO_PinAFConfig
+GPIO_Init
+USART_Init
+USART_Cmd
+USART_SendData
+USART_GetFlagStatus
+vsprintf

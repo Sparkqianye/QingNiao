@@ -1,0 +1,703 @@
+ARM GAS  /tmp/ccBqPpxi.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"My_I2C.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "./Hardware/My_I2C.c"
+  20              		.section	.text.MyI2C_W_SCL,"ax",%progbits
+  21              		.align	1
+  22              		.global	MyI2C_W_SCL
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	MyI2C_W_SCL:
+  28              	.LVL0:
+  29              	.LFB123:
+   1:./Hardware/My_I2C.c ****  #include "stm32f4xx.h"                  // Device header
+   2:./Hardware/My_I2C.c **** #include "Delay.h"
+   3:./Hardware/My_I2C.c **** 
+   4:./Hardware/My_I2C.c **** //PC10 SCL   PC12 SDA
+   5:./Hardware/My_I2C.c **** void MyI2C_W_SCL(uint8_t BitValue)
+   6:./Hardware/My_I2C.c **** {
+  30              		.loc 1 6 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 6 1 is_stmt 0 view .LVU1
+  35 0000 08B5     		push	{r3, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 3, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0246     		mov	r2, r0
+   7:./Hardware/My_I2C.c **** 		GPIO_WriteBit(GPIOC,GPIO_Pin_10,(BitAction)BitValue);
+  41              		.loc 1 7 3 is_stmt 1 view .LVU2
+  42 0004 4FF48061 		mov	r1, #1024
+  43 0008 0348     		ldr	r0, .L3
+  44              	.LVL1:
+  45              		.loc 1 7 3 is_stmt 0 view .LVU3
+  46 000a FFF7FEFF 		bl	GPIO_WriteBit
+  47              	.LVL2:
+   8:./Hardware/My_I2C.c **** 		Delay_us (10);
+  48              		.loc 1 8 3 is_stmt 1 view .LVU4
+  49 000e 0A20     		movs	r0, #10
+  50 0010 FFF7FEFF 		bl	Delay_us
+ARM GAS  /tmp/ccBqPpxi.s 			page 2
+
+
+  51              	.LVL3:
+   9:./Hardware/My_I2C.c **** }
+  52              		.loc 1 9 1 is_stmt 0 view .LVU5
+  53 0014 08BD     		pop	{r3, pc}
+  54              	.L4:
+  55 0016 00BF     		.align	2
+  56              	.L3:
+  57 0018 00080240 		.word	1073874944
+  58              		.cfi_endproc
+  59              	.LFE123:
+  61              		.section	.text.MyI2C_W_SDA,"ax",%progbits
+  62              		.align	1
+  63              		.global	MyI2C_W_SDA
+  64              		.syntax unified
+  65              		.thumb
+  66              		.thumb_func
+  68              	MyI2C_W_SDA:
+  69              	.LVL4:
+  70              	.LFB124:
+  10:./Hardware/My_I2C.c **** void MyI2C_W_SDA(uint8_t BitValue)
+  11:./Hardware/My_I2C.c **** {
+  71              		.loc 1 11 1 is_stmt 1 view -0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75              		.loc 1 11 1 is_stmt 0 view .LVU7
+  76 0000 08B5     		push	{r3, lr}
+  77              	.LCFI1:
+  78              		.cfi_def_cfa_offset 8
+  79              		.cfi_offset 3, -8
+  80              		.cfi_offset 14, -4
+  81 0002 0246     		mov	r2, r0
+  12:./Hardware/My_I2C.c **** 		GPIO_WriteBit(GPIOC,GPIO_Pin_12,(BitAction)BitValue);
+  82              		.loc 1 12 3 is_stmt 1 view .LVU8
+  83 0004 4FF48051 		mov	r1, #4096
+  84 0008 0348     		ldr	r0, .L7
+  85              	.LVL5:
+  86              		.loc 1 12 3 is_stmt 0 view .LVU9
+  87 000a FFF7FEFF 		bl	GPIO_WriteBit
+  88              	.LVL6:
+  13:./Hardware/My_I2C.c **** 		Delay_us (10);
+  89              		.loc 1 13 3 is_stmt 1 view .LVU10
+  90 000e 0A20     		movs	r0, #10
+  91 0010 FFF7FEFF 		bl	Delay_us
+  92              	.LVL7:
+  14:./Hardware/My_I2C.c **** }
+  93              		.loc 1 14 1 is_stmt 0 view .LVU11
+  94 0014 08BD     		pop	{r3, pc}
+  95              	.L8:
+  96 0016 00BF     		.align	2
+  97              	.L7:
+  98 0018 00080240 		.word	1073874944
+  99              		.cfi_endproc
+ 100              	.LFE124:
+ 102              		.section	.text.MyI2C_R_SDA,"ax",%progbits
+ 103              		.align	1
+ 104              		.global	MyI2C_R_SDA
+ARM GAS  /tmp/ccBqPpxi.s 			page 3
+
+
+ 105              		.syntax unified
+ 106              		.thumb
+ 107              		.thumb_func
+ 109              	MyI2C_R_SDA:
+ 110              	.LFB125:
+  15:./Hardware/My_I2C.c **** 
+  16:./Hardware/My_I2C.c **** 
+  17:./Hardware/My_I2C.c **** uint8_t MyI2C_R_SDA(void)
+  18:./Hardware/My_I2C.c **** {
+ 111              		.loc 1 18 1 is_stmt 1 view -0
+ 112              		.cfi_startproc
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115 0000 10B5     		push	{r4, lr}
+ 116              	.LCFI2:
+ 117              		.cfi_def_cfa_offset 8
+ 118              		.cfi_offset 4, -8
+ 119              		.cfi_offset 14, -4
+  19:./Hardware/My_I2C.c **** 		uint8_t BitValue;
+ 120              		.loc 1 19 3 view .LVU13
+  20:./Hardware/My_I2C.c **** 		BitValue = GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_12);
+ 121              		.loc 1 20 3 view .LVU14
+ 122              		.loc 1 20 14 is_stmt 0 view .LVU15
+ 123 0002 4FF48051 		mov	r1, #4096
+ 124 0006 0448     		ldr	r0, .L11
+ 125 0008 FFF7FEFF 		bl	GPIO_ReadInputDataBit
+ 126              	.LVL8:
+ 127 000c 0446     		mov	r4, r0
+ 128              	.LVL9:
+  21:./Hardware/My_I2C.c **** 		Delay_us(10);
+ 129              		.loc 1 21 3 is_stmt 1 view .LVU16
+ 130 000e 0A20     		movs	r0, #10
+ 131 0010 FFF7FEFF 		bl	Delay_us
+ 132              	.LVL10:
+  22:./Hardware/My_I2C.c **** 		return BitValue;
+ 133              		.loc 1 22 3 view .LVU17
+  23:./Hardware/My_I2C.c **** }	
+ 134              		.loc 1 23 1 is_stmt 0 view .LVU18
+ 135 0014 2046     		mov	r0, r4
+ 136 0016 10BD     		pop	{r4, pc}
+ 137              	.LVL11:
+ 138              	.L12:
+ 139              		.loc 1 23 1 view .LVU19
+ 140              		.align	2
+ 141              	.L11:
+ 142 0018 00080240 		.word	1073874944
+ 143              		.cfi_endproc
+ 144              	.LFE125:
+ 146              		.section	.text.MyI2C_Init,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	MyI2C_Init
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 153              	MyI2C_Init:
+ 154              	.LFB126:
+  24:./Hardware/My_I2C.c **** 
+ARM GAS  /tmp/ccBqPpxi.s 			page 4
+
+
+  25:./Hardware/My_I2C.c **** 
+  26:./Hardware/My_I2C.c **** void MyI2C_Init(void)
+  27:./Hardware/My_I2C.c **** {
+ 155              		.loc 1 27 1 is_stmt 1 view -0
+ 156              		.cfi_startproc
+ 157              		@ args = 0, pretend = 0, frame = 8
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159 0000 30B5     		push	{r4, r5, lr}
+ 160              	.LCFI3:
+ 161              		.cfi_def_cfa_offset 12
+ 162              		.cfi_offset 4, -12
+ 163              		.cfi_offset 5, -8
+ 164              		.cfi_offset 14, -4
+ 165 0002 83B0     		sub	sp, sp, #12
+ 166              	.LCFI4:
+ 167              		.cfi_def_cfa_offset 24
+  28:./Hardware/My_I2C.c ****     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC,ENABLE);
+ 168              		.loc 1 28 5 view .LVU21
+ 169 0004 0121     		movs	r1, #1
+ 170 0006 0420     		movs	r0, #4
+ 171 0008 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 172              	.LVL12:
+  29:./Hardware/My_I2C.c ****     GPIO_InitTypeDef GPIO_InitStructure;
+ 173              		.loc 1 29 5 view .LVU22
+  30:./Hardware/My_I2C.c **** 		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+ 174              		.loc 1 30 3 view .LVU23
+ 175              		.loc 1 30 32 is_stmt 0 view .LVU24
+ 176 000c 0123     		movs	r3, #1
+ 177 000e 8DF80430 		strb	r3, [sp, #4]
+  31:./Hardware/My_I2C.c ****     GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
+ 178              		.loc 1 31 5 is_stmt 1 view .LVU25
+ 179              		.loc 1 31 35 is_stmt 0 view .LVU26
+ 180 0012 8DF80630 		strb	r3, [sp, #6]
+  32:./Hardware/My_I2C.c **** 		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10 | GPIO_Pin_12;
+ 181              		.loc 1 32 3 is_stmt 1 view .LVU27
+ 182              		.loc 1 32 31 is_stmt 0 view .LVU28
+ 183 0016 4FF4A055 		mov	r5, #5120
+ 184 001a 0095     		str	r5, [sp]
+  33:./Hardware/My_I2C.c **** 		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+ 185              		.loc 1 33 3 is_stmt 1 view .LVU29
+ 186              		.loc 1 33 33 is_stmt 0 view .LVU30
+ 187 001c 0223     		movs	r3, #2
+ 188 001e 8DF80530 		strb	r3, [sp, #5]
+  34:./Hardware/My_I2C.c **** 		GPIO_Init(GPIOC, &GPIO_InitStructure);
+ 189              		.loc 1 34 3 is_stmt 1 view .LVU31
+ 190 0022 054C     		ldr	r4, .L15
+ 191 0024 6946     		mov	r1, sp
+ 192 0026 2046     		mov	r0, r4
+ 193 0028 FFF7FEFF 		bl	GPIO_Init
+ 194              	.LVL13:
+  35:./Hardware/My_I2C.c **** 		
+  36:./Hardware/My_I2C.c **** 		GPIO_SetBits(GPIOC, GPIO_Pin_10 | GPIO_Pin_12);
+ 195              		.loc 1 36 3 view .LVU32
+ 196 002c 2946     		mov	r1, r5
+ 197 002e 2046     		mov	r0, r4
+ 198 0030 FFF7FEFF 		bl	GPIO_SetBits
+ 199              	.LVL14:
+ARM GAS  /tmp/ccBqPpxi.s 			page 5
+
+
+  37:./Hardware/My_I2C.c **** //  RCC->AHB1ENR   |=  (1ul << 1);
+  38:./Hardware/My_I2C.c **** //  GPIOB->MODER   &= ~((3ul << 2*8));
+  39:./Hardware/My_I2C.c **** //  GPIOB->MODER   |=  ((1ul << 2*8));
+  40:./Hardware/My_I2C.c **** //  GPIOB->OTYPER  &= ~((1ul <<   8));
+  41:./Hardware/My_I2C.c **** //  GPIOB->OSPEEDR &= ~((3ul << 2*8));
+  42:./Hardware/My_I2C.c **** //  GPIOB->OSPEEDR |=  ((1ul << 2*8));
+  43:./Hardware/My_I2C.c **** //  GPIOB->PUPDR   &= ~((3ul << 2*8));
+  44:./Hardware/My_I2C.c **** //  GPIOB->BSRR    &= ~((1ul << 8));
+  45:./Hardware/My_I2C.c **** //  GPIOB->BSRR    |= 0ul << 8;
+  46:./Hardware/My_I2C.c **** //  
+  47:./Hardware/My_I2C.c **** //  GPIOB->MODER   &= ~((3ul << 2*9));
+  48:./Hardware/My_I2C.c **** //  GPIOB->MODER   |=  ((1ul << 2*9));
+  49:./Hardware/My_I2C.c **** //  GPIOB->OTYPER  &= ~((1ul <<   9));
+  50:./Hardware/My_I2C.c **** //  GPIOB->OSPEEDR &= ~((3ul << 2*9));
+  51:./Hardware/My_I2C.c **** //  GPIOB->OSPEEDR |=  ((1ul << 2*9));
+  52:./Hardware/My_I2C.c **** //  GPIOB->PUPDR   &= ~((3ul << 2*9));
+  53:./Hardware/My_I2C.c **** //  GPIOB->BSRR    &= ~((1ul << 9));
+  54:./Hardware/My_I2C.c **** //  GPIOB->BSRR    |= 0ul << 9;
+  55:./Hardware/My_I2C.c ****   
+  56:./Hardware/My_I2C.c **** 
+  57:./Hardware/My_I2C.c **** }
+ 200              		.loc 1 57 1 is_stmt 0 view .LVU33
+ 201 0034 03B0     		add	sp, sp, #12
+ 202              	.LCFI5:
+ 203              		.cfi_def_cfa_offset 12
+ 204              		@ sp needed
+ 205 0036 30BD     		pop	{r4, r5, pc}
+ 206              	.L16:
+ 207              		.align	2
+ 208              	.L15:
+ 209 0038 00080240 		.word	1073874944
+ 210              		.cfi_endproc
+ 211              	.LFE126:
+ 213              		.section	.text.MyI2C_Start,"ax",%progbits
+ 214              		.align	1
+ 215              		.global	MyI2C_Start
+ 216              		.syntax unified
+ 217              		.thumb
+ 218              		.thumb_func
+ 220              	MyI2C_Start:
+ 221              	.LFB127:
+  58:./Hardware/My_I2C.c **** 
+  59:./Hardware/My_I2C.c **** 
+  60:./Hardware/My_I2C.c **** void MyI2C_Start(void)
+  61:./Hardware/My_I2C.c **** {
+ 222              		.loc 1 61 1 is_stmt 1 view -0
+ 223              		.cfi_startproc
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 226 0000 08B5     		push	{r3, lr}
+ 227              	.LCFI6:
+ 228              		.cfi_def_cfa_offset 8
+ 229              		.cfi_offset 3, -8
+ 230              		.cfi_offset 14, -4
+  62:./Hardware/My_I2C.c **** 		MyI2C_W_SDA(1);
+ 231              		.loc 1 62 3 view .LVU35
+ 232 0002 0120     		movs	r0, #1
+ARM GAS  /tmp/ccBqPpxi.s 			page 6
+
+
+ 233 0004 FFF7FEFF 		bl	MyI2C_W_SDA
+ 234              	.LVL15:
+  63:./Hardware/My_I2C.c **** 		MyI2C_W_SCL(1);
+ 235              		.loc 1 63 3 view .LVU36
+ 236 0008 0120     		movs	r0, #1
+ 237 000a FFF7FEFF 		bl	MyI2C_W_SCL
+ 238              	.LVL16:
+  64:./Hardware/My_I2C.c **** 		MyI2C_W_SDA(0);
+ 239              		.loc 1 64 3 view .LVU37
+ 240 000e 0020     		movs	r0, #0
+ 241 0010 FFF7FEFF 		bl	MyI2C_W_SDA
+ 242              	.LVL17:
+  65:./Hardware/My_I2C.c **** 		MyI2C_W_SCL(0);
+ 243              		.loc 1 65 3 view .LVU38
+ 244 0014 0020     		movs	r0, #0
+ 245 0016 FFF7FEFF 		bl	MyI2C_W_SCL
+ 246              	.LVL18:
+  66:./Hardware/My_I2C.c **** }
+ 247              		.loc 1 66 1 is_stmt 0 view .LVU39
+ 248 001a 08BD     		pop	{r3, pc}
+ 249              		.cfi_endproc
+ 250              	.LFE127:
+ 252              		.section	.text.MyI2C_Stop,"ax",%progbits
+ 253              		.align	1
+ 254              		.global	MyI2C_Stop
+ 255              		.syntax unified
+ 256              		.thumb
+ 257              		.thumb_func
+ 259              	MyI2C_Stop:
+ 260              	.LFB128:
+  67:./Hardware/My_I2C.c **** void MyI2C_Stop(void)
+  68:./Hardware/My_I2C.c **** {
+ 261              		.loc 1 68 1 is_stmt 1 view -0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265 0000 08B5     		push	{r3, lr}
+ 266              	.LCFI7:
+ 267              		.cfi_def_cfa_offset 8
+ 268              		.cfi_offset 3, -8
+ 269              		.cfi_offset 14, -4
+  69:./Hardware/My_I2C.c **** 		MyI2C_W_SDA(0);
+ 270              		.loc 1 69 3 view .LVU41
+ 271 0002 0020     		movs	r0, #0
+ 272 0004 FFF7FEFF 		bl	MyI2C_W_SDA
+ 273              	.LVL19:
+  70:./Hardware/My_I2C.c **** 		MyI2C_W_SCL(1);
+ 274              		.loc 1 70 3 view .LVU42
+ 275 0008 0120     		movs	r0, #1
+ 276 000a FFF7FEFF 		bl	MyI2C_W_SCL
+ 277              	.LVL20:
+  71:./Hardware/My_I2C.c **** 		MyI2C_W_SDA(1);
+ 278              		.loc 1 71 3 view .LVU43
+ 279 000e 0120     		movs	r0, #1
+ 280 0010 FFF7FEFF 		bl	MyI2C_W_SDA
+ 281              	.LVL21:
+  72:./Hardware/My_I2C.c **** }
+ARM GAS  /tmp/ccBqPpxi.s 			page 7
+
+
+ 282              		.loc 1 72 1 is_stmt 0 view .LVU44
+ 283 0014 08BD     		pop	{r3, pc}
+ 284              		.cfi_endproc
+ 285              	.LFE128:
+ 287              		.section	.text.MyI2C_SendByte,"ax",%progbits
+ 288              		.align	1
+ 289              		.global	MyI2C_SendByte
+ 290              		.syntax unified
+ 291              		.thumb
+ 292              		.thumb_func
+ 294              	MyI2C_SendByte:
+ 295              	.LVL22:
+ 296              	.LFB129:
+  73:./Hardware/My_I2C.c **** void MyI2C_SendByte(uint8_t Byte)
+  74:./Hardware/My_I2C.c **** {	
+ 297              		.loc 1 74 1 is_stmt 1 view -0
+ 298              		.cfi_startproc
+ 299              		@ args = 0, pretend = 0, frame = 0
+ 300              		@ frame_needed = 0, uses_anonymous_args = 0
+ 301              		.loc 1 74 1 is_stmt 0 view .LVU46
+ 302 0000 38B5     		push	{r3, r4, r5, lr}
+ 303              	.LCFI8:
+ 304              		.cfi_def_cfa_offset 16
+ 305              		.cfi_offset 3, -16
+ 306              		.cfi_offset 4, -12
+ 307              		.cfi_offset 5, -8
+ 308              		.cfi_offset 14, -4
+ 309 0002 0546     		mov	r5, r0
+  75:./Hardware/My_I2C.c **** 		uint8_t i;
+ 310              		.loc 1 75 3 is_stmt 1 view .LVU47
+  76:./Hardware/My_I2C.c **** 		for(i = 0; i<8;i++)
+ 311              		.loc 1 76 3 view .LVU48
+ 312              	.LVL23:
+ 313              		.loc 1 76 9 is_stmt 0 view .LVU49
+ 314 0004 0024     		movs	r4, #0
+ 315              		.loc 1 76 3 view .LVU50
+ 316 0006 0CE0     		b	.L22
+ 317              	.LVL24:
+ 318              	.L23:
+  77:./Hardware/My_I2C.c **** 		{
+  78:./Hardware/My_I2C.c **** 			MyI2C_W_SDA(Byte & (0x80 >> i));
+ 319              		.loc 1 78 4 is_stmt 1 discriminator 3 view .LVU51
+ 320              		.loc 1 78 29 is_stmt 0 discriminator 3 view .LVU52
+ 321 0008 8020     		movs	r0, #128
+ 322 000a 2041     		asrs	r0, r0, r4
+ 323              		.loc 1 78 4 discriminator 3 view .LVU53
+ 324 000c 2840     		ands	r0, r0, r5
+ 325 000e FFF7FEFF 		bl	MyI2C_W_SDA
+ 326              	.LVL25:
+  79:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(1);
+ 327              		.loc 1 79 4 is_stmt 1 discriminator 3 view .LVU54
+ 328 0012 0120     		movs	r0, #1
+ 329 0014 FFF7FEFF 		bl	MyI2C_W_SCL
+ 330              	.LVL26:
+  80:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 331              		.loc 1 80 4 discriminator 3 view .LVU55
+ 332 0018 0020     		movs	r0, #0
+ARM GAS  /tmp/ccBqPpxi.s 			page 8
+
+
+ 333 001a FFF7FEFF 		bl	MyI2C_W_SCL
+ 334              	.LVL27:
+  76:./Hardware/My_I2C.c **** 		{
+ 335              		.loc 1 76 19 discriminator 3 view .LVU56
+ 336 001e 0134     		adds	r4, r4, #1
+ 337              	.LVL28:
+  76:./Hardware/My_I2C.c **** 		{
+ 338              		.loc 1 76 19 is_stmt 0 discriminator 3 view .LVU57
+ 339 0020 E4B2     		uxtb	r4, r4
+ 340              	.LVL29:
+ 341              	.L22:
+  76:./Hardware/My_I2C.c **** 		{
+ 342              		.loc 1 76 15 is_stmt 1 discriminator 1 view .LVU58
+ 343 0022 072C     		cmp	r4, #7
+ 344 0024 F0D9     		bls	.L23
+  81:./Hardware/My_I2C.c **** 		}
+  82:./Hardware/My_I2C.c **** 	
+  83:./Hardware/My_I2C.c **** }
+ 345              		.loc 1 83 1 is_stmt 0 view .LVU59
+ 346 0026 38BD     		pop	{r3, r4, r5, pc}
+ 347              		.loc 1 83 1 view .LVU60
+ 348              		.cfi_endproc
+ 349              	.LFE129:
+ 351              		.section	.text.MyI2C_ReceiveByte,"ax",%progbits
+ 352              		.align	1
+ 353              		.global	MyI2C_ReceiveByte
+ 354              		.syntax unified
+ 355              		.thumb
+ 356              		.thumb_func
+ 358              	MyI2C_ReceiveByte:
+ 359              	.LFB130:
+  84:./Hardware/My_I2C.c **** 
+  85:./Hardware/My_I2C.c **** uint8_t MyI2C_ReceiveByte(void)
+  86:./Hardware/My_I2C.c **** {
+ 360              		.loc 1 86 1 is_stmt 1 view -0
+ 361              		.cfi_startproc
+ 362              		@ args = 0, pretend = 0, frame = 0
+ 363              		@ frame_needed = 0, uses_anonymous_args = 0
+ 364 0000 38B5     		push	{r3, r4, r5, lr}
+ 365              	.LCFI9:
+ 366              		.cfi_def_cfa_offset 16
+ 367              		.cfi_offset 3, -16
+ 368              		.cfi_offset 4, -12
+ 369              		.cfi_offset 5, -8
+ 370              		.cfi_offset 14, -4
+  87:./Hardware/My_I2C.c **** 		uint8_t  i, Byte = 0x00;
+ 371              		.loc 1 87 3 view .LVU62
+ 372              	.LVL30:
+  88:./Hardware/My_I2C.c **** 		for(i=0;i<8;i++)
+ 373              		.loc 1 88 3 view .LVU63
+  87:./Hardware/My_I2C.c **** 		uint8_t  i, Byte = 0x00;
+ 374              		.loc 1 87 15 is_stmt 0 view .LVU64
+ 375 0002 0025     		movs	r5, #0
+ 376              		.loc 1 88 8 view .LVU65
+ 377 0004 2C46     		mov	r4, r5
+ 378              		.loc 1 88 3 view .LVU66
+ 379 0006 04E0     		b	.L26
+ARM GAS  /tmp/ccBqPpxi.s 			page 9
+
+
+ 380              	.LVL31:
+ 381              	.L27:
+  89:./Hardware/My_I2C.c **** 		{
+  90:./Hardware/My_I2C.c **** 			MyI2C_W_SDA(1);
+  91:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(1);
+  92:./Hardware/My_I2C.c **** 			if(MyI2C_R_SDA() == 1){Byte |= (0x80 >> i);}
+  93:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 382              		.loc 1 93 4 is_stmt 1 discriminator 2 view .LVU67
+ 383 0008 0020     		movs	r0, #0
+ 384 000a FFF7FEFF 		bl	MyI2C_W_SCL
+ 385              	.LVL32:
+  88:./Hardware/My_I2C.c **** 		for(i=0;i<8;i++)
+ 386              		.loc 1 88 16 discriminator 2 view .LVU68
+ 387 000e 0134     		adds	r4, r4, #1
+ 388              	.LVL33:
+  88:./Hardware/My_I2C.c **** 		for(i=0;i<8;i++)
+ 389              		.loc 1 88 16 is_stmt 0 discriminator 2 view .LVU69
+ 390 0010 E4B2     		uxtb	r4, r4
+ 391              	.LVL34:
+ 392              	.L26:
+  88:./Hardware/My_I2C.c **** 		for(i=0;i<8;i++)
+ 393              		.loc 1 88 12 is_stmt 1 discriminator 1 view .LVU70
+ 394 0012 072C     		cmp	r4, #7
+ 395 0014 0ED8     		bhi	.L30
+  90:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(1);
+ 396              		.loc 1 90 4 view .LVU71
+ 397 0016 0120     		movs	r0, #1
+ 398 0018 FFF7FEFF 		bl	MyI2C_W_SDA
+ 399              	.LVL35:
+  91:./Hardware/My_I2C.c **** 			if(MyI2C_R_SDA() == 1){Byte |= (0x80 >> i);}
+ 400              		.loc 1 91 4 view .LVU72
+ 401 001c 0120     		movs	r0, #1
+ 402 001e FFF7FEFF 		bl	MyI2C_W_SCL
+ 403              	.LVL36:
+  92:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 404              		.loc 1 92 4 view .LVU73
+  92:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 405              		.loc 1 92 7 is_stmt 0 view .LVU74
+ 406 0022 FFF7FEFF 		bl	MyI2C_R_SDA
+ 407              	.LVL37:
+  92:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 408              		.loc 1 92 6 view .LVU75
+ 409 0026 0128     		cmp	r0, #1
+ 410 0028 EED1     		bne	.L27
+  92:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 411              		.loc 1 92 27 is_stmt 1 discriminator 1 view .LVU76
+  92:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 412              		.loc 1 92 41 is_stmt 0 discriminator 1 view .LVU77
+ 413 002a 8023     		movs	r3, #128
+ 414 002c 2341     		asrs	r3, r3, r4
+  92:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 415              		.loc 1 92 32 discriminator 1 view .LVU78
+ 416 002e 1D43     		orrs	r5, r5, r3
+ 417              	.LVL38:
+  92:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 418              		.loc 1 92 32 discriminator 1 view .LVU79
+ 419 0030 EDB2     		uxtb	r5, r5
+ARM GAS  /tmp/ccBqPpxi.s 			page 10
+
+
+ 420              	.LVL39:
+  92:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 421              		.loc 1 92 32 discriminator 1 view .LVU80
+ 422 0032 E9E7     		b	.L27
+ 423              	.L30:
+  94:./Hardware/My_I2C.c **** 		}
+  95:./Hardware/My_I2C.c **** 		return Byte;
+ 424              		.loc 1 95 3 is_stmt 1 view .LVU81
+  96:./Hardware/My_I2C.c **** }	
+ 425              		.loc 1 96 1 is_stmt 0 view .LVU82
+ 426 0034 2846     		mov	r0, r5
+ 427 0036 38BD     		pop	{r3, r4, r5, pc}
+ 428              		.loc 1 96 1 view .LVU83
+ 429              		.cfi_endproc
+ 430              	.LFE130:
+ 432              		.section	.text.MyI2C_SendAck,"ax",%progbits
+ 433              		.align	1
+ 434              		.global	MyI2C_SendAck
+ 435              		.syntax unified
+ 436              		.thumb
+ 437              		.thumb_func
+ 439              	MyI2C_SendAck:
+ 440              	.LVL40:
+ 441              	.LFB131:
+  97:./Hardware/My_I2C.c **** 
+  98:./Hardware/My_I2C.c **** void MyI2C_SendAck(uint8_t AckBit)
+  99:./Hardware/My_I2C.c **** {	
+ 442              		.loc 1 99 1 is_stmt 1 view -0
+ 443              		.cfi_startproc
+ 444              		@ args = 0, pretend = 0, frame = 0
+ 445              		@ frame_needed = 0, uses_anonymous_args = 0
+ 446              		.loc 1 99 1 is_stmt 0 view .LVU85
+ 447 0000 08B5     		push	{r3, lr}
+ 448              	.LCFI10:
+ 449              		.cfi_def_cfa_offset 8
+ 450              		.cfi_offset 3, -8
+ 451              		.cfi_offset 14, -4
+ 100:./Hardware/My_I2C.c **** 			MyI2C_W_SDA(AckBit);
+ 452              		.loc 1 100 4 is_stmt 1 view .LVU86
+ 453 0002 FFF7FEFF 		bl	MyI2C_W_SDA
+ 454              	.LVL41:
+ 101:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(1);
+ 455              		.loc 1 101 4 view .LVU87
+ 456 0006 0120     		movs	r0, #1
+ 457 0008 FFF7FEFF 		bl	MyI2C_W_SCL
+ 458              	.LVL42:
+ 102:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 459              		.loc 1 102 4 view .LVU88
+ 460 000c 0020     		movs	r0, #0
+ 461 000e FFF7FEFF 		bl	MyI2C_W_SCL
+ 462              	.LVL43:
+ 103:./Hardware/My_I2C.c **** 
+ 104:./Hardware/My_I2C.c **** }
+ 463              		.loc 1 104 1 is_stmt 0 view .LVU89
+ 464 0012 08BD     		pop	{r3, pc}
+ 465              		.cfi_endproc
+ 466              	.LFE131:
+ARM GAS  /tmp/ccBqPpxi.s 			page 11
+
+
+ 468              		.section	.text.MyI2C_ReceiveAck,"ax",%progbits
+ 469              		.align	1
+ 470              		.global	MyI2C_ReceiveAck
+ 471              		.syntax unified
+ 472              		.thumb
+ 473              		.thumb_func
+ 475              	MyI2C_ReceiveAck:
+ 476              	.LFB132:
+ 105:./Hardware/My_I2C.c **** 
+ 106:./Hardware/My_I2C.c **** uint8_t MyI2C_ReceiveAck(void)
+ 107:./Hardware/My_I2C.c **** {
+ 477              		.loc 1 107 1 is_stmt 1 view -0
+ 478              		.cfi_startproc
+ 479              		@ args = 0, pretend = 0, frame = 0
+ 480              		@ frame_needed = 0, uses_anonymous_args = 0
+ 481 0000 10B5     		push	{r4, lr}
+ 482              	.LCFI11:
+ 483              		.cfi_def_cfa_offset 8
+ 484              		.cfi_offset 4, -8
+ 485              		.cfi_offset 14, -4
+ 108:./Hardware/My_I2C.c **** 			uint8_t AckBit;
+ 486              		.loc 1 108 4 view .LVU91
+ 109:./Hardware/My_I2C.c **** 			MyI2C_W_SDA(1);
+ 487              		.loc 1 109 4 view .LVU92
+ 488 0002 0120     		movs	r0, #1
+ 489 0004 FFF7FEFF 		bl	MyI2C_W_SDA
+ 490              	.LVL44:
+ 110:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(1);
+ 491              		.loc 1 110 4 view .LVU93
+ 492 0008 0120     		movs	r0, #1
+ 493 000a FFF7FEFF 		bl	MyI2C_W_SCL
+ 494              	.LVL45:
+ 111:./Hardware/My_I2C.c **** 			AckBit = MyI2C_R_SDA();
+ 495              		.loc 1 111 4 view .LVU94
+ 496              		.loc 1 111 13 is_stmt 0 view .LVU95
+ 497 000e FFF7FEFF 		bl	MyI2C_R_SDA
+ 498              	.LVL46:
+ 499 0012 0446     		mov	r4, r0
+ 500              	.LVL47:
+ 112:./Hardware/My_I2C.c **** 			MyI2C_W_SCL(0);
+ 501              		.loc 1 112 4 is_stmt 1 view .LVU96
+ 502 0014 0020     		movs	r0, #0
+ 503 0016 FFF7FEFF 		bl	MyI2C_W_SCL
+ 504              	.LVL48:
+ 113:./Hardware/My_I2C.c **** 			return AckBit;
+ 505              		.loc 1 113 4 view .LVU97
+ 114:./Hardware/My_I2C.c **** }	
+ 506              		.loc 1 114 1 is_stmt 0 view .LVU98
+ 507 001a 2046     		mov	r0, r4
+ 508 001c 10BD     		pop	{r4, pc}
+ 509              		.loc 1 114 1 view .LVU99
+ 510              		.cfi_endproc
+ 511              	.LFE132:
+ 513              		.text
+ 514              	.Letext0:
+ 515              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
+ 516              		.file 3 "./CORE/stm32f4xx.h"
+ARM GAS  /tmp/ccBqPpxi.s 			page 12
+
+
+ 517              		.file 4 "./Library/stm32f4xx_gpio.h"
+ 518              		.file 5 "./Library/stm32f4xx_rcc.h"
+ 519              		.file 6 "./Hardware/Delay.h"
+ARM GAS  /tmp/ccBqPpxi.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 My_I2C.c
+     /tmp/ccBqPpxi.s:21     .text.MyI2C_W_SCL:0000000000000000 $t
+     /tmp/ccBqPpxi.s:27     .text.MyI2C_W_SCL:0000000000000000 MyI2C_W_SCL
+     /tmp/ccBqPpxi.s:57     .text.MyI2C_W_SCL:0000000000000018 $d
+     /tmp/ccBqPpxi.s:62     .text.MyI2C_W_SDA:0000000000000000 $t
+     /tmp/ccBqPpxi.s:68     .text.MyI2C_W_SDA:0000000000000000 MyI2C_W_SDA
+     /tmp/ccBqPpxi.s:98     .text.MyI2C_W_SDA:0000000000000018 $d
+     /tmp/ccBqPpxi.s:103    .text.MyI2C_R_SDA:0000000000000000 $t
+     /tmp/ccBqPpxi.s:109    .text.MyI2C_R_SDA:0000000000000000 MyI2C_R_SDA
+     /tmp/ccBqPpxi.s:142    .text.MyI2C_R_SDA:0000000000000018 $d
+     /tmp/ccBqPpxi.s:147    .text.MyI2C_Init:0000000000000000 $t
+     /tmp/ccBqPpxi.s:153    .text.MyI2C_Init:0000000000000000 MyI2C_Init
+     /tmp/ccBqPpxi.s:209    .text.MyI2C_Init:0000000000000038 $d
+     /tmp/ccBqPpxi.s:214    .text.MyI2C_Start:0000000000000000 $t
+     /tmp/ccBqPpxi.s:220    .text.MyI2C_Start:0000000000000000 MyI2C_Start
+     /tmp/ccBqPpxi.s:253    .text.MyI2C_Stop:0000000000000000 $t
+     /tmp/ccBqPpxi.s:259    .text.MyI2C_Stop:0000000000000000 MyI2C_Stop
+     /tmp/ccBqPpxi.s:288    .text.MyI2C_SendByte:0000000000000000 $t
+     /tmp/ccBqPpxi.s:294    .text.MyI2C_SendByte:0000000000000000 MyI2C_SendByte
+     /tmp/ccBqPpxi.s:352    .text.MyI2C_ReceiveByte:0000000000000000 $t
+     /tmp/ccBqPpxi.s:358    .text.MyI2C_ReceiveByte:0000000000000000 MyI2C_ReceiveByte
+     /tmp/ccBqPpxi.s:433    .text.MyI2C_SendAck:0000000000000000 $t
+     /tmp/ccBqPpxi.s:439    .text.MyI2C_SendAck:0000000000000000 MyI2C_SendAck
+     /tmp/ccBqPpxi.s:469    .text.MyI2C_ReceiveAck:0000000000000000 $t
+     /tmp/ccBqPpxi.s:475    .text.MyI2C_ReceiveAck:0000000000000000 MyI2C_ReceiveAck
+
+UNDEFINED SYMBOLS
+GPIO_WriteBit
+Delay_us
+GPIO_ReadInputDataBit
+RCC_AHB1PeriphClockCmd
+GPIO_Init
+GPIO_SetBits

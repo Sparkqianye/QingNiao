@@ -1,0 +1,824 @@
+ARM GAS  /tmp/cccatk5d.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"gy86.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "./Hardware/gy86.c"
+  20              		.section	.text.I2C_WriteReg,"ax",%progbits
+  21              		.align	1
+  22              		.global	I2C_WriteReg
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	I2C_WriteReg:
+  28              	.LVL0:
+  29              	.LFB123:
+   1:./Hardware/gy86.c **** #include "stm32f4xx.h"                  // Device header
+   2:./Hardware/gy86.c **** #include "My_I2C.h"
+   3:./Hardware/gy86.c **** #include "gy86_reg.h"
+   4:./Hardware/gy86.c **** #include "Delay.h"
+   5:./Hardware/gy86.c **** 
+   6:./Hardware/gy86.c **** void I2C_WriteReg(uint8_t NAMEWriteAddress,uint8_t RegAddress,uint8_t Data)
+   7:./Hardware/gy86.c **** {
+  30              		.loc 1 7 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 7 1 is_stmt 0 view .LVU1
+  35 0000 70B5     		push	{r4, r5, r6, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 16
+  38              		.cfi_offset 4, -16
+  39              		.cfi_offset 5, -12
+  40              		.cfi_offset 6, -8
+  41              		.cfi_offset 14, -4
+  42 0002 0646     		mov	r6, r0
+  43 0004 0D46     		mov	r5, r1
+  44 0006 1446     		mov	r4, r2
+   8:./Hardware/gy86.c ****     MyI2C_Start();
+  45              		.loc 1 8 5 is_stmt 1 view .LVU2
+  46 0008 FFF7FEFF 		bl	MyI2C_Start
+  47              	.LVL1:
+   9:./Hardware/gy86.c **** 		MyI2C_SendByte(NAMEWriteAddress);
+  48              		.loc 1 9 3 view .LVU3
+  49 000c 3046     		mov	r0, r6
+ARM GAS  /tmp/cccatk5d.s 			page 2
+
+
+  50 000e FFF7FEFF 		bl	MyI2C_SendByte
+  51              	.LVL2:
+  10:./Hardware/gy86.c **** 		MyI2C_ReceiveAck();
+  52              		.loc 1 10 3 view .LVU4
+  53 0012 FFF7FEFF 		bl	MyI2C_ReceiveAck
+  54              	.LVL3:
+  11:./Hardware/gy86.c **** 		MyI2C_SendByte(RegAddress);
+  55              		.loc 1 11 3 view .LVU5
+  56 0016 2846     		mov	r0, r5
+  57 0018 FFF7FEFF 		bl	MyI2C_SendByte
+  58              	.LVL4:
+  12:./Hardware/gy86.c **** 		MyI2C_ReceiveAck();
+  59              		.loc 1 12 3 view .LVU6
+  60 001c FFF7FEFF 		bl	MyI2C_ReceiveAck
+  61              	.LVL5:
+  13:./Hardware/gy86.c **** 		MyI2C_SendByte(Data);
+  62              		.loc 1 13 3 view .LVU7
+  63 0020 2046     		mov	r0, r4
+  64 0022 FFF7FEFF 		bl	MyI2C_SendByte
+  65              	.LVL6:
+  14:./Hardware/gy86.c **** 		MyI2C_ReceiveAck();
+  66              		.loc 1 14 3 view .LVU8
+  67 0026 FFF7FEFF 		bl	MyI2C_ReceiveAck
+  68              	.LVL7:
+  15:./Hardware/gy86.c **** 		MyI2C_Stop();
+  69              		.loc 1 15 3 view .LVU9
+  70 002a FFF7FEFF 		bl	MyI2C_Stop
+  71              	.LVL8:
+  16:./Hardware/gy86.c **** }
+  72              		.loc 1 16 1 is_stmt 0 view .LVU10
+  73 002e 70BD     		pop	{r4, r5, r6, pc}
+  74              		.cfi_endproc
+  75              	.LFE123:
+  77              		.section	.text.I2C_ReadReg,"ax",%progbits
+  78              		.align	1
+  79              		.global	I2C_ReadReg
+  80              		.syntax unified
+  81              		.thumb
+  82              		.thumb_func
+  84              	I2C_ReadReg:
+  85              	.LVL9:
+  86              	.LFB124:
+  17:./Hardware/gy86.c **** 
+  18:./Hardware/gy86.c **** uint8_t I2C_ReadReg(uint8_t NAMEWriteAddress,uint8_t NAMEReadAddress,uint8_t RegAddress)
+  19:./Hardware/gy86.c **** {
+  87              		.loc 1 19 1 is_stmt 1 view -0
+  88              		.cfi_startproc
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		.loc 1 19 1 is_stmt 0 view .LVU12
+  92 0000 70B5     		push	{r4, r5, r6, lr}
+  93              	.LCFI1:
+  94              		.cfi_def_cfa_offset 16
+  95              		.cfi_offset 4, -16
+  96              		.cfi_offset 5, -12
+  97              		.cfi_offset 6, -8
+  98              		.cfi_offset 14, -4
+ARM GAS  /tmp/cccatk5d.s 			page 3
+
+
+  99 0002 0646     		mov	r6, r0
+ 100 0004 0C46     		mov	r4, r1
+ 101 0006 1546     		mov	r5, r2
+  20:./Hardware/gy86.c **** 		uint8_t Data;
+ 102              		.loc 1 20 3 is_stmt 1 view .LVU13
+  21:./Hardware/gy86.c **** 		
+  22:./Hardware/gy86.c **** 		MyI2C_Start();
+ 103              		.loc 1 22 3 view .LVU14
+ 104 0008 FFF7FEFF 		bl	MyI2C_Start
+ 105              	.LVL10:
+  23:./Hardware/gy86.c **** 		MyI2C_SendByte(NAMEWriteAddress);
+ 106              		.loc 1 23 3 view .LVU15
+ 107 000c 3046     		mov	r0, r6
+ 108 000e FFF7FEFF 		bl	MyI2C_SendByte
+ 109              	.LVL11:
+  24:./Hardware/gy86.c **** 		MyI2C_ReceiveAck();
+ 110              		.loc 1 24 3 view .LVU16
+ 111 0012 FFF7FEFF 		bl	MyI2C_ReceiveAck
+ 112              	.LVL12:
+  25:./Hardware/gy86.c **** 		MyI2C_SendByte(RegAddress);
+ 113              		.loc 1 25 3 view .LVU17
+ 114 0016 2846     		mov	r0, r5
+ 115 0018 FFF7FEFF 		bl	MyI2C_SendByte
+ 116              	.LVL13:
+  26:./Hardware/gy86.c **** 		MyI2C_ReceiveAck();
+ 117              		.loc 1 26 3 view .LVU18
+ 118 001c FFF7FEFF 		bl	MyI2C_ReceiveAck
+ 119              	.LVL14:
+  27:./Hardware/gy86.c **** 		
+  28:./Hardware/gy86.c **** 		MyI2C_Start();
+ 120              		.loc 1 28 3 view .LVU19
+ 121 0020 FFF7FEFF 		bl	MyI2C_Start
+ 122              	.LVL15:
+  29:./Hardware/gy86.c **** 		MyI2C_SendByte(NAMEReadAddress | 0x01);
+ 123              		.loc 1 29 3 view .LVU20
+ 124 0024 44F00100 		orr	r0, r4, #1
+ 125 0028 FFF7FEFF 		bl	MyI2C_SendByte
+ 126              	.LVL16:
+  30:./Hardware/gy86.c **** 		MyI2C_ReceiveAck();
+ 127              		.loc 1 30 3 view .LVU21
+ 128 002c FFF7FEFF 		bl	MyI2C_ReceiveAck
+ 129              	.LVL17:
+  31:./Hardware/gy86.c **** 		Data = MyI2C_ReceiveByte();
+ 130              		.loc 1 31 3 view .LVU22
+ 131              		.loc 1 31 10 is_stmt 0 view .LVU23
+ 132 0030 FFF7FEFF 		bl	MyI2C_ReceiveByte
+ 133              	.LVL18:
+ 134 0034 0446     		mov	r4, r0
+ 135              	.LVL19:
+  32:./Hardware/gy86.c **** 		MyI2C_SendAck(1);
+ 136              		.loc 1 32 3 is_stmt 1 view .LVU24
+ 137 0036 0120     		movs	r0, #1
+ 138 0038 FFF7FEFF 		bl	MyI2C_SendAck
+ 139              	.LVL20:
+  33:./Hardware/gy86.c ****     MyI2C_Stop();
+ 140              		.loc 1 33 5 view .LVU25
+ 141 003c FFF7FEFF 		bl	MyI2C_Stop
+ARM GAS  /tmp/cccatk5d.s 			page 4
+
+
+ 142              	.LVL21:
+  34:./Hardware/gy86.c **** 				
+  35:./Hardware/gy86.c **** 		return Data;
+ 143              		.loc 1 35 3 view .LVU26
+  36:./Hardware/gy86.c **** }
+ 144              		.loc 1 36 1 is_stmt 0 view .LVU27
+ 145 0040 2046     		mov	r0, r4
+ 146 0042 70BD     		pop	{r4, r5, r6, pc}
+ 147              		.loc 1 36 1 view .LVU28
+ 148              		.cfi_endproc
+ 149              	.LFE124:
+ 151              		.section	.text.HMC5883L_Init,"ax",%progbits
+ 152              		.align	1
+ 153              		.global	HMC5883L_Init
+ 154              		.syntax unified
+ 155              		.thumb
+ 156              		.thumb_func
+ 158              	HMC5883L_Init:
+ 159              	.LFB125:
+  37:./Hardware/gy86.c **** 
+  38:./Hardware/gy86.c **** void HMC5883L_Init(void)
+  39:./Hardware/gy86.c **** {
+ 160              		.loc 1 39 1 is_stmt 1 view -0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164 0000 08B5     		push	{r3, lr}
+ 165              	.LCFI2:
+ 166              		.cfi_def_cfa_offset 8
+ 167              		.cfi_offset 3, -8
+ 168              		.cfi_offset 14, -4
+  40:./Hardware/gy86.c **** 	MyI2C_Init();
+ 169              		.loc 1 40 2 view .LVU30
+ 170 0002 FFF7FEFF 		bl	MyI2C_Init
+ 171              	.LVL22:
+  41:./Hardware/gy86.c **** 	
+  42:./Hardware/gy86.c **** 	I2C_WriteReg(HMC5883L_WRITE_ADDRESS,HMC5883L_CON_REG_A,0x70);
+ 172              		.loc 1 42 2 view .LVU31
+ 173 0006 7022     		movs	r2, #112
+ 174 0008 0021     		movs	r1, #0
+ 175 000a 3C20     		movs	r0, #60
+ 176 000c FFF7FEFF 		bl	I2C_WriteReg
+ 177              	.LVL23:
+  43:./Hardware/gy86.c **** 	I2C_WriteReg(HMC5883L_WRITE_ADDRESS,HMC5883L_CON_REG_B,0x40);
+ 178              		.loc 1 43 2 view .LVU32
+ 179 0010 4022     		movs	r2, #64
+ 180 0012 0121     		movs	r1, #1
+ 181 0014 3C20     		movs	r0, #60
+ 182 0016 FFF7FEFF 		bl	I2C_WriteReg
+ 183              	.LVL24:
+  44:./Hardware/gy86.c **** 	I2C_WriteReg(HMC5883L_WRITE_ADDRESS,HMC5883L_MODE_REG	,0x00);
+ 184              		.loc 1 44 2 view .LVU33
+ 185 001a 0022     		movs	r2, #0
+ 186 001c 0221     		movs	r1, #2
+ 187 001e 3C20     		movs	r0, #60
+ 188 0020 FFF7FEFF 		bl	I2C_WriteReg
+ 189              	.LVL25:
+ARM GAS  /tmp/cccatk5d.s 			page 5
+
+
+  45:./Hardware/gy86.c **** }
+ 190              		.loc 1 45 1 is_stmt 0 view .LVU34
+ 191 0024 08BD     		pop	{r3, pc}
+ 192              		.cfi_endproc
+ 193              	.LFE125:
+ 195              		.section	.text.MPU6000_Init,"ax",%progbits
+ 196              		.align	1
+ 197              		.global	MPU6000_Init
+ 198              		.syntax unified
+ 199              		.thumb
+ 200              		.thumb_func
+ 202              	MPU6000_Init:
+ 203              	.LFB126:
+  46:./Hardware/gy86.c **** 
+  47:./Hardware/gy86.c **** void MPU6000_Init(void)
+  48:./Hardware/gy86.c **** {
+ 204              		.loc 1 48 1 is_stmt 1 view -0
+ 205              		.cfi_startproc
+ 206              		@ args = 0, pretend = 0, frame = 0
+ 207              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208 0000 08B5     		push	{r3, lr}
+ 209              	.LCFI3:
+ 210              		.cfi_def_cfa_offset 8
+ 211              		.cfi_offset 3, -8
+ 212              		.cfi_offset 14, -4
+  49:./Hardware/gy86.c **** 	MyI2C_Init();
+ 213              		.loc 1 49 2 view .LVU36
+ 214 0002 FFF7FEFF 		bl	MyI2C_Init
+ 215              	.LVL26:
+  50:./Hardware/gy86.c **** 	
+  51:./Hardware/gy86.c **** 	I2C_WriteReg(MPU6000_ADDRESS,MPU6000_PWR_MGMT_1,0x01);
+ 216              		.loc 1 51 2 view .LVU37
+ 217 0006 0122     		movs	r2, #1
+ 218 0008 6B21     		movs	r1, #107
+ 219 000a D020     		movs	r0, #208
+ 220 000c FFF7FEFF 		bl	I2C_WriteReg
+ 221              	.LVL27:
+  52:./Hardware/gy86.c **** 	I2C_WriteReg(MPU6000_ADDRESS,MPU6000_PWR_MGMT_2,0x00);
+ 222              		.loc 1 52 2 view .LVU38
+ 223 0010 0022     		movs	r2, #0
+ 224 0012 6C21     		movs	r1, #108
+ 225 0014 D020     		movs	r0, #208
+ 226 0016 FFF7FEFF 		bl	I2C_WriteReg
+ 227              	.LVL28:
+  53:./Hardware/gy86.c **** 	I2C_WriteReg(MPU6000_ADDRESS,MPU6000_SMPRT_DIV,0x09);
+ 228              		.loc 1 53 2 view .LVU39
+ 229 001a 0922     		movs	r2, #9
+ 230 001c 1921     		movs	r1, #25
+ 231 001e D020     		movs	r0, #208
+ 232 0020 FFF7FEFF 		bl	I2C_WriteReg
+ 233              	.LVL29:
+  54:./Hardware/gy86.c **** 	I2C_WriteReg(MPU6000_ADDRESS,MPU6000_CONFIG	,0x06);
+ 234              		.loc 1 54 2 view .LVU40
+ 235 0024 0622     		movs	r2, #6
+ 236 0026 1A21     		movs	r1, #26
+ 237 0028 D020     		movs	r0, #208
+ 238 002a FFF7FEFF 		bl	I2C_WriteReg
+ARM GAS  /tmp/cccatk5d.s 			page 6
+
+
+ 239              	.LVL30:
+  55:./Hardware/gy86.c **** 	I2C_WriteReg(MPU6000_ADDRESS,MPU6000_GYRO_CONFIG,0x18);
+ 240              		.loc 1 55 2 view .LVU41
+ 241 002e 1822     		movs	r2, #24
+ 242 0030 1B21     		movs	r1, #27
+ 243 0032 D020     		movs	r0, #208
+ 244 0034 FFF7FEFF 		bl	I2C_WriteReg
+ 245              	.LVL31:
+  56:./Hardware/gy86.c **** 	I2C_WriteReg(MPU6000_ADDRESS,MPU6000_ACCEL_CONFIG,0x18);
+ 246              		.loc 1 56 2 view .LVU42
+ 247 0038 1822     		movs	r2, #24
+ 248 003a 1C21     		movs	r1, #28
+ 249 003c D020     		movs	r0, #208
+ 250 003e FFF7FEFF 		bl	I2C_WriteReg
+ 251              	.LVL32:
+  57:./Hardware/gy86.c ****   I2C_WriteReg(MPU6000_ADDRESS,MPU6000_INT_PIN_CFG,0x02);
+ 252              		.loc 1 57 3 view .LVU43
+ 253 0042 0222     		movs	r2, #2
+ 254 0044 3721     		movs	r1, #55
+ 255 0046 D020     		movs	r0, #208
+ 256 0048 FFF7FEFF 		bl	I2C_WriteReg
+ 257              	.LVL33:
+  58:./Hardware/gy86.c ****   I2C_WriteReg(MPU6000_ADDRESS,MPU6000_USER_CTRL,0x00);
+ 258              		.loc 1 58 3 view .LVU44
+ 259 004c 0022     		movs	r2, #0
+ 260 004e 6A21     		movs	r1, #106
+ 261 0050 D020     		movs	r0, #208
+ 262 0052 FFF7FEFF 		bl	I2C_WriteReg
+ 263              	.LVL34:
+  59:./Hardware/gy86.c ****   
+  60:./Hardware/gy86.c **** }
+ 264              		.loc 1 60 1 is_stmt 0 view .LVU45
+ 265 0056 08BD     		pop	{r3, pc}
+ 266              		.cfi_endproc
+ 267              	.LFE126:
+ 269              		.section	.text.GY86_Init,"ax",%progbits
+ 270              		.align	1
+ 271              		.global	GY86_Init
+ 272              		.syntax unified
+ 273              		.thumb
+ 274              		.thumb_func
+ 276              	GY86_Init:
+ 277              	.LFB127:
+  61:./Hardware/gy86.c **** 
+  62:./Hardware/gy86.c **** void GY86_Init(void)
+  63:./Hardware/gy86.c **** {
+ 278              		.loc 1 63 1 is_stmt 1 view -0
+ 279              		.cfi_startproc
+ 280              		@ args = 0, pretend = 0, frame = 0
+ 281              		@ frame_needed = 0, uses_anonymous_args = 0
+ 282 0000 08B5     		push	{r3, lr}
+ 283              	.LCFI4:
+ 284              		.cfi_def_cfa_offset 8
+ 285              		.cfi_offset 3, -8
+ 286              		.cfi_offset 14, -4
+  64:./Hardware/gy86.c ****   HMC5883L_Init();
+ 287              		.loc 1 64 3 view .LVU47
+ARM GAS  /tmp/cccatk5d.s 			page 7
+
+
+ 288 0002 FFF7FEFF 		bl	HMC5883L_Init
+ 289              	.LVL35:
+  65:./Hardware/gy86.c ****   MPU6000_Init();
+ 290              		.loc 1 65 3 view .LVU48
+ 291 0006 FFF7FEFF 		bl	MPU6000_Init
+ 292              	.LVL36:
+  66:./Hardware/gy86.c **** }
+ 293              		.loc 1 66 1 is_stmt 0 view .LVU49
+ 294 000a 08BD     		pop	{r3, pc}
+ 295              		.cfi_endproc
+ 296              	.LFE127:
+ 298              		.section	.text.HMC5883L_GetData,"ax",%progbits
+ 299              		.align	1
+ 300              		.global	HMC5883L_GetData
+ 301              		.syntax unified
+ 302              		.thumb
+ 303              		.thumb_func
+ 305              	HMC5883L_GetData:
+ 306              	.LVL37:
+ 307              	.LFB128:
+  67:./Hardware/gy86.c **** 
+  68:./Hardware/gy86.c **** void HMC5883L_GetData(int16_t*AccX,int16_t*AccY,int16_t*AccZ)
+  69:./Hardware/gy86.c **** {
+ 308              		.loc 1 69 1 is_stmt 1 view -0
+ 309              		.cfi_startproc
+ 310              		@ args = 0, pretend = 0, frame = 0
+ 311              		@ frame_needed = 0, uses_anonymous_args = 0
+ 312              		.loc 1 69 1 is_stmt 0 view .LVU51
+ 313 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 314              	.LCFI5:
+ 315              		.cfi_def_cfa_offset 24
+ 316              		.cfi_offset 3, -24
+ 317              		.cfi_offset 4, -20
+ 318              		.cfi_offset 5, -16
+ 319              		.cfi_offset 6, -12
+ 320              		.cfi_offset 7, -8
+ 321              		.cfi_offset 14, -4
+ 322 0002 0646     		mov	r6, r0
+ 323 0004 0D46     		mov	r5, r1
+ 324 0006 1446     		mov	r4, r2
+  70:./Hardware/gy86.c **** 	uint8_t DataM,DataL;
+ 325              		.loc 1 70 2 is_stmt 1 view .LVU52
+  71:./Hardware/gy86.c **** 	
+  72:./Hardware/gy86.c **** 	DataM = I2C_ReadReg(HMC5883L_WRITE_ADDRESS,HMC5883L_READ_ADDRESS,HMC5883L_DATA_OUTPUT_X_MSB_REG);
+ 326              		.loc 1 72 2 view .LVU53
+ 327              		.loc 1 72 10 is_stmt 0 view .LVU54
+ 328 0008 0322     		movs	r2, #3
+ 329              	.LVL38:
+ 330              		.loc 1 72 10 view .LVU55
+ 331 000a 3D21     		movs	r1, #61
+ 332              	.LVL39:
+ 333              		.loc 1 72 10 view .LVU56
+ 334 000c 3C20     		movs	r0, #60
+ 335              	.LVL40:
+ 336              		.loc 1 72 10 view .LVU57
+ 337 000e FFF7FEFF 		bl	I2C_ReadReg
+ 338              	.LVL41:
+ARM GAS  /tmp/cccatk5d.s 			page 8
+
+
+ 339 0012 0746     		mov	r7, r0
+ 340              	.LVL42:
+  73:./Hardware/gy86.c **** 	DataL = I2C_ReadReg(HMC5883L_WRITE_ADDRESS,HMC5883L_READ_ADDRESS,HMC5883L_DATA_OUTPUT_X_LSB_REG);
+ 341              		.loc 1 73 2 is_stmt 1 view .LVU58
+ 342              		.loc 1 73 10 is_stmt 0 view .LVU59
+ 343 0014 0422     		movs	r2, #4
+ 344 0016 3D21     		movs	r1, #61
+ 345 0018 3C20     		movs	r0, #60
+ 346 001a FFF7FEFF 		bl	I2C_ReadReg
+ 347              	.LVL43:
+  74:./Hardware/gy86.c **** 	*AccX = (DataM << 8 | DataL);
+ 348              		.loc 1 74 2 is_stmt 1 view .LVU60
+ 349              		.loc 1 74 22 is_stmt 0 view .LVU61
+ 350 001e 40EA0720 		orr	r0, r0, r7, lsl #8
+ 351              	.LVL44:
+ 352              		.loc 1 74 8 view .LVU62
+ 353 0022 3080     		strh	r0, [r6]	@ movhi
+  75:./Hardware/gy86.c **** 	
+  76:./Hardware/gy86.c **** 	DataM = I2C_ReadReg(HMC5883L_WRITE_ADDRESS,HMC5883L_READ_ADDRESS,HMC5883L_DATA_OUTPUT_Y_MSB_REG);
+ 354              		.loc 1 76 2 is_stmt 1 view .LVU63
+ 355              		.loc 1 76 10 is_stmt 0 view .LVU64
+ 356 0024 0722     		movs	r2, #7
+ 357 0026 3D21     		movs	r1, #61
+ 358 0028 3C20     		movs	r0, #60
+ 359 002a FFF7FEFF 		bl	I2C_ReadReg
+ 360              	.LVL45:
+ 361 002e 0646     		mov	r6, r0
+ 362              	.LVL46:
+  77:./Hardware/gy86.c **** 	DataL = I2C_ReadReg(HMC5883L_WRITE_ADDRESS,HMC5883L_READ_ADDRESS,HMC5883L_DATA_OUTPUT_Y_LSB_REG);
+ 363              		.loc 1 77 2 is_stmt 1 view .LVU65
+ 364              		.loc 1 77 10 is_stmt 0 view .LVU66
+ 365 0030 0822     		movs	r2, #8
+ 366 0032 3D21     		movs	r1, #61
+ 367 0034 3C20     		movs	r0, #60
+ 368 0036 FFF7FEFF 		bl	I2C_ReadReg
+ 369              	.LVL47:
+  78:./Hardware/gy86.c **** 	*AccY = (DataM << 8 | DataL);
+ 370              		.loc 1 78 2 is_stmt 1 view .LVU67
+ 371              		.loc 1 78 22 is_stmt 0 view .LVU68
+ 372 003a 40EA0620 		orr	r0, r0, r6, lsl #8
+ 373              	.LVL48:
+ 374              		.loc 1 78 8 view .LVU69
+ 375 003e 2880     		strh	r0, [r5]	@ movhi
+  79:./Hardware/gy86.c **** 	
+  80:./Hardware/gy86.c **** 	
+  81:./Hardware/gy86.c **** 	DataM = I2C_ReadReg(HMC5883L_WRITE_ADDRESS,HMC5883L_READ_ADDRESS,HMC5883L_DATA_OUTPUT_Z_MSB_REG);
+ 376              		.loc 1 81 2 is_stmt 1 view .LVU70
+ 377              		.loc 1 81 10 is_stmt 0 view .LVU71
+ 378 0040 0522     		movs	r2, #5
+ 379 0042 3D21     		movs	r1, #61
+ 380 0044 3C20     		movs	r0, #60
+ 381 0046 FFF7FEFF 		bl	I2C_ReadReg
+ 382              	.LVL49:
+ 383 004a 0546     		mov	r5, r0
+ 384              	.LVL50:
+  82:./Hardware/gy86.c **** 	DataL = I2C_ReadReg(HMC5883L_WRITE_ADDRESS,HMC5883L_READ_ADDRESS,HMC5883L_DATA_OUTPUT_Z_LSB_REG);
+ 385              		.loc 1 82 2 is_stmt 1 view .LVU72
+ARM GAS  /tmp/cccatk5d.s 			page 9
+
+
+ 386              		.loc 1 82 10 is_stmt 0 view .LVU73
+ 387 004c 0622     		movs	r2, #6
+ 388 004e 3D21     		movs	r1, #61
+ 389 0050 3C20     		movs	r0, #60
+ 390 0052 FFF7FEFF 		bl	I2C_ReadReg
+ 391              	.LVL51:
+  83:./Hardware/gy86.c **** 	*AccZ = (DataM << 8 | DataL);
+ 392              		.loc 1 83 2 is_stmt 1 view .LVU74
+ 393              		.loc 1 83 22 is_stmt 0 view .LVU75
+ 394 0056 40EA0520 		orr	r0, r0, r5, lsl #8
+ 395              	.LVL52:
+ 396              		.loc 1 83 8 view .LVU76
+ 397 005a 2080     		strh	r0, [r4]	@ movhi
+  84:./Hardware/gy86.c **** 
+  85:./Hardware/gy86.c **** }
+ 398              		.loc 1 85 1 view .LVU77
+ 399 005c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 400              		.loc 1 85 1 view .LVU78
+ 401              		.cfi_endproc
+ 402              	.LFE128:
+ 404              		.section	.text.MPU6000_GetData,"ax",%progbits
+ 405              		.align	1
+ 406              		.global	MPU6000_GetData
+ 407              		.syntax unified
+ 408              		.thumb
+ 409              		.thumb_func
+ 411              	MPU6000_GetData:
+ 412              	.LVL53:
+ 413              	.LFB129:
+  86:./Hardware/gy86.c **** 
+  87:./Hardware/gy86.c **** void MPU6000_GetData(int16_t*AccX,int16_t*AccY,int16_t*AccZ,int16_t*GyroX,int16_t*GyroY,int16_t*Gyr
+  88:./Hardware/gy86.c **** {
+ 414              		.loc 1 88 1 is_stmt 1 view -0
+ 415              		.cfi_startproc
+ 416              		@ args = 8, pretend = 0, frame = 0
+ 417              		@ frame_needed = 0, uses_anonymous_args = 0
+ 418              		.loc 1 88 1 is_stmt 0 view .LVU80
+ 419 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 420              	.LCFI6:
+ 421              		.cfi_def_cfa_offset 24
+ 422              		.cfi_offset 4, -24
+ 423              		.cfi_offset 5, -20
+ 424              		.cfi_offset 6, -16
+ 425              		.cfi_offset 7, -12
+ 426              		.cfi_offset 8, -8
+ 427              		.cfi_offset 14, -4
+ 428 0004 0746     		mov	r7, r0
+ 429 0006 0E46     		mov	r6, r1
+ 430 0008 1546     		mov	r5, r2
+ 431 000a 1C46     		mov	r4, r3
+  89:./Hardware/gy86.c **** 	uint8_t DataH,DataL;
+ 432              		.loc 1 89 2 is_stmt 1 view .LVU81
+  90:./Hardware/gy86.c **** 	
+  91:./Hardware/gy86.c **** 	DataH = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_ACCEL_XOUT_H);
+ 433              		.loc 1 91 2 view .LVU82
+ 434              		.loc 1 91 10 is_stmt 0 view .LVU83
+ 435 000c 3B22     		movs	r2, #59
+ARM GAS  /tmp/cccatk5d.s 			page 10
+
+
+ 436              	.LVL54:
+ 437              		.loc 1 91 10 view .LVU84
+ 438 000e D021     		movs	r1, #208
+ 439              	.LVL55:
+ 440              		.loc 1 91 10 view .LVU85
+ 441 0010 0846     		mov	r0, r1
+ 442              	.LVL56:
+ 443              		.loc 1 91 10 view .LVU86
+ 444 0012 FFF7FEFF 		bl	I2C_ReadReg
+ 445              	.LVL57:
+ 446              		.loc 1 91 10 view .LVU87
+ 447 0016 8046     		mov	r8, r0
+ 448              	.LVL58:
+  92:./Hardware/gy86.c **** 	DataL = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_ACCEL_XOUT_L);
+ 449              		.loc 1 92 2 is_stmt 1 view .LVU88
+ 450              		.loc 1 92 10 is_stmt 0 view .LVU89
+ 451 0018 3C22     		movs	r2, #60
+ 452 001a D021     		movs	r1, #208
+ 453 001c 0846     		mov	r0, r1
+ 454 001e FFF7FEFF 		bl	I2C_ReadReg
+ 455              	.LVL59:
+  93:./Hardware/gy86.c **** 	*AccX = (DataH << 8 | DataL);
+ 456              		.loc 1 93 2 is_stmt 1 view .LVU90
+ 457              		.loc 1 93 22 is_stmt 0 view .LVU91
+ 458 0022 40EA0820 		orr	r0, r0, r8, lsl #8
+ 459              	.LVL60:
+ 460              		.loc 1 93 8 view .LVU92
+ 461 0026 3880     		strh	r0, [r7]	@ movhi
+  94:./Hardware/gy86.c **** 	
+  95:./Hardware/gy86.c **** 	DataH = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_ACCEL_YOUT_H);
+ 462              		.loc 1 95 2 is_stmt 1 view .LVU93
+ 463              		.loc 1 95 10 is_stmt 0 view .LVU94
+ 464 0028 3D22     		movs	r2, #61
+ 465 002a D021     		movs	r1, #208
+ 466 002c 0846     		mov	r0, r1
+ 467 002e FFF7FEFF 		bl	I2C_ReadReg
+ 468              	.LVL61:
+ 469 0032 0746     		mov	r7, r0
+ 470              	.LVL62:
+  96:./Hardware/gy86.c **** 	DataL = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_ACCEL_YOUT_L);
+ 471              		.loc 1 96 2 is_stmt 1 view .LVU95
+ 472              		.loc 1 96 10 is_stmt 0 view .LVU96
+ 473 0034 3E22     		movs	r2, #62
+ 474 0036 D021     		movs	r1, #208
+ 475 0038 0846     		mov	r0, r1
+ 476 003a FFF7FEFF 		bl	I2C_ReadReg
+ 477              	.LVL63:
+  97:./Hardware/gy86.c **** 	*AccY = (DataH << 8 | DataL);
+ 478              		.loc 1 97 2 is_stmt 1 view .LVU97
+ 479              		.loc 1 97 22 is_stmt 0 view .LVU98
+ 480 003e 40EA0720 		orr	r0, r0, r7, lsl #8
+ 481              	.LVL64:
+ 482              		.loc 1 97 8 view .LVU99
+ 483 0042 3080     		strh	r0, [r6]	@ movhi
+  98:./Hardware/gy86.c **** 	
+  99:./Hardware/gy86.c **** 	DataH = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_ACCEL_ZOUT_H);
+ 484              		.loc 1 99 2 is_stmt 1 view .LVU100
+ARM GAS  /tmp/cccatk5d.s 			page 11
+
+
+ 485              		.loc 1 99 10 is_stmt 0 view .LVU101
+ 486 0044 3F22     		movs	r2, #63
+ 487 0046 D021     		movs	r1, #208
+ 488 0048 0846     		mov	r0, r1
+ 489 004a FFF7FEFF 		bl	I2C_ReadReg
+ 490              	.LVL65:
+ 491 004e 0646     		mov	r6, r0
+ 492              	.LVL66:
+ 100:./Hardware/gy86.c **** 	DataL = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_ACCEL_ZOUT_L);
+ 493              		.loc 1 100 2 is_stmt 1 view .LVU102
+ 494              		.loc 1 100 10 is_stmt 0 view .LVU103
+ 495 0050 4022     		movs	r2, #64
+ 496 0052 D021     		movs	r1, #208
+ 497 0054 0846     		mov	r0, r1
+ 498 0056 FFF7FEFF 		bl	I2C_ReadReg
+ 499              	.LVL67:
+ 101:./Hardware/gy86.c **** 	*AccZ = (DataH << 8 | DataL);
+ 500              		.loc 1 101 2 is_stmt 1 view .LVU104
+ 501              		.loc 1 101 22 is_stmt 0 view .LVU105
+ 502 005a 40EA0620 		orr	r0, r0, r6, lsl #8
+ 503              	.LVL68:
+ 504              		.loc 1 101 8 view .LVU106
+ 505 005e 2880     		strh	r0, [r5]	@ movhi
+ 102:./Hardware/gy86.c ****   
+ 103:./Hardware/gy86.c ****   DataH = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_GYRO_XOUT_H);
+ 506              		.loc 1 103 3 is_stmt 1 view .LVU107
+ 507              		.loc 1 103 11 is_stmt 0 view .LVU108
+ 508 0060 4322     		movs	r2, #67
+ 509 0062 D021     		movs	r1, #208
+ 510 0064 0846     		mov	r0, r1
+ 511 0066 FFF7FEFF 		bl	I2C_ReadReg
+ 512              	.LVL69:
+ 513 006a 0546     		mov	r5, r0
+ 514              	.LVL70:
+ 104:./Hardware/gy86.c **** 	DataL = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_GYRO_XOUT_L);
+ 515              		.loc 1 104 2 is_stmt 1 view .LVU109
+ 516              		.loc 1 104 10 is_stmt 0 view .LVU110
+ 517 006c 4422     		movs	r2, #68
+ 518 006e D021     		movs	r1, #208
+ 519 0070 0846     		mov	r0, r1
+ 520 0072 FFF7FEFF 		bl	I2C_ReadReg
+ 521              	.LVL71:
+ 105:./Hardware/gy86.c **** 	*GyroX = (DataH << 8 | DataL);
+ 522              		.loc 1 105 2 is_stmt 1 view .LVU111
+ 523              		.loc 1 105 23 is_stmt 0 view .LVU112
+ 524 0076 40EA0520 		orr	r0, r0, r5, lsl #8
+ 525              	.LVL72:
+ 526              		.loc 1 105 9 view .LVU113
+ 527 007a 2080     		strh	r0, [r4]	@ movhi
+ 106:./Hardware/gy86.c ****   
+ 107:./Hardware/gy86.c ****   DataH = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_GYRO_YOUT_H);
+ 528              		.loc 1 107 3 is_stmt 1 view .LVU114
+ 529              		.loc 1 107 11 is_stmt 0 view .LVU115
+ 530 007c 4522     		movs	r2, #69
+ 531 007e D021     		movs	r1, #208
+ 532 0080 0846     		mov	r0, r1
+ 533 0082 FFF7FEFF 		bl	I2C_ReadReg
+ARM GAS  /tmp/cccatk5d.s 			page 12
+
+
+ 534              	.LVL73:
+ 535 0086 0446     		mov	r4, r0
+ 536              	.LVL74:
+ 108:./Hardware/gy86.c **** 	DataL = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_GYRO_YOUT_L);
+ 537              		.loc 1 108 2 is_stmt 1 view .LVU116
+ 538              		.loc 1 108 10 is_stmt 0 view .LVU117
+ 539 0088 4622     		movs	r2, #70
+ 540 008a D021     		movs	r1, #208
+ 541 008c 0846     		mov	r0, r1
+ 542 008e FFF7FEFF 		bl	I2C_ReadReg
+ 543              	.LVL75:
+ 109:./Hardware/gy86.c **** 	*GyroY = (DataH << 8 | DataL);
+ 544              		.loc 1 109 2 is_stmt 1 view .LVU118
+ 545              		.loc 1 109 23 is_stmt 0 view .LVU119
+ 546 0092 40EA0420 		orr	r0, r0, r4, lsl #8
+ 547              	.LVL76:
+ 548              		.loc 1 109 9 view .LVU120
+ 549 0096 069B     		ldr	r3, [sp, #24]
+ 550 0098 1880     		strh	r0, [r3]	@ movhi
+ 110:./Hardware/gy86.c ****   
+ 111:./Hardware/gy86.c ****   DataH = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_GYRO_ZOUT_H);
+ 551              		.loc 1 111 3 is_stmt 1 view .LVU121
+ 552              		.loc 1 111 11 is_stmt 0 view .LVU122
+ 553 009a 4722     		movs	r2, #71
+ 554 009c D021     		movs	r1, #208
+ 555 009e 0846     		mov	r0, r1
+ 556 00a0 FFF7FEFF 		bl	I2C_ReadReg
+ 557              	.LVL77:
+ 558 00a4 0446     		mov	r4, r0
+ 559              	.LVL78:
+ 112:./Hardware/gy86.c **** 	DataL = I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_GYRO_ZOUT_L);
+ 560              		.loc 1 112 2 is_stmt 1 view .LVU123
+ 561              		.loc 1 112 10 is_stmt 0 view .LVU124
+ 562 00a6 4822     		movs	r2, #72
+ 563 00a8 D021     		movs	r1, #208
+ 564 00aa 0846     		mov	r0, r1
+ 565 00ac FFF7FEFF 		bl	I2C_ReadReg
+ 566              	.LVL79:
+ 113:./Hardware/gy86.c **** 	*GyroZ = (DataH << 8 | DataL);
+ 567              		.loc 1 113 2 is_stmt 1 view .LVU125
+ 568              		.loc 1 113 23 is_stmt 0 view .LVU126
+ 569 00b0 40EA0420 		orr	r0, r0, r4, lsl #8
+ 570              	.LVL80:
+ 571              		.loc 1 113 9 view .LVU127
+ 572 00b4 079B     		ldr	r3, [sp, #28]
+ 573 00b6 1880     		strh	r0, [r3]	@ movhi
+ 114:./Hardware/gy86.c **** 	
+ 115:./Hardware/gy86.c **** }
+ 574              		.loc 1 115 1 view .LVU128
+ 575 00b8 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 576              		.loc 1 115 1 view .LVU129
+ 577              		.cfi_endproc
+ 578              	.LFE129:
+ 580              		.section	.text.MPU6000_GetID,"ax",%progbits
+ 581              		.align	1
+ 582              		.global	MPU6000_GetID
+ 583              		.syntax unified
+ARM GAS  /tmp/cccatk5d.s 			page 13
+
+
+ 584              		.thumb
+ 585              		.thumb_func
+ 587              	MPU6000_GetID:
+ 588              	.LFB130:
+ 116:./Hardware/gy86.c **** 
+ 117:./Hardware/gy86.c **** uint8_t MPU6000_GetID(void)
+ 118:./Hardware/gy86.c **** {
+ 589              		.loc 1 118 1 is_stmt 1 view -0
+ 590              		.cfi_startproc
+ 591              		@ args = 0, pretend = 0, frame = 0
+ 592              		@ frame_needed = 0, uses_anonymous_args = 0
+ 593 0000 08B5     		push	{r3, lr}
+ 594              	.LCFI7:
+ 595              		.cfi_def_cfa_offset 8
+ 596              		.cfi_offset 3, -8
+ 597              		.cfi_offset 14, -4
+ 119:./Hardware/gy86.c **** 	return I2C_ReadReg(MPU6000_ADDRESS,MPU6000_ADDRESS,MPU6000_WHO_AM_I);
+ 598              		.loc 1 119 2 view .LVU131
+ 599              		.loc 1 119 9 is_stmt 0 view .LVU132
+ 600 0002 7522     		movs	r2, #117
+ 601 0004 D021     		movs	r1, #208
+ 602 0006 0846     		mov	r0, r1
+ 603 0008 FFF7FEFF 		bl	I2C_ReadReg
+ 604              	.LVL81:
+ 120:./Hardware/gy86.c **** }
+ 605              		.loc 1 120 1 view .LVU133
+ 606 000c 08BD     		pop	{r3, pc}
+ 607              		.cfi_endproc
+ 608              	.LFE130:
+ 610              		.section	.text.HMC5883L_GetState,"ax",%progbits
+ 611              		.align	1
+ 612              		.global	HMC5883L_GetState
+ 613              		.syntax unified
+ 614              		.thumb
+ 615              		.thumb_func
+ 617              	HMC5883L_GetState:
+ 618              	.LFB131:
+ 121:./Hardware/gy86.c **** 
+ 122:./Hardware/gy86.c **** uint8_t HMC5883L_GetState(void)
+ 123:./Hardware/gy86.c **** {
+ 619              		.loc 1 123 1 is_stmt 1 view -0
+ 620              		.cfi_startproc
+ 621              		@ args = 0, pretend = 0, frame = 0
+ 622              		@ frame_needed = 0, uses_anonymous_args = 0
+ 623 0000 08B5     		push	{r3, lr}
+ 624              	.LCFI8:
+ 625              		.cfi_def_cfa_offset 8
+ 626              		.cfi_offset 3, -8
+ 627              		.cfi_offset 14, -4
+ 124:./Hardware/gy86.c ****   return I2C_ReadReg(HMC5883L_WRITE_ADDRESS,HMC5883L_READ_ADDRESS,HMC5883L_STATUS_REG);
+ 628              		.loc 1 124 3 view .LVU135
+ 629              		.loc 1 124 10 is_stmt 0 view .LVU136
+ 630 0002 0922     		movs	r2, #9
+ 631 0004 3D21     		movs	r1, #61
+ 632 0006 3C20     		movs	r0, #60
+ 633 0008 FFF7FEFF 		bl	I2C_ReadReg
+ 634              	.LVL82:
+ARM GAS  /tmp/cccatk5d.s 			page 14
+
+
+ 125:./Hardware/gy86.c **** }
+ 635              		.loc 1 125 1 view .LVU137
+ 636 000c 08BD     		pop	{r3, pc}
+ 637              		.cfi_endproc
+ 638              	.LFE131:
+ 640              		.text
+ 641              	.Letext0:
+ 642              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
+ 643              		.file 3 "./Hardware/My_I2C.h"
+ARM GAS  /tmp/cccatk5d.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gy86.c
+     /tmp/cccatk5d.s:21     .text.I2C_WriteReg:0000000000000000 $t
+     /tmp/cccatk5d.s:27     .text.I2C_WriteReg:0000000000000000 I2C_WriteReg
+     /tmp/cccatk5d.s:78     .text.I2C_ReadReg:0000000000000000 $t
+     /tmp/cccatk5d.s:84     .text.I2C_ReadReg:0000000000000000 I2C_ReadReg
+     /tmp/cccatk5d.s:152    .text.HMC5883L_Init:0000000000000000 $t
+     /tmp/cccatk5d.s:158    .text.HMC5883L_Init:0000000000000000 HMC5883L_Init
+     /tmp/cccatk5d.s:196    .text.MPU6000_Init:0000000000000000 $t
+     /tmp/cccatk5d.s:202    .text.MPU6000_Init:0000000000000000 MPU6000_Init
+     /tmp/cccatk5d.s:270    .text.GY86_Init:0000000000000000 $t
+     /tmp/cccatk5d.s:276    .text.GY86_Init:0000000000000000 GY86_Init
+     /tmp/cccatk5d.s:299    .text.HMC5883L_GetData:0000000000000000 $t
+     /tmp/cccatk5d.s:305    .text.HMC5883L_GetData:0000000000000000 HMC5883L_GetData
+     /tmp/cccatk5d.s:405    .text.MPU6000_GetData:0000000000000000 $t
+     /tmp/cccatk5d.s:411    .text.MPU6000_GetData:0000000000000000 MPU6000_GetData
+     /tmp/cccatk5d.s:581    .text.MPU6000_GetID:0000000000000000 $t
+     /tmp/cccatk5d.s:587    .text.MPU6000_GetID:0000000000000000 MPU6000_GetID
+     /tmp/cccatk5d.s:611    .text.HMC5883L_GetState:0000000000000000 $t
+     /tmp/cccatk5d.s:617    .text.HMC5883L_GetState:0000000000000000 HMC5883L_GetState
+
+UNDEFINED SYMBOLS
+MyI2C_Start
+MyI2C_SendByte
+MyI2C_ReceiveAck
+MyI2C_Stop
+MyI2C_ReceiveByte
+MyI2C_SendAck
+MyI2C_Init

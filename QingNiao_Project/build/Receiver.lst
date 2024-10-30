@@ -1,0 +1,1256 @@
+ARM GAS  /tmp/cc8GYpAO.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"Receiver.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "./Hardware/Receiver.c"
+  20              		.section	.text.ICTIM1CH1_2_Init,"ax",%progbits
+  21              		.align	1
+  22              		.global	ICTIM1CH1_2_Init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	ICTIM1CH1_2_Init:
+  28              	.LFB123:
+   1:./Hardware/Receiver.c **** //PB8为3通道PWM信号口,对应TIM4_CH3
+   2:./Hardware/Receiver.c **** //改为PA0连接通道3，对应TIM2_CH1
+   3:./Hardware/Receiver.c **** #include "stm32f4xx.h"                  // Device header
+   4:./Hardware/Receiver.c **** 
+   5:./Hardware/Receiver.c **** void ICTIM1CH1_2_Init(void)//PA8--TIM1CH1
+   6:./Hardware/Receiver.c **** {
+  29              		.loc 1 6 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 32
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 28
+  36              		.cfi_offset 4, -28
+  37              		.cfi_offset 5, -24
+  38              		.cfi_offset 6, -20
+  39              		.cfi_offset 7, -16
+  40              		.cfi_offset 8, -12
+  41              		.cfi_offset 9, -8
+  42              		.cfi_offset 14, -4
+  43 0004 89B0     		sub	sp, sp, #36
+  44              	.LCFI1:
+  45              		.cfi_def_cfa_offset 64
+   7:./Hardware/Receiver.c ****   RCC_APB1PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
+  46              		.loc 1 7 3 view .LVU1
+  47 0006 0121     		movs	r1, #1
+  48 0008 0846     		mov	r0, r1
+  49 000a FFF7FEFF 		bl	RCC_APB1PeriphClockCmd
+  50              	.LVL0:
+   8:./Hardware/Receiver.c ****   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
+ARM GAS  /tmp/cc8GYpAO.s 			page 2
+
+
+  51              		.loc 1 8 3 view .LVU2
+  52 000e 0121     		movs	r1, #1
+  53 0010 0846     		mov	r0, r1
+  54 0012 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+  55              	.LVL1:
+   9:./Hardware/Receiver.c ****   
+  10:./Hardware/Receiver.c ****   GPIO_PinAFConfig(GPIOA,GPIO_PinSource8,GPIO_AF_TIM1);
+  56              		.loc 1 10 3 view .LVU3
+  57 0016 2B4D     		ldr	r5, .L3
+  58 0018 0122     		movs	r2, #1
+  59 001a 0821     		movs	r1, #8
+  60 001c 2846     		mov	r0, r5
+  61 001e FFF7FEFF 		bl	GPIO_PinAFConfig
+  62              	.LVL2:
+  11:./Hardware/Receiver.c **** 
+  12:./Hardware/Receiver.c ****   GPIO_InitTypeDef GPIO_InitStructure;
+  63              		.loc 1 12 3 view .LVU4
+  13:./Hardware/Receiver.c **** 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+  64              		.loc 1 13 2 view .LVU5
+  65              		.loc 1 13 31 is_stmt 0 view .LVU6
+  66 0022 0226     		movs	r6, #2
+  67 0024 8DF81C60 		strb	r6, [sp, #28]
+  14:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  68              		.loc 1 14 3 is_stmt 1 view .LVU7
+  69              		.loc 1 14 32 is_stmt 0 view .LVU8
+  70 0028 0024     		movs	r4, #0
+  71 002a 8DF81F40 		strb	r4, [sp, #31]
+  15:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
+  72              		.loc 1 15 3 is_stmt 1 view .LVU9
+  73              		.loc 1 15 31 is_stmt 0 view .LVU10
+  74 002e 4FF48073 		mov	r3, #256
+  75 0032 0693     		str	r3, [sp, #24]
+  16:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+  76              		.loc 1 16 3 is_stmt 1 view .LVU11
+  77              		.loc 1 16 33 is_stmt 0 view .LVU12
+  78 0034 0323     		movs	r3, #3
+  79 0036 8DF81D30 		strb	r3, [sp, #29]
+  17:./Hardware/Receiver.c **** 	GPIO_Init(GPIOA, &GPIO_InitStructure);
+  80              		.loc 1 17 2 is_stmt 1 view .LVU13
+  81 003a 06A9     		add	r1, sp, #24
+  82 003c 2846     		mov	r0, r5
+  83 003e FFF7FEFF 		bl	GPIO_Init
+  84              	.LVL3:
+  18:./Hardware/Receiver.c ****   
+  19:./Hardware/Receiver.c ****   TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
+  85              		.loc 1 19 3 view .LVU14
+  20:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;//分频系数（1，不分频）
+  86              		.loc 1 20 3 view .LVU15
+  87              		.loc 1 20 47 is_stmt 0 view .LVU16
+  88 0042 ADF81440 		strh	r4, [sp, #20]	@ movhi
+  21:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;//对齐模式（向上对齐）
+  89              		.loc 1 21 3 is_stmt 1 view .LVU17
+  90              		.loc 1 21 45 is_stmt 0 view .LVU18
+  91 0046 ADF80E40 		strh	r4, [sp, #14]	@ movhi
+  22:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_Period = 65536-1;//arr
+  92              		.loc 1 22 3 is_stmt 1 view .LVU19
+  93              		.loc 1 22 40 is_stmt 0 view .LVU20
+ARM GAS  /tmp/cc8GYpAO.s 			page 3
+
+
+  94 004a 4FF6FF73 		movw	r3, #65535
+  95 004e 0493     		str	r3, [sp, #16]
+  23:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_Prescaler = 16-1;//psc
+  96              		.loc 1 23 3 is_stmt 1 view .LVU21
+  97              		.loc 1 23 43 is_stmt 0 view .LVU22
+  98 0050 0F27     		movs	r7, #15
+  99 0052 ADF80C70 		strh	r7, [sp, #12]	@ movhi
+  24:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;//定时器溢出增加倍数
+ 100              		.loc 1 24 3 is_stmt 1 view .LVU23
+ 101              		.loc 1 24 51 is_stmt 0 view .LVU24
+ 102 0056 8DF81640 		strb	r4, [sp, #22]
+  25:./Hardware/Receiver.c ****   TIM_TimeBaseInit(TIM1,&TIM_TimeBaseInitStructure);
+ 103              		.loc 1 25 3 is_stmt 1 view .LVU25
+ 104 005a A5F58035 		sub	r5, r5, #65536
+ 105 005e 03A9     		add	r1, sp, #12
+ 106 0060 2846     		mov	r0, r5
+ 107 0062 FFF7FEFF 		bl	TIM_TimeBaseInit
+ 108              	.LVL4:
+  26:./Hardware/Receiver.c **** 
+  27:./Hardware/Receiver.c ****   
+  28:./Hardware/Receiver.c ****   TIM_ICInitTypeDef TIM_ICInitStructure;
+ 109              		.loc 1 28 3 view .LVU26
+  29:./Hardware/Receiver.c ****   
+  30:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;//定时器通道PA8_TIM1_CH1
+ 110              		.loc 1 30 3 view .LVU27
+ 111              		.loc 1 30 35 is_stmt 0 view .LVU28
+ 112 0066 ADF80040 		strh	r4, [sp]	@ movhi
+  31:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICFilter = 0x0F;//滤波（最大0x0F）
+ 113              		.loc 1 31 3 is_stmt 1 view .LVU29
+ 114              		.loc 1 31 36 is_stmt 0 view .LVU30
+ 115 006a ADF80870 		strh	r7, [sp, #8]	@ movhi
+  32:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;//计数方式（向上计数法）
+ 116              		.loc 1 32 3 is_stmt 1 view .LVU31
+ 117              		.loc 1 32 38 is_stmt 0 view .LVU32
+ 118 006e ADF80240 		strh	r4, [sp, #2]	@ movhi
+  33:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;//输入预分频器
+ 119              		.loc 1 33 3 is_stmt 1 view .LVU33
+ 120              		.loc 1 33 39 is_stmt 0 view .LVU34
+ 121 0072 ADF80640 		strh	r4, [sp, #6]	@ movhi
+  34:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;//输入方式（直接输入方式）
+ 122              		.loc 1 34 3 is_stmt 1 view .LVU35
+ 123              		.loc 1 34 39 is_stmt 0 view .LVU36
+ 124 0076 4FF00108 		mov	r8, #1
+ 125 007a ADF80480 		strh	r8, [sp, #4]	@ movhi
+  35:./Hardware/Receiver.c ****   TIM_ICInit(TIM1,&TIM_ICInitStructure);
+ 126              		.loc 1 35 3 is_stmt 1 view .LVU37
+ 127 007e 6946     		mov	r1, sp
+ 128 0080 2846     		mov	r0, r5
+ 129 0082 FFF7FEFF 		bl	TIM_ICInit
+ 130              	.LVL5:
+  36:./Hardware/Receiver.c ****   
+  37:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;//通道2
+ 131              		.loc 1 37 3 view .LVU38
+ 132              		.loc 1 37 35 is_stmt 0 view .LVU39
+ 133 0086 4FF00409 		mov	r9, #4
+ 134 008a ADF80090 		strh	r9, [sp]	@ movhi
+  38:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICFilter = 0x0F;
+ARM GAS  /tmp/cc8GYpAO.s 			page 4
+
+
+ 135              		.loc 1 38 3 is_stmt 1 view .LVU40
+ 136              		.loc 1 38 36 is_stmt 0 view .LVU41
+ 137 008e ADF80870 		strh	r7, [sp, #8]	@ movhi
+  39:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Falling;//计数方式（向下计数法）
+ 138              		.loc 1 39 3 is_stmt 1 view .LVU42
+ 139              		.loc 1 39 38 is_stmt 0 view .LVU43
+ 140 0092 ADF80260 		strh	r6, [sp, #2]	@ movhi
+  40:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
+ 141              		.loc 1 40 3 is_stmt 1 view .LVU44
+ 142              		.loc 1 40 39 is_stmt 0 view .LVU45
+ 143 0096 ADF80640 		strh	r4, [sp, #6]	@ movhi
+  41:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_IndirectTI;//输入方式（间接输入方式）
+ 144              		.loc 1 41 3 is_stmt 1 view .LVU46
+ 145              		.loc 1 41 39 is_stmt 0 view .LVU47
+ 146 009a ADF80460 		strh	r6, [sp, #4]	@ movhi
+  42:./Hardware/Receiver.c ****   TIM_ICInit(TIM1,&TIM_ICInitStructure);
+ 147              		.loc 1 42 3 is_stmt 1 view .LVU48
+ 148 009e 6946     		mov	r1, sp
+ 149 00a0 2846     		mov	r0, r5
+ 150 00a2 FFF7FEFF 		bl	TIM_ICInit
+ 151              	.LVL6:
+  43:./Hardware/Receiver.c **** 
+  44:./Hardware/Receiver.c **** 
+  45:./Hardware/Receiver.c ****   
+  46:./Hardware/Receiver.c ****   TIM_SelectInputTrigger(TIM1,TIM_TS_TI1FP1); 
+ 152              		.loc 1 46 3 view .LVU49
+ 153 00a6 5021     		movs	r1, #80
+ 154 00a8 2846     		mov	r0, r5
+ 155 00aa FFF7FEFF 		bl	TIM_SelectInputTrigger
+ 156              	.LVL7:
+  47:./Hardware/Receiver.c ****   TIM_SelectSlaveMode(TIM1,TIM_SlaveMode_Reset);
+ 157              		.loc 1 47 3 view .LVU50
+ 158 00ae 4946     		mov	r1, r9
+ 159 00b0 2846     		mov	r0, r5
+ 160 00b2 FFF7FEFF 		bl	TIM_SelectSlaveMode
+ 161              	.LVL8:
+  48:./Hardware/Receiver.c ****   
+  49:./Hardware/Receiver.c ****   TIM_Cmd(TIM1,ENABLE);
+ 162              		.loc 1 49 3 view .LVU51
+ 163 00b6 4146     		mov	r1, r8
+ 164 00b8 2846     		mov	r0, r5
+ 165 00ba FFF7FEFF 		bl	TIM_Cmd
+ 166              	.LVL9:
+  50:./Hardware/Receiver.c **** }
+ 167              		.loc 1 50 1 is_stmt 0 view .LVU52
+ 168 00be 09B0     		add	sp, sp, #36
+ 169              	.LCFI2:
+ 170              		.cfi_def_cfa_offset 28
+ 171              		@ sp needed
+ 172 00c0 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 173              	.L4:
+ 174              		.align	2
+ 175              	.L3:
+ 176 00c4 00000240 		.word	1073872896
+ 177              		.cfi_endproc
+ 178              	.LFE123:
+ 180              		.section	.text.ICTIM2CH1_2_Init,"ax",%progbits
+ARM GAS  /tmp/cc8GYpAO.s 			page 5
+
+
+ 181              		.align	1
+ 182              		.global	ICTIM2CH1_2_Init
+ 183              		.syntax unified
+ 184              		.thumb
+ 185              		.thumb_func
+ 187              	ICTIM2CH1_2_Init:
+ 188              	.LFB124:
+  51:./Hardware/Receiver.c **** 
+  52:./Hardware/Receiver.c **** void ICTIM2CH1_2_Init(void)
+  53:./Hardware/Receiver.c **** {
+ 189              		.loc 1 53 1 is_stmt 1 view -0
+ 190              		.cfi_startproc
+ 191              		@ args = 0, pretend = 0, frame = 32
+ 192              		@ frame_needed = 0, uses_anonymous_args = 0
+ 193 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 194              	.LCFI3:
+ 195              		.cfi_def_cfa_offset 24
+ 196              		.cfi_offset 4, -24
+ 197              		.cfi_offset 5, -20
+ 198              		.cfi_offset 6, -16
+ 199              		.cfi_offset 7, -12
+ 200              		.cfi_offset 8, -8
+ 201              		.cfi_offset 14, -4
+ 202 0004 88B0     		sub	sp, sp, #32
+ 203              	.LCFI4:
+ 204              		.cfi_def_cfa_offset 56
+  54:./Hardware/Receiver.c ****   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+ 205              		.loc 1 54 3 view .LVU54
+ 206 0006 0121     		movs	r1, #1
+ 207 0008 0846     		mov	r0, r1
+ 208 000a FFF7FEFF 		bl	RCC_APB1PeriphClockCmd
+ 209              	.LVL10:
+  55:./Hardware/Receiver.c ****   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);//PA0
+ 210              		.loc 1 55 3 view .LVU55
+ 211 000e 0121     		movs	r1, #1
+ 212 0010 0846     		mov	r0, r1
+ 213 0012 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 214              	.LVL11:
+  56:./Hardware/Receiver.c ****   
+  57:./Hardware/Receiver.c ****   GPIO_PinAFConfig(GPIOA,GPIO_PinSource0,GPIO_AF_TIM2);
+ 215              		.loc 1 57 3 view .LVU56
+ 216 0016 2C4F     		ldr	r7, .L7
+ 217 0018 0122     		movs	r2, #1
+ 218 001a 0021     		movs	r1, #0
+ 219 001c 3846     		mov	r0, r7
+ 220 001e FFF7FEFF 		bl	GPIO_PinAFConfig
+ 221              	.LVL12:
+  58:./Hardware/Receiver.c **** 
+  59:./Hardware/Receiver.c ****   GPIO_InitTypeDef GPIO_InitStructure;
+ 222              		.loc 1 59 3 view .LVU57
+  60:./Hardware/Receiver.c **** 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+ 223              		.loc 1 60 2 view .LVU58
+ 224              		.loc 1 60 31 is_stmt 0 view .LVU59
+ 225 0022 0226     		movs	r6, #2
+ 226 0024 8DF81C60 		strb	r6, [sp, #28]
+  61:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+ 227              		.loc 1 61 3 is_stmt 1 view .LVU60
+ARM GAS  /tmp/cc8GYpAO.s 			page 6
+
+
+ 228              		.loc 1 61 32 is_stmt 0 view .LVU61
+ 229 0028 0024     		movs	r4, #0
+ 230 002a 8DF81F40 		strb	r4, [sp, #31]
+  62:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
+ 231              		.loc 1 62 3 is_stmt 1 view .LVU62
+ 232              		.loc 1 62 31 is_stmt 0 view .LVU63
+ 233 002e 0125     		movs	r5, #1
+ 234 0030 0695     		str	r5, [sp, #24]
+  63:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+ 235              		.loc 1 63 3 is_stmt 1 view .LVU64
+ 236              		.loc 1 63 33 is_stmt 0 view .LVU65
+ 237 0032 0323     		movs	r3, #3
+ 238 0034 8DF81D30 		strb	r3, [sp, #29]
+  64:./Hardware/Receiver.c **** 	GPIO_Init(GPIOA, &GPIO_InitStructure);
+ 239              		.loc 1 64 2 is_stmt 1 view .LVU66
+ 240 0038 06A9     		add	r1, sp, #24
+ 241 003a 3846     		mov	r0, r7
+ 242 003c FFF7FEFF 		bl	GPIO_Init
+ 243              	.LVL13:
+  65:./Hardware/Receiver.c ****   
+  66:./Hardware/Receiver.c ****   TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
+ 244              		.loc 1 66 3 view .LVU67
+  67:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;//分频系数（1，不分频）
+ 245              		.loc 1 67 3 view .LVU68
+ 246              		.loc 1 67 47 is_stmt 0 view .LVU69
+ 247 0040 ADF81440 		strh	r4, [sp, #20]	@ movhi
+  68:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;//对齐模式（向上对齐）
+ 248              		.loc 1 68 3 is_stmt 1 view .LVU70
+ 249              		.loc 1 68 45 is_stmt 0 view .LVU71
+ 250 0044 ADF80E40 		strh	r4, [sp, #14]	@ movhi
+  69:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_Period = 65536-1;//arr
+ 251              		.loc 1 69 3 is_stmt 1 view .LVU72
+ 252              		.loc 1 69 40 is_stmt 0 view .LVU73
+ 253 0048 4FF6FF73 		movw	r3, #65535
+ 254 004c 0493     		str	r3, [sp, #16]
+  70:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_Prescaler = 16-1;//psc
+ 255              		.loc 1 70 3 is_stmt 1 view .LVU74
+ 256              		.loc 1 70 43 is_stmt 0 view .LVU75
+ 257 004e 0F27     		movs	r7, #15
+ 258 0050 ADF80C70 		strh	r7, [sp, #12]	@ movhi
+  71:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;//定时器溢出增加倍数
+ 259              		.loc 1 71 3 is_stmt 1 view .LVU76
+ 260              		.loc 1 71 51 is_stmt 0 view .LVU77
+ 261 0054 8DF81640 		strb	r4, [sp, #22]
+  72:./Hardware/Receiver.c ****   TIM_TimeBaseInit(TIM2,&TIM_TimeBaseInitStructure);
+ 262              		.loc 1 72 3 is_stmt 1 view .LVU78
+ 263 0058 03A9     		add	r1, sp, #12
+ 264 005a 4FF08040 		mov	r0, #1073741824
+ 265 005e FFF7FEFF 		bl	TIM_TimeBaseInit
+ 266              	.LVL14:
+  73:./Hardware/Receiver.c **** 
+  74:./Hardware/Receiver.c ****   
+  75:./Hardware/Receiver.c ****   TIM_ICInitTypeDef TIM_ICInitStructure;
+ 267              		.loc 1 75 3 view .LVU79
+  76:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;//定时器通道（PB8对应TIM4CH3）//PA0对应TIM2CH1
+ 268              		.loc 1 76 3 view .LVU80
+ 269              		.loc 1 76 35 is_stmt 0 view .LVU81
+ARM GAS  /tmp/cc8GYpAO.s 			page 7
+
+
+ 270 0062 ADF80040 		strh	r4, [sp]	@ movhi
+  77:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICFilter = 0x0F;//滤波（最大0x0F）
+ 271              		.loc 1 77 3 is_stmt 1 view .LVU82
+ 272              		.loc 1 77 36 is_stmt 0 view .LVU83
+ 273 0066 ADF80870 		strh	r7, [sp, #8]	@ movhi
+  78:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;//计数方式（向上计数法）
+ 274              		.loc 1 78 3 is_stmt 1 view .LVU84
+ 275              		.loc 1 78 38 is_stmt 0 view .LVU85
+ 276 006a ADF80240 		strh	r4, [sp, #2]	@ movhi
+  79:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;//输入预分频器
+ 277              		.loc 1 79 3 is_stmt 1 view .LVU86
+ 278              		.loc 1 79 39 is_stmt 0 view .LVU87
+ 279 006e ADF80640 		strh	r4, [sp, #6]	@ movhi
+  80:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;//输入方式（直接输入方式）
+ 280              		.loc 1 80 3 is_stmt 1 view .LVU88
+ 281              		.loc 1 80 39 is_stmt 0 view .LVU89
+ 282 0072 ADF80450 		strh	r5, [sp, #4]	@ movhi
+  81:./Hardware/Receiver.c ****   
+  82:./Hardware/Receiver.c ****   TIM_ICInit(TIM2,&TIM_ICInitStructure);
+ 283              		.loc 1 82 3 is_stmt 1 view .LVU90
+ 284 0076 6946     		mov	r1, sp
+ 285 0078 4FF08040 		mov	r0, #1073741824
+ 286 007c FFF7FEFF 		bl	TIM_ICInit
+ 287              	.LVL15:
+  83:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;//通道2
+ 288              		.loc 1 83 3 view .LVU91
+ 289              		.loc 1 83 35 is_stmt 0 view .LVU92
+ 290 0080 4FF00408 		mov	r8, #4
+ 291 0084 ADF80080 		strh	r8, [sp]	@ movhi
+  84:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICFilter = 0x0F;
+ 292              		.loc 1 84 3 is_stmt 1 view .LVU93
+ 293              		.loc 1 84 36 is_stmt 0 view .LVU94
+ 294 0088 ADF80870 		strh	r7, [sp, #8]	@ movhi
+  85:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Falling;//计数方式（向下计数法）
+ 295              		.loc 1 85 3 is_stmt 1 view .LVU95
+ 296              		.loc 1 85 38 is_stmt 0 view .LVU96
+ 297 008c ADF80260 		strh	r6, [sp, #2]	@ movhi
+  86:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
+ 298              		.loc 1 86 3 is_stmt 1 view .LVU97
+ 299              		.loc 1 86 39 is_stmt 0 view .LVU98
+ 300 0090 ADF80640 		strh	r4, [sp, #6]	@ movhi
+  87:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_IndirectTI;//输入方式（间接输入方式）
+ 301              		.loc 1 87 3 is_stmt 1 view .LVU99
+ 302              		.loc 1 87 39 is_stmt 0 view .LVU100
+ 303 0094 ADF80460 		strh	r6, [sp, #4]	@ movhi
+  88:./Hardware/Receiver.c ****   TIM_ICInit(TIM2,&TIM_ICInitStructure);
+ 304              		.loc 1 88 3 is_stmt 1 view .LVU101
+ 305 0098 6946     		mov	r1, sp
+ 306 009a 4FF08040 		mov	r0, #1073741824
+ 307 009e FFF7FEFF 		bl	TIM_ICInit
+ 308              	.LVL16:
+  89:./Hardware/Receiver.c **** 
+  90:./Hardware/Receiver.c **** 
+  91:./Hardware/Receiver.c ****   
+  92:./Hardware/Receiver.c ****   TIM_SelectInputTrigger(TIM2,TIM_TS_TI1FP1); 
+ 309              		.loc 1 92 3 view .LVU102
+ 310 00a2 5021     		movs	r1, #80
+ARM GAS  /tmp/cc8GYpAO.s 			page 8
+
+
+ 311 00a4 4FF08040 		mov	r0, #1073741824
+ 312 00a8 FFF7FEFF 		bl	TIM_SelectInputTrigger
+ 313              	.LVL17:
+  93:./Hardware/Receiver.c ****   TIM_SelectSlaveMode(TIM2,TIM_SlaveMode_Reset);
+ 314              		.loc 1 93 3 view .LVU103
+ 315 00ac 4146     		mov	r1, r8
+ 316 00ae 4FF08040 		mov	r0, #1073741824
+ 317 00b2 FFF7FEFF 		bl	TIM_SelectSlaveMode
+ 318              	.LVL18:
+  94:./Hardware/Receiver.c ****   
+  95:./Hardware/Receiver.c ****   TIM_Cmd(TIM2,ENABLE);
+ 319              		.loc 1 95 3 view .LVU104
+ 320 00b6 2946     		mov	r1, r5
+ 321 00b8 4FF08040 		mov	r0, #1073741824
+ 322 00bc FFF7FEFF 		bl	TIM_Cmd
+ 323              	.LVL19:
+  96:./Hardware/Receiver.c **** }  
+ 324              		.loc 1 96 1 is_stmt 0 view .LVU105
+ 325 00c0 08B0     		add	sp, sp, #32
+ 326              	.LCFI5:
+ 327              		.cfi_def_cfa_offset 24
+ 328              		@ sp needed
+ 329 00c2 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 330              	.L8:
+ 331 00c6 00BF     		.align	2
+ 332              	.L7:
+ 333 00c8 00000240 		.word	1073872896
+ 334              		.cfi_endproc
+ 335              	.LFE124:
+ 337              		.section	.text.ICTIM4CH1_2_Init,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	ICTIM4CH1_2_Init
+ 340              		.syntax unified
+ 341              		.thumb
+ 342              		.thumb_func
+ 344              	ICTIM4CH1_2_Init:
+ 345              	.LFB125:
+  97:./Hardware/Receiver.c **** 
+  98:./Hardware/Receiver.c **** void ICTIM4CH1_2_Init(void)
+  99:./Hardware/Receiver.c **** {
+ 346              		.loc 1 99 1 is_stmt 1 view -0
+ 347              		.cfi_startproc
+ 348              		@ args = 0, pretend = 0, frame = 32
+ 349              		@ frame_needed = 0, uses_anonymous_args = 0
+ 350 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 351              	.LCFI6:
+ 352              		.cfi_def_cfa_offset 28
+ 353              		.cfi_offset 4, -28
+ 354              		.cfi_offset 5, -24
+ 355              		.cfi_offset 6, -20
+ 356              		.cfi_offset 7, -16
+ 357              		.cfi_offset 8, -12
+ 358              		.cfi_offset 9, -8
+ 359              		.cfi_offset 14, -4
+ 360 0004 89B0     		sub	sp, sp, #36
+ 361              	.LCFI7:
+ 362              		.cfi_def_cfa_offset 64
+ARM GAS  /tmp/cc8GYpAO.s 			page 9
+
+
+ 100:./Hardware/Receiver.c ****   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+ 363              		.loc 1 100 3 view .LVU107
+ 364 0006 0121     		movs	r1, #1
+ 365 0008 0420     		movs	r0, #4
+ 366 000a FFF7FEFF 		bl	RCC_APB1PeriphClockCmd
+ 367              	.LVL20:
+ 101:./Hardware/Receiver.c ****   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE);//PB6
+ 368              		.loc 1 101 3 view .LVU108
+ 369 000e 0121     		movs	r1, #1
+ 370 0010 0220     		movs	r0, #2
+ 371 0012 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 372              	.LVL21:
+ 102:./Hardware/Receiver.c ****   
+ 103:./Hardware/Receiver.c ****   GPIO_PinAFConfig(GPIOB,GPIO_PinSource6,GPIO_AF_TIM4);
+ 373              		.loc 1 103 3 view .LVU109
+ 374 0016 2B4D     		ldr	r5, .L11
+ 375 0018 0222     		movs	r2, #2
+ 376 001a 0621     		movs	r1, #6
+ 377 001c 2846     		mov	r0, r5
+ 378 001e FFF7FEFF 		bl	GPIO_PinAFConfig
+ 379              	.LVL22:
+ 104:./Hardware/Receiver.c **** 
+ 105:./Hardware/Receiver.c ****   GPIO_InitTypeDef GPIO_InitStructure;
+ 380              		.loc 1 105 3 view .LVU110
+ 106:./Hardware/Receiver.c **** 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+ 381              		.loc 1 106 2 view .LVU111
+ 382              		.loc 1 106 31 is_stmt 0 view .LVU112
+ 383 0022 0226     		movs	r6, #2
+ 384 0024 8DF81C60 		strb	r6, [sp, #28]
+ 107:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+ 385              		.loc 1 107 3 is_stmt 1 view .LVU113
+ 386              		.loc 1 107 32 is_stmt 0 view .LVU114
+ 387 0028 0024     		movs	r4, #0
+ 388 002a 8DF81F40 		strb	r4, [sp, #31]
+ 108:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+ 389              		.loc 1 108 3 is_stmt 1 view .LVU115
+ 390              		.loc 1 108 31 is_stmt 0 view .LVU116
+ 391 002e 4023     		movs	r3, #64
+ 392 0030 0693     		str	r3, [sp, #24]
+ 109:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+ 393              		.loc 1 109 3 is_stmt 1 view .LVU117
+ 394              		.loc 1 109 33 is_stmt 0 view .LVU118
+ 395 0032 0323     		movs	r3, #3
+ 396 0034 8DF81D30 		strb	r3, [sp, #29]
+ 110:./Hardware/Receiver.c **** 	GPIO_Init(GPIOB, &GPIO_InitStructure);
+ 397              		.loc 1 110 2 is_stmt 1 view .LVU119
+ 398 0038 06A9     		add	r1, sp, #24
+ 399 003a 2846     		mov	r0, r5
+ 400 003c FFF7FEFF 		bl	GPIO_Init
+ 401              	.LVL23:
+ 111:./Hardware/Receiver.c ****   
+ 112:./Hardware/Receiver.c ****   TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
+ 402              		.loc 1 112 3 view .LVU120
+ 113:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;//分频系数（1，不分频）
+ 403              		.loc 1 113 3 view .LVU121
+ 404              		.loc 1 113 47 is_stmt 0 view .LVU122
+ 405 0040 ADF81440 		strh	r4, [sp, #20]	@ movhi
+ARM GAS  /tmp/cc8GYpAO.s 			page 10
+
+
+ 114:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;//对齐模式（向上对齐）
+ 406              		.loc 1 114 3 is_stmt 1 view .LVU123
+ 407              		.loc 1 114 45 is_stmt 0 view .LVU124
+ 408 0044 ADF80E40 		strh	r4, [sp, #14]	@ movhi
+ 115:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_Period = 65536-1;//arr
+ 409              		.loc 1 115 3 is_stmt 1 view .LVU125
+ 410              		.loc 1 115 40 is_stmt 0 view .LVU126
+ 411 0048 4FF6FF73 		movw	r3, #65535
+ 412 004c 0493     		str	r3, [sp, #16]
+ 116:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_Prescaler = 16-1;//psc
+ 413              		.loc 1 116 3 is_stmt 1 view .LVU127
+ 414              		.loc 1 116 43 is_stmt 0 view .LVU128
+ 415 004e 0F27     		movs	r7, #15
+ 416 0050 ADF80C70 		strh	r7, [sp, #12]	@ movhi
+ 117:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;//定时器溢出增加倍数
+ 417              		.loc 1 117 3 is_stmt 1 view .LVU129
+ 418              		.loc 1 117 51 is_stmt 0 view .LVU130
+ 419 0054 8DF81640 		strb	r4, [sp, #22]
+ 118:./Hardware/Receiver.c ****   TIM_TimeBaseInit(TIM4,&TIM_TimeBaseInitStructure);
+ 420              		.loc 1 118 3 is_stmt 1 view .LVU131
+ 421 0058 A5F5FE35 		sub	r5, r5, #130048
+ 422 005c 03A9     		add	r1, sp, #12
+ 423 005e 2846     		mov	r0, r5
+ 424 0060 FFF7FEFF 		bl	TIM_TimeBaseInit
+ 425              	.LVL24:
+ 119:./Hardware/Receiver.c **** 
+ 120:./Hardware/Receiver.c ****   
+ 121:./Hardware/Receiver.c ****   TIM_ICInitTypeDef TIM_ICInitStructure;
+ 426              		.loc 1 121 3 view .LVU132
+ 122:./Hardware/Receiver.c ****   
+ 123:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;//定时器通道（PB8对应TIM4CH3）//PA0对应TIM2CH1
+ 427              		.loc 1 123 3 view .LVU133
+ 428              		.loc 1 123 35 is_stmt 0 view .LVU134
+ 429 0064 ADF80040 		strh	r4, [sp]	@ movhi
+ 124:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICFilter = 0x0F;//滤波（最大0x0F）
+ 430              		.loc 1 124 3 is_stmt 1 view .LVU135
+ 431              		.loc 1 124 36 is_stmt 0 view .LVU136
+ 432 0068 ADF80870 		strh	r7, [sp, #8]	@ movhi
+ 125:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;//计数方式（向上计数法）
+ 433              		.loc 1 125 3 is_stmt 1 view .LVU137
+ 434              		.loc 1 125 38 is_stmt 0 view .LVU138
+ 435 006c ADF80240 		strh	r4, [sp, #2]	@ movhi
+ 126:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;//输入预分频器
+ 436              		.loc 1 126 3 is_stmt 1 view .LVU139
+ 437              		.loc 1 126 39 is_stmt 0 view .LVU140
+ 438 0070 ADF80640 		strh	r4, [sp, #6]	@ movhi
+ 127:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;//输入方式（直接输入方式） 
+ 439              		.loc 1 127 3 is_stmt 1 view .LVU141
+ 440              		.loc 1 127 39 is_stmt 0 view .LVU142
+ 441 0074 4FF00108 		mov	r8, #1
+ 442 0078 ADF80480 		strh	r8, [sp, #4]	@ movhi
+ 128:./Hardware/Receiver.c ****   TIM_ICInit(TIM4,&TIM_ICInitStructure);
+ 443              		.loc 1 128 3 is_stmt 1 view .LVU143
+ 444 007c 6946     		mov	r1, sp
+ 445 007e 2846     		mov	r0, r5
+ 446 0080 FFF7FEFF 		bl	TIM_ICInit
+ 447              	.LVL25:
+ARM GAS  /tmp/cc8GYpAO.s 			page 11
+
+
+ 129:./Hardware/Receiver.c ****   
+ 130:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;//通道2
+ 448              		.loc 1 130 3 view .LVU144
+ 449              		.loc 1 130 35 is_stmt 0 view .LVU145
+ 450 0084 4FF00409 		mov	r9, #4
+ 451 0088 ADF80090 		strh	r9, [sp]	@ movhi
+ 131:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICFilter = 0x0F;
+ 452              		.loc 1 131 3 is_stmt 1 view .LVU146
+ 453              		.loc 1 131 36 is_stmt 0 view .LVU147
+ 454 008c ADF80870 		strh	r7, [sp, #8]	@ movhi
+ 132:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Falling;//计数方式（向下计数法）
+ 455              		.loc 1 132 3 is_stmt 1 view .LVU148
+ 456              		.loc 1 132 38 is_stmt 0 view .LVU149
+ 457 0090 ADF80260 		strh	r6, [sp, #2]	@ movhi
+ 133:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
+ 458              		.loc 1 133 3 is_stmt 1 view .LVU150
+ 459              		.loc 1 133 39 is_stmt 0 view .LVU151
+ 460 0094 ADF80640 		strh	r4, [sp, #6]	@ movhi
+ 134:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_IndirectTI;//输入方式（间接输入方式）
+ 461              		.loc 1 134 3 is_stmt 1 view .LVU152
+ 462              		.loc 1 134 39 is_stmt 0 view .LVU153
+ 463 0098 ADF80460 		strh	r6, [sp, #4]	@ movhi
+ 135:./Hardware/Receiver.c ****   TIM_ICInit(TIM4,&TIM_ICInitStructure);
+ 464              		.loc 1 135 3 is_stmt 1 view .LVU154
+ 465 009c 6946     		mov	r1, sp
+ 466 009e 2846     		mov	r0, r5
+ 467 00a0 FFF7FEFF 		bl	TIM_ICInit
+ 468              	.LVL26:
+ 136:./Hardware/Receiver.c **** 
+ 137:./Hardware/Receiver.c **** 
+ 138:./Hardware/Receiver.c ****   
+ 139:./Hardware/Receiver.c ****   TIM_SelectInputTrigger(TIM4,TIM_TS_TI1FP1); 
+ 469              		.loc 1 139 3 view .LVU155
+ 470 00a4 5021     		movs	r1, #80
+ 471 00a6 2846     		mov	r0, r5
+ 472 00a8 FFF7FEFF 		bl	TIM_SelectInputTrigger
+ 473              	.LVL27:
+ 140:./Hardware/Receiver.c ****   TIM_SelectSlaveMode(TIM4,TIM_SlaveMode_Reset);
+ 474              		.loc 1 140 3 view .LVU156
+ 475 00ac 4946     		mov	r1, r9
+ 476 00ae 2846     		mov	r0, r5
+ 477 00b0 FFF7FEFF 		bl	TIM_SelectSlaveMode
+ 478              	.LVL28:
+ 141:./Hardware/Receiver.c ****   
+ 142:./Hardware/Receiver.c ****   TIM_Cmd(TIM4,ENABLE);
+ 479              		.loc 1 142 3 view .LVU157
+ 480 00b4 4146     		mov	r1, r8
+ 481 00b6 2846     		mov	r0, r5
+ 482 00b8 FFF7FEFF 		bl	TIM_Cmd
+ 483              	.LVL29:
+ 143:./Hardware/Receiver.c **** }
+ 484              		.loc 1 143 1 is_stmt 0 view .LVU158
+ 485 00bc 09B0     		add	sp, sp, #36
+ 486              	.LCFI8:
+ 487              		.cfi_def_cfa_offset 28
+ 488              		@ sp needed
+ 489 00be BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ARM GAS  /tmp/cc8GYpAO.s 			page 12
+
+
+ 490              	.L12:
+ 491 00c2 00BF     		.align	2
+ 492              	.L11:
+ 493 00c4 00040240 		.word	1073873920
+ 494              		.cfi_endproc
+ 495              	.LFE125:
+ 497              		.section	.text.ICTIM5CH1_2_Init,"ax",%progbits
+ 498              		.align	1
+ 499              		.global	ICTIM5CH1_2_Init
+ 500              		.syntax unified
+ 501              		.thumb
+ 502              		.thumb_func
+ 504              	ICTIM5CH1_2_Init:
+ 505              	.LFB126:
+ 144:./Hardware/Receiver.c **** 
+ 145:./Hardware/Receiver.c **** void ICTIM5CH1_2_Init(void)
+ 146:./Hardware/Receiver.c **** {
+ 506              		.loc 1 146 1 is_stmt 1 view -0
+ 507              		.cfi_startproc
+ 508              		@ args = 0, pretend = 0, frame = 32
+ 509              		@ frame_needed = 0, uses_anonymous_args = 0
+ 510 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 511              	.LCFI9:
+ 512              		.cfi_def_cfa_offset 28
+ 513              		.cfi_offset 4, -28
+ 514              		.cfi_offset 5, -24
+ 515              		.cfi_offset 6, -20
+ 516              		.cfi_offset 7, -16
+ 517              		.cfi_offset 8, -12
+ 518              		.cfi_offset 9, -8
+ 519              		.cfi_offset 14, -4
+ 520 0004 89B0     		sub	sp, sp, #36
+ 521              	.LCFI10:
+ 522              		.cfi_def_cfa_offset 64
+ 147:./Hardware/Receiver.c ****   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
+ 523              		.loc 1 147 3 view .LVU160
+ 524 0006 0121     		movs	r1, #1
+ 525 0008 0820     		movs	r0, #8
+ 526 000a FFF7FEFF 		bl	RCC_APB1PeriphClockCmd
+ 527              	.LVL30:
+ 148:./Hardware/Receiver.c ****   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);//PA1
+ 528              		.loc 1 148 3 view .LVU161
+ 529 000e 0121     		movs	r1, #1
+ 530 0010 0846     		mov	r0, r1
+ 531 0012 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 532              	.LVL31:
+ 149:./Hardware/Receiver.c ****   
+ 150:./Hardware/Receiver.c ****   GPIO_PinAFConfig(GPIOA,GPIO_PinSource1,GPIO_AF_TIM5);
+ 533              		.loc 1 150 3 view .LVU162
+ 534 0016 2A4D     		ldr	r5, .L15
+ 535 0018 0222     		movs	r2, #2
+ 536 001a 0121     		movs	r1, #1
+ 537 001c 2846     		mov	r0, r5
+ 538 001e FFF7FEFF 		bl	GPIO_PinAFConfig
+ 539              	.LVL32:
+ 151:./Hardware/Receiver.c **** 
+ 152:./Hardware/Receiver.c ****   GPIO_InitTypeDef GPIO_InitStructure;
+ARM GAS  /tmp/cc8GYpAO.s 			page 13
+
+
+ 540              		.loc 1 152 3 view .LVU163
+ 153:./Hardware/Receiver.c **** 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+ 541              		.loc 1 153 2 view .LVU164
+ 542              		.loc 1 153 31 is_stmt 0 view .LVU165
+ 543 0022 0226     		movs	r6, #2
+ 544 0024 8DF81C60 		strb	r6, [sp, #28]
+ 154:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+ 545              		.loc 1 154 3 is_stmt 1 view .LVU166
+ 546              		.loc 1 154 32 is_stmt 0 view .LVU167
+ 547 0028 0024     		movs	r4, #0
+ 548 002a 8DF81F40 		strb	r4, [sp, #31]
+ 155:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+ 549              		.loc 1 155 3 is_stmt 1 view .LVU168
+ 550              		.loc 1 155 31 is_stmt 0 view .LVU169
+ 551 002e 0696     		str	r6, [sp, #24]
+ 156:./Hardware/Receiver.c ****   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+ 552              		.loc 1 156 3 is_stmt 1 view .LVU170
+ 553              		.loc 1 156 33 is_stmt 0 view .LVU171
+ 554 0030 0323     		movs	r3, #3
+ 555 0032 8DF81D30 		strb	r3, [sp, #29]
+ 157:./Hardware/Receiver.c **** 	GPIO_Init(GPIOA, &GPIO_InitStructure);
+ 556              		.loc 1 157 2 is_stmt 1 view .LVU172
+ 557 0036 06A9     		add	r1, sp, #24
+ 558 0038 2846     		mov	r0, r5
+ 559 003a FFF7FEFF 		bl	GPIO_Init
+ 560              	.LVL33:
+ 158:./Hardware/Receiver.c ****   
+ 159:./Hardware/Receiver.c ****   TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
+ 561              		.loc 1 159 3 view .LVU173
+ 160:./Hardware/Receiver.c ****   
+ 161:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;//分频系数（1，不分频）
+ 562              		.loc 1 161 3 view .LVU174
+ 563              		.loc 1 161 47 is_stmt 0 view .LVU175
+ 564 003e ADF81440 		strh	r4, [sp, #20]	@ movhi
+ 162:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;//对齐模式（向上对齐）
+ 565              		.loc 1 162 3 is_stmt 1 view .LVU176
+ 566              		.loc 1 162 45 is_stmt 0 view .LVU177
+ 567 0042 ADF80E40 		strh	r4, [sp, #14]	@ movhi
+ 163:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_Period = 65536-1;//arr
+ 568              		.loc 1 163 3 is_stmt 1 view .LVU178
+ 569              		.loc 1 163 40 is_stmt 0 view .LVU179
+ 570 0046 4FF6FF73 		movw	r3, #65535
+ 571 004a 0493     		str	r3, [sp, #16]
+ 164:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_Prescaler = 16-1;//psc
+ 572              		.loc 1 164 3 is_stmt 1 view .LVU180
+ 573              		.loc 1 164 43 is_stmt 0 view .LVU181
+ 574 004c 0F27     		movs	r7, #15
+ 575 004e ADF80C70 		strh	r7, [sp, #12]	@ movhi
+ 165:./Hardware/Receiver.c ****   TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;//定时器溢出增加倍数
+ 576              		.loc 1 165 3 is_stmt 1 view .LVU182
+ 577              		.loc 1 165 51 is_stmt 0 view .LVU183
+ 578 0052 8DF81640 		strb	r4, [sp, #22]
+ 166:./Hardware/Receiver.c ****   TIM_TimeBaseInit(TIM5,&TIM_TimeBaseInitStructure);
+ 579              		.loc 1 166 3 is_stmt 1 view .LVU184
+ 580 0056 A5F5FA35 		sub	r5, r5, #128000
+ 581 005a 03A9     		add	r1, sp, #12
+ 582 005c 2846     		mov	r0, r5
+ARM GAS  /tmp/cc8GYpAO.s 			page 14
+
+
+ 583 005e FFF7FEFF 		bl	TIM_TimeBaseInit
+ 584              	.LVL34:
+ 167:./Hardware/Receiver.c **** 
+ 168:./Hardware/Receiver.c ****   
+ 169:./Hardware/Receiver.c ****   TIM_ICInitTypeDef TIM_ICInitStructure;
+ 585              		.loc 1 169 3 view .LVU185
+ 170:./Hardware/Receiver.c ****   
+ 171:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;//定时器通道
+ 586              		.loc 1 171 3 view .LVU186
+ 587              		.loc 1 171 35 is_stmt 0 view .LVU187
+ 588 0062 4FF00409 		mov	r9, #4
+ 589 0066 ADF80090 		strh	r9, [sp]	@ movhi
+ 172:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICFilter = 0x0F;//滤波（最大0x0F）
+ 590              		.loc 1 172 3 is_stmt 1 view .LVU188
+ 591              		.loc 1 172 36 is_stmt 0 view .LVU189
+ 592 006a ADF80870 		strh	r7, [sp, #8]	@ movhi
+ 173:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;//计数方式（向上计数法）
+ 593              		.loc 1 173 3 is_stmt 1 view .LVU190
+ 594              		.loc 1 173 38 is_stmt 0 view .LVU191
+ 595 006e ADF80240 		strh	r4, [sp, #2]	@ movhi
+ 174:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;//输入预分频器
+ 596              		.loc 1 174 3 is_stmt 1 view .LVU192
+ 597              		.loc 1 174 39 is_stmt 0 view .LVU193
+ 598 0072 ADF80640 		strh	r4, [sp, #6]	@ movhi
+ 175:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;//输入方式（直接输入方式）
+ 599              		.loc 1 175 3 is_stmt 1 view .LVU194
+ 600              		.loc 1 175 39 is_stmt 0 view .LVU195
+ 601 0076 4FF00108 		mov	r8, #1
+ 602 007a ADF80480 		strh	r8, [sp, #4]	@ movhi
+ 176:./Hardware/Receiver.c ****   TIM_ICInit(TIM5,&TIM_ICInitStructure);
+ 603              		.loc 1 176 3 is_stmt 1 view .LVU196
+ 604 007e 6946     		mov	r1, sp
+ 605 0080 2846     		mov	r0, r5
+ 606 0082 FFF7FEFF 		bl	TIM_ICInit
+ 607              	.LVL35:
+ 177:./Hardware/Receiver.c ****   
+ 178:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;//通道1
+ 608              		.loc 1 178 3 view .LVU197
+ 609              		.loc 1 178 35 is_stmt 0 view .LVU198
+ 610 0086 ADF80040 		strh	r4, [sp]	@ movhi
+ 179:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICFilter = 0x0F;
+ 611              		.loc 1 179 3 is_stmt 1 view .LVU199
+ 612              		.loc 1 179 36 is_stmt 0 view .LVU200
+ 613 008a ADF80870 		strh	r7, [sp, #8]	@ movhi
+ 180:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Falling;//计数方式（向下计数法）
+ 614              		.loc 1 180 3 is_stmt 1 view .LVU201
+ 615              		.loc 1 180 38 is_stmt 0 view .LVU202
+ 616 008e ADF80260 		strh	r6, [sp, #2]	@ movhi
+ 181:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
+ 617              		.loc 1 181 3 is_stmt 1 view .LVU203
+ 618              		.loc 1 181 39 is_stmt 0 view .LVU204
+ 619 0092 ADF80640 		strh	r4, [sp, #6]	@ movhi
+ 182:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_IndirectTI;//输入方式（间接输入方式）
+ 620              		.loc 1 182 3 is_stmt 1 view .LVU205
+ 621              		.loc 1 182 39 is_stmt 0 view .LVU206
+ 622 0096 ADF80460 		strh	r6, [sp, #4]	@ movhi
+ 183:./Hardware/Receiver.c ****   TIM_ICInit(TIM5,&TIM_ICInitStructure);
+ARM GAS  /tmp/cc8GYpAO.s 			page 15
+
+
+ 623              		.loc 1 183 3 is_stmt 1 view .LVU207
+ 624 009a 6946     		mov	r1, sp
+ 625 009c 2846     		mov	r0, r5
+ 626 009e FFF7FEFF 		bl	TIM_ICInit
+ 627              	.LVL36:
+ 184:./Hardware/Receiver.c **** 
+ 185:./Hardware/Receiver.c **** 
+ 186:./Hardware/Receiver.c ****   
+ 187:./Hardware/Receiver.c ****   TIM_SelectInputTrigger(TIM5,TIM_TS_TI2FP2); 
+ 628              		.loc 1 187 3 view .LVU208
+ 629 00a2 6021     		movs	r1, #96
+ 630 00a4 2846     		mov	r0, r5
+ 631 00a6 FFF7FEFF 		bl	TIM_SelectInputTrigger
+ 632              	.LVL37:
+ 188:./Hardware/Receiver.c ****   TIM_SelectSlaveMode(TIM5,TIM_SlaveMode_Reset);
+ 633              		.loc 1 188 3 view .LVU209
+ 634 00aa 4946     		mov	r1, r9
+ 635 00ac 2846     		mov	r0, r5
+ 636 00ae FFF7FEFF 		bl	TIM_SelectSlaveMode
+ 637              	.LVL38:
+ 189:./Hardware/Receiver.c ****   
+ 190:./Hardware/Receiver.c ****   TIM_Cmd(TIM5,ENABLE);
+ 638              		.loc 1 190 3 view .LVU210
+ 639 00b2 4146     		mov	r1, r8
+ 640 00b4 2846     		mov	r0, r5
+ 641 00b6 FFF7FEFF 		bl	TIM_Cmd
+ 642              	.LVL39:
+ 191:./Hardware/Receiver.c **** }
+ 643              		.loc 1 191 1 is_stmt 0 view .LVU211
+ 644 00ba 09B0     		add	sp, sp, #36
+ 645              	.LCFI11:
+ 646              		.cfi_def_cfa_offset 28
+ 647              		@ sp needed
+ 648 00bc BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 649              	.L16:
+ 650              		.align	2
+ 651              	.L15:
+ 652 00c0 00000240 		.word	1073872896
+ 653              		.cfi_endproc
+ 654              	.LFE126:
+ 656              		.section	.text.ICTIM4CH3_4_Init,"ax",%progbits
+ 657              		.align	1
+ 658              		.global	ICTIM4CH3_4_Init
+ 659              		.syntax unified
+ 660              		.thumb
+ 661              		.thumb_func
+ 663              	ICTIM4CH3_4_Init:
+ 664              	.LFB127:
+ 192:./Hardware/Receiver.c **** 
+ 193:./Hardware/Receiver.c **** 
+ 194:./Hardware/Receiver.c **** void ICTIM4CH3_4_Init(void)
+ 195:./Hardware/Receiver.c **** {
+ 665              		.loc 1 195 1 is_stmt 1 view -0
+ 666              		.cfi_startproc
+ 667              		@ args = 0, pretend = 0, frame = 16
+ 668              		@ frame_needed = 0, uses_anonymous_args = 0
+ 669 0000 10B5     		push	{r4, lr}
+ARM GAS  /tmp/cc8GYpAO.s 			page 16
+
+
+ 670              	.LCFI12:
+ 671              		.cfi_def_cfa_offset 8
+ 672              		.cfi_offset 4, -8
+ 673              		.cfi_offset 14, -4
+ 674 0002 84B0     		sub	sp, sp, #16
+ 675              	.LCFI13:
+ 676              		.cfi_def_cfa_offset 24
+ 196:./Hardware/Receiver.c ****   RCC->AHB1ENR |= (1<<1);
+ 677              		.loc 1 196 3 view .LVU213
+ 678              		.loc 1 196 6 is_stmt 0 view .LVU214
+ 679 0004 504B     		ldr	r3, .L19
+ 680 0006 1A6B     		ldr	r2, [r3, #48]
+ 681              		.loc 1 196 16 view .LVU215
+ 682 0008 42F00202 		orr	r2, r2, #2
+ 683 000c 1A63     		str	r2, [r3, #48]
+ 197:./Hardware/Receiver.c ****   RCC->APB1ENR |= (1<<2);
+ 684              		.loc 1 197 3 is_stmt 1 view .LVU216
+ 685              		.loc 1 197 6 is_stmt 0 view .LVU217
+ 686 000e 1A6C     		ldr	r2, [r3, #64]
+ 687              		.loc 1 197 16 view .LVU218
+ 688 0010 42F00402 		orr	r2, r2, #4
+ 689 0014 1A64     		str	r2, [r3, #64]
+ 198:./Hardware/Receiver.c ****   
+ 199:./Hardware/Receiver.c ****   GPIOB->MODER &= ~(0xff<<12);
+ 690              		.loc 1 199 3 is_stmt 1 view .LVU219
+ 691              		.loc 1 199 8 is_stmt 0 view .LVU220
+ 692 0016 A3F55053 		sub	r3, r3, #13312
+ 693 001a 1A68     		ldr	r2, [r3]
+ 694              		.loc 1 199 16 view .LVU221
+ 695 001c 22F47F22 		bic	r2, r2, #1044480
+ 696 0020 1A60     		str	r2, [r3]
+ 200:./Hardware/Receiver.c **** 	GPIOB->MODER |= (0xaa<<12);
+ 697              		.loc 1 200 2 is_stmt 1 view .LVU222
+ 698              		.loc 1 200 7 is_stmt 0 view .LVU223
+ 699 0022 1A68     		ldr	r2, [r3]
+ 700              		.loc 1 200 15 view .LVU224
+ 701 0024 42F42A22 		orr	r2, r2, #696320
+ 702 0028 1A60     		str	r2, [r3]
+ 201:./Hardware/Receiver.c **** 	GPIOB->OSPEEDR |= (0xaa<<12);
+ 703              		.loc 1 201 2 is_stmt 1 view .LVU225
+ 704              		.loc 1 201 7 is_stmt 0 view .LVU226
+ 705 002a 9A68     		ldr	r2, [r3, #8]
+ 706              		.loc 1 201 17 view .LVU227
+ 707 002c 42F42A22 		orr	r2, r2, #696320
+ 708 0030 9A60     		str	r2, [r3, #8]
+ 202:./Hardware/Receiver.c **** 	GPIOB->PUPDR |= (0xaa<<12);
+ 709              		.loc 1 202 2 is_stmt 1 view .LVU228
+ 710              		.loc 1 202 7 is_stmt 0 view .LVU229
+ 711 0032 DA68     		ldr	r2, [r3, #12]
+ 712              		.loc 1 202 15 view .LVU230
+ 713 0034 42F42A22 		orr	r2, r2, #696320
+ 714 0038 DA60     		str	r2, [r3, #12]
+ 203:./Hardware/Receiver.c ****   
+ 204:./Hardware/Receiver.c ****   GPIOB->AFR[1] &= ~(0xff);
+ 715              		.loc 1 204 3 is_stmt 1 view .LVU231
+ 716              		.loc 1 204 13 is_stmt 0 view .LVU232
+ 717 003a 5A6A     		ldr	r2, [r3, #36]
+ARM GAS  /tmp/cc8GYpAO.s 			page 17
+
+
+ 718              		.loc 1 204 17 view .LVU233
+ 719 003c 22F0FF02 		bic	r2, r2, #255
+ 720 0040 5A62     		str	r2, [r3, #36]
+ 205:./Hardware/Receiver.c **** 	GPIOB->AFR[0] &= ~(0xffU<<24);
+ 721              		.loc 1 205 2 is_stmt 1 view .LVU234
+ 722              		.loc 1 205 12 is_stmt 0 view .LVU235
+ 723 0042 1A6A     		ldr	r2, [r3, #32]
+ 724              		.loc 1 205 16 view .LVU236
+ 725 0044 22F07F42 		bic	r2, r2, #-16777216
+ 726 0048 1A62     		str	r2, [r3, #32]
+ 206:./Hardware/Receiver.c **** 	GPIOB->AFR[0] |= (0x2<<24);
+ 727              		.loc 1 206 2 is_stmt 1 view .LVU237
+ 728              		.loc 1 206 12 is_stmt 0 view .LVU238
+ 729 004a 1A6A     		ldr	r2, [r3, #32]
+ 730              		.loc 1 206 16 view .LVU239
+ 731 004c 42F00072 		orr	r2, r2, #33554432
+ 732 0050 1A62     		str	r2, [r3, #32]
+ 207:./Hardware/Receiver.c **** 	GPIOB->AFR[0] |= (0x2<<28);
+ 733              		.loc 1 207 2 is_stmt 1 view .LVU240
+ 734              		.loc 1 207 12 is_stmt 0 view .LVU241
+ 735 0052 1A6A     		ldr	r2, [r3, #32]
+ 736              		.loc 1 207 16 view .LVU242
+ 737 0054 42F00052 		orr	r2, r2, #536870912
+ 738 0058 1A62     		str	r2, [r3, #32]
+ 208:./Hardware/Receiver.c **** 	GPIOB->AFR[1] |= (0x1<<1);
+ 739              		.loc 1 208 2 is_stmt 1 view .LVU243
+ 740              		.loc 1 208 12 is_stmt 0 view .LVU244
+ 741 005a 5A6A     		ldr	r2, [r3, #36]
+ 742              		.loc 1 208 16 view .LVU245
+ 743 005c 42F00202 		orr	r2, r2, #2
+ 744 0060 5A62     		str	r2, [r3, #36]
+ 209:./Hardware/Receiver.c **** 	GPIOB->AFR[1] |= (0x1<<5);
+ 745              		.loc 1 209 2 is_stmt 1 view .LVU246
+ 746              		.loc 1 209 12 is_stmt 0 view .LVU247
+ 747 0062 5A6A     		ldr	r2, [r3, #36]
+ 748              		.loc 1 209 16 view .LVU248
+ 749 0064 42F02002 		orr	r2, r2, #32
+ 750 0068 5A62     		str	r2, [r3, #36]
+ 210:./Hardware/Receiver.c ****   
+ 211:./Hardware/Receiver.c ****   TIM4->CR1 &=~(0Xf<<1);
+ 751              		.loc 1 211 3 is_stmt 1 view .LVU249
+ 752              		.loc 1 211 7 is_stmt 0 view .LVU250
+ 753 006a 384C     		ldr	r4, .L19+4
+ 754 006c 2388     		ldrh	r3, [r4]
+ 755 006e 9BB2     		uxth	r3, r3
+ 756              		.loc 1 211 13 view .LVU251
+ 757 0070 23F01E03 		bic	r3, r3, #30
+ 758 0074 9BB2     		uxth	r3, r3
+ 759 0076 2380     		strh	r3, [r4]	@ movhi
+ 212:./Hardware/Receiver.c **** 	TIM4->CR1 |= (0x1<<7);
+ 760              		.loc 1 212 2 is_stmt 1 view .LVU252
+ 761              		.loc 1 212 6 is_stmt 0 view .LVU253
+ 762 0078 2388     		ldrh	r3, [r4]
+ 763 007a 9BB2     		uxth	r3, r3
+ 764              		.loc 1 212 12 view .LVU254
+ 765 007c 43F08003 		orr	r3, r3, #128
+ 766 0080 2380     		strh	r3, [r4]	@ movhi
+ARM GAS  /tmp/cc8GYpAO.s 			page 18
+
+
+ 213:./Hardware/Receiver.c **** 	TIM4->SMCR &= ~(0x7);
+ 767              		.loc 1 213 2 is_stmt 1 view .LVU255
+ 768              		.loc 1 213 6 is_stmt 0 view .LVU256
+ 769 0082 2389     		ldrh	r3, [r4, #8]
+ 770 0084 9BB2     		uxth	r3, r3
+ 771              		.loc 1 213 13 view .LVU257
+ 772 0086 23F00703 		bic	r3, r3, #7
+ 773 008a 9BB2     		uxth	r3, r3
+ 774 008c 2381     		strh	r3, [r4, #8]	@ movhi
+ 214:./Hardware/Receiver.c ****   
+ 215:./Hardware/Receiver.c ****   TIM4->PSC = 16-1;
+ 775              		.loc 1 215 3 is_stmt 1 view .LVU258
+ 776              		.loc 1 215 13 is_stmt 0 view .LVU259
+ 777 008e 0F22     		movs	r2, #15
+ 778 0090 2285     		strh	r2, [r4, #40]	@ movhi
+ 216:./Hardware/Receiver.c **** 	TIM4->ARR = 65536-1;
+ 779              		.loc 1 216 2 is_stmt 1 view .LVU260
+ 780              		.loc 1 216 12 is_stmt 0 view .LVU261
+ 781 0092 4FF6FF73 		movw	r3, #65535
+ 782 0096 E362     		str	r3, [r4, #44]
+ 217:./Hardware/Receiver.c ****   
+ 218:./Hardware/Receiver.c ****   TIM4->CCMR2 &= ~(0x3<<0);
+ 783              		.loc 1 218 3 is_stmt 1 view .LVU262
+ 784              		.loc 1 218 7 is_stmt 0 view .LVU263
+ 785 0098 A38B     		ldrh	r3, [r4, #28]
+ 786 009a 9BB2     		uxth	r3, r3
+ 787              		.loc 1 218 15 view .LVU264
+ 788 009c 23F00303 		bic	r3, r3, #3
+ 789 00a0 9BB2     		uxth	r3, r3
+ 790 00a2 A383     		strh	r3, [r4, #28]	@ movhi
+ 219:./Hardware/Receiver.c **** 	TIM4->CCMR2 |= (0x01<<0);
+ 791              		.loc 1 219 2 is_stmt 1 view .LVU265
+ 792              		.loc 1 219 6 is_stmt 0 view .LVU266
+ 793 00a4 A38B     		ldrh	r3, [r4, #28]
+ 794 00a6 9BB2     		uxth	r3, r3
+ 795              		.loc 1 219 14 view .LVU267
+ 796 00a8 43F00103 		orr	r3, r3, #1
+ 797 00ac A383     		strh	r3, [r4, #28]	@ movhi
+ 220:./Hardware/Receiver.c **** 	TIM4->CCMR2 &= ~(0x3<<2);
+ 798              		.loc 1 220 2 is_stmt 1 view .LVU268
+ 799              		.loc 1 220 6 is_stmt 0 view .LVU269
+ 800 00ae A38B     		ldrh	r3, [r4, #28]
+ 801 00b0 9BB2     		uxth	r3, r3
+ 802              		.loc 1 220 14 view .LVU270
+ 803 00b2 23F00C03 		bic	r3, r3, #12
+ 804 00b6 9BB2     		uxth	r3, r3
+ 805 00b8 A383     		strh	r3, [r4, #28]	@ movhi
+ 221:./Hardware/Receiver.c **** 	TIM4->CCMR2 &= ~(0xf<<4);
+ 806              		.loc 1 221 2 is_stmt 1 view .LVU271
+ 807              		.loc 1 221 6 is_stmt 0 view .LVU272
+ 808 00ba A38B     		ldrh	r3, [r4, #28]
+ 809 00bc 9BB2     		uxth	r3, r3
+ 810              		.loc 1 221 14 view .LVU273
+ 811 00be 23F0F003 		bic	r3, r3, #240
+ 812 00c2 9BB2     		uxth	r3, r3
+ 813 00c4 A383     		strh	r3, [r4, #28]	@ movhi
+ 222:./Hardware/Receiver.c **** 	
+ARM GAS  /tmp/cc8GYpAO.s 			page 19
+
+
+ 223:./Hardware/Receiver.c **** 	TIM4->CCER |= (0x1<<8);
+ 814              		.loc 1 223 2 is_stmt 1 view .LVU274
+ 815              		.loc 1 223 6 is_stmt 0 view .LVU275
+ 816 00c6 238C     		ldrh	r3, [r4, #32]
+ 817 00c8 9BB2     		uxth	r3, r3
+ 818              		.loc 1 223 13 view .LVU276
+ 819 00ca 43F48073 		orr	r3, r3, #256
+ 820 00ce 2384     		strh	r3, [r4, #32]	@ movhi
+ 224:./Hardware/Receiver.c **** 	TIM4->CCER &= ~(0x1<<9);
+ 821              		.loc 1 224 2 is_stmt 1 view .LVU277
+ 822              		.loc 1 224 6 is_stmt 0 view .LVU278
+ 823 00d0 238C     		ldrh	r3, [r4, #32]
+ 824 00d2 9BB2     		uxth	r3, r3
+ 825              		.loc 1 224 13 view .LVU279
+ 826 00d4 23F40073 		bic	r3, r3, #512
+ 827 00d8 9BB2     		uxth	r3, r3
+ 828 00da 2384     		strh	r3, [r4, #32]	@ movhi
+ 225:./Hardware/Receiver.c **** 	
+ 226:./Hardware/Receiver.c ****   TIM_ICInitTypeDef TIM_ICInitStructure;
+ 829              		.loc 1 226 3 is_stmt 1 view .LVU280
+ 227:./Hardware/Receiver.c ****   
+ 228:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_Channel = TIM_Channel_4;//通道4
+ 830              		.loc 1 228 3 view .LVU281
+ 831              		.loc 1 228 35 is_stmt 0 view .LVU282
+ 832 00dc 0C23     		movs	r3, #12
+ 833 00de ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 229:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICFilter = 0x0F;
+ 834              		.loc 1 229 3 is_stmt 1 view .LVU283
+ 835              		.loc 1 229 36 is_stmt 0 view .LVU284
+ 836 00e2 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 230:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Falling;//计数方式（向下计数法）
+ 837              		.loc 1 230 3 is_stmt 1 view .LVU285
+ 838              		.loc 1 230 38 is_stmt 0 view .LVU286
+ 839 00e6 0223     		movs	r3, #2
+ 840 00e8 ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 231:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
+ 841              		.loc 1 231 3 is_stmt 1 view .LVU287
+ 842              		.loc 1 231 39 is_stmt 0 view .LVU288
+ 843 00ec 0022     		movs	r2, #0
+ 844 00ee ADF80A20 		strh	r2, [sp, #10]	@ movhi
+ 232:./Hardware/Receiver.c ****   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_IndirectTI;//输入方式（间接输入方式）
+ 845              		.loc 1 232 3 is_stmt 1 view .LVU289
+ 846              		.loc 1 232 39 is_stmt 0 view .LVU290
+ 847 00f2 ADF80830 		strh	r3, [sp, #8]	@ movhi
+ 233:./Hardware/Receiver.c ****   TIM_ICInit(TIM4,&TIM_ICInitStructure);
+ 848              		.loc 1 233 3 is_stmt 1 view .LVU291
+ 849 00f6 01A9     		add	r1, sp, #4
+ 850 00f8 2046     		mov	r0, r4
+ 851 00fa FFF7FEFF 		bl	TIM_ICInit
+ 852              	.LVL40:
+ 234:./Hardware/Receiver.c **** //	TIM4->CCMR2 &= ~(0x3<<8);
+ 235:./Hardware/Receiver.c **** //	TIM4->CCMR2 |= (0x01<<8);
+ 236:./Hardware/Receiver.c **** //	TIM4->CCMR2 &= ~(0x3<<10);
+ 237:./Hardware/Receiver.c **** //	TIM4->CCMR2 &= ~(0xf<<12);
+ 238:./Hardware/Receiver.c **** //	
+ 239:./Hardware/Receiver.c **** //	TIM4->CCER |=(0x1<<12);
+ 240:./Hardware/Receiver.c **** //	TIM4->CCER &= ~(0x1<<13);
+ARM GAS  /tmp/cc8GYpAO.s 			page 20
+
+
+ 241:./Hardware/Receiver.c **** 	
+ 242:./Hardware/Receiver.c **** 	
+ 243:./Hardware/Receiver.c **** 	TIM4->DIER |= (0x1<<0);
+ 853              		.loc 1 243 2 view .LVU292
+ 854              		.loc 1 243 6 is_stmt 0 view .LVU293
+ 855 00fe A389     		ldrh	r3, [r4, #12]
+ 856 0100 9BB2     		uxth	r3, r3
+ 857              		.loc 1 243 13 view .LVU294
+ 858 0102 43F00103 		orr	r3, r3, #1
+ 859 0106 A381     		strh	r3, [r4, #12]	@ movhi
+ 244:./Hardware/Receiver.c **** 	TIM4->DIER |= (0x1<<1);
+ 860              		.loc 1 244 2 is_stmt 1 view .LVU295
+ 861              		.loc 1 244 6 is_stmt 0 view .LVU296
+ 862 0108 A389     		ldrh	r3, [r4, #12]
+ 863 010a 9BB2     		uxth	r3, r3
+ 864              		.loc 1 244 13 view .LVU297
+ 865 010c 43F00203 		orr	r3, r3, #2
+ 866 0110 A381     		strh	r3, [r4, #12]	@ movhi
+ 245:./Hardware/Receiver.c **** 	TIM4->DIER |= (0x1<<2);
+ 867              		.loc 1 245 2 is_stmt 1 view .LVU298
+ 868              		.loc 1 245 6 is_stmt 0 view .LVU299
+ 869 0112 A389     		ldrh	r3, [r4, #12]
+ 870 0114 9BB2     		uxth	r3, r3
+ 871              		.loc 1 245 13 view .LVU300
+ 872 0116 43F00403 		orr	r3, r3, #4
+ 873 011a A381     		strh	r3, [r4, #12]	@ movhi
+ 246:./Hardware/Receiver.c **** 	TIM4->DIER |= (0x1<<3);
+ 874              		.loc 1 246 2 is_stmt 1 view .LVU301
+ 875              		.loc 1 246 6 is_stmt 0 view .LVU302
+ 876 011c A389     		ldrh	r3, [r4, #12]
+ 877 011e 9BB2     		uxth	r3, r3
+ 878              		.loc 1 246 13 view .LVU303
+ 879 0120 43F00803 		orr	r3, r3, #8
+ 880 0124 A381     		strh	r3, [r4, #12]	@ movhi
+ 247:./Hardware/Receiver.c **** 	TIM4->DIER |= (0x1<<4);
+ 881              		.loc 1 247 2 is_stmt 1 view .LVU304
+ 882              		.loc 1 247 6 is_stmt 0 view .LVU305
+ 883 0126 A389     		ldrh	r3, [r4, #12]
+ 884 0128 9BB2     		uxth	r3, r3
+ 885              		.loc 1 247 13 view .LVU306
+ 886 012a 43F01003 		orr	r3, r3, #16
+ 887 012e A381     		strh	r3, [r4, #12]	@ movhi
+ 248:./Hardware/Receiver.c **** 	
+ 249:./Hardware/Receiver.c **** 	TIM4->CR1 |= (0x1<<0);
+ 888              		.loc 1 249 2 is_stmt 1 view .LVU307
+ 889              		.loc 1 249 6 is_stmt 0 view .LVU308
+ 890 0130 2388     		ldrh	r3, [r4]
+ 891 0132 9BB2     		uxth	r3, r3
+ 892              		.loc 1 249 12 view .LVU309
+ 893 0134 43F00103 		orr	r3, r3, #1
+ 894 0138 2380     		strh	r3, [r4]	@ movhi
+ 250:./Hardware/Receiver.c ****   
+ 251:./Hardware/Receiver.c ****   TIM_Cmd(TIM4,ENABLE);
+ 895              		.loc 1 251 3 is_stmt 1 view .LVU310
+ 896 013a 0121     		movs	r1, #1
+ 897 013c 2046     		mov	r0, r4
+ 898 013e FFF7FEFF 		bl	TIM_Cmd
+ARM GAS  /tmp/cc8GYpAO.s 			page 21
+
+
+ 899              	.LVL41:
+ 252:./Hardware/Receiver.c **** }
+ 900              		.loc 1 252 1 is_stmt 0 view .LVU311
+ 901 0142 04B0     		add	sp, sp, #16
+ 902              	.LCFI14:
+ 903              		.cfi_def_cfa_offset 8
+ 904              		@ sp needed
+ 905 0144 10BD     		pop	{r4, pc}
+ 906              	.L20:
+ 907 0146 00BF     		.align	2
+ 908              	.L19:
+ 909 0148 00380240 		.word	1073887232
+ 910 014c 00080040 		.word	1073743872
+ 911              		.cfi_endproc
+ 912              	.LFE127:
+ 914              		.text
+ 915              	.Letext0:
+ 916              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
+ 917              		.file 3 "./CORE/stm32f4xx.h"
+ 918              		.file 4 "./Library/stm32f4xx_gpio.h"
+ 919              		.file 5 "./Library/stm32f4xx_tim.h"
+ 920              		.file 6 "./Library/stm32f4xx_rcc.h"
+ARM GAS  /tmp/cc8GYpAO.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Receiver.c
+     /tmp/cc8GYpAO.s:21     .text.ICTIM1CH1_2_Init:0000000000000000 $t
+     /tmp/cc8GYpAO.s:27     .text.ICTIM1CH1_2_Init:0000000000000000 ICTIM1CH1_2_Init
+     /tmp/cc8GYpAO.s:176    .text.ICTIM1CH1_2_Init:00000000000000c4 $d
+     /tmp/cc8GYpAO.s:181    .text.ICTIM2CH1_2_Init:0000000000000000 $t
+     /tmp/cc8GYpAO.s:187    .text.ICTIM2CH1_2_Init:0000000000000000 ICTIM2CH1_2_Init
+     /tmp/cc8GYpAO.s:333    .text.ICTIM2CH1_2_Init:00000000000000c8 $d
+     /tmp/cc8GYpAO.s:338    .text.ICTIM4CH1_2_Init:0000000000000000 $t
+     /tmp/cc8GYpAO.s:344    .text.ICTIM4CH1_2_Init:0000000000000000 ICTIM4CH1_2_Init
+     /tmp/cc8GYpAO.s:493    .text.ICTIM4CH1_2_Init:00000000000000c4 $d
+     /tmp/cc8GYpAO.s:498    .text.ICTIM5CH1_2_Init:0000000000000000 $t
+     /tmp/cc8GYpAO.s:504    .text.ICTIM5CH1_2_Init:0000000000000000 ICTIM5CH1_2_Init
+     /tmp/cc8GYpAO.s:652    .text.ICTIM5CH1_2_Init:00000000000000c0 $d
+     /tmp/cc8GYpAO.s:657    .text.ICTIM4CH3_4_Init:0000000000000000 $t
+     /tmp/cc8GYpAO.s:663    .text.ICTIM4CH3_4_Init:0000000000000000 ICTIM4CH3_4_Init
+     /tmp/cc8GYpAO.s:909    .text.ICTIM4CH3_4_Init:0000000000000148 $d
+
+UNDEFINED SYMBOLS
+RCC_APB1PeriphClockCmd
+RCC_AHB1PeriphClockCmd
+GPIO_PinAFConfig
+GPIO_Init
+TIM_TimeBaseInit
+TIM_ICInit
+TIM_SelectInputTrigger
+TIM_SelectSlaveMode
+TIM_Cmd

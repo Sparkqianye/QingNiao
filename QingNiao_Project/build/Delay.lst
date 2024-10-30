@@ -1,0 +1,234 @@
+ARM GAS  /tmp/ccZwKppm.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"Delay.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "./Hardware/Delay.c"
+  20              		.section	.text.Delay_us,"ax",%progbits
+  21              		.align	1
+  22              		.global	Delay_us
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	Delay_us:
+  28              	.LVL0:
+  29              	.LFB123:
+   1:./Hardware/Delay.c **** #include "stm32f4xx.h"                  // Device header
+   2:./Hardware/Delay.c **** 
+   3:./Hardware/Delay.c **** /**
+   4:./Hardware/Delay.c ****   * @brief  ?????
+   5:./Hardware/Delay.c ****   * @param  xus ????,??:0~233015
+   6:./Hardware/Delay.c ****   * @retval ?
+   7:./Hardware/Delay.c ****   */
+   8:./Hardware/Delay.c **** void Delay_us(uint32_t xus)
+   9:./Hardware/Delay.c **** {
+  30              		.loc 1 9 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  10:./Hardware/Delay.c **** 	SysTick->LOAD = 72 * xus;				//????????
+  35              		.loc 1 10 2 view .LVU1
+  36              		.loc 1 10 21 is_stmt 0 view .LVU2
+  37 0000 00EBC000 		add	r0, r0, r0, lsl #3
+  38              	.LVL1:
+  39              		.loc 1 10 21 view .LVU3
+  40 0004 C000     		lsls	r0, r0, #3
+  41              		.loc 1 10 16 view .LVU4
+  42 0006 4FF0E023 		mov	r3, #-536813568
+  43 000a 5861     		str	r0, [r3, #20]
+  11:./Hardware/Delay.c **** 	SysTick->VAL = 0x00;					//???????
+  44              		.loc 1 11 2 is_stmt 1 view .LVU5
+  45              		.loc 1 11 15 is_stmt 0 view .LVU6
+  46 000c 0022     		movs	r2, #0
+  47 000e 9A61     		str	r2, [r3, #24]
+ARM GAS  /tmp/ccZwKppm.s 			page 2
+
+
+  12:./Hardware/Delay.c **** 	SysTick->CTRL = 0x00000005;				//??????HCLK,?????
+  48              		.loc 1 12 2 is_stmt 1 view .LVU7
+  49              		.loc 1 12 16 is_stmt 0 view .LVU8
+  50 0010 0522     		movs	r2, #5
+  51 0012 1A61     		str	r2, [r3, #16]
+  13:./Hardware/Delay.c **** 	while(!(SysTick->CTRL & 0x00010000));	//?????0
+  52              		.loc 1 13 2 is_stmt 1 view .LVU9
+  53              	.L2:
+  54              		.loc 1 13 8 discriminator 1 view .LVU10
+  55              		.loc 1 13 17 is_stmt 0 discriminator 1 view .LVU11
+  56 0014 4FF0E023 		mov	r3, #-536813568
+  57 0018 1B69     		ldr	r3, [r3, #16]
+  58              		.loc 1 13 8 discriminator 1 view .LVU12
+  59 001a 13F4803F 		tst	r3, #65536
+  60 001e F9D0     		beq	.L2
+  14:./Hardware/Delay.c **** 	SysTick->CTRL = 0x00000004;				//?????
+  61              		.loc 1 14 2 is_stmt 1 view .LVU13
+  62              		.loc 1 14 16 is_stmt 0 view .LVU14
+  63 0020 4FF0E023 		mov	r3, #-536813568
+  64 0024 0422     		movs	r2, #4
+  65 0026 1A61     		str	r2, [r3, #16]
+  15:./Hardware/Delay.c **** }
+  66              		.loc 1 15 1 view .LVU15
+  67 0028 7047     		bx	lr
+  68              		.cfi_endproc
+  69              	.LFE123:
+  71              		.section	.text.Delay_ms,"ax",%progbits
+  72              		.align	1
+  73              		.global	Delay_ms
+  74              		.syntax unified
+  75              		.thumb
+  76              		.thumb_func
+  78              	Delay_ms:
+  79              	.LVL2:
+  80              	.LFB124:
+  16:./Hardware/Delay.c **** 
+  17:./Hardware/Delay.c **** /**
+  18:./Hardware/Delay.c ****   * @brief  ?????
+  19:./Hardware/Delay.c ****   * @param  xms ????,??:0~4294967295
+  20:./Hardware/Delay.c ****   * @retval ?
+  21:./Hardware/Delay.c ****   */
+  22:./Hardware/Delay.c **** void Delay_ms(uint32_t xms)
+  23:./Hardware/Delay.c **** {
+  81              		.loc 1 23 1 is_stmt 1 view -0
+  82              		.cfi_startproc
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85              		.loc 1 23 1 is_stmt 0 view .LVU17
+  86 0000 10B5     		push	{r4, lr}
+  87              	.LCFI0:
+  88              		.cfi_def_cfa_offset 8
+  89              		.cfi_offset 4, -8
+  90              		.cfi_offset 14, -4
+  24:./Hardware/Delay.c **** 	while(xms--)
+  91              		.loc 1 24 2 is_stmt 1 view .LVU18
+  92              		.loc 1 24 7 is_stmt 0 view .LVU19
+  93 0002 04E0     		b	.L4
+ARM GAS  /tmp/ccZwKppm.s 			page 3
+
+
+  94              	.LVL3:
+  95              	.L5:
+  25:./Hardware/Delay.c **** 	{
+  26:./Hardware/Delay.c **** 		Delay_us(1000);
+  96              		.loc 1 26 3 is_stmt 1 view .LVU20
+  97 0004 4FF47A70 		mov	r0, #1000
+  98 0008 FFF7FEFF 		bl	Delay_us
+  99              	.LVL4:
+  24:./Hardware/Delay.c **** 	while(xms--)
+ 100              		.loc 1 24 11 is_stmt 0 view .LVU21
+ 101 000c 2046     		mov	r0, r4
+ 102              	.LVL5:
+ 103              	.L4:
+  24:./Hardware/Delay.c **** 	while(xms--)
+ 104              		.loc 1 24 8 is_stmt 1 view .LVU22
+  24:./Hardware/Delay.c **** 	while(xms--)
+ 105              		.loc 1 24 11 is_stmt 0 view .LVU23
+ 106 000e 441E     		subs	r4, r0, #1
+ 107              	.LVL6:
+  24:./Hardware/Delay.c **** 	while(xms--)
+ 108              		.loc 1 24 8 view .LVU24
+ 109 0010 0028     		cmp	r0, #0
+ 110 0012 F7D1     		bne	.L5
+  27:./Hardware/Delay.c **** 	}
+  28:./Hardware/Delay.c **** }
+ 111              		.loc 1 28 1 view .LVU25
+ 112 0014 10BD     		pop	{r4, pc}
+ 113              		.loc 1 28 1 view .LVU26
+ 114              		.cfi_endproc
+ 115              	.LFE124:
+ 117              		.section	.text.Delay_s,"ax",%progbits
+ 118              		.align	1
+ 119              		.global	Delay_s
+ 120              		.syntax unified
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	Delay_s:
+ 125              	.LVL7:
+ 126              	.LFB125:
+  29:./Hardware/Delay.c ****  
+  30:./Hardware/Delay.c **** /**
+  31:./Hardware/Delay.c ****   * @brief  ????
+  32:./Hardware/Delay.c ****   * @param  xs ????,??:0~4294967295
+  33:./Hardware/Delay.c ****   * @retval ?
+  34:./Hardware/Delay.c ****   */
+  35:./Hardware/Delay.c **** void Delay_s(uint32_t xs)
+  36:./Hardware/Delay.c **** {
+ 127              		.loc 1 36 1 is_stmt 1 view -0
+ 128              		.cfi_startproc
+ 129              		@ args = 0, pretend = 0, frame = 0
+ 130              		@ frame_needed = 0, uses_anonymous_args = 0
+ 131              		.loc 1 36 1 is_stmt 0 view .LVU28
+ 132 0000 10B5     		push	{r4, lr}
+ 133              	.LCFI1:
+ 134              		.cfi_def_cfa_offset 8
+ 135              		.cfi_offset 4, -8
+ 136              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccZwKppm.s 			page 4
+
+
+  37:./Hardware/Delay.c **** 	while(xs--)
+ 137              		.loc 1 37 2 is_stmt 1 view .LVU29
+ 138              		.loc 1 37 7 is_stmt 0 view .LVU30
+ 139 0002 04E0     		b	.L8
+ 140              	.LVL8:
+ 141              	.L9:
+  38:./Hardware/Delay.c **** 	{
+  39:./Hardware/Delay.c **** 		Delay_ms(1000);
+ 142              		.loc 1 39 3 is_stmt 1 view .LVU31
+ 143 0004 4FF47A70 		mov	r0, #1000
+ 144 0008 FFF7FEFF 		bl	Delay_ms
+ 145              	.LVL9:
+  37:./Hardware/Delay.c **** 	while(xs--)
+ 146              		.loc 1 37 10 is_stmt 0 view .LVU32
+ 147 000c 2046     		mov	r0, r4
+ 148              	.LVL10:
+ 149              	.L8:
+  37:./Hardware/Delay.c **** 	while(xs--)
+ 150              		.loc 1 37 8 is_stmt 1 view .LVU33
+  37:./Hardware/Delay.c **** 	while(xs--)
+ 151              		.loc 1 37 10 is_stmt 0 view .LVU34
+ 152 000e 441E     		subs	r4, r0, #1
+ 153              	.LVL11:
+  37:./Hardware/Delay.c **** 	while(xs--)
+ 154              		.loc 1 37 8 view .LVU35
+ 155 0010 0028     		cmp	r0, #0
+ 156 0012 F7D1     		bne	.L9
+  40:./Hardware/Delay.c **** 	}
+  41:./Hardware/Delay.c **** } 
+ 157              		.loc 1 41 1 view .LVU36
+ 158 0014 10BD     		pop	{r4, pc}
+ 159              		.loc 1 41 1 view .LVU37
+ 160              		.cfi_endproc
+ 161              	.LFE125:
+ 163              		.text
+ 164              	.Letext0:
+ 165              		.file 2 "./CORE/core_cm4.h"
+ 166              		.file 3 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
+ARM GAS  /tmp/ccZwKppm.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Delay.c
+     /tmp/ccZwKppm.s:21     .text.Delay_us:0000000000000000 $t
+     /tmp/ccZwKppm.s:27     .text.Delay_us:0000000000000000 Delay_us
+     /tmp/ccZwKppm.s:72     .text.Delay_ms:0000000000000000 $t
+     /tmp/ccZwKppm.s:78     .text.Delay_ms:0000000000000000 Delay_ms
+     /tmp/ccZwKppm.s:118    .text.Delay_s:0000000000000000 $t
+     /tmp/ccZwKppm.s:124    .text.Delay_s:0000000000000000 Delay_s
+
+NO UNDEFINED SYMBOLS
