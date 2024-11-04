@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccUstmVg.s 			page 1
+ARM GAS  /tmp/ccxabzJ0.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
   28:./Library/stm32f4xx_hash.c ****    (#) Reset the HASH processor core, so that the HASH will be ready 
   29:./Library/stm32f4xx_hash.c ****        to compute he message digest of a new message by using HASH_Reset() function.
   30:./Library/stm32f4xx_hash.c ****   
-ARM GAS  /tmp/ccUstmVg.s 			page 2
+ARM GAS  /tmp/ccxabzJ0.s 			page 2
 
 
   31:./Library/stm32f4xx_hash.c ****    (#) Enable the HASH controller using the HASH_Cmd() function. 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
   85:./Library/stm32f4xx_hash.c ****        This operation follows the same mechanism as the one used to send the 
   86:./Library/stm32f4xx_hash.c ****        message in the hash operation (that is, by HASH_DataIn() function and, 
   87:./Library/stm32f4xx_hash.c ****        finally, HASH_StartDigest() function.
-ARM GAS  /tmp/ccUstmVg.s 			page 3
+ARM GAS  /tmp/ccxabzJ0.s 			page 3
 
 
   88:./Library/stm32f4xx_hash.c ****             
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  142:./Library/stm32f4xx_hash.c **** @verbatim    
  143:./Library/stm32f4xx_hash.c ****  ===============================================================================
  144:./Library/stm32f4xx_hash.c ****               ##### Initialization and Configuration functions #####
-ARM GAS  /tmp/ccUstmVg.s 			page 4
+ARM GAS  /tmp/ccxabzJ0.s 			page 4
 
 
  145:./Library/stm32f4xx_hash.c ****  ===============================================================================  
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
   58              		.thumb_func
   60              	HASH_Init:
   61              	.LVL2:
-ARM GAS  /tmp/ccUstmVg.s 			page 5
+ARM GAS  /tmp/ccxabzJ0.s 			page 5
 
 
   62              	.LFB124:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
   92              		.loc 1 194 47 view .LVU16
   93 0018 4468     		ldr	r4, [r0, #4]
   94 001a 2343     		orrs	r3, r3, r4
-ARM GAS  /tmp/ccUstmVg.s 			page 6
+ARM GAS  /tmp/ccxabzJ0.s 			page 6
 
 
  193:./Library/stm32f4xx_hash.c ****   HASH->CR |= (HASH_InitStruct->HASH_AlgoSelection | \
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  202:./Library/stm32f4xx_hash.c ****   }
  130              		.loc 1 202 5 is_stmt 1 view .LVU29
  202:./Library/stm32f4xx_hash.c ****   }
-ARM GAS  /tmp/ccUstmVg.s 			page 7
+ARM GAS  /tmp/ccxabzJ0.s 			page 7
 
 
  131              		.loc 1 202 9 is_stmt 0 view .LVU30
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  226:./Library/stm32f4xx_hash.c ****   /* Initialize the HASH_DataType member */
  227:./Library/stm32f4xx_hash.c ****   HASH_InitStruct->HASH_DataType = HASH_DataType_32b;
  168              		.loc 1 227 3 is_stmt 1 view .LVU38
-ARM GAS  /tmp/ccUstmVg.s 			page 8
+ARM GAS  /tmp/ccxabzJ0.s 			page 8
 
 
  169              		.loc 1 227 34 is_stmt 0 view .LVU39
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  206              		.cfi_endproc
  207              	.LFE126:
  209              		.section	.text.HASH_SetLastWordValidBitsNbr,"ax",%progbits
-ARM GAS  /tmp/ccUstmVg.s 			page 9
+ARM GAS  /tmp/ccxabzJ0.s 			page 9
 
 
  210              		.align	1
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  224              		.loc 1 287 3 view .LVU49
  288:./Library/stm32f4xx_hash.c ****   
  289:./Library/stm32f4xx_hash.c ****   /* Configure the Number of valid bits in last word of the message */
-ARM GAS  /tmp/ccUstmVg.s 			page 10
+ARM GAS  /tmp/ccxabzJ0.s 			page 10
 
 
  290:./Library/stm32f4xx_hash.c ****   HASH->STR &= ~(HASH_STR_NBW);
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  303:./Library/stm32f4xx_hash.c **** }
  268              		.loc 1 303 1 view .LVU61
  269 0004 7047     		bx	lr
-ARM GAS  /tmp/ccUstmVg.s 			page 11
+ARM GAS  /tmp/ccxabzJ0.s 			page 11
 
 
  270              	.L18:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  317:./Library/stm32f4xx_hash.c ****   * @brief  Provides the message digest result.
  318:./Library/stm32f4xx_hash.c ****   * @note   In MD5 mode, Data[7] to Data[4] filed of HASH_MsgDigest structure is not used
  319:./Library/stm32f4xx_hash.c ****   *         and is read as zero.
-ARM GAS  /tmp/ccUstmVg.s 			page 12
+ARM GAS  /tmp/ccxabzJ0.s 			page 12
 
 
  320:./Library/stm32f4xx_hash.c ****   *         In SHA-1 mode, Data[7] to Data[5] filed of HASH_MsgDigest structure is not used
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  337:./Library/stm32f4xx_hash.c ****   HASH_MessageDigest->Data[6] = HASH_DIGEST->HR[6];
  352              		.loc 1 337 3 is_stmt 1 view .LVU85
  353              		.loc 1 337 48 is_stmt 0 view .LVU86
-ARM GAS  /tmp/ccUstmVg.s 			page 13
+ARM GAS  /tmp/ccxabzJ0.s 			page 13
 
 
  354 001c 9A6A     		ldr	r2, [r3, #40]
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  397              	.L26:
  398 000c 00040650 		.word	1342571520
  399              		.cfi_endproc
-ARM GAS  /tmp/ccUstmVg.s 			page 14
+ARM GAS  /tmp/ccxabzJ0.s 			page 14
 
 
  400              	.LFE131:
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  416              		@ link register save eliminated.
  391:./Library/stm32f4xx_hash.c ****   uint8_t i = 0;
  417              		.loc 1 391 3 view .LVU98
-ARM GAS  /tmp/ccUstmVg.s 			page 15
+ARM GAS  /tmp/ccxabzJ0.s 			page 15
 
 
  392:./Library/stm32f4xx_hash.c ****   
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  401:./Library/stm32f4xx_hash.c **** }
  460              		.loc 1 401 1 is_stmt 0 view .LVU117
  461 002c 7047     		bx	lr
-ARM GAS  /tmp/ccUstmVg.s 			page 16
+ARM GAS  /tmp/ccxabzJ0.s 			page 16
 
 
  462              	.L32:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  501 000c 8268     		ldr	r2, [r0, #8]
  502              		.loc 1 418 12 view .LVU129
  503 000e 1A60     		str	r2, [r3]
-ARM GAS  /tmp/ccUstmVg.s 			page 17
+ARM GAS  /tmp/ccxabzJ0.s 			page 17
 
 
  419:./Library/stm32f4xx_hash.c ****   
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  546              		.align	1
  547              		.global	HASH_AutoStartDigest
  548              		.syntax unified
-ARM GAS  /tmp/ccUstmVg.s 			page 18
+ARM GAS  /tmp/ccxabzJ0.s 			page 18
 
 
  549              		.thumb
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  566 0002 064A     		ldr	r2, .L41
  567 0004 1368     		ldr	r3, [r2]
  568              		.loc 1 466 14 view .LVU149
-ARM GAS  /tmp/ccUstmVg.s 			page 19
+ARM GAS  /tmp/ccxabzJ0.s 			page 19
 
 
  569 0006 23F40053 		bic	r3, r3, #8192
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  487:./Library/stm32f4xx_hash.c ****   if (NewState != DISABLE)
  605              		.loc 1 487 3 view .LVU156
  606              		.loc 1 487 6 is_stmt 0 view .LVU157
-ARM GAS  /tmp/ccUstmVg.s 			page 20
+ARM GAS  /tmp/ccxabzJ0.s 			page 20
 
 
  607 0000 28B1     		cbz	r0, .L44
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  508:./Library/stm32f4xx_hash.c ****  ===============================================================================  
  509:./Library/stm32f4xx_hash.c **** 
  510:./Library/stm32f4xx_hash.c ****  [..] This section provides functions allowing to configure the HASH Interrupts and 
-ARM GAS  /tmp/ccUstmVg.s 			page 21
+ARM GAS  /tmp/ccxabzJ0.s 			page 21
 
 
  511:./Library/stm32f4xx_hash.c ****       to get the status and clear flags and Interrupts pending bits.
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  565:./Library/stm32f4xx_hash.c ****   * @brief  Enables or disables the specified HASH interrupts.
  566:./Library/stm32f4xx_hash.c ****   * @param  HASH_IT: specifies the HASH interrupt source to be enabled or disabled.
  567:./Library/stm32f4xx_hash.c ****   *          This parameter can be any combination of the following values:
-ARM GAS  /tmp/ccUstmVg.s 			page 22
+ARM GAS  /tmp/ccxabzJ0.s 			page 22
 
 
  568:./Library/stm32f4xx_hash.c ****   *            @arg HASH_IT_DINI: Data Input interrupt
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  674 0018 00040650 		.word	1342571520
  675              		.cfi_endproc
  676              	.LFE136:
-ARM GAS  /tmp/ccUstmVg.s 			page 23
+ARM GAS  /tmp/ccxabzJ0.s 			page 23
 
 
  678              		.section	.text.HASH_GetFlagStatus,"ax",%progbits
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  618:./Library/stm32f4xx_hash.c ****     tempreg = HASH->SR;
  619:./Library/stm32f4xx_hash.c ****   }
  620:./Library/stm32f4xx_hash.c **** 
-ARM GAS  /tmp/ccUstmVg.s 			page 24
+ARM GAS  /tmp/ccxabzJ0.s 			page 24
 
 
  621:./Library/stm32f4xx_hash.c ****   /* Check the status of the specified HASH flag */
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  743              		.thumb_func
  745              	HASH_ClearFlag:
  746              	.LVL26:
-ARM GAS  /tmp/ccUstmVg.s 			page 25
+ARM GAS  /tmp/ccxabzJ0.s 			page 25
 
 
  747              	.LFB138:
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  659:./Library/stm32f4xx_hash.c ****   */
  660:./Library/stm32f4xx_hash.c **** ITStatus HASH_GetITStatus(uint32_t HASH_IT)
  661:./Library/stm32f4xx_hash.c **** {
-ARM GAS  /tmp/ccUstmVg.s 			page 26
+ARM GAS  /tmp/ccxabzJ0.s 			page 26
 
 
  780              		.loc 1 661 1 is_stmt 1 view -0
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  684:./Library/stm32f4xx_hash.c **** }
  812              		.loc 1 684 1 is_stmt 0 view .LVU215
  813 0012 7047     		bx	lr
-ARM GAS  /tmp/ccUstmVg.s 			page 27
+ARM GAS  /tmp/ccxabzJ0.s 			page 27
 
 
  814              	.L67:
@@ -1618,71 +1618,71 @@ ARM GAS  /tmp/ccUstmVg.s 			page 1
  854              	.Letext0:
  855              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
  856              		.file 3 "./CORE/stm32f4xx.h"
-ARM GAS  /tmp/ccUstmVg.s 			page 28
+ARM GAS  /tmp/ccxabzJ0.s 			page 28
 
 
  857              		.file 4 "./Library/stm32f4xx_hash.h"
  858              		.file 5 "./Library/stm32f4xx_rcc.h"
-ARM GAS  /tmp/ccUstmVg.s 			page 29
+ARM GAS  /tmp/ccxabzJ0.s 			page 29
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_hash.c
-     /tmp/ccUstmVg.s:21     .text.HASH_DeInit:0000000000000000 $t
-     /tmp/ccUstmVg.s:27     .text.HASH_DeInit:0000000000000000 HASH_DeInit
-     /tmp/ccUstmVg.s:54     .text.HASH_Init:0000000000000000 $t
-     /tmp/ccUstmVg.s:60     .text.HASH_Init:0000000000000000 HASH_Init
-     /tmp/ccUstmVg.s:142    .text.HASH_Init:000000000000004c $d
-     /tmp/ccUstmVg.s:147    .text.HASH_StructInit:0000000000000000 $t
-     /tmp/ccUstmVg.s:153    .text.HASH_StructInit:0000000000000000 HASH_StructInit
-     /tmp/ccUstmVg.s:180    .text.HASH_Reset:0000000000000000 $t
-     /tmp/ccUstmVg.s:186    .text.HASH_Reset:0000000000000000 HASH_Reset
-     /tmp/ccUstmVg.s:205    .text.HASH_Reset:000000000000000c $d
-     /tmp/ccUstmVg.s:210    .text.HASH_SetLastWordValidBitsNbr:0000000000000000 $t
-     /tmp/ccUstmVg.s:216    .text.HASH_SetLastWordValidBitsNbr:0000000000000000 HASH_SetLastWordValidBitsNbr
-     /tmp/ccUstmVg.s:245    .text.HASH_SetLastWordValidBitsNbr:0000000000000014 $d
-     /tmp/ccUstmVg.s:250    .text.HASH_DataIn:0000000000000000 $t
-     /tmp/ccUstmVg.s:256    .text.HASH_DataIn:0000000000000000 HASH_DataIn
-     /tmp/ccUstmVg.s:273    .text.HASH_DataIn:0000000000000008 $d
-     /tmp/ccUstmVg.s:278    .text.HASH_GetInFIFOWordsNbr:0000000000000000 $t
-     /tmp/ccUstmVg.s:284    .text.HASH_GetInFIFOWordsNbr:0000000000000000 HASH_GetInFIFOWordsNbr
-     /tmp/ccUstmVg.s:301    .text.HASH_GetInFIFOWordsNbr:000000000000000c $d
-     /tmp/ccUstmVg.s:306    .text.HASH_GetDigest:0000000000000000 $t
-     /tmp/ccUstmVg.s:312    .text.HASH_GetDigest:0000000000000000 HASH_GetDigest
-     /tmp/ccUstmVg.s:367    .text.HASH_GetDigest:0000000000000028 $d
-     /tmp/ccUstmVg.s:373    .text.HASH_StartDigest:0000000000000000 $t
-     /tmp/ccUstmVg.s:379    .text.HASH_StartDigest:0000000000000000 HASH_StartDigest
-     /tmp/ccUstmVg.s:398    .text.HASH_StartDigest:000000000000000c $d
-     /tmp/ccUstmVg.s:403    .text.HASH_SaveContext:0000000000000000 $t
-     /tmp/ccUstmVg.s:409    .text.HASH_SaveContext:0000000000000000 HASH_SaveContext
-     /tmp/ccUstmVg.s:465    .text.HASH_SaveContext:0000000000000030 $d
-     /tmp/ccUstmVg.s:470    .text.HASH_RestoreContext:0000000000000000 $t
-     /tmp/ccUstmVg.s:476    .text.HASH_RestoreContext:0000000000000000 HASH_RestoreContext
-     /tmp/ccUstmVg.s:541    .text.HASH_RestoreContext:0000000000000038 $d
-     /tmp/ccUstmVg.s:546    .text.HASH_AutoStartDigest:0000000000000000 $t
-     /tmp/ccUstmVg.s:552    .text.HASH_AutoStartDigest:0000000000000000 HASH_AutoStartDigest
-     /tmp/ccUstmVg.s:585    .text.HASH_AutoStartDigest:000000000000001c $d
-     /tmp/ccUstmVg.s:590    .text.HASH_DMACmd:0000000000000000 $t
-     /tmp/ccUstmVg.s:596    .text.HASH_DMACmd:0000000000000000 HASH_DMACmd
-     /tmp/ccUstmVg.s:629    .text.HASH_DMACmd:000000000000001c $d
-     /tmp/ccUstmVg.s:634    .text.HASH_ITConfig:0000000000000000 $t
-     /tmp/ccUstmVg.s:640    .text.HASH_ITConfig:0000000000000000 HASH_ITConfig
-     /tmp/ccUstmVg.s:674    .text.HASH_ITConfig:0000000000000018 $d
-     /tmp/ccUstmVg.s:679    .text.HASH_GetFlagStatus:0000000000000000 $t
-     /tmp/ccUstmVg.s:685    .text.HASH_GetFlagStatus:0000000000000000 HASH_GetFlagStatus
-     /tmp/ccUstmVg.s:734    .text.HASH_GetFlagStatus:000000000000001c $d
-     /tmp/ccUstmVg.s:739    .text.HASH_ClearFlag:0000000000000000 $t
-     /tmp/ccUstmVg.s:745    .text.HASH_ClearFlag:0000000000000000 HASH_ClearFlag
-     /tmp/ccUstmVg.s:766    .text.HASH_ClearFlag:0000000000000008 $d
-     /tmp/ccUstmVg.s:771    .text.HASH_GetITStatus:0000000000000000 $t
-     /tmp/ccUstmVg.s:777    .text.HASH_GetITStatus:0000000000000000 HASH_GetITStatus
-     /tmp/ccUstmVg.s:817    .text.HASH_GetITStatus:0000000000000014 $d
-     /tmp/ccUstmVg.s:822    .text.HASH_ClearITPendingBit:0000000000000000 $t
-     /tmp/ccUstmVg.s:828    .text.HASH_ClearITPendingBit:0000000000000000 HASH_ClearITPendingBit
-     /tmp/ccUstmVg.s:849    .text.HASH_ClearITPendingBit:0000000000000008 $d
+     /tmp/ccxabzJ0.s:21     .text.HASH_DeInit:0000000000000000 $t
+     /tmp/ccxabzJ0.s:27     .text.HASH_DeInit:0000000000000000 HASH_DeInit
+     /tmp/ccxabzJ0.s:54     .text.HASH_Init:0000000000000000 $t
+     /tmp/ccxabzJ0.s:60     .text.HASH_Init:0000000000000000 HASH_Init
+     /tmp/ccxabzJ0.s:142    .text.HASH_Init:000000000000004c $d
+     /tmp/ccxabzJ0.s:147    .text.HASH_StructInit:0000000000000000 $t
+     /tmp/ccxabzJ0.s:153    .text.HASH_StructInit:0000000000000000 HASH_StructInit
+     /tmp/ccxabzJ0.s:180    .text.HASH_Reset:0000000000000000 $t
+     /tmp/ccxabzJ0.s:186    .text.HASH_Reset:0000000000000000 HASH_Reset
+     /tmp/ccxabzJ0.s:205    .text.HASH_Reset:000000000000000c $d
+     /tmp/ccxabzJ0.s:210    .text.HASH_SetLastWordValidBitsNbr:0000000000000000 $t
+     /tmp/ccxabzJ0.s:216    .text.HASH_SetLastWordValidBitsNbr:0000000000000000 HASH_SetLastWordValidBitsNbr
+     /tmp/ccxabzJ0.s:245    .text.HASH_SetLastWordValidBitsNbr:0000000000000014 $d
+     /tmp/ccxabzJ0.s:250    .text.HASH_DataIn:0000000000000000 $t
+     /tmp/ccxabzJ0.s:256    .text.HASH_DataIn:0000000000000000 HASH_DataIn
+     /tmp/ccxabzJ0.s:273    .text.HASH_DataIn:0000000000000008 $d
+     /tmp/ccxabzJ0.s:278    .text.HASH_GetInFIFOWordsNbr:0000000000000000 $t
+     /tmp/ccxabzJ0.s:284    .text.HASH_GetInFIFOWordsNbr:0000000000000000 HASH_GetInFIFOWordsNbr
+     /tmp/ccxabzJ0.s:301    .text.HASH_GetInFIFOWordsNbr:000000000000000c $d
+     /tmp/ccxabzJ0.s:306    .text.HASH_GetDigest:0000000000000000 $t
+     /tmp/ccxabzJ0.s:312    .text.HASH_GetDigest:0000000000000000 HASH_GetDigest
+     /tmp/ccxabzJ0.s:367    .text.HASH_GetDigest:0000000000000028 $d
+     /tmp/ccxabzJ0.s:373    .text.HASH_StartDigest:0000000000000000 $t
+     /tmp/ccxabzJ0.s:379    .text.HASH_StartDigest:0000000000000000 HASH_StartDigest
+     /tmp/ccxabzJ0.s:398    .text.HASH_StartDigest:000000000000000c $d
+     /tmp/ccxabzJ0.s:403    .text.HASH_SaveContext:0000000000000000 $t
+     /tmp/ccxabzJ0.s:409    .text.HASH_SaveContext:0000000000000000 HASH_SaveContext
+     /tmp/ccxabzJ0.s:465    .text.HASH_SaveContext:0000000000000030 $d
+     /tmp/ccxabzJ0.s:470    .text.HASH_RestoreContext:0000000000000000 $t
+     /tmp/ccxabzJ0.s:476    .text.HASH_RestoreContext:0000000000000000 HASH_RestoreContext
+     /tmp/ccxabzJ0.s:541    .text.HASH_RestoreContext:0000000000000038 $d
+     /tmp/ccxabzJ0.s:546    .text.HASH_AutoStartDigest:0000000000000000 $t
+     /tmp/ccxabzJ0.s:552    .text.HASH_AutoStartDigest:0000000000000000 HASH_AutoStartDigest
+     /tmp/ccxabzJ0.s:585    .text.HASH_AutoStartDigest:000000000000001c $d
+     /tmp/ccxabzJ0.s:590    .text.HASH_DMACmd:0000000000000000 $t
+     /tmp/ccxabzJ0.s:596    .text.HASH_DMACmd:0000000000000000 HASH_DMACmd
+     /tmp/ccxabzJ0.s:629    .text.HASH_DMACmd:000000000000001c $d
+     /tmp/ccxabzJ0.s:634    .text.HASH_ITConfig:0000000000000000 $t
+     /tmp/ccxabzJ0.s:640    .text.HASH_ITConfig:0000000000000000 HASH_ITConfig
+     /tmp/ccxabzJ0.s:674    .text.HASH_ITConfig:0000000000000018 $d
+     /tmp/ccxabzJ0.s:679    .text.HASH_GetFlagStatus:0000000000000000 $t
+     /tmp/ccxabzJ0.s:685    .text.HASH_GetFlagStatus:0000000000000000 HASH_GetFlagStatus
+     /tmp/ccxabzJ0.s:734    .text.HASH_GetFlagStatus:000000000000001c $d
+     /tmp/ccxabzJ0.s:739    .text.HASH_ClearFlag:0000000000000000 $t
+     /tmp/ccxabzJ0.s:745    .text.HASH_ClearFlag:0000000000000000 HASH_ClearFlag
+     /tmp/ccxabzJ0.s:766    .text.HASH_ClearFlag:0000000000000008 $d
+     /tmp/ccxabzJ0.s:771    .text.HASH_GetITStatus:0000000000000000 $t
+     /tmp/ccxabzJ0.s:777    .text.HASH_GetITStatus:0000000000000000 HASH_GetITStatus
+     /tmp/ccxabzJ0.s:817    .text.HASH_GetITStatus:0000000000000014 $d
+     /tmp/ccxabzJ0.s:822    .text.HASH_ClearITPendingBit:0000000000000000 $t
+     /tmp/ccxabzJ0.s:828    .text.HASH_ClearITPendingBit:0000000000000000 HASH_ClearITPendingBit
+     /tmp/ccxabzJ0.s:849    .text.HASH_ClearITPendingBit:0000000000000008 $d
 
 UNDEFINED SYMBOLS
 RCC_AHB2PeriphResetCmd
-ARM GAS  /tmp/ccUstmVg.s 			page 30
+ARM GAS  /tmp/ccxabzJ0.s 			page 30
 
 

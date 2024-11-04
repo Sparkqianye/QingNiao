@@ -1,7 +1,7 @@
 build/GaussNewton.o: User/GaussNewton.c User/GaussNewton.h \
- Hardware/gy86.h CORE/stm32f4xx.h CORE/core_cm4.h CORE/core_cmInstr.h \
- CORE/core_cmFunc.h CORE/core_cmSimd.h CORE/system_stm32f4xx.h \
- Library/stm32f4xx_conf.h Library/stm32f4xx_adc.h Library/stm32f4xx_crc.h \
+ CORE/stm32f4xx.h CORE/core_cm4.h CORE/core_cmInstr.h CORE/core_cmFunc.h \
+ CORE/core_cmSimd.h CORE/system_stm32f4xx.h Library/stm32f4xx_conf.h \
+ Library/stm32f4xx_adc.h Library/stm32f4xx_crc.h \
  Library/stm32f4xx_dbgmcu.h Library/stm32f4xx_dma.h \
  Library/stm32f4xx_exti.h Library/stm32f4xx_flash.h \
  Library/stm32f4xx_gpio.h Library/stm32f4xx_i2c.h \
@@ -10,7 +10,6 @@ build/GaussNewton.o: User/GaussNewton.c User/GaussNewton.h \
  Library/stm32f4xx_syscfg.h Library/stm32f4xx_tim.h \
  Library/stm32f4xx_usart.h Library/stm32f4xx_wwdg.h Library/misc.h
 User/GaussNewton.h:
-Hardware/gy86.h:
 CORE/stm32f4xx.h:
 CORE/core_cm4.h:
 CORE/core_cmInstr.h:

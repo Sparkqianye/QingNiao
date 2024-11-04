@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccvqGf3A.s 			page 1
+ARM GAS  /tmp/ccu5zSnW.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
   27:./Library/stm32f4xx_i2c.c ****         (++) Connect the pin to the desired peripherals' Alternate 
   28:./Library/stm32f4xx_i2c.c ****              Function (AF) using GPIO_PinAFConfig() function
   29:./Library/stm32f4xx_i2c.c ****         (++) Configure the desired pin in alternate function by:
-ARM GAS  /tmp/ccvqGf3A.s 			page 2
+ARM GAS  /tmp/ccu5zSnW.s 			page 2
 
 
   30:./Library/stm32f4xx_i2c.c ****              GPIO_InitStruct->GPIO_Mode = GPIO_Mode_AF
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
   84:./Library/stm32f4xx_i2c.c **** /* Includes ------------------------------------------------------------------*/
   85:./Library/stm32f4xx_i2c.c **** #include "stm32f4xx_i2c.h"
   86:./Library/stm32f4xx_i2c.c **** #include "stm32f4xx_rcc.h"
-ARM GAS  /tmp/ccvqGf3A.s 			page 3
+ARM GAS  /tmp/ccu5zSnW.s 			page 3
 
 
   87:./Library/stm32f4xx_i2c.c **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
   39              		.cfi_offset 14, -4
  132:./Library/stm32f4xx_i2c.c ****   /* Check the parameters */
  133:./Library/stm32f4xx_i2c.c ****   assert_param(IS_I2C_ALL_PERIPH(I2Cx));
-ARM GAS  /tmp/ccvqGf3A.s 			page 4
+ARM GAS  /tmp/ccu5zSnW.s 			page 4
 
 
   40              		.loc 1 133 3 is_stmt 1 view .LVU2
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
   66              		.loc 1 138 5 is_stmt 0 view .LVU11
   67 001c FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
   68              	.LVL4:
-ARM GAS  /tmp/ccvqGf3A.s 			page 5
+ARM GAS  /tmp/ccu5zSnW.s 			page 5
 
 
  140:./Library/stm32f4xx_i2c.c ****   }
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  117              		.global	I2C_Init
  118              		.syntax unified
  119              		.thumb
-ARM GAS  /tmp/ccvqGf3A.s 			page 6
+ARM GAS  /tmp/ccu5zSnW.s 			page 6
 
 
  120              		.thumb_func
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  184:./Library/stm32f4xx_i2c.c ****   assert_param(IS_I2C_OWN_ADDRESS1(I2C_InitStruct->I2C_OwnAddress1));
  151              		.loc 1 184 3 view .LVU30
  185:./Library/stm32f4xx_i2c.c ****   assert_param(IS_I2C_ACK_STATE(I2C_InitStruct->I2C_Ack));
-ARM GAS  /tmp/ccvqGf3A.s 			page 7
+ARM GAS  /tmp/ccu5zSnW.s 			page 7
 
 
  152              		.loc 1 185 3 view .LVU31
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  203:./Library/stm32f4xx_i2c.c ****   /* Disable the selected I2C peripheral to configure TRISE */
  204:./Library/stm32f4xx_i2c.c ****   I2Cx->CR1 &= (uint16_t)~((uint16_t)I2C_CR1_PE);
  189              		.loc 1 204 3 is_stmt 1 view .LVU48
-ARM GAS  /tmp/ccvqGf3A.s 			page 8
+ARM GAS  /tmp/ccu5zSnW.s 			page 8
 
 
  190              		.loc 1 204 7 is_stmt 0 view .LVU49
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  225              		.loc 1 223 29 is_stmt 0 view .LVU64
  226 004c 0130     		adds	r0, r0, #1
  227              		.loc 1 223 17 view .LVU65
-ARM GAS  /tmp/ccvqGf3A.s 			page 9
+ARM GAS  /tmp/ccu5zSnW.s 			page 9
 
 
  228 004e 2084     		strh	r0, [r4, #32]	@ movhi
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  262:./Library/stm32f4xx_i2c.c ****   tmpreg = I2Cx->CR1;
  244              		.loc 1 262 3 is_stmt 1 view .LVU72
  245              		.loc 1 262 10 is_stmt 0 view .LVU73
-ARM GAS  /tmp/ccvqGf3A.s 			page 10
+ARM GAS  /tmp/ccu5zSnW.s 			page 10
 
 
  246 005c 2388     		ldrh	r3, [r4]
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  287              	.L12:
  288              	.LCFI4:
  289              		.cfi_restore_state
-ARM GAS  /tmp/ccvqGf3A.s 			page 11
+ARM GAS  /tmp/ccu5zSnW.s 			page 11
 
 
  230:./Library/stm32f4xx_i2c.c ****     {
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  327 00a8 4FF49671 		mov	r1, #300
  328 00ac 01FB02F2 		mul	r2, r1, r2
  329              	.LVL42:
-ARM GAS  /tmp/ccvqGf3A.s 			page 12
+ARM GAS  /tmp/ccu5zSnW.s 			page 12
 
 
  252:./Library/stm32f4xx_i2c.c ****   }
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  283:./Library/stm32f4xx_i2c.c **** {
  371              		.loc 1 283 1 is_stmt 1 view -0
  372              		.cfi_startproc
-ARM GAS  /tmp/ccvqGf3A.s 			page 13
+ARM GAS  /tmp/ccu5zSnW.s 			page 13
 
 
  373              		@ args = 0, pretend = 0, frame = 0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  300:./Library/stm32f4xx_i2c.c ****   * @brief  Enables or disables the specified I2C peripheral.
  301:./Library/stm32f4xx_i2c.c ****   * @param  I2Cx: where x can be 1, 2 or 3 to select the I2C peripheral.
  302:./Library/stm32f4xx_i2c.c ****   * @param  NewState: new state of the I2Cx peripheral. 
-ARM GAS  /tmp/ccvqGf3A.s 			page 14
+ARM GAS  /tmp/ccu5zSnW.s 			page 14
 
 
  303:./Library/stm32f4xx_i2c.c ****   *          This parameter can be: ENABLE or DISABLE.
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  449              		.thumb
  450              		.thumb_func
  452              	I2C_AnalogFilterCmd:
-ARM GAS  /tmp/ccvqGf3A.s 			page 15
+ARM GAS  /tmp/ccu5zSnW.s 			page 15
 
 
  453              	.LVL47:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  480 0014 43F01003 		orr	r3, r3, #16
  481 0018 8384     		strh	r3, [r0, #36]	@ movhi
  349:./Library/stm32f4xx_i2c.c ****   }
-ARM GAS  /tmp/ccvqGf3A.s 			page 16
+ARM GAS  /tmp/ccu5zSnW.s 			page 16
 
 
  350:./Library/stm32f4xx_i2c.c **** }
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  511              		.loc 1 376 10 is_stmt 0 view .LVU159
  512 0004 23F00F03 		bic	r3, r3, #15
  513              	.LVL50:
-ARM GAS  /tmp/ccvqGf3A.s 			page 17
+ARM GAS  /tmp/ccu5zSnW.s 			page 17
 
 
  377:./Library/stm32f4xx_i2c.c ****   
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  399:./Library/stm32f4xx_i2c.c ****     /* Generate a START condition */
  400:./Library/stm32f4xx_i2c.c ****     I2Cx->CR1 |= I2C_CR1_START;
  548              		.loc 1 400 5 is_stmt 1 view .LVU170
-ARM GAS  /tmp/ccvqGf3A.s 			page 18
+ARM GAS  /tmp/ccu5zSnW.s 			page 18
 
 
  549              		.loc 1 400 9 is_stmt 0 view .LVU171
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  420:./Library/stm32f4xx_i2c.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  586              		.loc 1 420 3 view .LVU179
  421:./Library/stm32f4xx_i2c.c ****   if (NewState != DISABLE)
-ARM GAS  /tmp/ccvqGf3A.s 			page 19
+ARM GAS  /tmp/ccu5zSnW.s 			page 19
 
 
  587              		.loc 1 421 3 view .LVU180
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  443:./Library/stm32f4xx_i2c.c ****   */
  444:./Library/stm32f4xx_i2c.c **** void I2C_Send7bitAddress(I2C_TypeDef* I2Cx, uint8_t Address, uint8_t I2C_Direction)
  445:./Library/stm32f4xx_i2c.c **** {
-ARM GAS  /tmp/ccvqGf3A.s 			page 20
+ARM GAS  /tmp/ccu5zSnW.s 			page 20
 
 
  622              		.loc 1 445 1 is_stmt 1 view -0
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  657              		.thumb_func
  659              	I2C_AcknowledgeConfig:
  660              	.LVL58:
-ARM GAS  /tmp/ccvqGf3A.s 			page 21
+ARM GAS  /tmp/ccu5zSnW.s 			page 21
 
 
  661              	.LFB132:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  691              		.cfi_endproc
  692              	.LFE132:
  694              		.section	.text.I2C_OwnAddress2Config,"ax",%progbits
-ARM GAS  /tmp/ccvqGf3A.s 			page 22
+ARM GAS  /tmp/ccu5zSnW.s 			page 22
 
 
  695              		.align	1
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  510:./Library/stm32f4xx_i2c.c ****   /* Store the new register value */
  511:./Library/stm32f4xx_i2c.c ****   I2Cx->OAR2 = tmpreg;
  727              		.loc 1 511 3 is_stmt 1 view .LVU224
-ARM GAS  /tmp/ccvqGf3A.s 			page 23
+ARM GAS  /tmp/ccu5zSnW.s 			page 23
 
 
  728              		.loc 1 511 14 is_stmt 0 view .LVU225
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  532:./Library/stm32f4xx_i2c.c ****   {
  533:./Library/stm32f4xx_i2c.c ****     /* Disable dual addressing mode */
  534:./Library/stm32f4xx_i2c.c ****     I2Cx->OAR2 &= (uint16_t)~((uint16_t)I2C_OAR2_ENDUAL);
-ARM GAS  /tmp/ccvqGf3A.s 			page 24
+ARM GAS  /tmp/ccu5zSnW.s 			page 24
 
 
  764              		.loc 1 534 5 is_stmt 1 view .LVU235
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  801              		.loc 1 553 15 view .LVU246
  802 0006 43F04003 		orr	r3, r3, #64
  803 000a 0380     		strh	r3, [r0]	@ movhi
-ARM GAS  /tmp/ccvqGf3A.s 			page 25
+ARM GAS  /tmp/ccu5zSnW.s 			page 25
 
 
  804 000c 7047     		bx	lr
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  837              		.loc 1 576 6 is_stmt 0 view .LVU255
  838 0000 39B1     		cbz	r1, .L51
  577:./Library/stm32f4xx_i2c.c ****   {
-ARM GAS  /tmp/ccvqGf3A.s 			page 26
+ARM GAS  /tmp/ccu5zSnW.s 			page 26
 
 
  578:./Library/stm32f4xx_i2c.c ****     /* Peripheral under reset */
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  598:./Library/stm32f4xx_i2c.c ****   assert_param(IS_I2C_ALL_PERIPH(I2Cx));
  875              		.loc 1 598 3 view .LVU264
  599:./Library/stm32f4xx_i2c.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
-ARM GAS  /tmp/ccvqGf3A.s 			page 27
+ARM GAS  /tmp/ccu5zSnW.s 			page 27
 
 
  876              		.loc 1 599 3 view .LVU265
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  620:./Library/stm32f4xx_i2c.c ****   */
  621:./Library/stm32f4xx_i2c.c **** void I2C_FastModeDutyCycleConfig(I2C_TypeDef* I2Cx, uint16_t I2C_DutyCycle)
  622:./Library/stm32f4xx_i2c.c **** {
-ARM GAS  /tmp/ccvqGf3A.s 			page 28
+ARM GAS  /tmp/ccu5zSnW.s 			page 28
 
 
  912              		.loc 1 622 1 is_stmt 1 view -0
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  954              	.LFB139:
  637:./Library/stm32f4xx_i2c.c **** 
  638:./Library/stm32f4xx_i2c.c **** /**
-ARM GAS  /tmp/ccvqGf3A.s 			page 29
+ARM GAS  /tmp/ccu5zSnW.s 			page 29
 
 
  639:./Library/stm32f4xx_i2c.c ****   * @brief  Selects the specified I2C NACK position in master receiver mode.
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  973 0010 0380     		strh	r3, [r0]	@ movhi
  675:./Library/stm32f4xx_i2c.c ****   }
  676:./Library/stm32f4xx_i2c.c **** }
-ARM GAS  /tmp/ccvqGf3A.s 			page 30
+ARM GAS  /tmp/ccu5zSnW.s 			page 30
 
 
  974              		.loc 1 676 1 view .LVU295
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  695:./Library/stm32f4xx_i2c.c ****     I2Cx->CR1 |= I2C_SMBusAlert_Low;
  696:./Library/stm32f4xx_i2c.c ****   }
  697:./Library/stm32f4xx_i2c.c ****   else
-ARM GAS  /tmp/ccvqGf3A.s 			page 31
+ARM GAS  /tmp/ccu5zSnW.s 			page 31
 
 
  698:./Library/stm32f4xx_i2c.c ****   {
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  714:./Library/stm32f4xx_i2c.c ****   assert_param(IS_I2C_ALL_PERIPH(I2Cx));
  1046              		.loc 1 714 3 view .LVU312
  715:./Library/stm32f4xx_i2c.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
-ARM GAS  /tmp/ccvqGf3A.s 			page 32
+ARM GAS  /tmp/ccu5zSnW.s 			page 32
 
 
  1047              		.loc 1 715 3 view .LVU313
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  736:./Library/stm32f4xx_i2c.c ****                   ##### Data transfers functions #####
  737:./Library/stm32f4xx_i2c.c ****  ===============================================================================  
  738:./Library/stm32f4xx_i2c.c **** 
-ARM GAS  /tmp/ccvqGf3A.s 			page 33
+ARM GAS  /tmp/ccu5zSnW.s 			page 33
 
 
  739:./Library/stm32f4xx_i2c.c **** @endverbatim
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1112              		.loc 1 765 3 view .LVU329
  766:./Library/stm32f4xx_i2c.c ****   /* Return the data in the DR register */
  767:./Library/stm32f4xx_i2c.c ****   return (uint8_t)I2Cx->DR;
-ARM GAS  /tmp/ccvqGf3A.s 			page 34
+ARM GAS  /tmp/ccu5zSnW.s 			page 34
 
 
  1113              		.loc 1 767 3 view .LVU330
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1139              		.loc 1 797 3 view .LVU335
  798:./Library/stm32f4xx_i2c.c ****   if (NewState != DISABLE)
  1140              		.loc 1 798 3 view .LVU336
-ARM GAS  /tmp/ccvqGf3A.s 			page 35
+ARM GAS  /tmp/ccu5zSnW.s 			page 35
 
 
  1141              		.loc 1 798 6 is_stmt 0 view .LVU337
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  821:./Library/stm32f4xx_i2c.c ****   *                
  822:./Library/stm32f4xx_i2c.c ****   * @retval None
  823:./Library/stm32f4xx_i2c.c ****   */
-ARM GAS  /tmp/ccvqGf3A.s 			page 36
+ARM GAS  /tmp/ccu5zSnW.s 			page 36
 
 
  824:./Library/stm32f4xx_i2c.c **** void I2C_PECPositionConfig(I2C_TypeDef* I2Cx, uint16_t I2C_PECPosition)
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1211              		.syntax unified
  1212              		.thumb
  1213              		.thumb_func
-ARM GAS  /tmp/ccvqGf3A.s 			page 37
+ARM GAS  /tmp/ccu5zSnW.s 			page 37
 
 
  1215              	I2C_CalculatePEC:
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1245              		.loc 1 863 1 view .LVU368
  1246 001a 7047     		bx	lr
  1247              		.cfi_endproc
-ARM GAS  /tmp/ccvqGf3A.s 			page 38
+ARM GAS  /tmp/ccu5zSnW.s 			page 38
 
 
  1248              	.LFE146:
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  884:./Library/stm32f4xx_i2c.c ****  *
  885:./Library/stm32f4xx_i2c.c **** @verbatim   
  886:./Library/stm32f4xx_i2c.c ****  ===============================================================================
-ARM GAS  /tmp/ccvqGf3A.s 			page 39
+ARM GAS  /tmp/ccu5zSnW.s 			page 39
 
 
  887:./Library/stm32f4xx_i2c.c ****                 ##### DMA transfers management functions #####
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1310 0012 23F40063 		bic	r3, r3, #2048
  1311 0016 9BB2     		uxth	r3, r3
  1312 0018 8380     		strh	r3, [r0, #4]	@ movhi
-ARM GAS  /tmp/ccvqGf3A.s 			page 40
+ARM GAS  /tmp/ccu5zSnW.s 			page 40
 
 
  917:./Library/stm32f4xx_i2c.c ****   }
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  939:./Library/stm32f4xx_i2c.c ****     /* Next DMA transfer is not the last transfer */
  940:./Library/stm32f4xx_i2c.c ****     I2Cx->CR2 &= (uint16_t)~((uint16_t)I2C_CR2_LAST);
  1347              		.loc 1 940 5 is_stmt 1 view .LVU394
-ARM GAS  /tmp/ccvqGf3A.s 			page 41
+ARM GAS  /tmp/ccu5zSnW.s 			page 41
 
 
  1348              		.loc 1 940 9 is_stmt 0 view .LVU395
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  975:./Library/stm32f4xx_i2c.c **** 
  976:./Library/stm32f4xx_i2c.c ****           (++) When to use
  977:./Library/stm32f4xx_i2c.c ****              (+++) This function is suitable for most applications as well as for startup 
-ARM GAS  /tmp/ccvqGf3A.s 			page 42
+ARM GAS  /tmp/ccu5zSnW.s 			page 42
 
 
  978:./Library/stm32f4xx_i2c.c ****                activity since the events are fully described in the product reference 
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
 1032:./Library/stm32f4xx_i2c.c ****              (+++) This function could be used for specific applications or in debug 
 1033:./Library/stm32f4xx_i2c.c ****                phase.
 1034:./Library/stm32f4xx_i2c.c ****              (+++) It is suitable when only one flag checking is needed (most I2C 
-ARM GAS  /tmp/ccvqGf3A.s 			page 43
+ARM GAS  /tmp/ccu5zSnW.s 			page 43
 
 
 1035:./Library/stm32f4xx_i2c.c ****                events are monitored through multiple flags).
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1385              		.loc 1 1073 3 view .LVU404
  1386              		.loc 1 1073 7 is_stmt 0 view .LVU405
  1387 0006 0190     		str	r0, [sp, #4]
-ARM GAS  /tmp/ccvqGf3A.s 			page 44
+ARM GAS  /tmp/ccu5zSnW.s 			page 44
 
 
 1074:./Library/stm32f4xx_i2c.c ****   tmp += I2C_Register;
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1424              		@ frame_needed = 0, uses_anonymous_args = 0
  1425              		@ link register save eliminated.
 1094:./Library/stm32f4xx_i2c.c ****   /* Check the parameters */
-ARM GAS  /tmp/ccvqGf3A.s 			page 45
+ARM GAS  /tmp/ccu5zSnW.s 			page 45
 
 
 1095:./Library/stm32f4xx_i2c.c ****   assert_param(IS_I2C_ALL_PERIPH(I2Cx));
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
 1110:./Library/stm32f4xx_i2c.c **** 
 1111:./Library/stm32f4xx_i2c.c **** /*
 1112:./Library/stm32f4xx_i2c.c ****  ===============================================================================
-ARM GAS  /tmp/ccvqGf3A.s 			page 46
+ARM GAS  /tmp/ccu5zSnW.s 			page 46
 
 
 1113:./Library/stm32f4xx_i2c.c ****                           1. Basic state monitoring                    
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1475              		.loc 1 1158 3 view .LVU432
 1159:./Library/stm32f4xx_i2c.c ****   assert_param(IS_I2C_EVENT(I2C_EVENT));
  1476              		.loc 1 1159 3 view .LVU433
-ARM GAS  /tmp/ccvqGf3A.s 			page 47
+ARM GAS  /tmp/ccu5zSnW.s 			page 47
 
 
 1160:./Library/stm32f4xx_i2c.c **** 
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
 1187:./Library/stm32f4xx_i2c.c ****     status = ERROR;
  1504              		.loc 1 1187 12 view .LVU447
  1505 0018 0020     		movs	r0, #0
-ARM GAS  /tmp/ccvqGf3A.s 			page 48
+ARM GAS  /tmp/ccu5zSnW.s 			page 48
 
 
  1506              	.LVL93:
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1536              		.loc 1 1209 1 is_stmt 1 view -0
  1537              		.cfi_startproc
  1538              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccvqGf3A.s 			page 49
+ARM GAS  /tmp/ccu5zSnW.s 			page 49
 
 
  1539              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
 1228:./Library/stm32f4xx_i2c.c **** /*
 1229:./Library/stm32f4xx_i2c.c ****  ===============================================================================
 1230:./Library/stm32f4xx_i2c.c ****                           3. Flag-based state monitoring                   
-ARM GAS  /tmp/ccvqGf3A.s 			page 50
+ARM GAS  /tmp/ccu5zSnW.s 			page 50
 
 
 1231:./Library/stm32f4xx_i2c.c ****  ===============================================================================  
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
 1268:./Library/stm32f4xx_i2c.c ****   /* Check the parameters */
 1269:./Library/stm32f4xx_i2c.c ****   assert_param(IS_I2C_ALL_PERIPH(I2Cx));
  1594              		.loc 1 1269 3 is_stmt 1 view .LVU473
-ARM GAS  /tmp/ccvqGf3A.s 			page 51
+ARM GAS  /tmp/ccu5zSnW.s 			page 51
 
 
 1270:./Library/stm32f4xx_i2c.c ****   assert_param(IS_I2C_GET_FLAG(I2C_FLAG));
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1624              		.loc 1 1294 5 view .LVU490
  1625 0020 0B42     		tst	r3, r1
  1626 0022 07D0     		beq	.L104
-ARM GAS  /tmp/ccvqGf3A.s 			page 52
+ARM GAS  /tmp/ccu5zSnW.s 			page 52
 
 
 1295:./Library/stm32f4xx_i2c.c ****   {
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1663              		.align	1
  1664              		.global	I2C_ClearFlag
  1665              		.syntax unified
-ARM GAS  /tmp/ccvqGf3A.s 			page 53
+ARM GAS  /tmp/ccu5zSnW.s 			page 53
 
 
  1666              		.thumb
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1681              		.loc 1 1347 11 is_stmt 0 view .LVU505
  1682 0000 21F07F41 		bic	r1, r1, #-16777216
  1683              	.LVL111:
-ARM GAS  /tmp/ccvqGf3A.s 			page 54
+ARM GAS  /tmp/ccu5zSnW.s 			page 54
 
 
 1348:./Library/stm32f4xx_i2c.c ****   /* Clear the selected I2C flag */
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1712              		@ link register save eliminated.
 1376:./Library/stm32f4xx_i2c.c ****   ITStatus bitstatus = RESET;
  1713              		.loc 1 1376 3 view .LVU512
-ARM GAS  /tmp/ccvqGf3A.s 			page 55
+ARM GAS  /tmp/ccu5zSnW.s 			page 55
 
 
 1377:./Library/stm32f4xx_i2c.c ****   uint32_t enablestatus = 0;
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1746 001a 7047     		bx	lr
  1747              	.LVL119:
  1748              	.L110:
-ARM GAS  /tmp/ccvqGf3A.s 			page 56
+ARM GAS  /tmp/ccu5zSnW.s 			page 56
 
 
 1393:./Library/stm32f4xx_i2c.c ****   }
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
 1435:./Library/stm32f4xx_i2c.c **** {
  1768              		.loc 1 1435 1 is_stmt 1 view -0
  1769              		.cfi_startproc
-ARM GAS  /tmp/ccvqGf3A.s 			page 57
+ARM GAS  /tmp/ccu5zSnW.s 			page 57
 
 
  1770              		@ args = 0, pretend = 0, frame = 0
@@ -3401,86 +3401,86 @@ ARM GAS  /tmp/ccvqGf3A.s 			page 1
  1797              		.file 3 "./CORE/stm32f4xx.h"
  1798              		.file 4 "./Library/stm32f4xx_rcc.h"
  1799              		.file 5 "./Library/stm32f4xx_i2c.h"
-ARM GAS  /tmp/ccvqGf3A.s 			page 58
+ARM GAS  /tmp/ccu5zSnW.s 			page 58
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_i2c.c
-     /tmp/ccvqGf3A.s:21     .text.I2C_DeInit:0000000000000000 $t
-     /tmp/ccvqGf3A.s:27     .text.I2C_DeInit:0000000000000000 I2C_DeInit
-     /tmp/ccvqGf3A.s:109    .text.I2C_DeInit:0000000000000058 $d
-     /tmp/ccvqGf3A.s:116    .text.I2C_Init:0000000000000000 $t
-     /tmp/ccvqGf3A.s:122    .text.I2C_Init:0000000000000000 I2C_Init
-     /tmp/ccvqGf3A.s:355    .text.I2C_Init:00000000000000cc $d
-     /tmp/ccvqGf3A.s:362    .text.I2C_StructInit:0000000000000000 $t
-     /tmp/ccvqGf3A.s:368    .text.I2C_StructInit:0000000000000000 I2C_StructInit
-     /tmp/ccvqGf3A.s:404    .text.I2C_Cmd:0000000000000000 $t
-     /tmp/ccvqGf3A.s:410    .text.I2C_Cmd:0000000000000000 I2C_Cmd
-     /tmp/ccvqGf3A.s:446    .text.I2C_AnalogFilterCmd:0000000000000000 $t
-     /tmp/ccvqGf3A.s:452    .text.I2C_AnalogFilterCmd:0000000000000000 I2C_AnalogFilterCmd
-     /tmp/ccvqGf3A.s:488    .text.I2C_DigitalFilterConfig:0000000000000000 $t
-     /tmp/ccvqGf3A.s:494    .text.I2C_DigitalFilterConfig:0000000000000000 I2C_DigitalFilterConfig
-     /tmp/ccvqGf3A.s:529    .text.I2C_GenerateSTART:0000000000000000 $t
-     /tmp/ccvqGf3A.s:535    .text.I2C_GenerateSTART:0000000000000000 I2C_GenerateSTART
-     /tmp/ccvqGf3A.s:571    .text.I2C_GenerateSTOP:0000000000000000 $t
-     /tmp/ccvqGf3A.s:577    .text.I2C_GenerateSTOP:0000000000000000 I2C_GenerateSTOP
-     /tmp/ccvqGf3A.s:613    .text.I2C_Send7bitAddress:0000000000000000 $t
-     /tmp/ccvqGf3A.s:619    .text.I2C_Send7bitAddress:0000000000000000 I2C_Send7bitAddress
-     /tmp/ccvqGf3A.s:653    .text.I2C_AcknowledgeConfig:0000000000000000 $t
-     /tmp/ccvqGf3A.s:659    .text.I2C_AcknowledgeConfig:0000000000000000 I2C_AcknowledgeConfig
-     /tmp/ccvqGf3A.s:695    .text.I2C_OwnAddress2Config:0000000000000000 $t
-     /tmp/ccvqGf3A.s:701    .text.I2C_OwnAddress2Config:0000000000000000 I2C_OwnAddress2Config
-     /tmp/ccvqGf3A.s:736    .text.I2C_DualAddressCmd:0000000000000000 $t
-     /tmp/ccvqGf3A.s:742    .text.I2C_DualAddressCmd:0000000000000000 I2C_DualAddressCmd
-     /tmp/ccvqGf3A.s:778    .text.I2C_GeneralCallCmd:0000000000000000 $t
-     /tmp/ccvqGf3A.s:784    .text.I2C_GeneralCallCmd:0000000000000000 I2C_GeneralCallCmd
-     /tmp/ccvqGf3A.s:820    .text.I2C_SoftwareResetCmd:0000000000000000 $t
-     /tmp/ccvqGf3A.s:826    .text.I2C_SoftwareResetCmd:0000000000000000 I2C_SoftwareResetCmd
-     /tmp/ccvqGf3A.s:861    .text.I2C_StretchClockCmd:0000000000000000 $t
-     /tmp/ccvqGf3A.s:867    .text.I2C_StretchClockCmd:0000000000000000 I2C_StretchClockCmd
-     /tmp/ccvqGf3A.s:903    .text.I2C_FastModeDutyCycleConfig:0000000000000000 $t
-     /tmp/ccvqGf3A.s:909    .text.I2C_FastModeDutyCycleConfig:0000000000000000 I2C_FastModeDutyCycleConfig
-     /tmp/ccvqGf3A.s:946    .text.I2C_NACKPositionConfig:0000000000000000 $t
-     /tmp/ccvqGf3A.s:952    .text.I2C_NACKPositionConfig:0000000000000000 I2C_NACKPositionConfig
-     /tmp/ccvqGf3A.s:989    .text.I2C_SMBusAlertConfig:0000000000000000 $t
-     /tmp/ccvqGf3A.s:995    .text.I2C_SMBusAlertConfig:0000000000000000 I2C_SMBusAlertConfig
-     /tmp/ccvqGf3A.s:1032   .text.I2C_ARPCmd:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1038   .text.I2C_ARPCmd:0000000000000000 I2C_ARPCmd
-     /tmp/ccvqGf3A.s:1074   .text.I2C_SendData:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1080   .text.I2C_SendData:0000000000000000 I2C_SendData
-     /tmp/ccvqGf3A.s:1098   .text.I2C_ReceiveData:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1104   .text.I2C_ReceiveData:0000000000000000 I2C_ReceiveData
-     /tmp/ccvqGf3A.s:1124   .text.I2C_TransmitPEC:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1130   .text.I2C_TransmitPEC:0000000000000000 I2C_TransmitPEC
-     /tmp/ccvqGf3A.s:1166   .text.I2C_PECPositionConfig:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1172   .text.I2C_PECPositionConfig:0000000000000000 I2C_PECPositionConfig
-     /tmp/ccvqGf3A.s:1209   .text.I2C_CalculatePEC:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1215   .text.I2C_CalculatePEC:0000000000000000 I2C_CalculatePEC
-     /tmp/ccvqGf3A.s:1251   .text.I2C_GetPEC:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1257   .text.I2C_GetPEC:0000000000000000 I2C_GetPEC
-     /tmp/ccvqGf3A.s:1277   .text.I2C_DMACmd:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1283   .text.I2C_DMACmd:0000000000000000 I2C_DMACmd
-     /tmp/ccvqGf3A.s:1319   .text.I2C_DMALastTransferCmd:0000000000000000 $t
-ARM GAS  /tmp/ccvqGf3A.s 			page 59
+     /tmp/ccu5zSnW.s:21     .text.I2C_DeInit:0000000000000000 $t
+     /tmp/ccu5zSnW.s:27     .text.I2C_DeInit:0000000000000000 I2C_DeInit
+     /tmp/ccu5zSnW.s:109    .text.I2C_DeInit:0000000000000058 $d
+     /tmp/ccu5zSnW.s:116    .text.I2C_Init:0000000000000000 $t
+     /tmp/ccu5zSnW.s:122    .text.I2C_Init:0000000000000000 I2C_Init
+     /tmp/ccu5zSnW.s:355    .text.I2C_Init:00000000000000cc $d
+     /tmp/ccu5zSnW.s:362    .text.I2C_StructInit:0000000000000000 $t
+     /tmp/ccu5zSnW.s:368    .text.I2C_StructInit:0000000000000000 I2C_StructInit
+     /tmp/ccu5zSnW.s:404    .text.I2C_Cmd:0000000000000000 $t
+     /tmp/ccu5zSnW.s:410    .text.I2C_Cmd:0000000000000000 I2C_Cmd
+     /tmp/ccu5zSnW.s:446    .text.I2C_AnalogFilterCmd:0000000000000000 $t
+     /tmp/ccu5zSnW.s:452    .text.I2C_AnalogFilterCmd:0000000000000000 I2C_AnalogFilterCmd
+     /tmp/ccu5zSnW.s:488    .text.I2C_DigitalFilterConfig:0000000000000000 $t
+     /tmp/ccu5zSnW.s:494    .text.I2C_DigitalFilterConfig:0000000000000000 I2C_DigitalFilterConfig
+     /tmp/ccu5zSnW.s:529    .text.I2C_GenerateSTART:0000000000000000 $t
+     /tmp/ccu5zSnW.s:535    .text.I2C_GenerateSTART:0000000000000000 I2C_GenerateSTART
+     /tmp/ccu5zSnW.s:571    .text.I2C_GenerateSTOP:0000000000000000 $t
+     /tmp/ccu5zSnW.s:577    .text.I2C_GenerateSTOP:0000000000000000 I2C_GenerateSTOP
+     /tmp/ccu5zSnW.s:613    .text.I2C_Send7bitAddress:0000000000000000 $t
+     /tmp/ccu5zSnW.s:619    .text.I2C_Send7bitAddress:0000000000000000 I2C_Send7bitAddress
+     /tmp/ccu5zSnW.s:653    .text.I2C_AcknowledgeConfig:0000000000000000 $t
+     /tmp/ccu5zSnW.s:659    .text.I2C_AcknowledgeConfig:0000000000000000 I2C_AcknowledgeConfig
+     /tmp/ccu5zSnW.s:695    .text.I2C_OwnAddress2Config:0000000000000000 $t
+     /tmp/ccu5zSnW.s:701    .text.I2C_OwnAddress2Config:0000000000000000 I2C_OwnAddress2Config
+     /tmp/ccu5zSnW.s:736    .text.I2C_DualAddressCmd:0000000000000000 $t
+     /tmp/ccu5zSnW.s:742    .text.I2C_DualAddressCmd:0000000000000000 I2C_DualAddressCmd
+     /tmp/ccu5zSnW.s:778    .text.I2C_GeneralCallCmd:0000000000000000 $t
+     /tmp/ccu5zSnW.s:784    .text.I2C_GeneralCallCmd:0000000000000000 I2C_GeneralCallCmd
+     /tmp/ccu5zSnW.s:820    .text.I2C_SoftwareResetCmd:0000000000000000 $t
+     /tmp/ccu5zSnW.s:826    .text.I2C_SoftwareResetCmd:0000000000000000 I2C_SoftwareResetCmd
+     /tmp/ccu5zSnW.s:861    .text.I2C_StretchClockCmd:0000000000000000 $t
+     /tmp/ccu5zSnW.s:867    .text.I2C_StretchClockCmd:0000000000000000 I2C_StretchClockCmd
+     /tmp/ccu5zSnW.s:903    .text.I2C_FastModeDutyCycleConfig:0000000000000000 $t
+     /tmp/ccu5zSnW.s:909    .text.I2C_FastModeDutyCycleConfig:0000000000000000 I2C_FastModeDutyCycleConfig
+     /tmp/ccu5zSnW.s:946    .text.I2C_NACKPositionConfig:0000000000000000 $t
+     /tmp/ccu5zSnW.s:952    .text.I2C_NACKPositionConfig:0000000000000000 I2C_NACKPositionConfig
+     /tmp/ccu5zSnW.s:989    .text.I2C_SMBusAlertConfig:0000000000000000 $t
+     /tmp/ccu5zSnW.s:995    .text.I2C_SMBusAlertConfig:0000000000000000 I2C_SMBusAlertConfig
+     /tmp/ccu5zSnW.s:1032   .text.I2C_ARPCmd:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1038   .text.I2C_ARPCmd:0000000000000000 I2C_ARPCmd
+     /tmp/ccu5zSnW.s:1074   .text.I2C_SendData:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1080   .text.I2C_SendData:0000000000000000 I2C_SendData
+     /tmp/ccu5zSnW.s:1098   .text.I2C_ReceiveData:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1104   .text.I2C_ReceiveData:0000000000000000 I2C_ReceiveData
+     /tmp/ccu5zSnW.s:1124   .text.I2C_TransmitPEC:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1130   .text.I2C_TransmitPEC:0000000000000000 I2C_TransmitPEC
+     /tmp/ccu5zSnW.s:1166   .text.I2C_PECPositionConfig:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1172   .text.I2C_PECPositionConfig:0000000000000000 I2C_PECPositionConfig
+     /tmp/ccu5zSnW.s:1209   .text.I2C_CalculatePEC:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1215   .text.I2C_CalculatePEC:0000000000000000 I2C_CalculatePEC
+     /tmp/ccu5zSnW.s:1251   .text.I2C_GetPEC:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1257   .text.I2C_GetPEC:0000000000000000 I2C_GetPEC
+     /tmp/ccu5zSnW.s:1277   .text.I2C_DMACmd:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1283   .text.I2C_DMACmd:0000000000000000 I2C_DMACmd
+     /tmp/ccu5zSnW.s:1319   .text.I2C_DMALastTransferCmd:0000000000000000 $t
+ARM GAS  /tmp/ccu5zSnW.s 			page 59
 
 
-     /tmp/ccvqGf3A.s:1325   .text.I2C_DMALastTransferCmd:0000000000000000 I2C_DMALastTransferCmd
-     /tmp/ccvqGf3A.s:1361   .text.I2C_ReadRegister:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1367   .text.I2C_ReadRegister:0000000000000000 I2C_ReadRegister
-     /tmp/ccvqGf3A.s:1412   .text.I2C_ITConfig:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1418   .text.I2C_ITConfig:0000000000000000 I2C_ITConfig
-     /tmp/ccvqGf3A.s:1458   .text.I2C_CheckEvent:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1464   .text.I2C_CheckEvent:0000000000000000 I2C_CheckEvent
-     /tmp/ccvqGf3A.s:1527   .text.I2C_GetLastEvent:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1533   .text.I2C_GetLastEvent:0000000000000000 I2C_GetLastEvent
-     /tmp/ccvqGf3A.s:1568   .text.I2C_GetFlagStatus:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1574   .text.I2C_GetFlagStatus:0000000000000000 I2C_GetFlagStatus
-     /tmp/ccvqGf3A.s:1663   .text.I2C_ClearFlag:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1669   .text.I2C_ClearFlag:0000000000000000 I2C_ClearFlag
-     /tmp/ccvqGf3A.s:1699   .text.I2C_GetITStatus:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1705   .text.I2C_GetITStatus:0000000000000000 I2C_GetITStatus
-     /tmp/ccvqGf3A.s:1759   .text.I2C_ClearITPendingBit:0000000000000000 $t
-     /tmp/ccvqGf3A.s:1765   .text.I2C_ClearITPendingBit:0000000000000000 I2C_ClearITPendingBit
+     /tmp/ccu5zSnW.s:1325   .text.I2C_DMALastTransferCmd:0000000000000000 I2C_DMALastTransferCmd
+     /tmp/ccu5zSnW.s:1361   .text.I2C_ReadRegister:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1367   .text.I2C_ReadRegister:0000000000000000 I2C_ReadRegister
+     /tmp/ccu5zSnW.s:1412   .text.I2C_ITConfig:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1418   .text.I2C_ITConfig:0000000000000000 I2C_ITConfig
+     /tmp/ccu5zSnW.s:1458   .text.I2C_CheckEvent:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1464   .text.I2C_CheckEvent:0000000000000000 I2C_CheckEvent
+     /tmp/ccu5zSnW.s:1527   .text.I2C_GetLastEvent:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1533   .text.I2C_GetLastEvent:0000000000000000 I2C_GetLastEvent
+     /tmp/ccu5zSnW.s:1568   .text.I2C_GetFlagStatus:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1574   .text.I2C_GetFlagStatus:0000000000000000 I2C_GetFlagStatus
+     /tmp/ccu5zSnW.s:1663   .text.I2C_ClearFlag:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1669   .text.I2C_ClearFlag:0000000000000000 I2C_ClearFlag
+     /tmp/ccu5zSnW.s:1699   .text.I2C_GetITStatus:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1705   .text.I2C_GetITStatus:0000000000000000 I2C_GetITStatus
+     /tmp/ccu5zSnW.s:1759   .text.I2C_ClearITPendingBit:0000000000000000 $t
+     /tmp/ccu5zSnW.s:1765   .text.I2C_ClearITPendingBit:0000000000000000 I2C_ClearITPendingBit
 
 UNDEFINED SYMBOLS
 RCC_APB1PeriphResetCmd

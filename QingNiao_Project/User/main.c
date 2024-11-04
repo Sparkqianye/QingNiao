@@ -8,6 +8,11 @@ RCC_ClocksTypeDef RCC_Clocks;
 extern void LED_Init(void);
 uint32_t Data, Duty;
 
+
+double mpuX,mpuY,mpuZ,gyroX,gyroY,gyroZ;
+double mpuX_correction,mpuY_correction,mpuZ_correction,gyroX_correction,gyroY_correction,gyroZ_correction;
+
+
 int main(void)
 {
 //  LED_Init();
@@ -27,8 +32,7 @@ int main(void)
 //  Serial_Printf("hmcZ = %d\r\n",hmcZ);
 //  Delay_ms(100);
 //    
-//  int16_t mpuX,mpuY,mpuZ,gyroX,gyroY,gyroZ;
-//	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
+  //	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
 //	Serial_Printf("mpuX = %d\r\n",mpuX);
 //  Delay_ms(100);
 //  Serial_Printf("mpuY = %d\r\n",mpuY);
