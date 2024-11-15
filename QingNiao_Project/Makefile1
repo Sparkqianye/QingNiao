@@ -36,8 +36,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES = $(shell find . -name '*.c')
-# CPP sources
-CPP_SOURCES = $(shell find . -name '*.cpp')
+
 # ASM sources
 ASM_SOURCES =  \
 startup_stm32f401xe.s
@@ -54,13 +53,11 @@ PREFIX = arm-none-eabi-
 # either it can be added to the PATH environment variable.
 ifdef GCC_PATH
 CC = $(GCC_PATH)/$(PREFIX)gcc
-CXX = $(GCC_PATH)/$(PREFIX)g++
 AS = $(GCC_PATH)/$(PREFIX)gcc -x assembler-with-cpp
 CP = $(GCC_PATH)/$(PREFIX)objcopy
 SZ = $(GCC_PATH)/$(PREFIX)size
 else
 CC = $(PREFIX)gcc
-CXX = $(PREFIX)g++
 AS = $(PREFIX)gcc -x assembler-with-cpp
 CP = $(PREFIX)objcopy
 SZ = $(PREFIX)size
@@ -92,10 +89,6 @@ C_DEFS =  \
 -DUSE_STDPERIPH_DRIVER \
 -DSTM32F401xx
 
-# C++ defines
-CPP_DEFS =  \
--DUSE_CPP_FEATURE \
--DANOTHER_CPP_DEFINE
 
 # AS includes
 AS_INCLUDES = 
@@ -108,29 +101,22 @@ C_INCLUDES =  \
 -I./User/${wildcard *.h} \
 -I./User/${wildcard *.hpp}
 
-# C++ includes
-CPP_INCLUDES = \
--I./User \
--I./User/cpp_headers
+
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
 CFLAGS += $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
-# compile g++ flags
-CXXFLAGS += $(MCU) $(CPP_DEFS) $(CPP_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
-
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
-CXXFLAGS += -g -gdwarf-2
 endif
 
 
 
 # Generate dependency information
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
-CXXFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
+
 
 #######################################
 # LDFLAGS
@@ -152,9 +138,8 @@ all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET
 #######################################
 # list of objects
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
-OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(CPP_SOURCES:.cpp=.o)))
+$(addprefix $(BUILD_DIR)/,$(notdir $(CPP_SOURCES:.cpp=.o)))
 vpath %.c $(sort $(dir $(C_SOURCES)))
-vpath %.cpp $(sort $(dir $(CPP_SOURCES)))
 
 # list of ASM program objects
 OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
@@ -164,9 +149,6 @@ vpath %.S $(sort $(dir $(ASMM_SOURCES)))
 
 $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
 	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
-
-$(BUILD_DIR)/%.o: %.cpp Makefile | $(BUILD_DIR)
-	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
 	$(AS) -c $(CFLAGS) $< -o $@

@@ -3,9 +3,11 @@
 #include <stdio.h>
 #include <math.h>
 
-#define G 9.81
+#define G 1.00
 
-double ideal_a_matrix[6][3] = {
+int invert_flag = 2;
+
+float ideal_a_matrix[6][3] = {
     {0, 0, G},
     {0, 0,-G},
     {0, G, 0},
@@ -14,10 +16,10 @@ double ideal_a_matrix[6][3] = {
     {-G, 0, 0}
 };
 
-double measure[6][3] = {0};
+float measure[6][3] = {0};
 
 //diff matrix 赋值
-double diff[6][3] = {0};
+float diff[6][3] = {0};
 
 void measure_diff_a_init()
 {
@@ -31,11 +33,35 @@ void measure_diff_a_init()
     }
 }
 
+
+//for delta Beta Beta_alpha matrix
+float delta[6] = {0.0};
+float Beta_alpha[6] = {0};
+float Beta[6] = {0};
+
+void delta_Beta_init()
+{
+    for(int i = 0; i < 3; i++)
+    {
+        Beta_alpha[i] = 0.0;
+        Beta[i] = 0.0;
+        delta[i] = 0.0;
+    }
+    for(int i = 3; i < 6; i++)
+    {
+        Beta_alpha[i] = 1.0;
+        Beta[i] = 1.0;
+        delta[i] = 0.0;
+    }
+}
+
+
+
 uint8_t current_index = 0;
 
 //matrix residual 赋值, residual为某特定解下方程的误差 
-double residual[6];
-void DR_a_init(double data_ax, double data_ay, double data_az)
+float residual[6];
+void DR_a_init(float data_ax, float data_ay, float data_az)
 {
     current_index = current_index % 6;
 
@@ -43,46 +69,28 @@ void DR_a_init(double data_ax, double data_ay, double data_az)
     measure[current_index][1] = data_ay;
     measure[current_index][2] = data_az;
 
-    diff[current_index][0] = measure[current_index][0] - ideal_a_matrix[current_index][0];
-    diff[current_index][1] = measure[current_index][1] - ideal_a_matrix[current_index][1];
-    diff[current_index][2] = measure[current_index][2] - ideal_a_matrix[current_index][2];
+    diff[current_index][0] = (measure[current_index][0] - Beta[0])*Beta[3];
+    diff[current_index][1] = (measure[current_index][1] - Beta[1])*Beta[4];
+    diff[current_index][2] = (measure[current_index][2] - Beta[2])*Beta[5];
 
-    residual[current_index] = sqrt(
-    diff[current_index][0] * diff[current_index][0] +
-    diff[current_index][1] * diff[current_index][1] +
-    diff[current_index][2] * diff[current_index][2]
-    );
-
+    residual[current_index] = 1-diff[current_index][0]*diff[current_index][0]
+                                -diff[current_index][1]*diff[current_index][1]
+                                -diff[current_index][2]*diff[current_index][2];
     current_index++;
 }
 
-
-//for delta Beta Beta_alpha matrix
-double delta[6] = {0.0};
-double Beta_alpha[6] = {0};
-double Beta[6] = {0};
-
-void delta_Beta_init()
-{
-    for(int i = 0; i < 6; i++)
-    {
-        Beta_alpha[i] = 0.0;
-        Beta[i] = 0.0;
-        delta[i] = 0.0;
-    }
-}
 //初解βα
 //β = βα - [ J_r^T * J_r ]^-1   *   [J_r^T * R]
 //delta = [Jr(βα)^T Jr(βα)]^-1  Jr(βα)^T r(βα)
 
 
-double Jr[6][6];
+float Jr[6][6];
 //Jr(βα)^T Jr(βα) 6x6 6x6 = 6x6
-double Jr_T_Jr[6][6] = {0};
+float Jr_T_Jr[6][6] = {0};
 //Jr(βα)^T r(βα) 6x6 6x1 = 6x1 r为某特定解下方程的误差
-double Jr_T_R[6] = {0};
+float Jr_T_R[6] = {0};
 
-double J_invert[6][6] = {0};
+float J_invert[6][6] = {0};
 
 void J_a_init()
 {
@@ -113,18 +121,18 @@ void GaussNewton()
     //J_r
     for(uint8_t i = 0; i < 6; i++)
     {
-        for(uint8_t j = 0; j < 3; j++)
-        {
-            //fill the Jacobian matrix with partial derivatives
-            Jr[i][j] = 2*Beta_alpha[j+3]*Beta_alpha[j+3]*diff[i][j];
-            Jr[i][j+3] = -2*Beta_alpha[j+3]*diff[i][j]*diff[i][j];
-        }
+        Jr[i][0] = ( 2*diff[i][0] - 2*Beta[0] )*Beta[3]*Beta[3];
+        Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+        Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+        Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+        Jr[i][4] = -2*(diff[i][1] - Beta[1] )*(diff[i][1] - Beta[1] )*Beta[4];
+        Jr[i][5] = -2*(diff[i][2] - Beta[2] )*(diff[i][2] - Beta[2] )*Beta[5];
     }
 
     //Jr(βα)^T Jr(βα) 6x6 6x6 = 6x6
-    //double Jr_T_Jr[6][6] = {0};
+    //float Jr_T_Jr[6][6] = {0};
     //Jr(βα)^T r(βα) 6x6 6x1 = 6x1 r为某特定解下方程的误差
-    //double Jr_T_R[6] = {0};
+    //float Jr_T_R[6] = {0};
     for (uint8_t i = 0; i < 6; i++)
     {
         Jr_T_R[i] =0;
@@ -160,65 +168,59 @@ void GaussNewton()
 
 }
 
-void a_correction(double data_ax, double data_ay, double data_az)
-{
-    mpuX_correction = (data_ax - Beta[0])*Beta[3];
-    mpuY_correction = (data_ay - Beta[1])*Beta[4];
-    mpuZ_correction = (data_az - Beta[2])*Beta[5];
-}
+// float aX_correction = 0.0f;
+// float aY_correction = 0.0f;
+// float aZ_correction = 0.0f;
+
 
 
 //................................................................
 //................................................................
 //求逆矩阵[Jr(βα)^T Jr(βα)]^-1
-int invert_matrix(double A[6][6], double invA[6][6], int n) {
-    double augmented[6][12] = {0};  // 扩展矩阵 [A | I]
-
-    // 构建扩展矩阵
+int invert_matrix(float matrix[6][6], float inverse[6][6], int n) {
+    // 创建扩展矩阵
+    float augmented[6][2 * 6];
+    
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            augmented[i][j] = A[i][j];
-            augmented[i][j + n] = (i == j) ? 1.0 : 0.0;
+            augmented[i][j] = matrix[i][j];
+        }
+        for (int j = 0; j < n; j++) {
+            augmented[i][j + n] = (i == j) ? 1 : 0;  // 单位矩阵
         }
     }
 
-
-    // 高斯-约旦消元法
+    // 高斯消元
     for (int i = 0; i < n; i++) {
-        // 寻找最大值以避免除以小数
-        double max_val = fabs(augmented[i][i]);
-        int max_row = i;
+        // 找到主元
+        float MEl = fabs(augmented[i][i]);
+        int MRow = i;
         for (int k = i + 1; k < n; k++) {
-            if (fabs(augmented[k][i]) > max_val) {
-                max_val = fabs(augmented[k][i]);
-                max_row = k;
+            if (fabs(augmented[k][i]) > MEl) {
+                MEl = fabs(augmented[k][i]);
+                MRow = k;
             }
         }
-
-        // 如果主元素为0，矩阵不可逆
-        if (max_val == 0) {
-            return 0;
+        // 交换最大行与当前行
+        for (int k = i; k < 2 * n; k++) {
+            float tmp = augmented[MRow][k];
+            augmented[MRow][k] = augmented[i][k];
+            augmented[i][k] = tmp;
+        }
+        // 将主元变为1
+        float divisor = augmented[i][i];
+        if (divisor == 0) {
+            invert_flag = 0;
+            return 0;  // 矩阵不可逆
+        }
+        for (int k = 0; k < 2 * n; k++) {
+            augmented[i][k] /= divisor;
         }
 
-        // 交换行
-        if (max_row != i) {
-            for (int j = 0; j < 2 * n; j++) {
-                double temp = augmented[i][j];
-                augmented[i][j] = augmented[max_row][j];
-                augmented[max_row][j] = temp;
-            }
-        }
-
-        // 归一化主元素
-        double pivot = augmented[i][i];
-        for (int j = 0; j < 2 * n; j++) {
-            augmented[i][j] /= pivot;
-        }
-
-        // 消元
+        // 消去其他行的当前列
         for (int k = 0; k < n; k++) {
             if (k != i) {
-                double factor = augmented[k][i];
+                float factor = augmented[k][i];
                 for (int j = 0; j < 2 * n; j++) {
                     augmented[k][j] -= factor * augmented[i][j];
                 }
@@ -229,11 +231,19 @@ int invert_matrix(double A[6][6], double invA[6][6], int n) {
     // 提取逆矩阵
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            invA[i][j] = augmented[i][j + n];
+            inverse[i][j] = augmented[i][j+6];//调整下降方向，已删
         }
     }
+    invert_flag = 1;
+    return 1;  // 矩阵逆运算成功
+}
 
-    return 1;
+
+void a_correction(float ax, float ay, float az)
+{
+    aX_correction = (ax - Beta[0])*Beta[3];
+    aY_correction = (ay - Beta[1])*Beta[4];
+    aZ_correction = (az - Beta[2])*Beta[5];
 }
 
 

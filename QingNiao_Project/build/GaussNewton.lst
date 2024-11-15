@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc6pnpCj.s 			page 1
+ARM GAS  /tmp/ccIqjcvN.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -33,2054 +33,1959 @@ ARM GAS  /tmp/cc6pnpCj.s 			page 1
    3:./User/GaussNewton.c **** #include <stdio.h>
    4:./User/GaussNewton.c **** #include <math.h>
    5:./User/GaussNewton.c **** 
-   6:./User/GaussNewton.c **** #define G 9.81
+   6:./User/GaussNewton.c **** #define G 1.00
    7:./User/GaussNewton.c **** 
-   8:./User/GaussNewton.c **** double ideal_a_matrix[6][3] = {
-   9:./User/GaussNewton.c ****     {0, 0, G},
-  10:./User/GaussNewton.c ****     {0, 0,-G},
-  11:./User/GaussNewton.c ****     {0, G, 0},
-  12:./User/GaussNewton.c ****     {0,-G, 0},
-  13:./User/GaussNewton.c ****     {G, 0, 0},
-  14:./User/GaussNewton.c ****     {-G, 0, 0}
-  15:./User/GaussNewton.c **** };
-  16:./User/GaussNewton.c **** 
-  17:./User/GaussNewton.c **** double measure[6][3] = {0};
+   8:./User/GaussNewton.c **** int invert_flag = 2;
+   9:./User/GaussNewton.c **** 
+  10:./User/GaussNewton.c **** float ideal_a_matrix[6][3] = {
+  11:./User/GaussNewton.c ****     {0, 0, G},
+  12:./User/GaussNewton.c ****     {0, 0,-G},
+  13:./User/GaussNewton.c ****     {0, G, 0},
+  14:./User/GaussNewton.c ****     {0,-G, 0},
+  15:./User/GaussNewton.c ****     {G, 0, 0},
+  16:./User/GaussNewton.c ****     {-G, 0, 0}
+  17:./User/GaussNewton.c **** };
   18:./User/GaussNewton.c **** 
-  19:./User/GaussNewton.c **** //diff matrix 赋值
-  20:./User/GaussNewton.c **** double diff[6][3] = {0};
-  21:./User/GaussNewton.c **** 
-  22:./User/GaussNewton.c **** void measure_diff_a_init()
-  23:./User/GaussNewton.c **** {
-  29              		.loc 1 23 1 view -0
+  19:./User/GaussNewton.c **** float measure[6][3] = {0};
+  20:./User/GaussNewton.c **** 
+  21:./User/GaussNewton.c **** //diff matrix 赋值
+  22:./User/GaussNewton.c **** float diff[6][3] = {0};
+  23:./User/GaussNewton.c **** 
+  24:./User/GaussNewton.c **** void measure_diff_a_init()
+  25:./User/GaussNewton.c **** {
+  29              		.loc 1 25 1 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33              		@ link register save eliminated.
-  24:./User/GaussNewton.c ****     for(int i = 0; i < 6; i++)
-  34              		.loc 1 24 5 view .LVU1
-ARM GAS  /tmp/cc6pnpCj.s 			page 2
+ARM GAS  /tmp/ccIqjcvN.s 			page 2
 
 
+  26:./User/GaussNewton.c ****     for(int i = 0; i < 6; i++)
+  34              		.loc 1 26 5 view .LVU1
   35              	.LBB2:
-  36              		.loc 1 24 9 view .LVU2
+  36              		.loc 1 26 9 view .LVU2
   37              	.LVL0:
-  38              		.loc 1 24 13 is_stmt 0 view .LVU3
+  38              		.loc 1 26 13 is_stmt 0 view .LVU3
   39 0000 0020     		movs	r0, #0
-  40              		.loc 1 24 5 view .LVU4
+  40              		.loc 1 26 5 view .LVU4
   41 0002 12E0     		b	.L2
   42              	.LVL1:
   43              	.L3:
   44              	.LBB3:
-  25:./User/GaussNewton.c ****     {
-  26:./User/GaussNewton.c ****         for(int j = 0; j < 3; j++)
-  27:./User/GaussNewton.c ****         {
-  28:./User/GaussNewton.c ****             diff[i][j] = 0.0;
-  45              		.loc 1 28 13 is_stmt 1 discriminator 3 view .LVU5
-  46              		.loc 1 28 24 is_stmt 0 discriminator 3 view .LVU6
+  27:./User/GaussNewton.c ****     {
+  28:./User/GaussNewton.c ****         for(int j = 0; j < 3; j++)
+  29:./User/GaussNewton.c ****         {
+  30:./User/GaussNewton.c ****             diff[i][j] = 0.0;
+  45              		.loc 1 30 13 is_stmt 1 discriminator 3 view .LVU5
+  46              		.loc 1 30 24 is_stmt 0 discriminator 3 view .LVU6
   47 0004 00EB4003 		add	r3, r0, r0, lsl #1
   48 0008 1344     		add	r3, r3, r2
-  49 000a 0D49     		ldr	r1, .L7+8
-  50 000c 01EBC301 		add	r1, r1, r3, lsl #3
-  51 0010 9FED097B 		vldr.64	d7, .L7
-  52 0014 81ED007B 		vstr.64	d7, [r1]
-  29:./User/GaussNewton.c ****             measure[i][j] = 0.0;
-  53              		.loc 1 29 13 is_stmt 1 discriminator 3 view .LVU7
-  54              		.loc 1 29 27 is_stmt 0 discriminator 3 view .LVU8
-  55 0018 0A49     		ldr	r1, .L7+12
-  56 001a 01EBC303 		add	r3, r1, r3, lsl #3
-  57 001e 83ED007B 		vstr.64	d7, [r3]
-  26:./User/GaussNewton.c ****         {
-  58              		.loc 1 26 32 is_stmt 1 discriminator 3 view .LVU9
+  49 000a 0A49     		ldr	r1, .L7
+  50 000c 01EB8301 		add	r1, r1, r3, lsl #2
+  51 0010 4FF0000C 		mov	ip, #0
+  52 0014 C1F800C0 		str	ip, [r1]	@ float
+  31:./User/GaussNewton.c ****             measure[i][j] = 0.0;
+  53              		.loc 1 31 13 is_stmt 1 discriminator 3 view .LVU7
+  54              		.loc 1 31 27 is_stmt 0 discriminator 3 view .LVU8
+  55 0018 0749     		ldr	r1, .L7+4
+  56 001a 01EB8303 		add	r3, r1, r3, lsl #2
+  57 001e C3F800C0 		str	ip, [r3]	@ float
+  28:./User/GaussNewton.c ****         {
+  58              		.loc 1 28 32 is_stmt 1 discriminator 3 view .LVU9
   59 0022 0132     		adds	r2, r2, #1
   60              	.LVL2:
   61              	.L4:
-  26:./User/GaussNewton.c ****         {
-  62              		.loc 1 26 26 discriminator 1 view .LVU10
+  28:./User/GaussNewton.c ****         {
+  62              		.loc 1 28 26 discriminator 1 view .LVU10
   63 0024 022A     		cmp	r2, #2
   64 0026 EDDD     		ble	.L3
   65              	.LBE3:
-  24:./User/GaussNewton.c ****     {
-  66              		.loc 1 24 28 discriminator 2 view .LVU11
+  26:./User/GaussNewton.c ****     {
+  66              		.loc 1 26 28 discriminator 2 view .LVU11
   67 0028 0130     		adds	r0, r0, #1
   68              	.LVL3:
   69              	.L2:
-  24:./User/GaussNewton.c ****     {
-  70              		.loc 1 24 22 discriminator 1 view .LVU12
+  26:./User/GaussNewton.c ****     {
+  70              		.loc 1 26 22 discriminator 1 view .LVU12
   71 002a 0528     		cmp	r0, #5
   72 002c 01DC     		bgt	.L6
   73              	.LBB4:
-  26:./User/GaussNewton.c ****         {
-  74              		.loc 1 26 17 is_stmt 0 view .LVU13
+  28:./User/GaussNewton.c ****         {
+  74              		.loc 1 28 17 is_stmt 0 view .LVU13
   75 002e 0022     		movs	r2, #0
   76 0030 F8E7     		b	.L4
   77              	.L6:
   78              	.LBE4:
   79              	.LBE2:
-  30:./User/GaussNewton.c ****         }
-  31:./User/GaussNewton.c ****     }
-ARM GAS  /tmp/cc6pnpCj.s 			page 3
+ARM GAS  /tmp/ccIqjcvN.s 			page 3
 
 
-  32:./User/GaussNewton.c **** }
-  80              		.loc 1 32 1 view .LVU14
+  32:./User/GaussNewton.c ****         }
+  33:./User/GaussNewton.c ****     }
+  34:./User/GaussNewton.c **** }
+  80              		.loc 1 34 1 view .LVU14
   81 0032 7047     		bx	lr
   82              	.L8:
-  83 0034 AFF30080 		.align	3
+  83              		.align	2
   84              	.L7:
-  85 0038 00000000 		.word	0
-  86 003c 00000000 		.word	0
-  87 0040 00000000 		.word	diff
-  88 0044 00000000 		.word	measure
-  89              		.cfi_endproc
-  90              	.LFE126:
-  92              		.global	__aeabi_dsub
-  93              		.global	__aeabi_dmul
-  94              		.global	__aeabi_dadd
-  95              		.section	.text.DR_a_init,"ax",%progbits
-  96              		.align	1
-  97              		.global	DR_a_init
-  98              		.syntax unified
-  99              		.thumb
- 100              		.thumb_func
- 102              	DR_a_init:
- 103              	.LVL4:
- 104              	.LFB127:
-  33:./User/GaussNewton.c **** 
-  34:./User/GaussNewton.c **** uint8_t current_index = 0;
+  85 0034 00000000 		.word	diff
+  86 0038 00000000 		.word	measure
+  87              		.cfi_endproc
+  88              	.LFE126:
+  90              		.section	.text.delta_Beta_init,"ax",%progbits
+  91              		.align	1
+  92              		.global	delta_Beta_init
+  93              		.syntax unified
+  94              		.thumb
+  95              		.thumb_func
+  97              	delta_Beta_init:
+  98              	.LFB127:
   35:./User/GaussNewton.c **** 
-  36:./User/GaussNewton.c **** //matrix residual 赋值, residual为某特定解下方程的误差 
-  37:./User/GaussNewton.c **** double residual[6];
-  38:./User/GaussNewton.c **** void DR_a_init(double data_ax, double data_ay, double data_az)
-  39:./User/GaussNewton.c **** {
- 105              		.loc 1 39 1 is_stmt 1 view -0
- 106              		.cfi_startproc
- 107              		@ args = 0, pretend = 0, frame = 0
- 108              		@ frame_needed = 0, uses_anonymous_args = 0
- 109              		.loc 1 39 1 is_stmt 0 view .LVU16
- 110 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 111              	.LCFI0:
- 112              		.cfi_def_cfa_offset 40
- 113              		.cfi_offset 3, -40
- 114              		.cfi_offset 4, -36
- 115              		.cfi_offset 5, -32
- 116              		.cfi_offset 6, -28
- 117              		.cfi_offset 7, -24
- 118              		.cfi_offset 8, -20
- 119              		.cfi_offset 9, -16
- 120              		.cfi_offset 10, -12
- 121              		.cfi_offset 11, -8
- 122              		.cfi_offset 14, -4
- 123 0004 2DED028B 		vpush.64	{d8}
- 124              	.LCFI1:
- 125              		.cfi_def_cfa_offset 48
- 126              		.cfi_offset 80, -48
- 127              		.cfi_offset 81, -44
- 128 0008 51EC100B 		vmov	r0, r1, d0
- 129 000c B0EE418A 		vmov.f32	s16, s2
- 130 0010 F0EE618A 		vmov.f32	s17, s3
-ARM GAS  /tmp/cc6pnpCj.s 			page 4
-
-
- 131 0014 59EC128B 		vmov	r8, r9, d2
-  40:./User/GaussNewton.c ****     current_index = current_index % 6;
- 132              		.loc 1 40 5 is_stmt 1 view .LVU17
- 133              		.loc 1 40 19 is_stmt 0 view .LVU18
- 134 0018 354D     		ldr	r5, .L11
- 135 001a 2C78     		ldrb	r4, [r5]	@ zero_extendqisi2
- 136 001c 354B     		ldr	r3, .L11+4
- 137 001e A3FB0423 		umull	r2, r3, r3, r4
- 138 0022 9B08     		lsrs	r3, r3, #2
- 139 0024 03EB4303 		add	r3, r3, r3, lsl #1
- 140 0028 A4EB4304 		sub	r4, r4, r3, lsl #1
- 141 002c E4B2     		uxtb	r4, r4
- 142 002e 2C70     		strb	r4, [r5]
+  36:./User/GaussNewton.c **** 
+  37:./User/GaussNewton.c **** //for delta Beta Beta_alpha matrix
+  38:./User/GaussNewton.c **** float delta[6] = {0.0};
+  39:./User/GaussNewton.c **** float Beta_alpha[6] = {0};
+  40:./User/GaussNewton.c **** float Beta[6] = {0};
   41:./User/GaussNewton.c **** 
-  42:./User/GaussNewton.c ****     measure[current_index][0] = data_ax;
- 143              		.loc 1 42 5 is_stmt 1 view .LVU19
- 144              		.loc 1 42 31 is_stmt 0 view .LVU20
- 145 0030 6600     		lsls	r6, r4, #1
- 146 0032 04EB4402 		add	r2, r4, r4, lsl #1
- 147 0036 304B     		ldr	r3, .L11+8
- 148 0038 03EBC203 		add	r3, r3, r2, lsl #3
- 149 003c 83ED000B 		vstr.64	d0, [r3]
-  43:./User/GaussNewton.c ****     measure[current_index][1] = data_ay;
- 150              		.loc 1 43 5 is_stmt 1 view .LVU21
- 151              		.loc 1 43 31 is_stmt 0 view .LVU22
- 152 0040 83ED021B 		vstr.64	d1, [r3, #8]
-  44:./User/GaussNewton.c ****     measure[current_index][2] = data_az;
- 153              		.loc 1 44 5 is_stmt 1 view .LVU23
- 154              		.loc 1 44 31 is_stmt 0 view .LVU24
- 155 0044 83ED042B 		vstr.64	d2, [r3, #16]
-  45:./User/GaussNewton.c **** 
-  46:./User/GaussNewton.c ****     diff[current_index][0] = measure[current_index][0] - ideal_a_matrix[current_index][0];
- 156              		.loc 1 46 5 is_stmt 1 view .LVU25
- 157              		.loc 1 46 87 is_stmt 0 view .LVU26
- 158 0048 2C4F     		ldr	r7, .L11+12
- 159 004a 07EBC207 		add	r7, r7, r2, lsl #3
- 160              		.loc 1 46 56 view .LVU27
- 161 004e D7E90023 		ldrd	r2, [r7]
- 162 0052 FFF7FEFF 		bl	__aeabi_dsub
- 163              	.LVL5:
- 164              		.loc 1 46 56 view .LVU28
- 165 0056 8246     		mov	r10, r0
- 166 0058 8B46     		mov	fp, r1
- 167              		.loc 1 46 28 view .LVU29
- 168 005a 3319     		adds	r3, r6, r4
- 169 005c 284E     		ldr	r6, .L11+16
- 170 005e 06EBC306 		add	r6, r6, r3, lsl #3
- 171 0062 C6E900AB 		strd	r10, [r6]
-  47:./User/GaussNewton.c ****     diff[current_index][1] = measure[current_index][1] - ideal_a_matrix[current_index][1];
- 172              		.loc 1 47 5 is_stmt 1 view .LVU30
- 173              		.loc 1 47 56 is_stmt 0 view .LVU31
- 174 0066 D7E90223 		ldrd	r2, [r7, #8]
- 175 006a 51EC180B 		vmov	r0, r1, d8
- 176 006e FFF7FEFF 		bl	__aeabi_dsub
- 177              	.LVL6:
- 178 0072 41EC180B 		vmov	d8, r0, r1
- 179              	.LVL7:
-ARM GAS  /tmp/cc6pnpCj.s 			page 5
+  42:./User/GaussNewton.c **** void delta_Beta_init()
+  43:./User/GaussNewton.c **** {
+  99              		.loc 1 43 1 is_stmt 1 view -0
+ 100              		.cfi_startproc
+ 101              		@ args = 0, pretend = 0, frame = 0
+ 102              		@ frame_needed = 0, uses_anonymous_args = 0
+ 103              		@ link register save eliminated.
+  44:./User/GaussNewton.c ****     for(int i = 0; i < 3; i++)
+ 104              		.loc 1 44 5 view .LVU16
+ 105              	.LBB5:
+ 106              		.loc 1 44 9 view .LVU17
+ 107              	.LVL4:
+ 108              		.loc 1 44 13 is_stmt 0 view .LVU18
+ 109 0000 0023     		movs	r3, #0
+ 110              		.loc 1 44 5 view .LVU19
+ 111 0002 0DE0     		b	.L10
+ 112              	.LVL5:
+ 113              	.L11:
+  45:./User/GaussNewton.c ****     {
+  46:./User/GaussNewton.c ****         Beta_alpha[i] = 0.0;
+ 114              		.loc 1 46 9 is_stmt 1 discriminator 3 view .LVU20
+ 115              		.loc 1 46 23 is_stmt 0 discriminator 3 view .LVU21
+ 116 0004 124A     		ldr	r2, .L14
+ 117 0006 02EB8302 		add	r2, r2, r3, lsl #2
+ 118 000a 0021     		movs	r1, #0
+ 119 000c 1160     		str	r1, [r2]	@ float
+  47:./User/GaussNewton.c ****         Beta[i] = 0.0;
+ 120              		.loc 1 47 9 is_stmt 1 discriminator 3 view .LVU22
+ 121              		.loc 1 47 17 is_stmt 0 discriminator 3 view .LVU23
+ 122 000e 114A     		ldr	r2, .L14+4
+ARM GAS  /tmp/ccIqjcvN.s 			page 4
 
 
- 180              		.loc 1 47 28 view .LVU32
- 181 0076 C6E90201 		strd	r0, [r6, #8]
-  48:./User/GaussNewton.c ****     diff[current_index][2] = measure[current_index][2] - ideal_a_matrix[current_index][2];
- 182              		.loc 1 48 5 is_stmt 1 view .LVU33
- 183              		.loc 1 48 56 is_stmt 0 view .LVU34
- 184 007a D7E90423 		ldrd	r2, [r7, #16]
- 185 007e 4046     		mov	r0, r8
- 186 0080 4946     		mov	r1, r9
- 187 0082 FFF7FEFF 		bl	__aeabi_dsub
- 188              	.LVL8:
- 189 0086 8046     		mov	r8, r0
- 190              	.LVL9:
- 191              		.loc 1 48 56 view .LVU35
- 192 0088 8946     		mov	r9, r1
- 193              		.loc 1 48 28 view .LVU36
- 194 008a C6E90489 		strd	r8, [r6, #16]
-  49:./User/GaussNewton.c **** 
-  50:./User/GaussNewton.c ****     residual[current_index] = sqrt(
- 195              		.loc 1 50 5 is_stmt 1 view .LVU37
-  51:./User/GaussNewton.c ****     diff[current_index][0] * diff[current_index][0] +
- 196              		.loc 1 51 28 is_stmt 0 view .LVU38
- 197 008e 5246     		mov	r2, r10
- 198 0090 5B46     		mov	r3, fp
- 199 0092 5046     		mov	r0, r10
- 200 0094 5946     		mov	r1, fp
- 201 0096 FFF7FEFF 		bl	__aeabi_dmul
- 202              	.LVL10:
- 203 009a 0646     		mov	r6, r0
- 204 009c 0F46     		mov	r7, r1
-  52:./User/GaussNewton.c ****     diff[current_index][1] * diff[current_index][1] +
- 205              		.loc 1 52 28 view .LVU39
- 206 009e 53EC182B 		vmov	r2, r3, d8
- 207 00a2 51EC180B 		vmov	r0, r1, d8
- 208 00a6 FFF7FEFF 		bl	__aeabi_dmul
- 209              	.LVL11:
- 210 00aa 0246     		mov	r2, r0
- 211 00ac 0B46     		mov	r3, r1
-  51:./User/GaussNewton.c ****     diff[current_index][0] * diff[current_index][0] +
- 212              		.loc 1 51 53 view .LVU40
- 213 00ae 3046     		mov	r0, r6
- 214 00b0 3946     		mov	r1, r7
- 215 00b2 FFF7FEFF 		bl	__aeabi_dadd
- 216              	.LVL12:
- 217 00b6 0646     		mov	r6, r0
- 218 00b8 0F46     		mov	r7, r1
-  53:./User/GaussNewton.c ****     diff[current_index][2] * diff[current_index][2]
- 219              		.loc 1 53 28 view .LVU41
- 220 00ba 4246     		mov	r2, r8
- 221 00bc 4B46     		mov	r3, r9
- 222 00be 4046     		mov	r0, r8
- 223 00c0 4946     		mov	r1, r9
- 224 00c2 FFF7FEFF 		bl	__aeabi_dmul
- 225              	.LVL13:
- 226 00c6 0246     		mov	r2, r0
- 227 00c8 0B46     		mov	r3, r1
-  50:./User/GaussNewton.c ****     diff[current_index][0] * diff[current_index][0] +
- 228              		.loc 1 50 31 view .LVU42
-ARM GAS  /tmp/cc6pnpCj.s 			page 6
+ 123 0010 02EB8302 		add	r2, r2, r3, lsl #2
+ 124 0014 1160     		str	r1, [r2]	@ float
+  48:./User/GaussNewton.c ****         delta[i] = 0.0;
+ 125              		.loc 1 48 9 is_stmt 1 discriminator 3 view .LVU24
+ 126              		.loc 1 48 18 is_stmt 0 discriminator 3 view .LVU25
+ 127 0016 104A     		ldr	r2, .L14+8
+ 128 0018 02EB8302 		add	r2, r2, r3, lsl #2
+ 129 001c 1160     		str	r1, [r2]	@ float
+  44:./User/GaussNewton.c ****     {
+ 130              		.loc 1 44 28 is_stmt 1 discriminator 3 view .LVU26
+ 131 001e 0133     		adds	r3, r3, #1
+ 132              	.LVL6:
+ 133              	.L10:
+  44:./User/GaussNewton.c ****     {
+ 134              		.loc 1 44 22 discriminator 1 view .LVU27
+ 135 0020 022B     		cmp	r3, #2
+ 136 0022 EFDD     		ble	.L11
+ 137              	.LBE5:
+ 138              	.LBB6:
+  49:./User/GaussNewton.c ****     }
+  50:./User/GaussNewton.c ****     for(int i = 3; i < 6; i++)
+ 139              		.loc 1 50 13 is_stmt 0 view .LVU28
+ 140 0024 0323     		movs	r3, #3
+ 141              	.LVL7:
+ 142              		.loc 1 50 13 view .LVU29
+ 143 0026 0FE0     		b	.L12
+ 144              	.LVL8:
+ 145              	.L13:
+  51:./User/GaussNewton.c ****     {
+  52:./User/GaussNewton.c ****         Beta_alpha[i] = 1.0;
+ 146              		.loc 1 52 9 is_stmt 1 discriminator 3 view .LVU30
+ 147              		.loc 1 52 23 is_stmt 0 discriminator 3 view .LVU31
+ 148 0028 094A     		ldr	r2, .L14
+ 149 002a 02EB8302 		add	r2, r2, r3, lsl #2
+ 150 002e 4FF07E51 		mov	r1, #1065353216
+ 151 0032 1160     		str	r1, [r2]	@ float
+  53:./User/GaussNewton.c ****         Beta[i] = 1.0;
+ 152              		.loc 1 53 9 is_stmt 1 discriminator 3 view .LVU32
+ 153              		.loc 1 53 17 is_stmt 0 discriminator 3 view .LVU33
+ 154 0034 074A     		ldr	r2, .L14+4
+ 155 0036 02EB8302 		add	r2, r2, r3, lsl #2
+ 156 003a 1160     		str	r1, [r2]	@ float
+  54:./User/GaussNewton.c ****         delta[i] = 0.0;
+ 157              		.loc 1 54 9 is_stmt 1 discriminator 3 view .LVU34
+ 158              		.loc 1 54 18 is_stmt 0 discriminator 3 view .LVU35
+ 159 003c 064A     		ldr	r2, .L14+8
+ 160 003e 02EB8302 		add	r2, r2, r3, lsl #2
+ 161 0042 0021     		movs	r1, #0
+ 162 0044 1160     		str	r1, [r2]	@ float
+  50:./User/GaussNewton.c ****     {
+ 163              		.loc 1 50 28 is_stmt 1 discriminator 3 view .LVU36
+ 164 0046 0133     		adds	r3, r3, #1
+ 165              	.LVL9:
+ 166              	.L12:
+  50:./User/GaussNewton.c ****     {
+ 167              		.loc 1 50 22 discriminator 1 view .LVU37
+ 168 0048 052B     		cmp	r3, #5
+ARM GAS  /tmp/ccIqjcvN.s 			page 5
 
 
- 229 00ca 3046     		mov	r0, r6
- 230 00cc 3946     		mov	r1, r7
- 231 00ce FFF7FEFF 		bl	__aeabi_dadd
- 232              	.LVL14:
- 233 00d2 41EC100B 		vmov	d0, r0, r1
- 234 00d6 FFF7FEFF 		bl	sqrt
- 235              	.LVL15:
-  50:./User/GaussNewton.c ****     diff[current_index][0] * diff[current_index][0] +
- 236              		.loc 1 50 29 view .LVU43
- 237 00da 0A4B     		ldr	r3, .L11+20
- 238 00dc 03EBC403 		add	r3, r3, r4, lsl #3
- 239 00e0 83ED000B 		vstr.64	d0, [r3]
-  54:./User/GaussNewton.c ****     );
-  55:./User/GaussNewton.c **** 
-  56:./User/GaussNewton.c ****     current_index++;
- 240              		.loc 1 56 5 is_stmt 1 view .LVU44
- 241              		.loc 1 56 18 is_stmt 0 view .LVU45
- 242 00e4 0134     		adds	r4, r4, #1
- 243 00e6 2C70     		strb	r4, [r5]
-  57:./User/GaussNewton.c **** }
- 244              		.loc 1 57 1 view .LVU46
- 245 00e8 BDEC028B 		vldm	sp!, {d8}
- 246              	.LCFI2:
- 247              		.cfi_restore 80
- 248              		.cfi_restore 81
- 249              		.cfi_def_cfa_offset 40
- 250 00ec BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 251              	.L12:
- 252              		.align	2
- 253              	.L11:
- 254 00f0 00000000 		.word	current_index
- 255 00f4 ABAAAAAA 		.word	-1431655765
- 256 00f8 00000000 		.word	measure
- 257 00fc 00000000 		.word	ideal_a_matrix
- 258 0100 00000000 		.word	diff
- 259 0104 00000000 		.word	residual
- 260              		.cfi_endproc
- 261              	.LFE127:
- 263              		.section	.text.delta_Beta_init,"ax",%progbits
- 264              		.align	1
- 265              		.global	delta_Beta_init
- 266              		.syntax unified
- 267              		.thumb
- 268              		.thumb_func
- 270              	delta_Beta_init:
- 271              	.LFB128:
+ 169 004a EDDD     		ble	.L13
+ 170              	.LBE6:
+  55:./User/GaussNewton.c ****     }
+  56:./User/GaussNewton.c **** }
+ 171              		.loc 1 56 1 is_stmt 0 view .LVU38
+ 172 004c 7047     		bx	lr
+ 173              	.L15:
+ 174 004e 00BF     		.align	2
+ 175              	.L14:
+ 176 0050 00000000 		.word	Beta_alpha
+ 177 0054 00000000 		.word	Beta
+ 178 0058 00000000 		.word	delta
+ 179              		.cfi_endproc
+ 180              	.LFE127:
+ 182              		.section	.text.DR_a_init,"ax",%progbits
+ 183              		.align	1
+ 184              		.global	DR_a_init
+ 185              		.syntax unified
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	DR_a_init:
+ 190              	.LVL10:
+ 191              	.LFB128:
+  57:./User/GaussNewton.c **** 
   58:./User/GaussNewton.c **** 
   59:./User/GaussNewton.c **** 
-  60:./User/GaussNewton.c **** //for delta Beta Beta_alpha matrix
-  61:./User/GaussNewton.c **** double delta[6] = {0.0};
-  62:./User/GaussNewton.c **** double Beta_alpha[6] = {0};
-  63:./User/GaussNewton.c **** double Beta[6] = {0};
-  64:./User/GaussNewton.c **** 
-  65:./User/GaussNewton.c **** void delta_Beta_init()
-  66:./User/GaussNewton.c **** {
- 272              		.loc 1 66 1 is_stmt 1 view -0
- 273              		.cfi_startproc
-ARM GAS  /tmp/cc6pnpCj.s 			page 7
+  60:./User/GaussNewton.c **** uint8_t current_index = 0;
+  61:./User/GaussNewton.c **** 
+  62:./User/GaussNewton.c **** //matrix residual 赋值, residual为某特定解下方程的误差 
+  63:./User/GaussNewton.c **** float residual[6];
+  64:./User/GaussNewton.c **** void DR_a_init(float data_ax, float data_ay, float data_az)
+  65:./User/GaussNewton.c **** {
+ 192              		.loc 1 65 1 is_stmt 1 view -0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 0
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196              		@ link register save eliminated.
+  66:./User/GaussNewton.c ****     current_index = current_index % 6;
+ 197              		.loc 1 66 5 view .LVU40
+ 198              		.loc 1 66 19 is_stmt 0 view .LVU41
+ 199 0000 2748     		ldr	r0, .L17
+ 200 0002 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 201 0004 274A     		ldr	r2, .L17+4
+ 202 0006 A2FB0312 		umull	r1, r2, r2, r3
+ 203 000a 9208     		lsrs	r2, r2, #2
+ 204 000c 02EB4202 		add	r2, r2, r2, lsl #1
+ 205 0010 A3EB4203 		sub	r3, r3, r2, lsl #1
+ 206 0014 DBB2     		uxtb	r3, r3
+ 207 0016 0370     		strb	r3, [r0]
+  67:./User/GaussNewton.c **** 
+  68:./User/GaussNewton.c ****     measure[current_index][0] = data_ax;
+ 208              		.loc 1 68 5 is_stmt 1 view .LVU42
+ 209              		.loc 1 68 31 is_stmt 0 view .LVU43
+ 210 0018 03EB4301 		add	r1, r3, r3, lsl #1
+ 211 001c 224A     		ldr	r2, .L17+8
+ 212 001e 02EB8102 		add	r2, r2, r1, lsl #2
+ 213 0022 82ED000A 		vstr.32	s0, [r2]
+ARM GAS  /tmp/ccIqjcvN.s 			page 6
 
 
- 274              		@ args = 0, pretend = 0, frame = 0
- 275              		@ frame_needed = 0, uses_anonymous_args = 0
- 276              		@ link register save eliminated.
-  67:./User/GaussNewton.c ****     for(int i = 0; i < 6; i++)
- 277              		.loc 1 67 5 view .LVU48
- 278              	.LBB5:
- 279              		.loc 1 67 9 view .LVU49
- 280              	.LVL16:
- 281              		.loc 1 67 13 is_stmt 0 view .LVU50
- 282 0000 0023     		movs	r3, #0
- 283              		.loc 1 67 5 view .LVU51
- 284 0002 11E0     		b	.L14
- 285              	.LVL17:
- 286              	.L15:
-  68:./User/GaussNewton.c ****     {
-  69:./User/GaussNewton.c ****         Beta_alpha[i] = 0.0;
- 287              		.loc 1 69 9 is_stmt 1 discriminator 3 view .LVU52
- 288              		.loc 1 69 23 is_stmt 0 discriminator 3 view .LVU53
- 289 0004 0A4A     		ldr	r2, .L16
- 290 0006 02EBC302 		add	r2, r2, r3, lsl #3
- 291 000a 0020     		movs	r0, #0
- 292 000c 0021     		movs	r1, #0
- 293 000e C2E90001 		strd	r0, [r2]
-  70:./User/GaussNewton.c ****         Beta[i] = 0.0;
- 294              		.loc 1 70 9 is_stmt 1 discriminator 3 view .LVU54
- 295              		.loc 1 70 17 is_stmt 0 discriminator 3 view .LVU55
- 296 0012 084A     		ldr	r2, .L16+4
- 297 0014 02EBC302 		add	r2, r2, r3, lsl #3
- 298 0018 C2E90001 		strd	r0, [r2]
-  71:./User/GaussNewton.c ****         delta[i] = 0.0;
- 299              		.loc 1 71 9 is_stmt 1 discriminator 3 view .LVU56
- 300              		.loc 1 71 18 is_stmt 0 discriminator 3 view .LVU57
- 301 001c 064A     		ldr	r2, .L16+8
- 302 001e 02EBC302 		add	r2, r2, r3, lsl #3
- 303 0022 C2E90001 		strd	r0, [r2]
-  67:./User/GaussNewton.c ****     {
- 304              		.loc 1 67 28 is_stmt 1 discriminator 3 view .LVU58
- 305 0026 0133     		adds	r3, r3, #1
- 306              	.LVL18:
- 307              	.L14:
-  67:./User/GaussNewton.c ****     {
- 308              		.loc 1 67 22 discriminator 1 view .LVU59
- 309 0028 052B     		cmp	r3, #5
- 310 002a EBDD     		ble	.L15
- 311              	.LBE5:
-  72:./User/GaussNewton.c ****     }
-  73:./User/GaussNewton.c **** }
- 312              		.loc 1 73 1 is_stmt 0 view .LVU60
- 313 002c 7047     		bx	lr
- 314              	.L17:
- 315 002e 00BF     		.align	2
- 316              	.L16:
- 317 0030 00000000 		.word	Beta_alpha
- 318 0034 00000000 		.word	Beta
- 319 0038 00000000 		.word	delta
- 320              		.cfi_endproc
- 321              	.LFE128:
-ARM GAS  /tmp/cc6pnpCj.s 			page 8
+  69:./User/GaussNewton.c ****     measure[current_index][1] = data_ay;
+ 214              		.loc 1 69 5 is_stmt 1 view .LVU44
+ 215              		.loc 1 69 31 is_stmt 0 view .LVU45
+ 216 0026 C2ED010A 		vstr.32	s1, [r2, #4]
+  70:./User/GaussNewton.c ****     measure[current_index][2] = data_az;
+ 217              		.loc 1 70 5 is_stmt 1 view .LVU46
+ 218              		.loc 1 70 31 is_stmt 0 view .LVU47
+ 219 002a 82ED021A 		vstr.32	s2, [r2, #8]
+  71:./User/GaussNewton.c **** 
+  72:./User/GaussNewton.c ****     diff[current_index][0] = (measure[current_index][0] - Beta[0])*Beta[3];
+ 220              		.loc 1 72 5 is_stmt 1 view .LVU48
+ 221              		.loc 1 72 63 is_stmt 0 view .LVU49
+ 222 002e 1F4A     		ldr	r2, .L17+12
+ 223 0030 D2ED007A 		vldr.32	s15, [r2]
+ 224              		.loc 1 72 57 view .LVU50
+ 225 0034 30EE670A 		vsub.f32	s0, s0, s15
+ 226              	.LVL11:
+ 227              		.loc 1 72 72 view .LVU51
+ 228 0038 D2ED037A 		vldr.32	s15, [r2, #12]
+ 229              		.loc 1 72 67 view .LVU52
+ 230 003c 20EE270A 		vmul.f32	s0, s0, s15
+ 231              		.loc 1 72 28 view .LVU53
+ 232 0040 8C46     		mov	ip, r1
+ 233 0042 1B49     		ldr	r1, .L17+16
+ 234              	.LVL12:
+ 235              		.loc 1 72 28 view .LVU54
+ 236 0044 01EB8C01 		add	r1, r1, ip, lsl #2
+ 237 0048 81ED000A 		vstr.32	s0, [r1]
+  73:./User/GaussNewton.c ****     diff[current_index][1] = (measure[current_index][1] - Beta[1])*Beta[4];
+ 238              		.loc 1 73 5 is_stmt 1 view .LVU55
+ 239              		.loc 1 73 63 is_stmt 0 view .LVU56
+ 240 004c D2ED017A 		vldr.32	s15, [r2, #4]
+ 241              		.loc 1 73 57 view .LVU57
+ 242 0050 70EEE70A 		vsub.f32	s1, s1, s15
+ 243              	.LVL13:
+ 244              		.loc 1 73 72 view .LVU58
+ 245 0054 D2ED047A 		vldr.32	s15, [r2, #16]
+ 246              		.loc 1 73 67 view .LVU59
+ 247 0058 60EEA70A 		vmul.f32	s1, s1, s15
+ 248              		.loc 1 73 28 view .LVU60
+ 249 005c C1ED010A 		vstr.32	s1, [r1, #4]
+  74:./User/GaussNewton.c ****     diff[current_index][2] = (measure[current_index][2] - Beta[2])*Beta[5];
+ 250              		.loc 1 74 5 is_stmt 1 view .LVU61
+ 251              		.loc 1 74 63 is_stmt 0 view .LVU62
+ 252 0060 D2ED027A 		vldr.32	s15, [r2, #8]
+ 253              		.loc 1 74 57 view .LVU63
+ 254 0064 31EE671A 		vsub.f32	s2, s2, s15
+ 255              	.LVL14:
+ 256              		.loc 1 74 72 view .LVU64
+ 257 0068 D2ED057A 		vldr.32	s15, [r2, #20]
+ 258              		.loc 1 74 67 view .LVU65
+ 259 006c 21EE271A 		vmul.f32	s2, s2, s15
+ 260              		.loc 1 74 28 view .LVU66
+ 261 0070 81ED021A 		vstr.32	s2, [r1, #8]
+  75:./User/GaussNewton.c **** 
+  76:./User/GaussNewton.c ****     residual[current_index] = 1-diff[current_index][0]*diff[current_index][0]
+ 262              		.loc 1 76 5 is_stmt 1 view .LVU67
+ARM GAS  /tmp/ccIqjcvN.s 			page 7
 
 
- 323              		.section	.text.J_a_init,"ax",%progbits
- 324              		.align	1
- 325              		.global	J_a_init
- 326              		.syntax unified
- 327              		.thumb
- 328              		.thumb_func
- 330              	J_a_init:
- 331              	.LFB129:
-  74:./User/GaussNewton.c **** //初解βα
-  75:./User/GaussNewton.c **** //β = βα - [ J_r^T * J_r ]^-1   *   [J_r^T * R]
-  76:./User/GaussNewton.c **** //delta = [Jr(βα)^T Jr(βα)]^-1  Jr(βα)^T r(βα)
-  77:./User/GaussNewton.c **** 
-  78:./User/GaussNewton.c **** 
-  79:./User/GaussNewton.c **** double Jr[6][6];
-  80:./User/GaussNewton.c **** //Jr(βα)^T Jr(βα) 6x6 6x6 = 6x6
-  81:./User/GaussNewton.c **** double Jr_T_Jr[6][6] = {0};
-  82:./User/GaussNewton.c **** //Jr(βα)^T r(βα) 6x6 6x1 = 6x1 r为某特定解下方程的误差
-  83:./User/GaussNewton.c **** double Jr_T_R[6] = {0};
-  84:./User/GaussNewton.c **** 
-  85:./User/GaussNewton.c **** double J_invert[6][6] = {0};
+ 263              		.loc 1 76 55 is_stmt 0 view .LVU68
+ 264 0074 20EE000A 		vmul.f32	s0, s0, s0
+ 265              		.loc 1 76 32 view .LVU69
+ 266 0078 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 267 007c 77EEC07A 		vsub.f32	s15, s15, s0
+  77:./User/GaussNewton.c ****                                 -diff[current_index][1]*diff[current_index][1]
+ 268              		.loc 1 77 56 view .LVU70
+ 269 0080 60EEA00A 		vmul.f32	s1, s1, s1
+ 270              		.loc 1 77 33 view .LVU71
+ 271 0084 77EEE07A 		vsub.f32	s15, s15, s1
+  78:./User/GaussNewton.c ****                                 -diff[current_index][2]*diff[current_index][2];
+ 272              		.loc 1 78 56 view .LVU72
+ 273 0088 21EE011A 		vmul.f32	s2, s2, s2
+ 274              		.loc 1 78 33 view .LVU73
+ 275 008c 77EEC17A 		vsub.f32	s15, s15, s2
+  76:./User/GaussNewton.c ****                                 -diff[current_index][1]*diff[current_index][1]
+ 276              		.loc 1 76 29 view .LVU74
+ 277 0090 084A     		ldr	r2, .L17+20
+ 278 0092 02EB8302 		add	r2, r2, r3, lsl #2
+ 279 0096 C2ED007A 		vstr.32	s15, [r2]
+  79:./User/GaussNewton.c ****     current_index++;
+ 280              		.loc 1 79 5 is_stmt 1 view .LVU75
+ 281              		.loc 1 79 18 is_stmt 0 view .LVU76
+ 282 009a 0133     		adds	r3, r3, #1
+ 283 009c 0370     		strb	r3, [r0]
+  80:./User/GaussNewton.c **** }
+ 284              		.loc 1 80 1 view .LVU77
+ 285 009e 7047     		bx	lr
+ 286              	.L18:
+ 287              		.align	2
+ 288              	.L17:
+ 289 00a0 00000000 		.word	current_index
+ 290 00a4 ABAAAAAA 		.word	-1431655765
+ 291 00a8 00000000 		.word	measure
+ 292 00ac 00000000 		.word	Beta
+ 293 00b0 00000000 		.word	diff
+ 294 00b4 00000000 		.word	residual
+ 295              		.cfi_endproc
+ 296              	.LFE128:
+ 298              		.section	.text.J_a_init,"ax",%progbits
+ 299              		.align	1
+ 300              		.global	J_a_init
+ 301              		.syntax unified
+ 302              		.thumb
+ 303              		.thumb_func
+ 305              	J_a_init:
+ 306              	.LFB129:
+  81:./User/GaussNewton.c **** 
+  82:./User/GaussNewton.c **** //初解βα
+  83:./User/GaussNewton.c **** //β = βα - [ J_r^T * J_r ]^-1   *   [J_r^T * R]
+  84:./User/GaussNewton.c **** //delta = [Jr(βα)^T Jr(βα)]^-1  Jr(βα)^T r(βα)
+  85:./User/GaussNewton.c **** 
   86:./User/GaussNewton.c **** 
-  87:./User/GaussNewton.c **** void J_a_init()
-  88:./User/GaussNewton.c **** {
- 332              		.loc 1 88 1 is_stmt 1 view -0
- 333              		.cfi_startproc
- 334              		@ args = 0, pretend = 0, frame = 0
- 335              		@ frame_needed = 0, uses_anonymous_args = 0
- 336              		@ link register save eliminated.
-  89:./User/GaussNewton.c ****     for(int i = 0; i < 6; i++)
- 337              		.loc 1 89 5 view .LVU62
- 338              	.LBB6:
- 339              		.loc 1 89 9 view .LVU63
- 340              	.LVL19:
- 341              		.loc 1 89 13 is_stmt 0 view .LVU64
- 342 0000 0020     		movs	r0, #0
- 343              		.loc 1 89 5 view .LVU65
- 344 0002 1FE0     		b	.L19
- 345              	.LVL20:
- 346              	.L20:
- 347              	.LBB7:
-  90:./User/GaussNewton.c ****     {
-  91:./User/GaussNewton.c ****         for(int j = 0; j < 3; j++)
-  92:./User/GaussNewton.c ****         {
-  93:./User/GaussNewton.c ****             Jr[i][j] = 0.0;
- 348              		.loc 1 93 13 is_stmt 1 discriminator 3 view .LVU66
- 349              		.loc 1 93 22 is_stmt 0 discriminator 3 view .LVU67
- 350 0004 00EB4001 		add	r1, r0, r0, lsl #1
- 351 0008 4B00     		lsls	r3, r1, #1
- 352 000a 1344     		add	r3, r3, r2
- 353 000c 1249     		ldr	r1, .L24+8
- 354 000e 01EBC301 		add	r1, r1, r3, lsl #3
- 355 0012 9FED0F7B 		vldr.64	d7, .L24
- 356 0016 81ED007B 		vstr.64	d7, [r1]
-  94:./User/GaussNewton.c ****             Jr_T_Jr[i][j] = 0.0;
- 357              		.loc 1 94 13 is_stmt 1 discriminator 3 view .LVU68
- 358              		.loc 1 94 27 is_stmt 0 discriminator 3 view .LVU69
- 359 001a 1049     		ldr	r1, .L24+12
-ARM GAS  /tmp/cc6pnpCj.s 			page 9
+  87:./User/GaussNewton.c **** float Jr[6][6];
+  88:./User/GaussNewton.c **** //Jr(βα)^T Jr(βα) 6x6 6x6 = 6x6
+  89:./User/GaussNewton.c **** float Jr_T_Jr[6][6] = {0};
+  90:./User/GaussNewton.c **** //Jr(βα)^T r(βα) 6x6 6x1 = 6x1 r为某特定解下方程的误差
+ARM GAS  /tmp/ccIqjcvN.s 			page 8
 
 
- 360 001c 01EBC301 		add	r1, r1, r3, lsl #3
- 361 0020 81ED007B 		vstr.64	d7, [r1]
-  95:./User/GaussNewton.c ****             J_invert[i][j] = 0.0;
- 362              		.loc 1 95 13 is_stmt 1 discriminator 3 view .LVU70
- 363              		.loc 1 95 28 is_stmt 0 discriminator 3 view .LVU71
- 364 0024 0E49     		ldr	r1, .L24+16
- 365 0026 01EBC303 		add	r3, r1, r3, lsl #3
- 366 002a 83ED007B 		vstr.64	d7, [r3]
-  91:./User/GaussNewton.c ****         {
- 367              		.loc 1 91 32 is_stmt 1 discriminator 3 view .LVU72
- 368 002e 0132     		adds	r2, r2, #1
- 369              	.LVL21:
- 370              	.L21:
-  91:./User/GaussNewton.c ****         {
- 371              		.loc 1 91 26 discriminator 1 view .LVU73
- 372 0030 022A     		cmp	r2, #2
- 373 0032 E7DD     		ble	.L20
- 374              	.LBE7:
-  96:./User/GaussNewton.c ****         }
-  97:./User/GaussNewton.c ****         Jr_T_R[i] = 0.0;
- 375              		.loc 1 97 9 discriminator 2 view .LVU74
- 376              		.loc 1 97 19 is_stmt 0 discriminator 2 view .LVU75
- 377 0034 0B4B     		ldr	r3, .L24+20
- 378 0036 03EBC003 		add	r3, r3, r0, lsl #3
- 379 003a 9FED057B 		vldr.64	d7, .L24
- 380 003e 83ED007B 		vstr.64	d7, [r3]
-  89:./User/GaussNewton.c ****     {
- 381              		.loc 1 89 28 is_stmt 1 discriminator 2 view .LVU76
- 382 0042 0130     		adds	r0, r0, #1
- 383              	.LVL22:
- 384              	.L19:
-  89:./User/GaussNewton.c ****     {
- 385              		.loc 1 89 22 discriminator 1 view .LVU77
- 386 0044 0528     		cmp	r0, #5
- 387 0046 01DC     		bgt	.L23
- 388              	.LBB8:
-  91:./User/GaussNewton.c ****         {
- 389              		.loc 1 91 17 is_stmt 0 view .LVU78
- 390 0048 0022     		movs	r2, #0
- 391 004a F1E7     		b	.L21
- 392              	.L23:
- 393              	.LBE8:
- 394              	.LBE6:
-  98:./User/GaussNewton.c ****     }
-  99:./User/GaussNewton.c **** }
- 395              		.loc 1 99 1 view .LVU79
- 396 004c 7047     		bx	lr
- 397              	.L25:
- 398 004e 00BF     		.align	3
- 399              	.L24:
- 400 0050 00000000 		.word	0
- 401 0054 00000000 		.word	0
- 402 0058 00000000 		.word	Jr
- 403 005c 00000000 		.word	Jr_T_Jr
- 404 0060 00000000 		.word	J_invert
- 405 0064 00000000 		.word	Jr_T_R
- 406              		.cfi_endproc
-ARM GAS  /tmp/cc6pnpCj.s 			page 10
+  91:./User/GaussNewton.c **** float Jr_T_R[6] = {0};
+  92:./User/GaussNewton.c **** 
+  93:./User/GaussNewton.c **** float J_invert[6][6] = {0};
+  94:./User/GaussNewton.c **** 
+  95:./User/GaussNewton.c **** void J_a_init()
+  96:./User/GaussNewton.c **** {
+ 307              		.loc 1 96 1 is_stmt 1 view -0
+ 308              		.cfi_startproc
+ 309              		@ args = 0, pretend = 0, frame = 0
+ 310              		@ frame_needed = 0, uses_anonymous_args = 0
+ 311              		@ link register save eliminated.
+  97:./User/GaussNewton.c ****     for(int i = 0; i < 6; i++)
+ 312              		.loc 1 97 5 view .LVU79
+ 313              	.LBB7:
+ 314              		.loc 1 97 9 view .LVU80
+ 315              	.LVL15:
+ 316              		.loc 1 97 13 is_stmt 0 view .LVU81
+ 317 0000 4FF0000C 		mov	ip, #0
+ 318              		.loc 1 97 5 view .LVU82
+ 319 0004 1AE0     		b	.L20
+ 320              	.LVL16:
+ 321              	.L21:
+ 322              	.LBB8:
+  98:./User/GaussNewton.c ****     {
+  99:./User/GaussNewton.c ****         for(int j = 0; j < 3; j++)
+ 100:./User/GaussNewton.c ****         {
+ 101:./User/GaussNewton.c ****             Jr[i][j] = 0.0;
+ 323              		.loc 1 101 13 is_stmt 1 discriminator 3 view .LVU83
+ 324              		.loc 1 101 22 is_stmt 0 discriminator 3 view .LVU84
+ 325 0006 0CEB4C01 		add	r1, ip, ip, lsl #1
+ 326 000a 4B00     		lsls	r3, r1, #1
+ 327 000c 1344     		add	r3, r3, r2
+ 328 000e 0E49     		ldr	r1, .L25
+ 329 0010 01EB8301 		add	r1, r1, r3, lsl #2
+ 330 0014 0020     		movs	r0, #0
+ 331 0016 0860     		str	r0, [r1]	@ float
+ 102:./User/GaussNewton.c ****             Jr_T_Jr[i][j] = 0.0;
+ 332              		.loc 1 102 13 is_stmt 1 discriminator 3 view .LVU85
+ 333              		.loc 1 102 27 is_stmt 0 discriminator 3 view .LVU86
+ 334 0018 0C49     		ldr	r1, .L25+4
+ 335 001a 01EB8301 		add	r1, r1, r3, lsl #2
+ 336 001e 0860     		str	r0, [r1]	@ float
+ 103:./User/GaussNewton.c ****             J_invert[i][j] = 0.0;
+ 337              		.loc 1 103 13 is_stmt 1 discriminator 3 view .LVU87
+ 338              		.loc 1 103 28 is_stmt 0 discriminator 3 view .LVU88
+ 339 0020 0B49     		ldr	r1, .L25+8
+ 340 0022 01EB8303 		add	r3, r1, r3, lsl #2
+ 341 0026 1860     		str	r0, [r3]	@ float
+  99:./User/GaussNewton.c ****         {
+ 342              		.loc 1 99 32 is_stmt 1 discriminator 3 view .LVU89
+ 343 0028 0132     		adds	r2, r2, #1
+ 344              	.LVL17:
+ 345              	.L22:
+  99:./User/GaussNewton.c ****         {
+ 346              		.loc 1 99 26 discriminator 1 view .LVU90
+ 347 002a 022A     		cmp	r2, #2
+ 348 002c EBDD     		ble	.L21
+ARM GAS  /tmp/ccIqjcvN.s 			page 9
 
 
- 407              	.LFE129:
- 409              		.section	.text.GuassNewton_init,"ax",%progbits
- 410              		.align	1
- 411              		.global	GuassNewton_init
- 412              		.syntax unified
- 413              		.thumb
- 414              		.thumb_func
- 416              	GuassNewton_init:
- 417              	.LFB130:
- 100:./User/GaussNewton.c **** 
- 101:./User/GaussNewton.c **** void GuassNewton_init()
- 102:./User/GaussNewton.c **** {
- 418              		.loc 1 102 1 is_stmt 1 view -0
- 419              		.cfi_startproc
- 420              		@ args = 0, pretend = 0, frame = 0
- 421              		@ frame_needed = 0, uses_anonymous_args = 0
- 422 0000 08B5     		push	{r3, lr}
- 423              	.LCFI3:
- 424              		.cfi_def_cfa_offset 8
- 425              		.cfi_offset 3, -8
- 426              		.cfi_offset 14, -4
- 103:./User/GaussNewton.c ****     measure_diff_a_init();
- 427              		.loc 1 103 5 view .LVU81
- 428 0002 FFF7FEFF 		bl	measure_diff_a_init
- 429              	.LVL23:
- 104:./User/GaussNewton.c ****     delta_Beta_init();
- 430              		.loc 1 104 5 view .LVU82
- 431 0006 FFF7FEFF 		bl	delta_Beta_init
- 432              	.LVL24:
- 105:./User/GaussNewton.c ****     J_a_init();
- 433              		.loc 1 105 5 view .LVU83
- 434 000a FFF7FEFF 		bl	J_a_init
- 435              	.LVL25:
- 106:./User/GaussNewton.c **** }
- 436              		.loc 1 106 1 is_stmt 0 view .LVU84
- 437 000e 08BD     		pop	{r3, pc}
- 438              		.cfi_endproc
- 439              	.LFE130:
- 441              		.section	.text.a_correction,"ax",%progbits
- 442              		.align	1
- 443              		.global	a_correction
- 444              		.syntax unified
- 445              		.thumb
- 446              		.thumb_func
- 448              	a_correction:
- 449              	.LVL26:
- 450              	.LFB132:
- 107:./User/GaussNewton.c **** 
+ 349              	.LBE8:
+ 104:./User/GaussNewton.c ****         }
+ 105:./User/GaussNewton.c ****         Jr_T_R[i] = 0.0;
+ 350              		.loc 1 105 9 discriminator 2 view .LVU91
+ 351              		.loc 1 105 19 is_stmt 0 discriminator 2 view .LVU92
+ 352 002e 094B     		ldr	r3, .L25+12
+ 353 0030 03EB8C03 		add	r3, r3, ip, lsl #2
+ 354 0034 0022     		movs	r2, #0
+ 355              	.LVL18:
+ 356              		.loc 1 105 19 discriminator 2 view .LVU93
+ 357 0036 1A60     		str	r2, [r3]	@ float
+  97:./User/GaussNewton.c ****     {
+ 358              		.loc 1 97 28 is_stmt 1 discriminator 2 view .LVU94
+ 359 0038 0CF1010C 		add	ip, ip, #1
+ 360              	.LVL19:
+ 361              	.L20:
+  97:./User/GaussNewton.c ****     {
+ 362              		.loc 1 97 22 discriminator 1 view .LVU95
+ 363 003c BCF1050F 		cmp	ip, #5
+ 364 0040 01DC     		bgt	.L24
+ 365              	.LBB9:
+  99:./User/GaussNewton.c ****         {
+ 366              		.loc 1 99 17 is_stmt 0 view .LVU96
+ 367 0042 0022     		movs	r2, #0
+ 368 0044 F1E7     		b	.L22
+ 369              	.L24:
+ 370              	.LBE9:
+ 371              	.LBE7:
+ 106:./User/GaussNewton.c ****     }
+ 107:./User/GaussNewton.c **** }
+ 372              		.loc 1 107 1 view .LVU97
+ 373 0046 7047     		bx	lr
+ 374              	.L26:
+ 375              		.align	2
+ 376              	.L25:
+ 377 0048 00000000 		.word	Jr
+ 378 004c 00000000 		.word	Jr_T_Jr
+ 379 0050 00000000 		.word	J_invert
+ 380 0054 00000000 		.word	Jr_T_R
+ 381              		.cfi_endproc
+ 382              	.LFE129:
+ 384              		.section	.text.GuassNewton_init,"ax",%progbits
+ 385              		.align	1
+ 386              		.global	GuassNewton_init
+ 387              		.syntax unified
+ 388              		.thumb
+ 389              		.thumb_func
+ 391              	GuassNewton_init:
+ 392              	.LFB130:
  108:./User/GaussNewton.c **** 
- 109:./User/GaussNewton.c **** void GaussNewton()
+ 109:./User/GaussNewton.c **** void GuassNewton_init()
  110:./User/GaussNewton.c **** {
- 111:./User/GaussNewton.c ****     
- 112:./User/GaussNewton.c **** 
- 113:./User/GaussNewton.c ****     //J_r
- 114:./User/GaussNewton.c ****     for(uint8_t i = 0; i < 6; i++)
- 115:./User/GaussNewton.c ****     {
- 116:./User/GaussNewton.c ****         for(uint8_t j = 0; j < 3; j++)
-ARM GAS  /tmp/cc6pnpCj.s 			page 11
+ 393              		.loc 1 110 1 is_stmt 1 view -0
+ 394              		.cfi_startproc
+ 395              		@ args = 0, pretend = 0, frame = 0
+ 396              		@ frame_needed = 0, uses_anonymous_args = 0
+ 397 0000 08B5     		push	{r3, lr}
+ARM GAS  /tmp/ccIqjcvN.s 			page 10
 
 
- 117:./User/GaussNewton.c ****         {
- 118:./User/GaussNewton.c ****             //fill the Jacobian matrix with partial derivatives
- 119:./User/GaussNewton.c ****             Jr[i][j] = 2*Beta_alpha[j+3]*Beta_alpha[j+3]*diff[i][j];
- 120:./User/GaussNewton.c ****             Jr[i][j+3] = -2*Beta_alpha[j+3]*diff[i][j]*diff[i][j];
- 121:./User/GaussNewton.c ****         }
- 122:./User/GaussNewton.c ****     }
- 123:./User/GaussNewton.c **** 
- 124:./User/GaussNewton.c ****     //Jr(βα)^T Jr(βα) 6x6 6x6 = 6x6
- 125:./User/GaussNewton.c ****     //double Jr_T_Jr[6][6] = {0};
- 126:./User/GaussNewton.c ****     //Jr(βα)^T r(βα) 6x6 6x1 = 6x1 r为某特定解下方程的误差
- 127:./User/GaussNewton.c ****     //double Jr_T_R[6] = {0};
- 128:./User/GaussNewton.c ****     for (uint8_t i = 0; i < 6; i++)
- 129:./User/GaussNewton.c ****     {
- 130:./User/GaussNewton.c ****         Jr_T_R[i] =0;
- 131:./User/GaussNewton.c ****         for(uint8_t j = 0; j < 6; j++)
- 132:./User/GaussNewton.c ****         {
- 133:./User/GaussNewton.c ****             Jr_T_Jr[i][j] =0;
- 134:./User/GaussNewton.c ****             for(uint8_t k = 0; k < 6; k++)
- 135:./User/GaussNewton.c ****             {
- 136:./User/GaussNewton.c ****                 Jr_T_Jr[i][j] += Jr[k][i] * Jr[k][j];
- 137:./User/GaussNewton.c ****             }
- 138:./User/GaussNewton.c ****             Jr_T_R[i] += Jr[j][i] * residual[j];
- 139:./User/GaussNewton.c ****         }
- 140:./User/GaussNewton.c ****     }
- 141:./User/GaussNewton.c **** 
- 142:./User/GaussNewton.c ****     //[Jr(βα)^T Jr(βα)]^-1
- 143:./User/GaussNewton.c ****     invert_matrix(Jr_T_Jr,J_invert,6);
- 144:./User/GaussNewton.c **** 
- 145:./User/GaussNewton.c ****     //delta = [Jr(βα)^T Jr(βα)]^-1  Jr(βα)^T r(βα)
- 146:./User/GaussNewton.c ****     //即delta = J_invert Jr_T_R
- 147:./User/GaussNewton.c ****     for (uint8_t i = 0; i < 6; i++) {
- 148:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
- 149:./User/GaussNewton.c ****             delta[i] += J_invert[i][j] * Jr_T_R[j];
- 150:./User/GaussNewton.c ****         }
- 151:./User/GaussNewton.c ****     }
+ 398              	.LCFI0:
+ 399              		.cfi_def_cfa_offset 8
+ 400              		.cfi_offset 3, -8
+ 401              		.cfi_offset 14, -4
+ 111:./User/GaussNewton.c ****     measure_diff_a_init();
+ 402              		.loc 1 111 5 view .LVU99
+ 403 0002 FFF7FEFF 		bl	measure_diff_a_init
+ 404              	.LVL20:
+ 112:./User/GaussNewton.c ****     delta_Beta_init();
+ 405              		.loc 1 112 5 view .LVU100
+ 406 0006 FFF7FEFF 		bl	delta_Beta_init
+ 407              	.LVL21:
+ 113:./User/GaussNewton.c ****     J_a_init();
+ 408              		.loc 1 113 5 view .LVU101
+ 409 000a FFF7FEFF 		bl	J_a_init
+ 410              	.LVL22:
+ 114:./User/GaussNewton.c **** }
+ 411              		.loc 1 114 1 is_stmt 0 view .LVU102
+ 412 000e 08BD     		pop	{r3, pc}
+ 413              		.cfi_endproc
+ 414              	.LFE130:
+ 416              		.section	.text.invert_matrix,"ax",%progbits
+ 417              		.align	1
+ 418              		.global	invert_matrix
+ 419              		.syntax unified
+ 420              		.thumb
+ 421              		.thumb_func
+ 423              	invert_matrix:
+ 424              	.LVL23:
+ 425              	.LFB132:
+ 115:./User/GaussNewton.c **** 
+ 116:./User/GaussNewton.c **** 
+ 117:./User/GaussNewton.c **** void GaussNewton()
+ 118:./User/GaussNewton.c **** {
+ 119:./User/GaussNewton.c ****     
+ 120:./User/GaussNewton.c **** 
+ 121:./User/GaussNewton.c ****     //J_r
+ 122:./User/GaussNewton.c ****     for(uint8_t i = 0; i < 6; i++)
+ 123:./User/GaussNewton.c ****     {
+ 124:./User/GaussNewton.c ****         Jr[i][0] = ( 2*diff[i][0] - 2*Beta[0] )*Beta[3]*Beta[3];
+ 125:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 126:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 127:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 128:./User/GaussNewton.c ****         Jr[i][4] = -2*(diff[i][1] - Beta[1] )*(diff[i][1] - Beta[1] )*Beta[4];
+ 129:./User/GaussNewton.c ****         Jr[i][5] = -2*(diff[i][2] - Beta[2] )*(diff[i][2] - Beta[2] )*Beta[5];
+ 130:./User/GaussNewton.c ****     }
+ 131:./User/GaussNewton.c **** 
+ 132:./User/GaussNewton.c ****     //Jr(βα)^T Jr(βα) 6x6 6x6 = 6x6
+ 133:./User/GaussNewton.c ****     //float Jr_T_Jr[6][6] = {0};
+ 134:./User/GaussNewton.c ****     //Jr(βα)^T r(βα) 6x6 6x1 = 6x1 r为某特定解下方程的误差
+ 135:./User/GaussNewton.c ****     //float Jr_T_R[6] = {0};
+ 136:./User/GaussNewton.c ****     for (uint8_t i = 0; i < 6; i++)
+ 137:./User/GaussNewton.c ****     {
+ 138:./User/GaussNewton.c ****         Jr_T_R[i] =0;
+ 139:./User/GaussNewton.c ****         for(uint8_t j = 0; j < 6; j++)
+ 140:./User/GaussNewton.c ****         {
+ 141:./User/GaussNewton.c ****             Jr_T_Jr[i][j] =0;
+ARM GAS  /tmp/ccIqjcvN.s 			page 11
+
+
+ 142:./User/GaussNewton.c ****             for(uint8_t k = 0; k < 6; k++)
+ 143:./User/GaussNewton.c ****             {
+ 144:./User/GaussNewton.c ****                 Jr_T_Jr[i][j] += Jr[k][i] * Jr[k][j];
+ 145:./User/GaussNewton.c ****             }
+ 146:./User/GaussNewton.c ****             Jr_T_R[i] += Jr[j][i] * residual[j];
+ 147:./User/GaussNewton.c ****         }
+ 148:./User/GaussNewton.c ****     }
+ 149:./User/GaussNewton.c **** 
+ 150:./User/GaussNewton.c ****     //[Jr(βα)^T Jr(βα)]^-1
+ 151:./User/GaussNewton.c ****     invert_matrix(Jr_T_Jr,J_invert,6);
  152:./User/GaussNewton.c **** 
- 153:./User/GaussNewton.c ****     //β = βα - delta
- 154:./User/GaussNewton.c ****     for (uint8_t i = 0; i < 6; i++) 
- 155:./User/GaussNewton.c ****     {
- 156:./User/GaussNewton.c ****         Beta[i] = Beta_alpha[i] - delta[i];
- 157:./User/GaussNewton.c ****         //βα更新 
- 158:./User/GaussNewton.c ****         Beta_alpha[i] = Beta[i];
+ 153:./User/GaussNewton.c ****     //delta = [Jr(βα)^T Jr(βα)]^-1  Jr(βα)^T r(βα)
+ 154:./User/GaussNewton.c ****     //即delta = J_invert Jr_T_R
+ 155:./User/GaussNewton.c ****     for (uint8_t i = 0; i < 6; i++) {
+ 156:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
+ 157:./User/GaussNewton.c ****             delta[i] += J_invert[i][j] * Jr_T_R[j];
+ 158:./User/GaussNewton.c ****         }
  159:./User/GaussNewton.c ****     }
  160:./User/GaussNewton.c **** 
- 161:./User/GaussNewton.c **** }
- 162:./User/GaussNewton.c **** 
- 163:./User/GaussNewton.c **** void a_correction(double data_ax, double data_ay, double data_az)
- 164:./User/GaussNewton.c **** {
- 451              		.loc 1 164 1 is_stmt 1 view -0
- 452              		.cfi_startproc
- 453              		@ args = 0, pretend = 0, frame = 0
- 454              		@ frame_needed = 0, uses_anonymous_args = 0
- 455              		.loc 1 164 1 is_stmt 0 view .LVU86
- 456 0000 2DE9D043 		push	{r4, r6, r7, r8, r9, lr}
- 457              	.LCFI4:
- 458              		.cfi_def_cfa_offset 24
- 459              		.cfi_offset 4, -24
-ARM GAS  /tmp/cc6pnpCj.s 			page 12
-
-
- 460              		.cfi_offset 6, -20
- 461              		.cfi_offset 7, -16
- 462              		.cfi_offset 8, -12
- 463              		.cfi_offset 9, -8
- 464              		.cfi_offset 14, -4
- 465 0004 51EC100B 		vmov	r0, r1, d0
- 466 0008 59EC118B 		vmov	r8, r9, d1
- 467 000c 57EC126B 		vmov	r6, r7, d2
- 165:./User/GaussNewton.c ****     mpuX_correction = (data_ax - Beta[0])*Beta[3];
- 468              		.loc 1 165 5 is_stmt 1 view .LVU87
- 469              		.loc 1 165 38 is_stmt 0 view .LVU88
- 470 0010 134C     		ldr	r4, .L30
- 471              		.loc 1 165 32 view .LVU89
- 472 0012 D4E90023 		ldrd	r2, [r4]
- 473 0016 FFF7FEFF 		bl	__aeabi_dsub
- 474              	.LVL27:
- 475              		.loc 1 165 42 view .LVU90
- 476 001a D4E90623 		ldrd	r2, [r4, #24]
- 477 001e FFF7FEFF 		bl	__aeabi_dmul
- 478              	.LVL28:
- 479              		.loc 1 165 21 view .LVU91
- 480 0022 104B     		ldr	r3, .L30+4
- 481 0024 C3E90001 		strd	r0, [r3]
- 166:./User/GaussNewton.c ****     mpuY_correction = (data_ay - Beta[1])*Beta[4];
- 482              		.loc 1 166 5 is_stmt 1 view .LVU92
- 483              		.loc 1 166 32 is_stmt 0 view .LVU93
- 484 0028 D4E90223 		ldrd	r2, [r4, #8]
- 485 002c 4046     		mov	r0, r8
- 486 002e 4946     		mov	r1, r9
- 487 0030 FFF7FEFF 		bl	__aeabi_dsub
- 488              	.LVL29:
- 489              		.loc 1 166 42 view .LVU94
- 490 0034 D4E90823 		ldrd	r2, [r4, #32]
- 491 0038 FFF7FEFF 		bl	__aeabi_dmul
- 492              	.LVL30:
- 493              		.loc 1 166 21 view .LVU95
- 494 003c 0A4B     		ldr	r3, .L30+8
- 495 003e C3E90001 		strd	r0, [r3]
- 167:./User/GaussNewton.c ****     mpuZ_correction = (data_az - Beta[2])*Beta[5];
- 496              		.loc 1 167 5 is_stmt 1 view .LVU96
- 497              		.loc 1 167 32 is_stmt 0 view .LVU97
- 498 0042 D4E90423 		ldrd	r2, [r4, #16]
- 499 0046 3046     		mov	r0, r6
- 500 0048 3946     		mov	r1, r7
- 501 004a FFF7FEFF 		bl	__aeabi_dsub
- 502              	.LVL31:
- 503              		.loc 1 167 42 view .LVU98
- 504 004e D4E90A23 		ldrd	r2, [r4, #40]
- 505 0052 FFF7FEFF 		bl	__aeabi_dmul
- 506              	.LVL32:
- 507              		.loc 1 167 21 view .LVU99
- 508 0056 054B     		ldr	r3, .L30+12
- 509 0058 C3E90001 		strd	r0, [r3]
- 168:./User/GaussNewton.c **** }
- 510              		.loc 1 168 1 view .LVU100
- 511 005c BDE8D083 		pop	{r4, r6, r7, r8, r9, pc}
- 512              	.LVL33:
-ARM GAS  /tmp/cc6pnpCj.s 			page 13
-
-
- 513              	.L31:
- 514              		.loc 1 168 1 view .LVU101
- 515              		.align	2
- 516              	.L30:
- 517 0060 00000000 		.word	Beta
- 518 0064 00000000 		.word	mpuX_correction
- 519 0068 00000000 		.word	mpuY_correction
- 520 006c 00000000 		.word	mpuZ_correction
- 521              		.cfi_endproc
- 522              	.LFE132:
- 524              		.global	__aeabi_dcmpgt
- 525              		.global	__aeabi_dcmpeq
- 526              		.global	__aeabi_ddiv
- 527              		.section	.text.invert_matrix,"ax",%progbits
- 528              		.align	1
- 529              		.global	invert_matrix
- 530              		.syntax unified
- 531              		.thumb
- 532              		.thumb_func
- 534              	invert_matrix:
- 535              	.LVL34:
- 536              	.LFB133:
- 169:./User/GaussNewton.c **** 
+ 161:./User/GaussNewton.c ****     //β = βα - delta
+ 162:./User/GaussNewton.c ****     for (uint8_t i = 0; i < 6; i++) 
+ 163:./User/GaussNewton.c ****     {
+ 164:./User/GaussNewton.c ****         Beta[i] = Beta_alpha[i] - delta[i];
+ 165:./User/GaussNewton.c ****         //βα更新 
+ 166:./User/GaussNewton.c ****         Beta_alpha[i] = Beta[i];
+ 167:./User/GaussNewton.c ****     }
+ 168:./User/GaussNewton.c **** 
+ 169:./User/GaussNewton.c **** }
  170:./User/GaussNewton.c **** 
- 171:./User/GaussNewton.c **** //................................................................
- 172:./User/GaussNewton.c **** //................................................................
- 173:./User/GaussNewton.c **** //求逆矩阵[Jr(βα)^T Jr(βα)]^-1
- 174:./User/GaussNewton.c **** int invert_matrix(double A[6][6], double invA[6][6], int n) {
- 537              		.loc 1 174 61 is_stmt 1 view -0
- 538              		.cfi_startproc
- 539              		@ args = 0, pretend = 0, frame = 608
- 540              		@ frame_needed = 0, uses_anonymous_args = 0
- 541              		.loc 1 174 61 is_stmt 0 view .LVU103
- 542 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 543              	.LCFI5:
- 544              		.cfi_def_cfa_offset 36
- 545              		.cfi_offset 4, -36
- 546              		.cfi_offset 5, -32
- 547              		.cfi_offset 6, -28
- 548              		.cfi_offset 7, -24
- 549              		.cfi_offset 8, -20
- 550              		.cfi_offset 9, -16
- 551              		.cfi_offset 10, -12
- 552              		.cfi_offset 11, -8
- 553              		.cfi_offset 14, -4
- 554 0004 ADF5197D 		sub	sp, sp, #612
- 555              	.LCFI6:
- 556              		.cfi_def_cfa_offset 648
- 557 0008 0446     		mov	r4, r0
- 558 000a 0E46     		mov	r6, r1
- 559 000c 9046     		mov	r8, r2
- 175:./User/GaussNewton.c ****     double augmented[6][12] = {0};  // 扩展矩阵 [A | I]
- 560              		.loc 1 175 5 is_stmt 1 view .LVU104
- 561              		.loc 1 175 12 is_stmt 0 view .LVU105
- 562 000e 4FF41072 		mov	r2, #576
- 563              	.LVL35:
- 564              		.loc 1 175 12 view .LVU106
-ARM GAS  /tmp/cc6pnpCj.s 			page 14
-
-
- 565 0012 0021     		movs	r1, #0
- 566              	.LVL36:
- 567              		.loc 1 175 12 view .LVU107
- 568 0014 08A8     		add	r0, sp, #32
- 569              	.LVL37:
- 570              		.loc 1 175 12 view .LVU108
- 571 0016 FFF7FEFF 		bl	memset
- 572              	.LVL38:
+ 171:./User/GaussNewton.c **** // float aX_correction = 0.0f;
+ 172:./User/GaussNewton.c **** // float aY_correction = 0.0f;
+ 173:./User/GaussNewton.c **** // float aZ_correction = 0.0f;
+ 174:./User/GaussNewton.c **** 
+ 175:./User/GaussNewton.c **** 
  176:./User/GaussNewton.c **** 
- 177:./User/GaussNewton.c ****     // 构建扩展矩阵
- 178:./User/GaussNewton.c ****     for (int i = 0; i < n; i++) {
- 573              		.loc 1 178 5 is_stmt 1 view .LVU109
- 574              	.LBB9:
- 575              		.loc 1 178 10 view .LVU110
- 576              		.loc 1 178 14 is_stmt 0 view .LVU111
- 577 001a 0023     		movs	r3, #0
- 578              		.loc 1 178 5 view .LVU112
- 579 001c 2AE0     		b	.L33
- 580              	.LVL39:
- 581              	.L64:
- 582              	.LBB10:
- 179:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 180:./User/GaussNewton.c ****             augmented[i][j] = A[i][j];
- 181:./User/GaussNewton.c ****             augmented[i][j + n] = (i == j) ? 1.0 : 0.0;
- 583              		.loc 1 181 50 view .LVU113
- 584 001e 4FF0000A 		mov	r10, #0
- 585 0022 DFF820B2 		ldr	fp, .L72
- 586              	.L34:
- 587              		.loc 1 181 28 discriminator 4 view .LVU114
- 588 0026 02EB0801 		add	r1, r2, r8
- 589              		.loc 1 181 33 discriminator 4 view .LVU115
- 590 002a 03EB4300 		add	r0, r3, r3, lsl #1
- 591 002e 01EB8001 		add	r1, r1, r0, lsl #2
- 592 0032 08A8     		add	r0, sp, #32
- 593 0034 00EBC101 		add	r1, r0, r1, lsl #3
- 594 0038 C1E900AB 		strd	r10, [r1]
- 179:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 595              		.loc 1 179 33 is_stmt 1 discriminator 4 view .LVU116
- 596 003c 0132     		adds	r2, r2, #1
- 597              	.LVL40:
- 598              	.L36:
- 179:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 599              		.loc 1 179 27 discriminator 2 view .LVU117
- 600 003e 4245     		cmp	r2, r8
- 601 0040 17DA     		bge	.L63
- 180:./User/GaussNewton.c ****             augmented[i][j + n] = (i == j) ? 1.0 : 0.0;
- 602              		.loc 1 180 13 view .LVU118
- 180:./User/GaussNewton.c ****             augmented[i][j + n] = (i == j) ? 1.0 : 0.0;
- 603              		.loc 1 180 32 is_stmt 0 view .LVU119
- 604 0042 03EB4301 		add	r1, r3, r3, lsl #1
- 605 0046 04EB0111 		add	r1, r4, r1, lsl #4
- 180:./User/GaussNewton.c ****             augmented[i][j + n] = (i == j) ? 1.0 : 0.0;
- 606              		.loc 1 180 35 view .LVU120
- 607 004a 01EBC201 		add	r1, r1, r2, lsl #3
- 608 004e D1E900AB 		ldrd	r10, [r1]
- 180:./User/GaussNewton.c ****             augmented[i][j + n] = (i == j) ? 1.0 : 0.0;
- 609              		.loc 1 180 29 view .LVU121
-ARM GAS  /tmp/cc6pnpCj.s 			page 15
+ 177:./User/GaussNewton.c **** //................................................................
+ 178:./User/GaussNewton.c **** //................................................................
+ 179:./User/GaussNewton.c **** //求逆矩阵[Jr(βα)^T Jr(βα)]^-1
+ 180:./User/GaussNewton.c **** int invert_matrix(float matrix[6][6], float inverse[6][6], int n) {
+ 426              		.loc 1 180 67 is_stmt 1 view -0
+ 427              		.cfi_startproc
+ 428              		@ args = 0, pretend = 0, frame = 288
+ 429              		@ frame_needed = 0, uses_anonymous_args = 0
+ 430              		.loc 1 180 67 is_stmt 0 view .LVU104
+ 431 0000 70B5     		push	{r4, r5, r6, lr}
+ 432              	.LCFI1:
+ 433              		.cfi_def_cfa_offset 16
+ 434              		.cfi_offset 4, -16
+ 435              		.cfi_offset 5, -12
+ 436              		.cfi_offset 6, -8
+ 437              		.cfi_offset 14, -4
+ 438 0002 C8B0     		sub	sp, sp, #288
+ 439              	.LCFI2:
+ 440              		.cfi_def_cfa_offset 304
+ 441 0004 0C46     		mov	r4, r1
+ 442 0006 1146     		mov	r1, r2
+ 443              	.LVL24:
+ARM GAS  /tmp/ccIqjcvN.s 			page 12
 
 
- 610 0052 03EB4301 		add	r1, r3, r3, lsl #1
- 611 0056 02EB8101 		add	r1, r2, r1, lsl #2
- 612 005a 08A8     		add	r0, sp, #32
- 613 005c 00EBC101 		add	r1, r0, r1, lsl #3
- 614 0060 C1E900AB 		strd	r10, [r1]
- 615              		.loc 1 181 13 is_stmt 1 view .LVU122
- 616              		.loc 1 181 50 is_stmt 0 view .LVU123
- 617 0064 9342     		cmp	r3, r2
- 618 0066 DAD0     		beq	.L64
- 619              		.loc 1 181 50 view .LVU124
- 620 0068 4FF0000A 		mov	r10, #0
- 621 006c 4FF0000B 		mov	fp, #0
- 622 0070 D9E7     		b	.L34
- 623              	.L63:
- 624              		.loc 1 181 50 view .LVU125
- 625              	.LBE10:
- 178:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 626              		.loc 1 178 29 is_stmt 1 discriminator 2 view .LVU126
- 627 0072 0133     		adds	r3, r3, #1
- 628              	.LVL41:
- 629              	.L33:
- 178:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 630              		.loc 1 178 23 discriminator 1 view .LVU127
- 631 0074 4345     		cmp	r3, r8
- 632 0076 01DA     		bge	.L65
- 633              	.LBB11:
- 179:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 634              		.loc 1 179 18 is_stmt 0 view .LVU128
- 635 0078 0022     		movs	r2, #0
- 636 007a E0E7     		b	.L36
- 637              	.L65:
- 638              	.LBE11:
- 639              	.LBE9:
- 640              	.LBB12:
- 182:./User/GaussNewton.c ****         }
- 183:./User/GaussNewton.c ****     }
- 184:./User/GaussNewton.c **** 
- 185:./User/GaussNewton.c **** 
- 186:./User/GaussNewton.c ****     // 高斯-约旦消元法
- 187:./User/GaussNewton.c ****     for (int i = 0; i < n; i++) {
- 641              		.loc 1 187 14 view .LVU129
- 642 007c 0025     		movs	r5, #0
- 643 007e 0796     		str	r6, [sp, #28]
- 644 0080 A4E0     		b	.L37
- 645              	.LVL42:
- 646              	.L39:
- 647              	.LBB13:
- 648              	.LBB14:
- 188:./User/GaussNewton.c ****         // 寻找最大值以避免除以小数
- 189:./User/GaussNewton.c ****         double max_val = fabs(augmented[i][i]);
- 190:./User/GaussNewton.c ****         int max_row = i;
- 191:./User/GaussNewton.c ****         for (int k = i + 1; k < n; k++) {
- 649              		.loc 1 191 37 is_stmt 1 discriminator 2 view .LVU130
- 650 0082 0134     		adds	r4, r4, #1
- 651              	.LVL43:
- 652              	.L38:
- 653              		.loc 1 191 31 discriminator 1 view .LVU131
-ARM GAS  /tmp/cc6pnpCj.s 			page 16
+ 181:./User/GaussNewton.c ****     // 创建扩展矩阵
+ 182:./User/GaussNewton.c ****     float augmented[6][2 * 6];
+ 444              		.loc 1 182 5 is_stmt 1 view .LVU105
+ 183:./User/GaussNewton.c ****     
+ 184:./User/GaussNewton.c ****     for (int i = 0; i < n; i++) {
+ 445              		.loc 1 184 5 view .LVU106
+ 446              	.LBB10:
+ 447              		.loc 1 184 10 view .LVU107
+ 448              		.loc 1 184 14 is_stmt 0 view .LVU108
+ 449 0008 0023     		movs	r3, #0
+ 450              		.loc 1 184 5 view .LVU109
+ 451 000a 26E0     		b	.L30
+ 452              	.LVL25:
+ 453              	.L31:
+ 454              	.LBB11:
+ 185:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 186:./User/GaussNewton.c ****             augmented[i][j] = matrix[i][j];
+ 455              		.loc 1 186 13 is_stmt 1 discriminator 3 view .LVU110
+ 456              		.loc 1 186 37 is_stmt 0 discriminator 3 view .LVU111
+ 457 000c 03EB4302 		add	r2, r3, r3, lsl #1
+ 458 0010 00EBC202 		add	r2, r0, r2, lsl #3
+ 459              		.loc 1 186 40 discriminator 3 view .LVU112
+ 460 0014 02EB8502 		add	r2, r2, r5, lsl #2
+ 461 0018 1668     		ldr	r6, [r2]	@ float
+ 462              		.loc 1 186 29 discriminator 3 view .LVU113
+ 463 001a 03EB4302 		add	r2, r3, r3, lsl #1
+ 464 001e 05EB8202 		add	r2, r5, r2, lsl #2
+ 465 0022 0DEB8202 		add	r2, sp, r2, lsl #2
+ 466 0026 1660     		str	r6, [r2]	@ float
+ 185:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 467              		.loc 1 185 33 is_stmt 1 discriminator 3 view .LVU114
+ 468 0028 0135     		adds	r5, r5, #1
+ 469              	.LVL26:
+ 470              	.L35:
+ 185:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 471              		.loc 1 185 27 discriminator 1 view .LVU115
+ 472 002a 8D42     		cmp	r5, r1
+ 473 002c EEDB     		blt	.L31
+ 474              	.LBE11:
+ 475              	.LBB12:
+ 187:./User/GaussNewton.c ****         }
+ 188:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 476              		.loc 1 188 18 is_stmt 0 view .LVU116
+ 477 002e 0022     		movs	r2, #0
+ 478 0030 0BE0     		b	.L32
+ 479              	.LVL27:
+ 480              	.L61:
+ 189:./User/GaussNewton.c ****             augmented[i][j + n] = (i == j) ? 1 : 0;  // 单位矩阵
+ 481              		.loc 1 189 33 view .LVU117
+ 482 0032 4FF07E5C 		mov	ip, #1065353216
+ 483              	.L33:
+ 484              		.loc 1 189 28 discriminator 4 view .LVU118
+ 485 0036 5518     		adds	r5, r2, r1
+ 486              		.loc 1 189 33 discriminator 4 view .LVU119
+ 487 0038 03EB4306 		add	r6, r3, r3, lsl #1
+ 488 003c 05EB8605 		add	r5, r5, r6, lsl #2
+ 489 0040 0DEB8505 		add	r5, sp, r5, lsl #2
+ARM GAS  /tmp/ccIqjcvN.s 			page 13
 
 
- 654 0084 4445     		cmp	r4, r8
- 655 0086 17DA     		bge	.L66
- 192:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > max_val) {
- 656              		.loc 1 192 13 view .LVU132
- 657              		.loc 1 192 34 is_stmt 0 view .LVU133
- 658 0088 04EB4403 		add	r3, r4, r4, lsl #1
- 659 008c 05EB8303 		add	r3, r5, r3, lsl #2
- 660 0090 08AA     		add	r2, sp, #32
- 661 0092 02EBC303 		add	r3, r2, r3, lsl #3
- 662 0096 D3E90023 		ldrd	r2, [r3]
- 663              		.loc 1 192 17 view .LVU134
- 664 009a 1646     		mov	r6, r2
- 665 009c 23F00047 		bic	r7, r3, #-2147483648
- 666              		.loc 1 192 16 view .LVU135
- 667 00a0 5246     		mov	r2, r10
- 668 00a2 5B46     		mov	r3, fp
- 669 00a4 3046     		mov	r0, r6
- 670 00a6 3946     		mov	r1, r7
- 671 00a8 FFF7FEFF 		bl	__aeabi_dcmpgt
- 672              	.LVL44:
- 673 00ac 0028     		cmp	r0, #0
- 674 00ae E8D0     		beq	.L39
- 193:./User/GaussNewton.c ****                 max_val = fabs(augmented[k][i]);
- 194:./User/GaussNewton.c ****                 max_row = k;
- 675              		.loc 1 194 25 view .LVU136
- 676 00b0 A146     		mov	r9, r4
- 677              	.LVL45:
- 193:./User/GaussNewton.c ****                 max_val = fabs(augmented[k][i]);
- 678              		.loc 1 193 25 view .LVU137
- 679 00b2 B246     		mov	r10, r6
- 680              	.LVL46:
- 193:./User/GaussNewton.c ****                 max_val = fabs(augmented[k][i]);
- 681              		.loc 1 193 25 view .LVU138
- 682 00b4 BB46     		mov	fp, r7
- 683 00b6 E4E7     		b	.L39
- 684              	.LVL47:
- 685              	.L66:
- 193:./User/GaussNewton.c ****                 max_val = fabs(augmented[k][i]);
- 686              		.loc 1 193 25 view .LVU139
- 687              	.LBE14:
- 195:./User/GaussNewton.c ****             }
- 196:./User/GaussNewton.c ****         }
- 197:./User/GaussNewton.c **** 
- 198:./User/GaussNewton.c ****         // 如果主元素为0，矩阵不可逆
- 199:./User/GaussNewton.c ****         if (max_val == 0) {
- 688              		.loc 1 199 12 view .LVU140
- 689 00b8 CDE90467 		strd	r6, [sp, #16]
- 690 00bc 5046     		mov	r0, r10
- 691 00be 5946     		mov	r1, fp
- 692 00c0 CDE90201 		strd	r0, [sp, #8]
- 693 00c4 4E46     		mov	r6, r9
- 694 00c6 DDF800A0 		ldr	r10, [sp]
- 695              	.LVL48:
- 696              		.loc 1 199 9 is_stmt 1 view .LVU141
- 697              		.loc 1 199 12 is_stmt 0 view .LVU142
- 698 00ca 0022     		movs	r2, #0
- 699 00cc 0023     		movs	r3, #0
-ARM GAS  /tmp/cc6pnpCj.s 			page 17
+ 490 0044 C5F800C0 		str	ip, [r5]	@ float
+ 188:./User/GaussNewton.c ****             augmented[i][j + n] = (i == j) ? 1 : 0;  // 单位矩阵
+ 491              		.loc 1 188 33 is_stmt 1 discriminator 4 view .LVU120
+ 492 0048 0132     		adds	r2, r2, #1
+ 493              	.LVL28:
+ 494              	.L32:
+ 188:./User/GaussNewton.c ****             augmented[i][j + n] = (i == j) ? 1 : 0;  // 单位矩阵
+ 495              		.loc 1 188 27 discriminator 2 view .LVU121
+ 496 004a 8A42     		cmp	r2, r1
+ 497 004c 04DA     		bge	.L60
+ 498              		.loc 1 189 13 view .LVU122
+ 499              		.loc 1 189 33 is_stmt 0 view .LVU123
+ 500 004e 9342     		cmp	r3, r2
+ 501 0050 EFD0     		beq	.L61
+ 502              		.loc 1 189 33 view .LVU124
+ 503 0052 4FF0000C 		mov	ip, #0
+ 504 0056 EEE7     		b	.L33
+ 505              	.L60:
+ 506              		.loc 1 189 33 view .LVU125
+ 507              	.LBE12:
+ 184:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 508              		.loc 1 184 29 is_stmt 1 discriminator 2 view .LVU126
+ 509 0058 0133     		adds	r3, r3, #1
+ 510              	.LVL29:
+ 511              	.L30:
+ 184:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 512              		.loc 1 184 23 discriminator 1 view .LVU127
+ 513 005a 8B42     		cmp	r3, r1
+ 514 005c 01DA     		bge	.L62
+ 515              	.LBB13:
+ 185:./User/GaussNewton.c ****             augmented[i][j] = matrix[i][j];
+ 516              		.loc 1 185 18 is_stmt 0 view .LVU128
+ 517 005e 0025     		movs	r5, #0
+ 518 0060 E3E7     		b	.L35
+ 519              	.L62:
+ 520              	.LBE13:
+ 521              	.LBE10:
+ 522              	.LBB14:
+ 190:./User/GaussNewton.c ****         }
+ 191:./User/GaussNewton.c ****     }
+ 192:./User/GaussNewton.c **** 
+ 193:./User/GaussNewton.c ****     // 高斯消元
+ 194:./User/GaussNewton.c ****     for (int i = 0; i < n; i++) {
+ 523              		.loc 1 194 14 view .LVU129
+ 524 0062 4FF0000E 		mov	lr, #0
+ 525 0066 79E0     		b	.L36
+ 526              	.LVL30:
+ 527              	.L38:
+ 528              	.LBB15:
+ 529              	.LBB16:
+ 195:./User/GaussNewton.c ****         // 找到主元
+ 196:./User/GaussNewton.c ****         float MEl = fabs(augmented[i][i]);
+ 197:./User/GaussNewton.c ****         int MRow = i;
+ 198:./User/GaussNewton.c ****         for (int k = i + 1; k < n; k++) {
+ 530              		.loc 1 198 37 is_stmt 1 discriminator 2 view .LVU130
+ 531 0068 0133     		adds	r3, r3, #1
+ 532              	.LVL31:
+ARM GAS  /tmp/ccIqjcvN.s 			page 14
 
 
- 700 00ce FFF7FEFF 		bl	__aeabi_dcmpeq
- 701              	.LVL49:
- 702 00d2 0028     		cmp	r0, #0
- 703 00d4 40F0B480 		bne	.L59
- 704              	.LVL50:
- 200:./User/GaussNewton.c ****             return 0;
- 201:./User/GaussNewton.c ****         }
- 202:./User/GaussNewton.c **** 
- 203:./User/GaussNewton.c ****         // 交换行
- 204:./User/GaussNewton.c ****         if (max_row != i) {
- 705              		.loc 1 204 9 is_stmt 1 view .LVU143
- 706              		.loc 1 204 12 is_stmt 0 view .LVU144
- 707 00d8 4D45     		cmp	r5, r9
- 708 00da 39D1     		bne	.L67
- 709              	.L43:
- 205:./User/GaussNewton.c ****             for (int j = 0; j < 2 * n; j++) {
- 206:./User/GaussNewton.c ****                 double temp = augmented[i][j];
- 207:./User/GaussNewton.c ****                 augmented[i][j] = augmented[max_row][j];
- 208:./User/GaussNewton.c ****                 augmented[max_row][j] = temp;
- 209:./User/GaussNewton.c ****             }
- 210:./User/GaussNewton.c ****         }
- 211:./User/GaussNewton.c **** 
- 212:./User/GaussNewton.c ****         // 归一化主元素
- 213:./User/GaussNewton.c ****         double pivot = augmented[i][i];
- 710              		.loc 1 213 9 is_stmt 1 view .LVU145
- 711              		.loc 1 213 16 is_stmt 0 view .LVU146
- 712 00dc 6823     		movs	r3, #104
- 713 00de 08AA     		add	r2, sp, #32
- 714 00e0 03FB0523 		mla	r3, r3, r5, r2
- 715 00e4 D3E90067 		ldrd	r6, [r3]
- 716              	.LVL51:
- 214:./User/GaussNewton.c ****         for (int j = 0; j < 2 * n; j++) {
- 717              		.loc 1 214 9 is_stmt 1 view .LVU147
- 718              	.LBB15:
- 719              		.loc 1 214 14 view .LVU148
- 720              		.loc 1 214 18 is_stmt 0 view .LVU149
- 721 00e8 4FF00009 		mov	r9, #0
- 722              	.LVL52:
- 723              	.L45:
- 724              		.loc 1 214 27 is_stmt 1 discriminator 1 view .LVU150
- 725              		.loc 1 214 31 is_stmt 0 discriminator 1 view .LVU151
- 726 00ec 4FEA480B 		lsl	fp, r8, #1
- 727              		.loc 1 214 27 discriminator 1 view .LVU152
- 728 00f0 B9EB480F 		cmp	r9, r8, lsl #1
- 729 00f4 2EDA     		bge	.L68
- 215:./User/GaussNewton.c ****             augmented[i][j] /= pivot;
- 730              		.loc 1 215 13 is_stmt 1 discriminator 3 view .LVU153
- 731              		.loc 1 215 25 is_stmt 0 discriminator 3 view .LVU154
- 732 00f6 05EB4503 		add	r3, r5, r5, lsl #1
- 733 00fa 09EB8303 		add	r3, r9, r3, lsl #2
- 734 00fe 08AA     		add	r2, sp, #32
- 735 0100 02EBC304 		add	r4, r2, r3, lsl #3
- 736              		.loc 1 215 29 discriminator 3 view .LVU155
- 737 0104 3246     		mov	r2, r6
- 738 0106 3B46     		mov	r3, r7
- 739 0108 D4E90001 		ldrd	r0, [r4]
- 740 010c FFF7FEFF 		bl	__aeabi_ddiv
-ARM GAS  /tmp/cc6pnpCj.s 			page 18
+ 533              	.L37:
+ 534              		.loc 1 198 31 discriminator 1 view .LVU131
+ 535 006a 8B42     		cmp	r3, r1
+ 536 006c 12DA     		bge	.L63
+ 199:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > MEl) {
+ 537              		.loc 1 199 13 view .LVU132
+ 538              		.loc 1 199 34 is_stmt 0 view .LVU133
+ 539 006e 03EB4302 		add	r2, r3, r3, lsl #1
+ 540 0072 0EEB8202 		add	r2, lr, r2, lsl #2
+ 541 0076 0DEB8202 		add	r2, sp, r2, lsl #2
+ 542 007a D2ED007A 		vldr.32	s15, [r2]
+ 543              		.loc 1 199 17 view .LVU134
+ 544 007e F0EEE77A 		vabs.f32	s15, s15
+ 545              		.loc 1 199 16 view .LVU135
+ 546 0082 F4EEC77A 		vcmpe.f32	s15, s14
+ 547 0086 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 548 008a EDDD     		ble	.L38
+ 200:./User/GaussNewton.c ****                 MEl = fabs(augmented[k][i]);
+ 201:./User/GaussNewton.c ****                 MRow = k;
+ 549              		.loc 1 201 22 view .LVU136
+ 550 008c 9C46     		mov	ip, r3
+ 551              	.LVL32:
+ 200:./User/GaussNewton.c ****                 MEl = fabs(augmented[k][i]);
+ 552              		.loc 1 200 21 view .LVU137
+ 553 008e B0EE677A 		vmov.f32	s14, s15
+ 554              	.LVL33:
+ 200:./User/GaussNewton.c ****                 MEl = fabs(augmented[k][i]);
+ 555              		.loc 1 200 21 view .LVU138
+ 556 0092 E9E7     		b	.L38
+ 557              	.LVL34:
+ 558              	.L63:
+ 200:./User/GaussNewton.c ****                 MEl = fabs(augmented[k][i]);
+ 559              		.loc 1 200 21 view .LVU139
+ 560              	.LBE16:
+ 561              	.LBB17:
+ 202:./User/GaussNewton.c ****             }
+ 203:./User/GaussNewton.c ****         }
+ 204:./User/GaussNewton.c ****         // 交换最大行与当前行
+ 205:./User/GaussNewton.c ****         for (int k = i; k < 2 * n; k++) {
+ 562              		.loc 1 205 18 view .LVU140
+ 563 0094 7046     		mov	r0, lr
+ 564 0096 12E0     		b	.L40
+ 565              	.LVL35:
+ 566              	.L41:
+ 567              	.LBB18:
+ 206:./User/GaussNewton.c ****             float tmp = augmented[MRow][k];
+ 568              		.loc 1 206 13 is_stmt 1 discriminator 3 view .LVU141
+ 569              		.loc 1 206 19 is_stmt 0 discriminator 3 view .LVU142
+ 570 0098 0CEB4C03 		add	r3, ip, ip, lsl #1
+ 571 009c 00EB8303 		add	r3, r0, r3, lsl #2
+ 572 00a0 0DEB8303 		add	r3, sp, r3, lsl #2
+ 573 00a4 1E68     		ldr	r6, [r3]	@ float
+ 574              	.LVL36:
+ 207:./User/GaussNewton.c ****             augmented[MRow][k] = augmented[i][k];
+ 575              		.loc 1 207 13 is_stmt 1 discriminator 3 view .LVU143
+ 576              		.loc 1 207 46 is_stmt 0 discriminator 3 view .LVU144
+ 577 00a6 0EEB4E02 		add	r2, lr, lr, lsl #1
+ARM GAS  /tmp/ccIqjcvN.s 			page 15
 
 
- 741              	.LVL53:
- 742 0110 C4E90001 		strd	r0, [r4]
- 214:./User/GaussNewton.c ****         for (int j = 0; j < 2 * n; j++) {
- 743              		.loc 1 214 37 is_stmt 1 discriminator 3 view .LVU156
- 744 0114 09F10109 		add	r9, r9, #1
- 745              	.LVL54:
- 214:./User/GaussNewton.c ****         for (int j = 0; j < 2 * n; j++) {
- 746              		.loc 1 214 37 is_stmt 0 discriminator 3 view .LVU157
- 747 0118 E8E7     		b	.L45
- 748              	.LVL55:
- 749              	.L44:
- 214:./User/GaussNewton.c ****         for (int j = 0; j < 2 * n; j++) {
- 750              		.loc 1 214 37 discriminator 3 view .LVU158
- 751              	.LBE15:
- 752              	.LBB16:
- 753              	.LBB17:
- 206:./User/GaussNewton.c ****                 augmented[i][j] = augmented[max_row][j];
- 754              		.loc 1 206 17 is_stmt 1 discriminator 3 view .LVU159
- 206:./User/GaussNewton.c ****                 augmented[i][j] = augmented[max_row][j];
- 755              		.loc 1 206 24 is_stmt 0 discriminator 3 view .LVU160
- 756 011a 05EB4503 		add	r3, r5, r5, lsl #1
- 757 011e 01EB8303 		add	r3, r1, r3, lsl #2
- 758 0122 08AA     		add	r2, sp, #32
- 759 0124 02EBC303 		add	r3, r2, r3, lsl #3
- 760 0128 93ED007B 		vldr.64	d7, [r3]
- 761              	.LVL56:
- 207:./User/GaussNewton.c ****                 augmented[max_row][j] = temp;
- 762              		.loc 1 207 17 is_stmt 1 discriminator 3 view .LVU161
- 207:./User/GaussNewton.c ****                 augmented[max_row][j] = temp;
- 763              		.loc 1 207 53 is_stmt 0 discriminator 3 view .LVU162
- 764 012c 06EB4602 		add	r2, r6, r6, lsl #1
- 765 0130 01EB8202 		add	r2, r1, r2, lsl #2
- 766 0134 08A8     		add	r0, sp, #32
- 767 0136 00EBC202 		add	r2, r0, r2, lsl #3
- 768 013a 92ED006B 		vldr.64	d6, [r2]
- 207:./User/GaussNewton.c ****                 augmented[max_row][j] = temp;
- 769              		.loc 1 207 33 discriminator 3 view .LVU163
- 770 013e 83ED006B 		vstr.64	d6, [r3]
- 208:./User/GaussNewton.c ****             }
- 771              		.loc 1 208 17 is_stmt 1 discriminator 3 view .LVU164
- 208:./User/GaussNewton.c ****             }
- 772              		.loc 1 208 39 is_stmt 0 discriminator 3 view .LVU165
- 773 0142 82ED007B 		vstr.64	d7, [r2]
- 774              	.LBE17:
- 205:./User/GaussNewton.c ****                 double temp = augmented[i][j];
- 775              		.loc 1 205 41 is_stmt 1 discriminator 3 view .LVU166
- 776 0146 0131     		adds	r1, r1, #1
- 777              	.LVL57:
- 778              	.L42:
- 205:./User/GaussNewton.c ****                 double temp = augmented[i][j];
- 779              		.loc 1 205 31 discriminator 1 view .LVU167
- 780 0148 B1EB480F 		cmp	r1, r8, lsl #1
- 781 014c E5DB     		blt	.L44
- 782 014e C5E7     		b	.L43
- 783              	.LVL58:
- 784              	.L67:
- 205:./User/GaussNewton.c ****                 double temp = augmented[i][j];
-ARM GAS  /tmp/cc6pnpCj.s 			page 19
+ 578 00aa 00EB8202 		add	r2, r0, r2, lsl #2
+ 579 00ae 0DEB8202 		add	r2, sp, r2, lsl #2
+ 580 00b2 D2ED007A 		vldr.32	s15, [r2]
+ 581              		.loc 1 207 32 discriminator 3 view .LVU145
+ 582 00b6 C3ED007A 		vstr.32	s15, [r3]
+ 208:./User/GaussNewton.c ****             augmented[i][k] = tmp;
+ 583              		.loc 1 208 13 is_stmt 1 discriminator 3 view .LVU146
+ 584              		.loc 1 208 29 is_stmt 0 discriminator 3 view .LVU147
+ 585 00ba 1660     		str	r6, [r2]	@ float
+ 586              	.LBE18:
+ 205:./User/GaussNewton.c ****             float tmp = augmented[MRow][k];
+ 587              		.loc 1 205 37 is_stmt 1 discriminator 3 view .LVU148
+ 588 00bc 0130     		adds	r0, r0, #1
+ 589              	.LVL37:
+ 590              	.L40:
+ 205:./User/GaussNewton.c ****             float tmp = augmented[MRow][k];
+ 591              		.loc 1 205 27 discriminator 1 view .LVU149
+ 205:./User/GaussNewton.c ****             float tmp = augmented[MRow][k];
+ 592              		.loc 1 205 31 is_stmt 0 discriminator 1 view .LVU150
+ 593 00be 4E00     		lsls	r6, r1, #1
+ 205:./User/GaussNewton.c ****             float tmp = augmented[MRow][k];
+ 594              		.loc 1 205 27 discriminator 1 view .LVU151
+ 595 00c0 B0EB410F 		cmp	r0, r1, lsl #1
+ 596 00c4 E8DB     		blt	.L41
+ 597              	.LBE17:
+ 209:./User/GaussNewton.c ****         }
+ 210:./User/GaussNewton.c ****         // 将主元变为1
+ 211:./User/GaussNewton.c ****         float divisor = augmented[i][i];
+ 598              		.loc 1 211 9 is_stmt 1 view .LVU152
+ 599              		.loc 1 211 15 is_stmt 0 view .LVU153
+ 600 00c6 3423     		movs	r3, #52
+ 601 00c8 6A46     		mov	r2, sp
+ 602 00ca 03FB0E23 		mla	r3, r3, lr, r2
+ 603 00ce D3ED006A 		vldr.32	s13, [r3]
+ 604              	.LVL38:
+ 212:./User/GaussNewton.c ****         if (divisor == 0) {
+ 605              		.loc 1 212 9 is_stmt 1 view .LVU154
+ 606              		.loc 1 212 12 is_stmt 0 view .LVU155
+ 607 00d2 F5EE406A 		vcmp.f32	s13, #0
+ 608 00d6 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 609 00da 01D0     		beq	.L64
+ 610              	.LBB19:
+ 213:./User/GaussNewton.c ****             invert_flag = 0;
+ 214:./User/GaussNewton.c ****             return 0;  // 矩阵不可逆
+ 215:./User/GaussNewton.c ****         }
+ 216:./User/GaussNewton.c ****         for (int k = 0; k < 2 * n; k++) {
+ 611              		.loc 1 216 18 view .LVU156
+ 612 00dc 0022     		movs	r2, #0
+ 613 00de 10E0     		b	.L42
+ 614              	.L64:
+ 615              	.LBE19:
+ 213:./User/GaussNewton.c ****             invert_flag = 0;
+ 616              		.loc 1 213 13 is_stmt 1 view .LVU157
+ 213:./User/GaussNewton.c ****             invert_flag = 0;
+ 617              		.loc 1 213 25 is_stmt 0 view .LVU158
+ 618 00e0 0020     		movs	r0, #0
+ 619              	.LVL39:
+ARM GAS  /tmp/ccIqjcvN.s 			page 16
 
 
- 785              		.loc 1 205 22 is_stmt 0 view .LVU168
- 786 0150 0021     		movs	r1, #0
- 787 0152 F9E7     		b	.L42
- 788              	.LVL59:
- 789              	.L68:
- 205:./User/GaussNewton.c ****                 double temp = augmented[i][j];
- 790              		.loc 1 205 22 view .LVU169
- 791              	.LBE16:
- 792              	.LBB18:
- 216:./User/GaussNewton.c ****         }
- 217:./User/GaussNewton.c **** 
- 218:./User/GaussNewton.c ****         // 消元
- 219:./User/GaussNewton.c ****         for (int k = 0; k < n; k++) {
- 793              		.loc 1 219 18 view .LVU170
- 794 0154 0027     		movs	r7, #0
- 795 0156 CDF818A0 		str	r10, [sp, #24]
- 796 015a 4446     		mov	r4, r8
- 797 015c 21E0     		b	.L47
- 798              	.LVL60:
- 799              	.L50:
- 800              	.LBB19:
- 801              	.LBB20:
- 220:./User/GaussNewton.c ****             if (k != i) {
- 221:./User/GaussNewton.c ****                 double factor = augmented[k][i];
- 222:./User/GaussNewton.c ****                 for (int j = 0; j < 2 * n; j++) {
- 223:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
- 802              		.loc 1 223 21 is_stmt 1 discriminator 3 view .LVU171
- 803              		.loc 1 223 33 is_stmt 0 discriminator 3 view .LVU172
- 804 015e 07EB4708 		add	r8, r7, r7, lsl #1
- 805 0162 06EB8808 		add	r8, r6, r8, lsl #2
- 806 0166 08AB     		add	r3, sp, #32
- 807 0168 03EBC808 		add	r8, r3, r8, lsl #3
- 808 016c D8E9009A 		ldrd	r9, [r8]
- 809              		.loc 1 223 61 discriminator 3 view .LVU173
- 810 0170 05EB4503 		add	r3, r5, r5, lsl #1
- 811 0174 06EB8303 		add	r3, r6, r3, lsl #2
- 812 0178 08AA     		add	r2, sp, #32
- 813 017a 02EBC301 		add	r1, r2, r3, lsl #3
- 814              		.loc 1 223 47 discriminator 3 view .LVU174
- 815 017e DDE90023 		ldrd	r2, [sp]
- 816 0182 D1E90001 		ldrd	r0, [r1]
- 817 0186 FFF7FEFF 		bl	__aeabi_dmul
- 818              	.LVL61:
- 819 018a 0246     		mov	r2, r0
- 820 018c 0B46     		mov	r3, r1
- 821              		.loc 1 223 37 discriminator 3 view .LVU175
- 822 018e 4846     		mov	r0, r9
- 823 0190 5146     		mov	r1, r10
- 824 0192 FFF7FEFF 		bl	__aeabi_dsub
- 825              	.LVL62:
- 826 0196 C8E90001 		strd	r0, [r8]
- 222:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
- 827              		.loc 1 222 45 is_stmt 1 discriminator 3 view .LVU176
- 828 019a 0136     		adds	r6, r6, #1
- 829              	.LVL63:
- 830              	.L49:
- 222:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
-ARM GAS  /tmp/cc6pnpCj.s 			page 20
+ 213:./User/GaussNewton.c ****             invert_flag = 0;
+ 620              		.loc 1 213 25 view .LVU159
+ 621 00e2 354B     		ldr	r3, .L68
+ 622 00e4 1860     		str	r0, [r3]
+ 214:./User/GaussNewton.c ****         }
+ 623              		.loc 1 214 13 is_stmt 1 view .LVU160
+ 214:./User/GaussNewton.c ****         }
+ 624              		.loc 1 214 20 is_stmt 0 view .LVU161
+ 625 00e6 64E0     		b	.L29
+ 626              	.LVL40:
+ 627              	.L44:
+ 628              	.LBB20:
+ 217:./User/GaussNewton.c ****             augmented[i][k] /= divisor;
+ 629              		.loc 1 217 13 is_stmt 1 discriminator 3 view .LVU162
+ 630              		.loc 1 217 25 is_stmt 0 discriminator 3 view .LVU163
+ 631 00e8 0EEB4E03 		add	r3, lr, lr, lsl #1
+ 632 00ec 02EB8303 		add	r3, r2, r3, lsl #2
+ 633 00f0 0DEB8303 		add	r3, sp, r3, lsl #2
+ 634 00f4 93ED007A 		vldr.32	s14, [r3]
+ 635              		.loc 1 217 29 discriminator 3 view .LVU164
+ 636 00f8 C7EE267A 		vdiv.f32	s15, s14, s13
+ 637 00fc C3ED007A 		vstr.32	s15, [r3]
+ 216:./User/GaussNewton.c ****             augmented[i][k] /= divisor;
+ 638              		.loc 1 216 37 is_stmt 1 discriminator 3 view .LVU165
+ 639 0100 0132     		adds	r2, r2, #1
+ 640              	.LVL41:
+ 641              	.L42:
+ 216:./User/GaussNewton.c ****             augmented[i][k] /= divisor;
+ 642              		.loc 1 216 27 discriminator 1 view .LVU166
+ 643 0102 9642     		cmp	r6, r2
+ 644 0104 F0DC     		bgt	.L44
+ 645              	.LBE20:
+ 646              	.LBB21:
+ 218:./User/GaussNewton.c ****         }
+ 219:./User/GaussNewton.c **** 
+ 220:./User/GaussNewton.c ****         // 消去其他行的当前列
+ 221:./User/GaussNewton.c ****         for (int k = 0; k < n; k++) {
+ 647              		.loc 1 221 18 is_stmt 0 view .LVU167
+ 648 0106 0022     		movs	r2, #0
+ 649              	.LVL42:
+ 650              		.loc 1 221 18 view .LVU168
+ 651 0108 19E0     		b	.L45
+ 652              	.LVL43:
+ 653              	.L48:
+ 654              	.LBB22:
+ 655              	.LBB23:
+ 222:./User/GaussNewton.c ****             if (k != i) {
+ 223:./User/GaussNewton.c ****                 float factor = augmented[k][i];
+ 224:./User/GaussNewton.c ****                 for (int j = 0; j < 2 * n; j++) {
+ 225:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
+ 656              		.loc 1 225 21 is_stmt 1 discriminator 3 view .LVU169
+ 657              		.loc 1 225 33 is_stmt 0 discriminator 3 view .LVU170
+ 658 010a 02EB4203 		add	r3, r2, r2, lsl #1
+ 659 010e 00EB8303 		add	r3, r0, r3, lsl #2
+ 660 0112 0DEB8303 		add	r3, sp, r3, lsl #2
+ 661 0116 D3ED007A 		vldr.32	s15, [r3]
+ 662              		.loc 1 225 61 discriminator 3 view .LVU171
+ARM GAS  /tmp/ccIqjcvN.s 			page 17
 
 
- 831              		.loc 1 222 35 discriminator 1 view .LVU177
- 832 019c B345     		cmp	fp, r6
- 833 019e DEDC     		bgt	.L50
- 834              	.LVL64:
- 835              	.L48:
- 222:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
- 836              		.loc 1 222 35 is_stmt 0 discriminator 1 view .LVU178
- 837              	.LBE20:
- 838              	.LBE19:
- 219:./User/GaussNewton.c ****             if (k != i) {
- 839              		.loc 1 219 33 is_stmt 1 discriminator 2 view .LVU179
- 840 01a0 0137     		adds	r7, r7, #1
- 841              	.LVL65:
- 842              	.L47:
- 219:./User/GaussNewton.c ****             if (k != i) {
- 843              		.loc 1 219 27 discriminator 1 view .LVU180
- 844 01a2 A742     		cmp	r7, r4
- 845 01a4 0EDA     		bge	.L69
- 220:./User/GaussNewton.c ****             if (k != i) {
- 846              		.loc 1 220 13 view .LVU181
- 220:./User/GaussNewton.c ****             if (k != i) {
- 847              		.loc 1 220 16 is_stmt 0 view .LVU182
- 848 01a6 BD42     		cmp	r5, r7
- 849 01a8 FAD0     		beq	.L48
- 850              	.LBB22:
- 221:./User/GaussNewton.c ****                 for (int j = 0; j < 2 * n; j++) {
- 851              		.loc 1 221 17 is_stmt 1 view .LVU183
- 221:./User/GaussNewton.c ****                 for (int j = 0; j < 2 * n; j++) {
- 852              		.loc 1 221 24 is_stmt 0 view .LVU184
- 853 01aa 07EB4702 		add	r2, r7, r7, lsl #1
- 854 01ae 05EB8202 		add	r2, r5, r2, lsl #2
- 855 01b2 08AB     		add	r3, sp, #32
- 856 01b4 03EBC202 		add	r2, r3, r2, lsl #3
- 857 01b8 92ED007B 		vldr.64	d7, [r2]
- 858 01bc 8DED007B 		vstr.64	d7, [sp]
- 859              	.LVL66:
- 222:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
- 860              		.loc 1 222 17 is_stmt 1 view .LVU185
- 861              	.LBB21:
- 222:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
- 862              		.loc 1 222 22 view .LVU186
- 222:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
- 863              		.loc 1 222 26 is_stmt 0 view .LVU187
- 864 01c0 0026     		movs	r6, #0
- 222:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
- 865              		.loc 1 222 17 view .LVU188
- 866 01c2 EBE7     		b	.L49
- 867              	.LVL67:
- 868              	.L69:
- 222:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
- 869              		.loc 1 222 17 view .LVU189
- 870              	.LBE21:
- 871              	.LBE22:
- 872              	.LBE18:
- 873              	.LBE13:
- 187:./User/GaussNewton.c ****         // 寻找最大值以避免除以小数
- 874              		.loc 1 187 29 view .LVU190
-ARM GAS  /tmp/cc6pnpCj.s 			page 21
+ 663 011a 0EEB4E0C 		add	ip, lr, lr, lsl #1
+ 664 011e 00EB8C0C 		add	ip, r0, ip, lsl #2
+ 665 0122 0DEB8C0C 		add	ip, sp, ip, lsl #2
+ 666 0126 9CED007A 		vldr.32	s14, [ip]
+ 667              		.loc 1 225 47 discriminator 3 view .LVU172
+ 668 012a 27EE267A 		vmul.f32	s14, s14, s13
+ 669              		.loc 1 225 37 discriminator 3 view .LVU173
+ 670 012e 77EEC77A 		vsub.f32	s15, s15, s14
+ 671 0132 C3ED007A 		vstr.32	s15, [r3]
+ 224:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
+ 672              		.loc 1 224 45 is_stmt 1 discriminator 3 view .LVU174
+ 673 0136 0130     		adds	r0, r0, #1
+ 674              	.LVL44:
+ 675              	.L47:
+ 224:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
+ 676              		.loc 1 224 35 discriminator 1 view .LVU175
+ 677 0138 8642     		cmp	r6, r0
+ 678 013a E6DC     		bgt	.L48
+ 679              	.LVL45:
+ 680              	.L46:
+ 224:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
+ 681              		.loc 1 224 35 is_stmt 0 discriminator 1 view .LVU176
+ 682              	.LBE23:
+ 683              	.LBE22:
+ 221:./User/GaussNewton.c ****             if (k != i) {
+ 684              		.loc 1 221 33 is_stmt 1 discriminator 2 view .LVU177
+ 685 013c 0132     		adds	r2, r2, #1
+ 686              	.LVL46:
+ 687              	.L45:
+ 221:./User/GaussNewton.c ****             if (k != i) {
+ 688              		.loc 1 221 27 discriminator 1 view .LVU178
+ 689 013e 8A42     		cmp	r2, r1
+ 690 0140 0BDA     		bge	.L65
+ 222:./User/GaussNewton.c ****             if (k != i) {
+ 691              		.loc 1 222 13 view .LVU179
+ 222:./User/GaussNewton.c ****             if (k != i) {
+ 692              		.loc 1 222 16 is_stmt 0 view .LVU180
+ 693 0142 9645     		cmp	lr, r2
+ 694 0144 FAD0     		beq	.L46
+ 695              	.LBB25:
+ 223:./User/GaussNewton.c ****                 for (int j = 0; j < 2 * n; j++) {
+ 696              		.loc 1 223 17 is_stmt 1 view .LVU181
+ 223:./User/GaussNewton.c ****                 for (int j = 0; j < 2 * n; j++) {
+ 697              		.loc 1 223 23 is_stmt 0 view .LVU182
+ 698 0146 02EB4203 		add	r3, r2, r2, lsl #1
+ 699 014a 0EEB8303 		add	r3, lr, r3, lsl #2
+ 700 014e 0DEB8303 		add	r3, sp, r3, lsl #2
+ 701 0152 D3ED006A 		vldr.32	s13, [r3]
+ 702              	.LVL47:
+ 224:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
+ 703              		.loc 1 224 17 is_stmt 1 view .LVU183
+ 704              	.LBB24:
+ 224:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
+ 705              		.loc 1 224 22 view .LVU184
+ 224:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
+ 706              		.loc 1 224 26 is_stmt 0 view .LVU185
+ 707 0156 0020     		movs	r0, #0
+ARM GAS  /tmp/ccIqjcvN.s 			page 18
 
 
- 875 01c4 DDF818A0 		ldr	r10, [sp, #24]
- 876 01c8 A046     		mov	r8, r4
- 877 01ca 5546     		mov	r5, r10
- 878              	.LVL68:
- 879              	.L37:
- 187:./User/GaussNewton.c ****         // 寻找最大值以避免除以小数
- 880              		.loc 1 187 23 is_stmt 1 discriminator 1 view .LVU191
- 881 01cc 4545     		cmp	r5, r8
- 882 01ce 14DA     		bge	.L70
- 883              	.LBB24:
- 189:./User/GaussNewton.c ****         int max_row = i;
- 884              		.loc 1 189 9 view .LVU192
- 189:./User/GaussNewton.c ****         int max_row = i;
- 885              		.loc 1 189 43 is_stmt 0 view .LVU193
- 886 01d0 6823     		movs	r3, #104
- 887 01d2 08AA     		add	r2, sp, #32
- 888 01d4 03FB0523 		mla	r3, r3, r5, r2
- 889 01d8 D3E90023 		ldrd	r2, [r3]
- 189:./User/GaussNewton.c ****         int max_row = i;
- 890              		.loc 1 189 16 view .LVU194
- 891 01dc 0292     		str	r2, [sp, #8]
- 892 01de 23F00043 		bic	r3, r3, #-2147483648
- 893 01e2 0393     		str	r3, [sp, #12]
- 894              	.LVL69:
- 190:./User/GaussNewton.c ****         for (int k = i + 1; k < n; k++) {
- 895              		.loc 1 190 9 is_stmt 1 view .LVU195
- 191:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > max_val) {
- 896              		.loc 1 191 9 view .LVU196
- 897              	.LBB23:
- 191:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > max_val) {
- 898              		.loc 1 191 14 view .LVU197
- 191:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > max_val) {
- 899              		.loc 1 191 18 is_stmt 0 view .LVU198
- 900 01e4 05F1010A 		add	r10, r5, #1
- 901              	.LVL70:
- 191:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > max_val) {
- 902              		.loc 1 191 18 view .LVU199
- 903 01e8 5446     		mov	r4, r10
- 904 01ea A946     		mov	r9, r5
- 905 01ec DDE90467 		ldrd	r6, [sp, #16]
- 906 01f0 CDF800A0 		str	r10, [sp]
- 907 01f4 DDE902AB 		ldrd	r10, [sp, #8]
- 908              	.LVL71:
- 191:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > max_val) {
- 909              		.loc 1 191 9 view .LVU200
- 910 01f8 44E7     		b	.L38
- 911              	.LVL72:
- 912              	.L70:
- 191:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > max_val) {
- 913              		.loc 1 191 9 view .LVU201
- 914              	.LBE23:
- 915              	.LBE24:
- 916              	.LBE12:
- 917              	.LBB26:
- 224:./User/GaussNewton.c ****                 }
- 225:./User/GaussNewton.c ****             }
- 226:./User/GaussNewton.c ****         }
-ARM GAS  /tmp/cc6pnpCj.s 			page 22
+ 224:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
+ 708              		.loc 1 224 17 view .LVU186
+ 709 0158 EEE7     		b	.L47
+ 710              	.LVL48:
+ 711              	.L65:
+ 224:./User/GaussNewton.c ****                     augmented[k][j] -= factor * augmented[i][j];
+ 712              		.loc 1 224 17 view .LVU187
+ 713              	.LBE24:
+ 714              	.LBE25:
+ 715              	.LBE21:
+ 716              	.LBE15:
+ 194:./User/GaussNewton.c ****         // 找到主元
+ 717              		.loc 1 194 29 view .LVU188
+ 718 015a AE46     		mov	lr, r5
+ 719              	.LVL49:
+ 720              	.L36:
+ 194:./User/GaussNewton.c ****         // 找到主元
+ 721              		.loc 1 194 23 is_stmt 1 discriminator 1 view .LVU189
+ 722 015c 8E45     		cmp	lr, r1
+ 723 015e 0CDA     		bge	.L66
+ 724              	.LBB28:
+ 196:./User/GaussNewton.c ****         int MRow = i;
+ 725              		.loc 1 196 9 view .LVU190
+ 196:./User/GaussNewton.c ****         int MRow = i;
+ 726              		.loc 1 196 38 is_stmt 0 view .LVU191
+ 727 0160 3423     		movs	r3, #52
+ 728 0162 6A46     		mov	r2, sp
+ 729 0164 03FB0E23 		mla	r3, r3, lr, r2
+ 730 0168 93ED007A 		vldr.32	s14, [r3]
+ 196:./User/GaussNewton.c ****         int MRow = i;
+ 731              		.loc 1 196 15 view .LVU192
+ 732 016c B0EEC77A 		vabs.f32	s14, s14
+ 733              	.LVL50:
+ 197:./User/GaussNewton.c ****         for (int k = i + 1; k < n; k++) {
+ 734              		.loc 1 197 9 is_stmt 1 view .LVU193
+ 198:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > MEl) {
+ 735              		.loc 1 198 9 view .LVU194
+ 736              	.LBB26:
+ 198:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > MEl) {
+ 737              		.loc 1 198 14 view .LVU195
+ 198:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > MEl) {
+ 738              		.loc 1 198 18 is_stmt 0 view .LVU196
+ 739 0170 0EF10105 		add	r5, lr, #1
+ 740              	.LVL51:
+ 198:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > MEl) {
+ 741              		.loc 1 198 18 view .LVU197
+ 742 0174 2B46     		mov	r3, r5
+ 743              	.LBE26:
+ 197:./User/GaussNewton.c ****         for (int k = i + 1; k < n; k++) {
+ 744              		.loc 1 197 13 view .LVU198
+ 745 0176 F446     		mov	ip, lr
+ 746              	.LBB27:
+ 198:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > MEl) {
+ 747              		.loc 1 198 9 view .LVU199
+ 748 0178 77E7     		b	.L37
+ 749              	.LVL52:
+ 750              	.L66:
+ARM GAS  /tmp/ccIqjcvN.s 			page 19
 
 
- 227:./User/GaussNewton.c ****     }
- 228:./User/GaussNewton.c **** 
- 229:./User/GaussNewton.c ****     // 提取逆矩阵
- 230:./User/GaussNewton.c ****     for (int i = 0; i < n; i++) {
- 918              		.loc 1 230 14 view .LVU202
- 919 01fa 079E     		ldr	r6, [sp, #28]
- 920 01fc 0021     		movs	r1, #0
- 921 01fe 16E0     		b	.L53
- 922              	.LVL73:
- 923              	.L54:
- 924              	.LBB27:
- 231:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 232:./User/GaussNewton.c ****             invA[i][j] = augmented[i][j + n];
- 925              		.loc 1 232 13 is_stmt 1 discriminator 3 view .LVU203
- 926              		.loc 1 232 41 is_stmt 0 discriminator 3 view .LVU204
- 927 0200 02EB0800 		add	r0, r2, r8
- 928              		.loc 1 232 17 discriminator 3 view .LVU205
- 929 0204 01EB4103 		add	r3, r1, r1, lsl #1
- 930 0208 06EB0313 		add	r3, r6, r3, lsl #4
- 931              		.loc 1 232 38 discriminator 3 view .LVU206
- 932 020c 01EB4104 		add	r4, r1, r1, lsl #1
- 933 0210 00EB8400 		add	r0, r0, r4, lsl #2
- 934 0214 08AC     		add	r4, sp, #32
- 935 0216 04EBC000 		add	r0, r4, r0, lsl #3
- 936 021a D0E90045 		ldrd	r4, [r0]
- 937              		.loc 1 232 24 discriminator 3 view .LVU207
- 938 021e 03EBC203 		add	r3, r3, r2, lsl #3
- 939 0222 C3E90045 		strd	r4, [r3]
- 231:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 940              		.loc 1 231 33 is_stmt 1 discriminator 3 view .LVU208
- 941 0226 0132     		adds	r2, r2, #1
- 942              	.LVL74:
- 943              	.L55:
- 231:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 944              		.loc 1 231 27 discriminator 1 view .LVU209
- 945 0228 4245     		cmp	r2, r8
- 946 022a E9DB     		blt	.L54
- 947              	.LBE27:
- 230:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 948              		.loc 1 230 29 discriminator 2 view .LVU210
- 949 022c 0131     		adds	r1, r1, #1
- 950              	.LVL75:
- 951              	.L53:
- 230:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 952              		.loc 1 230 23 discriminator 1 view .LVU211
- 953 022e 4145     		cmp	r1, r8
- 954 0230 01DA     		bge	.L71
- 955              	.LBB28:
- 231:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
- 956              		.loc 1 231 18 is_stmt 0 view .LVU212
- 957 0232 0022     		movs	r2, #0
- 958 0234 F8E7     		b	.L55
- 959              	.L71:
- 960              	.LBE28:
- 961              	.LBE26:
- 233:./User/GaussNewton.c ****         }
- 234:./User/GaussNewton.c ****     }
-ARM GAS  /tmp/cc6pnpCj.s 			page 23
+ 198:./User/GaussNewton.c ****             if (fabs(augmented[k][i]) > MEl) {
+ 751              		.loc 1 198 9 view .LVU200
+ 752              	.LBE27:
+ 753              	.LBE28:
+ 754              	.LBE14:
+ 755              	.LBB29:
+ 226:./User/GaussNewton.c ****                 }
+ 227:./User/GaussNewton.c ****             }
+ 228:./User/GaussNewton.c ****         }
+ 229:./User/GaussNewton.c ****     }
+ 230:./User/GaussNewton.c **** 
+ 231:./User/GaussNewton.c ****     // 提取逆矩阵
+ 232:./User/GaussNewton.c ****     for (int i = 0; i < n; i++) {
+ 756              		.loc 1 232 14 view .LVU201
+ 757 017a 0020     		movs	r0, #0
+ 758 017c 12E0     		b	.L51
+ 759              	.LVL53:
+ 760              	.L52:
+ 761              	.LBB30:
+ 233:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 234:./User/GaussNewton.c ****             inverse[i][j] = augmented[i][j+6];//调整下降方向，已删
+ 762              		.loc 1 234 13 is_stmt 1 discriminator 3 view .LVU202
+ 763              		.loc 1 234 43 is_stmt 0 discriminator 3 view .LVU203
+ 764 017e 951D     		adds	r5, r2, #6
+ 765              		.loc 1 234 20 discriminator 3 view .LVU204
+ 766 0180 00EB4003 		add	r3, r0, r0, lsl #1
+ 767 0184 04EBC303 		add	r3, r4, r3, lsl #3
+ 768              		.loc 1 234 41 discriminator 3 view .LVU205
+ 769 0188 00EB4006 		add	r6, r0, r0, lsl #1
+ 770 018c 05EB8605 		add	r5, r5, r6, lsl #2
+ 771 0190 0DEB8505 		add	r5, sp, r5, lsl #2
+ 772 0194 2D68     		ldr	r5, [r5]	@ float
+ 773              		.loc 1 234 27 discriminator 3 view .LVU206
+ 774 0196 03EB8203 		add	r3, r3, r2, lsl #2
+ 775 019a 1D60     		str	r5, [r3]	@ float
+ 233:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 776              		.loc 1 233 33 is_stmt 1 discriminator 3 view .LVU207
+ 777 019c 0132     		adds	r2, r2, #1
+ 778              	.LVL54:
+ 779              	.L53:
+ 233:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 780              		.loc 1 233 27 discriminator 1 view .LVU208
+ 781 019e 8A42     		cmp	r2, r1
+ 782 01a0 EDDB     		blt	.L52
+ 783              	.LBE30:
+ 232:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 784              		.loc 1 232 29 discriminator 2 view .LVU209
+ 785 01a2 0130     		adds	r0, r0, #1
+ 786              	.LVL55:
+ 787              	.L51:
+ 232:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 788              		.loc 1 232 23 discriminator 1 view .LVU210
+ 789 01a4 8842     		cmp	r0, r1
+ 790 01a6 01DA     		bge	.L67
+ 791              	.LBB31:
+ 233:./User/GaussNewton.c ****         for (int j = 0; j < n; j++) {
+ 792              		.loc 1 233 18 is_stmt 0 view .LVU211
+ARM GAS  /tmp/ccIqjcvN.s 			page 20
 
 
- 235:./User/GaussNewton.c **** 
- 236:./User/GaussNewton.c ****     return 1;
- 962              		.loc 1 236 12 view .LVU213
- 963 0236 0120     		movs	r0, #1
- 964              	.LVL76:
- 965              	.L32:
- 237:./User/GaussNewton.c **** }
- 966              		.loc 1 237 1 view .LVU214
- 967 0238 0DF5197D 		add	sp, sp, #612
- 968              	.LCFI7:
- 969              		.cfi_remember_state
- 970              		.cfi_def_cfa_offset 36
- 971              		@ sp needed
- 972 023c BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 973              	.LVL77:
- 974              	.L59:
- 975              	.LCFI8:
- 976              		.cfi_restore_state
- 977              	.LBB29:
- 978              	.LBB25:
- 200:./User/GaussNewton.c ****         }
- 979              		.loc 1 200 20 view .LVU215
- 980 0240 0020     		movs	r0, #0
- 981 0242 F9E7     		b	.L32
- 982              	.L73:
- 983              		.align	2
- 984              	.L72:
- 985 0244 0000F03F 		.word	1072693248
- 986              	.LBE25:
- 987              	.LBE29:
- 988              		.cfi_endproc
- 989              	.LFE133:
- 991              		.section	.text.GaussNewton,"ax",%progbits
- 992              		.align	1
- 993              		.global	GaussNewton
- 994              		.syntax unified
- 995              		.thumb
- 996              		.thumb_func
- 998              	GaussNewton:
- 999              	.LFB131:
- 110:./User/GaussNewton.c ****     
- 1000              		.loc 1 110 1 is_stmt 1 view -0
- 1001              		.cfi_startproc
- 1002              		@ args = 0, pretend = 0, frame = 16
- 1003              		@ frame_needed = 0, uses_anonymous_args = 0
- 1004 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 1005              	.LCFI9:
- 1006              		.cfi_def_cfa_offset 36
- 1007              		.cfi_offset 4, -36
- 1008              		.cfi_offset 5, -32
- 1009              		.cfi_offset 6, -28
- 1010              		.cfi_offset 7, -24
- 1011              		.cfi_offset 8, -20
- 1012              		.cfi_offset 9, -16
- 1013              		.cfi_offset 10, -12
- 1014              		.cfi_offset 11, -8
- 1015              		.cfi_offset 14, -4
-ARM GAS  /tmp/cc6pnpCj.s 			page 24
+ 793 01a8 0022     		movs	r2, #0
+ 794 01aa F8E7     		b	.L53
+ 795              	.L67:
+ 796              	.LBE31:
+ 797              	.LBE29:
+ 235:./User/GaussNewton.c ****         }
+ 236:./User/GaussNewton.c ****     }
+ 237:./User/GaussNewton.c ****     invert_flag = 1;
+ 798              		.loc 1 237 5 is_stmt 1 view .LVU212
+ 799              		.loc 1 237 17 is_stmt 0 view .LVU213
+ 800 01ac 0120     		movs	r0, #1
+ 801              	.LVL56:
+ 802              		.loc 1 237 17 view .LVU214
+ 803 01ae 024B     		ldr	r3, .L68
+ 804 01b0 1860     		str	r0, [r3]
+ 238:./User/GaussNewton.c ****     return 1;  // 矩阵逆运算成功
+ 805              		.loc 1 238 5 is_stmt 1 view .LVU215
+ 806              	.LVL57:
+ 807              	.L29:
+ 239:./User/GaussNewton.c **** }
+ 808              		.loc 1 239 1 is_stmt 0 view .LVU216
+ 809 01b2 48B0     		add	sp, sp, #288
+ 810              	.LCFI3:
+ 811              		.cfi_def_cfa_offset 16
+ 812              		@ sp needed
+ 813 01b4 70BD     		pop	{r4, r5, r6, pc}
+ 814              	.LVL58:
+ 815              	.L69:
+ 816              		.loc 1 239 1 view .LVU217
+ 817 01b6 00BF     		.align	2
+ 818              	.L68:
+ 819 01b8 00000000 		.word	invert_flag
+ 820              		.cfi_endproc
+ 821              	.LFE132:
+ 823              		.section	.text.GaussNewton,"ax",%progbits
+ 824              		.align	1
+ 825              		.global	GaussNewton
+ 826              		.syntax unified
+ 827              		.thumb
+ 828              		.thumb_func
+ 830              	GaussNewton:
+ 831              	.LFB131:
+ 118:./User/GaussNewton.c ****     
+ 832              		.loc 1 118 1 is_stmt 1 view -0
+ 833              		.cfi_startproc
+ 834              		@ args = 0, pretend = 0, frame = 0
+ 835              		@ frame_needed = 0, uses_anonymous_args = 0
+ 836 0000 70B5     		push	{r4, r5, r6, lr}
+ 837              	.LCFI4:
+ 838              		.cfi_def_cfa_offset 16
+ 839              		.cfi_offset 4, -16
+ 840              		.cfi_offset 5, -12
+ 841              		.cfi_offset 6, -8
+ 842              		.cfi_offset 14, -4
+ 122:./User/GaussNewton.c ****     {
+ 843              		.loc 1 122 5 view .LVU219
+ 844              	.LBB32:
+ARM GAS  /tmp/ccIqjcvN.s 			page 21
 
 
- 1016 0004 85B0     		sub	sp, sp, #20
- 1017              	.LCFI10:
- 1018              		.cfi_def_cfa_offset 56
- 114:./User/GaussNewton.c ****     {
- 1019              		.loc 1 114 5 view .LVU217
- 1020              	.LBB30:
- 114:./User/GaussNewton.c ****     {
- 1021              		.loc 1 114 9 view .LVU218
- 1022              	.LVL78:
- 114:./User/GaussNewton.c ****     {
- 1023              		.loc 1 114 17 is_stmt 0 view .LVU219
- 1024 0006 4FF0000C 		mov	ip, #0
- 1025 000a 6646     		mov	r6, ip
- 114:./User/GaussNewton.c ****     {
- 1026              		.loc 1 114 5 view .LVU220
- 1027 000c 48E0     		b	.L75
- 1028              	.LVL79:
- 1029              	.L76:
- 1030              	.LBB31:
- 119:./User/GaussNewton.c ****             Jr[i][j+3] = -2*Beta_alpha[j+3]*diff[i][j]*diff[i][j];
- 1031              		.loc 1 119 13 is_stmt 1 discriminator 3 view .LVU221
- 119:./User/GaussNewton.c ****             Jr[i][j+3] = -2*Beta_alpha[j+3]*diff[i][j]*diff[i][j];
- 1032              		.loc 1 119 38 is_stmt 0 discriminator 3 view .LVU222
- 1033 000e 04F1030B 		add	fp, r4, #3
- 119:./User/GaussNewton.c ****             Jr[i][j+3] = -2*Beta_alpha[j+3]*diff[i][j]*diff[i][j];
- 1034              		.loc 1 119 36 discriminator 3 view .LVU223
- 1035 0012 824B     		ldr	r3, .L96
- 1036 0014 03EBCB03 		add	r3, r3, fp, lsl #3
- 1037 0018 D3E90089 		ldrd	r8, [r3]
- 119:./User/GaussNewton.c ****             Jr[i][j+3] = -2*Beta_alpha[j+3]*diff[i][j]*diff[i][j];
- 1038              		.loc 1 119 25 discriminator 3 view .LVU224
- 1039 001c 4246     		mov	r2, r8
- 1040 001e 4B46     		mov	r3, r9
- 1041 0020 4046     		mov	r0, r8
- 1042 0022 4946     		mov	r1, r9
- 1043 0024 FFF7FEFF 		bl	__aeabi_dadd
- 1044              	.LVL80:
- 119:./User/GaussNewton.c ****             Jr[i][j+3] = -2*Beta_alpha[j+3]*diff[i][j]*diff[i][j];
- 1045              		.loc 1 119 41 discriminator 3 view .LVU225
- 1046 0028 CDE90201 		strd	r0, [sp, #8]
- 1047 002c 0246     		mov	r2, r0
- 1048 002e 0B46     		mov	r3, r1
- 1049 0030 4046     		mov	r0, r8
- 1050 0032 4946     		mov	r1, r9
- 1051 0034 FFF7FEFF 		bl	__aeabi_dmul
- 1052              	.LVL81:
- 119:./User/GaussNewton.c ****             Jr[i][j+3] = -2*Beta_alpha[j+3]*diff[i][j]*diff[i][j];
- 1053              		.loc 1 119 65 discriminator 3 view .LVU226
- 1054 0038 06EB4605 		add	r5, r6, r6, lsl #1
- 1055 003c 2A19     		adds	r2, r5, r4
- 1056 003e 784B     		ldr	r3, .L96+4
- 1057 0040 03EBC203 		add	r3, r3, r2, lsl #3
- 1058 0044 D3E90089 		ldrd	r8, [r3]
- 119:./User/GaussNewton.c ****             Jr[i][j+3] = -2*Beta_alpha[j+3]*diff[i][j]*diff[i][j];
- 1059              		.loc 1 119 57 discriminator 3 view .LVU227
- 1060 0048 4246     		mov	r2, r8
- 1061 004a 4B46     		mov	r3, r9
-ARM GAS  /tmp/cc6pnpCj.s 			page 25
+ 122:./User/GaussNewton.c ****     {
+ 845              		.loc 1 122 9 view .LVU220
+ 846              	.LVL59:
+ 122:./User/GaussNewton.c ****     {
+ 847              		.loc 1 122 17 is_stmt 0 view .LVU221
+ 848 0002 0023     		movs	r3, #0
+ 122:./User/GaussNewton.c ****     {
+ 849              		.loc 1 122 5 view .LVU222
+ 850 0004 64E0     		b	.L71
+ 851              	.LVL60:
+ 852              	.L72:
+ 124:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 853              		.loc 1 124 9 is_stmt 1 discriminator 3 view .LVU223
+ 124:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 854              		.loc 1 124 31 is_stmt 0 discriminator 3 view .LVU224
+ 855 0006 03EB4301 		add	r1, r3, r3, lsl #1
+ 856 000a 8A00     		lsls	r2, r1, #2
+ 857 000c 8048     		ldr	r0, .L89
+ 858 000e 1044     		add	r0, r0, r2
+ 859 0010 D0ED006A 		vldr.32	s13, [r0]
+ 124:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 860              		.loc 1 124 23 discriminator 3 view .LVU225
+ 861 0014 76EEA67A 		vadd.f32	s15, s13, s13
+ 124:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 862              		.loc 1 124 43 discriminator 3 view .LVU226
+ 863 0018 7E49     		ldr	r1, .L89+4
+ 864 001a 91ED003A 		vldr.32	s6, [r1]
+ 124:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 865              		.loc 1 124 38 discriminator 3 view .LVU227
+ 866 001e 33EE037A 		vadd.f32	s14, s6, s6
+ 124:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 867              		.loc 1 124 35 discriminator 3 view .LVU228
+ 868 0022 77EEC77A 		vsub.f32	s15, s15, s14
+ 124:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 869              		.loc 1 124 53 discriminator 3 view .LVU229
+ 870 0026 D1ED034A 		vldr.32	s9, [r1, #12]
+ 124:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 871              		.loc 1 124 48 discriminator 3 view .LVU230
+ 872 002a 67EEA47A 		vmul.f32	s15, s15, s9
+ 124:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 873              		.loc 1 124 56 discriminator 3 view .LVU231
+ 874 002e 64EEA77A 		vmul.f32	s15, s9, s15
+ 124:./User/GaussNewton.c ****         Jr[i][1] = ( 2*diff[i][1] - 2*Beta[1] )*Beta[4]*Beta[4];
+ 875              		.loc 1 124 18 discriminator 3 view .LVU232
+ 876 0032 794C     		ldr	r4, .L89+8
+ 877 0034 03EB4305 		add	r5, r3, r3, lsl #1
+ 878 0038 EA00     		lsls	r2, r5, #3
+ 879 003a 2244     		add	r2, r2, r4
+ 880 003c C2ED007A 		vstr.32	s15, [r2]
+ 125:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 881              		.loc 1 125 9 is_stmt 1 discriminator 3 view .LVU233
+ 125:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 882              		.loc 1 125 31 is_stmt 0 discriminator 3 view .LVU234
+ 883 0040 90ED017A 		vldr.32	s14, [r0, #4]
+ 125:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 884              		.loc 1 125 23 discriminator 3 view .LVU235
+ 885 0044 77EE077A 		vadd.f32	s15, s14, s14
+ARM GAS  /tmp/ccIqjcvN.s 			page 22
 
 
- 1062 004c FFF7FEFF 		bl	__aeabi_dmul
- 1063              	.LVL82:
- 119:./User/GaussNewton.c ****             Jr[i][j+3] = -2*Beta_alpha[j+3]*diff[i][j]*diff[i][j];
- 1064              		.loc 1 119 22 discriminator 3 view .LVU228
- 1065 0050 744F     		ldr	r7, .L96+8
- 1066 0052 4FEA450A 		lsl	r10, r5, #1
- 1067 0056 04EB4505 		add	r5, r4, r5, lsl #1
- 1068 005a 07EBC505 		add	r5, r7, r5, lsl #3
- 1069 005e C5E90001 		strd	r0, [r5]
- 120:./User/GaussNewton.c ****         }
- 1070              		.loc 1 120 13 is_stmt 1 discriminator 3 view .LVU229
- 120:./User/GaussNewton.c ****         }
- 1071              		.loc 1 120 44 is_stmt 0 discriminator 3 view .LVU230
- 1072 0062 DDE90212 		ldrd	r1, [sp, #8]
- 1073 0066 0091     		str	r1, [sp]
- 1074 0068 02F10043 		add	r3, r2, #-2147483648
- 1075 006c 0193     		str	r3, [sp, #4]
- 1076 006e 4246     		mov	r2, r8
- 1077 0070 4B46     		mov	r3, r9
- 1078 0072 DDE90001 		ldrd	r0, [sp]
- 1079 0076 FFF7FEFF 		bl	__aeabi_dmul
- 1080              	.LVL83:
- 1081 007a 0246     		mov	r2, r0
- 1082 007c 0B46     		mov	r3, r1
- 120:./User/GaussNewton.c ****         }
- 1083              		.loc 1 120 55 discriminator 3 view .LVU231
- 1084 007e 4046     		mov	r0, r8
- 1085 0080 4946     		mov	r1, r9
- 1086 0082 FFF7FEFF 		bl	__aeabi_dmul
- 1087              	.LVL84:
- 120:./User/GaussNewton.c ****         }
- 1088              		.loc 1 120 24 discriminator 3 view .LVU232
- 1089 0086 DA44     		add	r10, r10, fp
- 1090 0088 07EBCA07 		add	r7, r7, r10, lsl #3
- 1091 008c C7E90001 		strd	r0, [r7]
- 116:./User/GaussNewton.c ****         {
- 1092              		.loc 1 116 36 is_stmt 1 discriminator 3 view .LVU233
- 1093 0090 0134     		adds	r4, r4, #1
- 1094              	.LVL85:
- 116:./User/GaussNewton.c ****         {
- 1095              		.loc 1 116 36 is_stmt 0 discriminator 3 view .LVU234
- 1096 0092 E4B2     		uxtb	r4, r4
- 1097              	.LVL86:
- 1098              	.L77:
- 116:./User/GaussNewton.c ****         {
- 1099              		.loc 1 116 30 is_stmt 1 discriminator 1 view .LVU235
- 1100 0094 022C     		cmp	r4, #2
- 1101 0096 BAD9     		bls	.L76
- 1102              	.LBE31:
- 114:./User/GaussNewton.c ****     {
- 1103              		.loc 1 114 32 discriminator 2 view .LVU236
- 1104 0098 06F1010C 		add	ip, r6, #1
- 1105 009c 5FFA8CF6 		uxtb	r6, ip
- 1106              	.LVL87:
- 1107              	.L75:
- 114:./User/GaussNewton.c ****     {
- 1108              		.loc 1 114 26 discriminator 1 view .LVU237
-ARM GAS  /tmp/cc6pnpCj.s 			page 26
+ 125:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 886              		.loc 1 125 43 discriminator 3 view .LVU236
+ 887 0048 D1ED013A 		vldr.32	s7, [r1, #4]
+ 125:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 888              		.loc 1 125 38 discriminator 3 view .LVU237
+ 889 004c 33EEA36A 		vadd.f32	s12, s7, s7
+ 125:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 890              		.loc 1 125 35 discriminator 3 view .LVU238
+ 891 0050 77EEC67A 		vsub.f32	s15, s15, s12
+ 125:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 892              		.loc 1 125 53 discriminator 3 view .LVU239
+ 893 0054 91ED045A 		vldr.32	s10, [r1, #16]
+ 125:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 894              		.loc 1 125 48 discriminator 3 view .LVU240
+ 895 0058 67EE857A 		vmul.f32	s15, s15, s10
+ 125:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 896              		.loc 1 125 56 discriminator 3 view .LVU241
+ 897 005c 65EE277A 		vmul.f32	s15, s10, s15
+ 125:./User/GaussNewton.c ****         Jr[i][2] = ( 2*diff[i][2] - 2*Beta[2] )*Beta[5]*Beta[5];
+ 898              		.loc 1 125 18 discriminator 3 view .LVU242
+ 899 0060 C2ED017A 		vstr.32	s15, [r2, #4]
+ 126:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 900              		.loc 1 126 9 is_stmt 1 discriminator 3 view .LVU243
+ 126:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 901              		.loc 1 126 31 is_stmt 0 discriminator 3 view .LVU244
+ 902 0064 D0ED027A 		vldr.32	s15, [r0, #8]
+ 126:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 903              		.loc 1 126 23 discriminator 3 view .LVU245
+ 904 0068 37EEA76A 		vadd.f32	s12, s15, s15
+ 126:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 905              		.loc 1 126 43 discriminator 3 view .LVU246
+ 906 006c 91ED024A 		vldr.32	s8, [r1, #8]
+ 126:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 907              		.loc 1 126 38 discriminator 3 view .LVU247
+ 908 0070 74EE045A 		vadd.f32	s11, s8, s8
+ 126:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 909              		.loc 1 126 35 discriminator 3 view .LVU248
+ 910 0074 36EE656A 		vsub.f32	s12, s12, s11
+ 126:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 911              		.loc 1 126 53 discriminator 3 view .LVU249
+ 912 0078 D1ED055A 		vldr.32	s11, [r1, #20]
+ 126:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 913              		.loc 1 126 48 discriminator 3 view .LVU250
+ 914 007c 26EE256A 		vmul.f32	s12, s12, s11
+ 126:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 915              		.loc 1 126 56 discriminator 3 view .LVU251
+ 916 0080 25EE866A 		vmul.f32	s12, s11, s12
+ 126:./User/GaussNewton.c ****         Jr[i][3] = -2*(diff[i][0] - Beta[0] )*(diff[i][0] - Beta[0] )*Beta[3];
+ 917              		.loc 1 126 18 discriminator 3 view .LVU252
+ 918 0084 82ED026A 		vstr.32	s12, [r2, #8]
+ 127:./User/GaussNewton.c ****         Jr[i][4] = -2*(diff[i][1] - Beta[1] )*(diff[i][1] - Beta[1] )*Beta[4];
+ 919              		.loc 1 127 9 is_stmt 1 discriminator 3 view .LVU253
+ 127:./User/GaussNewton.c ****         Jr[i][4] = -2*(diff[i][1] - Beta[1] )*(diff[i][1] - Beta[1] )*Beta[4];
+ 920              		.loc 1 127 35 is_stmt 0 discriminator 3 view .LVU254
+ 921 0088 76EEC36A 		vsub.f32	s13, s13, s6
+ 127:./User/GaussNewton.c ****         Jr[i][4] = -2*(diff[i][1] - Beta[1] )*(diff[i][1] - Beta[1] )*Beta[4];
+ 922              		.loc 1 127 22 discriminator 3 view .LVU255
+ARM GAS  /tmp/ccIqjcvN.s 			page 23
 
 
- 1109 00a0 052E     		cmp	r6, #5
- 1110 00a2 01D8     		bhi	.L92
- 1111              	.LBB32:
- 116:./User/GaussNewton.c ****         {
- 1112              		.loc 1 116 21 is_stmt 0 view .LVU238
- 1113 00a4 0024     		movs	r4, #0
- 1114 00a6 F5E7     		b	.L77
- 1115              	.L92:
- 1116              	.LBE32:
- 1117              	.LBE30:
- 1118              	.LBB33:
- 128:./User/GaussNewton.c ****     {
- 1119              		.loc 1 128 18 view .LVU239
- 1120 00a8 4FF00009 		mov	r9, #0
- 1121 00ac 5DE0     		b	.L78
- 1122              	.LVL88:
- 1123              	.L81:
- 1124              	.LBB34:
- 1125              	.LBB35:
- 136:./User/GaussNewton.c ****             }
- 1126              		.loc 1 136 17 is_stmt 1 discriminator 3 view .LVU240
- 136:./User/GaussNewton.c ****             }
- 1127              		.loc 1 136 27 is_stmt 0 discriminator 3 view .LVU241
- 1128 00ae 06EB4603 		add	r3, r6, r6, lsl #1
- 1129 00b2 07EB4303 		add	r3, r7, r3, lsl #1
- 1130 00b6 5C4D     		ldr	r5, .L96+12
- 1131 00b8 05EBC305 		add	r5, r5, r3, lsl #3
- 1132 00bc D5E900AB 		ldrd	r10, [r5]
- 136:./User/GaussNewton.c ****             }
- 1133              		.loc 1 136 39 discriminator 3 view .LVU242
- 1134 00c0 584B     		ldr	r3, .L96+8
- 1135 00c2 04EB4401 		add	r1, r4, r4, lsl #1
- 1136 00c6 06EB4101 		add	r1, r6, r1, lsl #1
- 1137 00ca 03EBC101 		add	r1, r3, r1, lsl #3
- 136:./User/GaussNewton.c ****             }
- 1138              		.loc 1 136 50 discriminator 3 view .LVU243
- 1139 00ce 04EB4402 		add	r2, r4, r4, lsl #1
- 1140 00d2 07EB4202 		add	r2, r7, r2, lsl #1
- 1141 00d6 03EBC203 		add	r3, r3, r2, lsl #3
- 136:./User/GaussNewton.c ****             }
- 1142              		.loc 1 136 43 discriminator 3 view .LVU244
- 1143 00da D3E90023 		ldrd	r2, [r3]
- 1144 00de D1E90001 		ldrd	r0, [r1]
- 1145 00e2 FFF7FEFF 		bl	__aeabi_dmul
- 1146              	.LVL89:
- 1147 00e6 0246     		mov	r2, r0
- 1148 00e8 0B46     		mov	r3, r1
- 136:./User/GaussNewton.c ****             }
- 1149              		.loc 1 136 31 discriminator 3 view .LVU245
- 1150 00ea 5046     		mov	r0, r10
- 1151 00ec 5946     		mov	r1, fp
- 1152 00ee FFF7FEFF 		bl	__aeabi_dadd
- 1153              	.LVL90:
- 1154 00f2 C5E90001 		strd	r0, [r5]
- 134:./User/GaussNewton.c ****             {
- 1155              		.loc 1 134 40 is_stmt 1 discriminator 3 view .LVU246
- 1156 00f6 0134     		adds	r4, r4, #1
-ARM GAS  /tmp/cc6pnpCj.s 			page 27
+ 923 008c B8EE006A 		vmov.f32	s12, #-2.0e+0
+ 924 0090 26EE863A 		vmul.f32	s6, s13, s12
+ 127:./User/GaussNewton.c ****         Jr[i][4] = -2*(diff[i][1] - Beta[1] )*(diff[i][1] - Beta[1] )*Beta[4];
+ 925              		.loc 1 127 46 discriminator 3 view .LVU256
+ 926 0094 66EE836A 		vmul.f32	s13, s13, s6
+ 127:./User/GaussNewton.c ****         Jr[i][4] = -2*(diff[i][1] - Beta[1] )*(diff[i][1] - Beta[1] )*Beta[4];
+ 927              		.loc 1 127 70 discriminator 3 view .LVU257
+ 928 0098 64EEA64A 		vmul.f32	s9, s9, s13
+ 127:./User/GaussNewton.c ****         Jr[i][4] = -2*(diff[i][1] - Beta[1] )*(diff[i][1] - Beta[1] )*Beta[4];
+ 929              		.loc 1 127 18 discriminator 3 view .LVU258
+ 930 009c C2ED034A 		vstr.32	s9, [r2, #12]
+ 128:./User/GaussNewton.c ****         Jr[i][5] = -2*(diff[i][2] - Beta[2] )*(diff[i][2] - Beta[2] )*Beta[5];
+ 931              		.loc 1 128 9 is_stmt 1 discriminator 3 view .LVU259
+ 128:./User/GaussNewton.c ****         Jr[i][5] = -2*(diff[i][2] - Beta[2] )*(diff[i][2] - Beta[2] )*Beta[5];
+ 932              		.loc 1 128 35 is_stmt 0 discriminator 3 view .LVU260
+ 933 00a0 37EE637A 		vsub.f32	s14, s14, s7
+ 128:./User/GaussNewton.c ****         Jr[i][5] = -2*(diff[i][2] - Beta[2] )*(diff[i][2] - Beta[2] )*Beta[5];
+ 934              		.loc 1 128 22 discriminator 3 view .LVU261
+ 935 00a4 67EE066A 		vmul.f32	s13, s14, s12
+ 128:./User/GaussNewton.c ****         Jr[i][5] = -2*(diff[i][2] - Beta[2] )*(diff[i][2] - Beta[2] )*Beta[5];
+ 936              		.loc 1 128 46 discriminator 3 view .LVU262
+ 937 00a8 27EE267A 		vmul.f32	s14, s14, s13
+ 128:./User/GaussNewton.c ****         Jr[i][5] = -2*(diff[i][2] - Beta[2] )*(diff[i][2] - Beta[2] )*Beta[5];
+ 938              		.loc 1 128 70 discriminator 3 view .LVU263
+ 939 00ac 25EE075A 		vmul.f32	s10, s10, s14
+ 128:./User/GaussNewton.c ****         Jr[i][5] = -2*(diff[i][2] - Beta[2] )*(diff[i][2] - Beta[2] )*Beta[5];
+ 940              		.loc 1 128 18 discriminator 3 view .LVU264
+ 941 00b0 82ED045A 		vstr.32	s10, [r2, #16]
+ 129:./User/GaussNewton.c ****     }
+ 942              		.loc 1 129 9 is_stmt 1 discriminator 3 view .LVU265
+ 129:./User/GaussNewton.c ****     }
+ 943              		.loc 1 129 35 is_stmt 0 discriminator 3 view .LVU266
+ 944 00b4 77EEC47A 		vsub.f32	s15, s15, s8
+ 129:./User/GaussNewton.c ****     }
+ 945              		.loc 1 129 22 discriminator 3 view .LVU267
+ 946 00b8 27EE866A 		vmul.f32	s12, s15, s12
+ 129:./User/GaussNewton.c ****     }
+ 947              		.loc 1 129 46 discriminator 3 view .LVU268
+ 948 00bc 67EE867A 		vmul.f32	s15, s15, s12
+ 129:./User/GaussNewton.c ****     }
+ 949              		.loc 1 129 70 discriminator 3 view .LVU269
+ 950 00c0 65EEA75A 		vmul.f32	s11, s11, s15
+ 129:./User/GaussNewton.c ****     }
+ 951              		.loc 1 129 18 discriminator 3 view .LVU270
+ 952 00c4 EA00     		lsls	r2, r5, #3
+ 953 00c6 1444     		add	r4, r4, r2
+ 954 00c8 C4ED055A 		vstr.32	s11, [r4, #20]
+ 122:./User/GaussNewton.c ****     {
+ 955              		.loc 1 122 32 is_stmt 1 discriminator 3 view .LVU271
+ 956 00cc 0133     		adds	r3, r3, #1
+ 957              	.LVL61:
+ 122:./User/GaussNewton.c ****     {
+ 958              		.loc 1 122 32 is_stmt 0 discriminator 3 view .LVU272
+ 959 00ce DBB2     		uxtb	r3, r3
+ 960              	.LVL62:
+ 961              	.L71:
+ 122:./User/GaussNewton.c ****     {
+ARM GAS  /tmp/ccIqjcvN.s 			page 24
 
 
- 1157              	.LVL91:
- 134:./User/GaussNewton.c ****             {
- 1158              		.loc 1 134 40 is_stmt 0 discriminator 3 view .LVU247
- 1159 00f8 E4B2     		uxtb	r4, r4
- 1160              	.LVL92:
- 1161              	.L80:
- 134:./User/GaussNewton.c ****             {
- 1162              		.loc 1 134 34 is_stmt 1 discriminator 1 view .LVU248
- 1163 00fa 052C     		cmp	r4, #5
- 1164 00fc D7D9     		bls	.L81
- 1165              	.LBE35:
- 138:./User/GaussNewton.c ****         }
- 1166              		.loc 1 138 13 discriminator 2 view .LVU249
- 138:./User/GaussNewton.c ****         }
- 1167              		.loc 1 138 19 is_stmt 0 discriminator 2 view .LVU250
- 1168 00fe 4B4C     		ldr	r4, .L96+16
- 1169              	.LVL93:
- 138:./User/GaussNewton.c ****         }
- 1170              		.loc 1 138 19 discriminator 2 view .LVU251
- 1171 0100 04EBC604 		add	r4, r4, r6, lsl #3
- 1172 0104 D4E900AB 		ldrd	r10, [r4]
- 138:./User/GaussNewton.c ****         }
- 1173              		.loc 1 138 31 discriminator 2 view .LVU252
- 1174 0108 07EB4703 		add	r3, r7, r7, lsl #1
- 1175 010c 06EB4303 		add	r3, r6, r3, lsl #1
- 1176 0110 4449     		ldr	r1, .L96+8
- 1177 0112 01EBC301 		add	r1, r1, r3, lsl #3
- 138:./User/GaussNewton.c ****         }
- 1178              		.loc 1 138 45 discriminator 2 view .LVU253
- 1179 0116 464B     		ldr	r3, .L96+20
- 1180 0118 03EBC703 		add	r3, r3, r7, lsl #3
- 138:./User/GaussNewton.c ****         }
- 1181              		.loc 1 138 35 discriminator 2 view .LVU254
- 1182 011c D3E90023 		ldrd	r2, [r3]
- 1183 0120 D1E90001 		ldrd	r0, [r1]
- 1184 0124 FFF7FEFF 		bl	__aeabi_dmul
- 1185              	.LVL94:
- 1186 0128 0246     		mov	r2, r0
- 1187 012a 0B46     		mov	r3, r1
- 138:./User/GaussNewton.c ****         }
- 1188              		.loc 1 138 23 discriminator 2 view .LVU255
- 1189 012c 5046     		mov	r0, r10
- 1190 012e 5946     		mov	r1, fp
- 1191 0130 FFF7FEFF 		bl	__aeabi_dadd
- 1192              	.LVL95:
- 1193 0134 C4E90001 		strd	r0, [r4]
- 131:./User/GaussNewton.c ****         {
- 1194              		.loc 1 131 36 is_stmt 1 discriminator 2 view .LVU256
- 1195 0138 08F10108 		add	r8, r8, #1
- 1196              	.LVL96:
- 131:./User/GaussNewton.c ****         {
- 1197              		.loc 1 131 36 is_stmt 0 discriminator 2 view .LVU257
- 1198 013c 5FFA88F8 		uxtb	r8, r8
- 1199              	.LVL97:
- 1200              	.L79:
- 131:./User/GaussNewton.c ****         {
- 1201              		.loc 1 131 30 is_stmt 1 discriminator 1 view .LVU258
-ARM GAS  /tmp/cc6pnpCj.s 			page 28
+ 962              		.loc 1 122 26 is_stmt 1 discriminator 1 view .LVU273
+ 963 00d0 052B     		cmp	r3, #5
+ 964 00d2 98D9     		bls	.L72
+ 965              	.LBE32:
+ 966              	.LBB33:
+ 136:./User/GaussNewton.c ****     {
+ 967              		.loc 1 136 18 is_stmt 0 view .LVU274
+ 968 00d4 0025     		movs	r5, #0
+ 969 00d6 4CE0     		b	.L73
+ 970              	.LVL63:
+ 971              	.L76:
+ 972              	.LBB34:
+ 973              	.LBB35:
+ 144:./User/GaussNewton.c ****             }
+ 974              		.loc 1 144 17 is_stmt 1 discriminator 3 view .LVU275
+ 144:./User/GaussNewton.c ****             }
+ 975              		.loc 1 144 27 is_stmt 0 discriminator 3 view .LVU276
+ 976 00d8 0CEB4C01 		add	r1, ip, ip, lsl #1
+ 977 00dc 4A00     		lsls	r2, r1, #1
+ 978 00de 7244     		add	r2, r2, lr
+ 979 00e0 4E49     		ldr	r1, .L89+12
+ 980 00e2 01EB8201 		add	r1, r1, r2, lsl #2
+ 981 00e6 D1ED007A 		vldr.32	s15, [r1]
+ 144:./User/GaussNewton.c ****             }
+ 982              		.loc 1 144 39 discriminator 3 view .LVU277
+ 983 00ea 4B48     		ldr	r0, .L89+8
+ 984 00ec 03EB4306 		add	r6, r3, r3, lsl #1
+ 985 00f0 7200     		lsls	r2, r6, #1
+ 986 00f2 6244     		add	r2, r2, ip
+ 987 00f4 00EB8202 		add	r2, r0, r2, lsl #2
+ 988 00f8 92ED007A 		vldr.32	s14, [r2]
+ 144:./User/GaussNewton.c ****             }
+ 989              		.loc 1 144 50 discriminator 3 view .LVU278
+ 990 00fc 7200     		lsls	r2, r6, #1
+ 991 00fe 7244     		add	r2, r2, lr
+ 992 0100 00EB8200 		add	r0, r0, r2, lsl #2
+ 993 0104 D0ED006A 		vldr.32	s13, [r0]
+ 144:./User/GaussNewton.c ****             }
+ 994              		.loc 1 144 43 discriminator 3 view .LVU279
+ 995 0108 27EE267A 		vmul.f32	s14, s14, s13
+ 144:./User/GaussNewton.c ****             }
+ 996              		.loc 1 144 31 discriminator 3 view .LVU280
+ 997 010c 77EE877A 		vadd.f32	s15, s15, s14
+ 998 0110 C1ED007A 		vstr.32	s15, [r1]
+ 142:./User/GaussNewton.c ****             {
+ 999              		.loc 1 142 40 is_stmt 1 discriminator 3 view .LVU281
+ 1000 0114 0133     		adds	r3, r3, #1
+ 1001              	.LVL64:
+ 142:./User/GaussNewton.c ****             {
+ 1002              		.loc 1 142 40 is_stmt 0 discriminator 3 view .LVU282
+ 1003 0116 DBB2     		uxtb	r3, r3
+ 1004              	.LVL65:
+ 1005              	.L75:
+ 142:./User/GaussNewton.c ****             {
+ 1006              		.loc 1 142 34 is_stmt 1 discriminator 1 view .LVU283
+ 1007 0118 052B     		cmp	r3, #5
+ 1008 011a DDD9     		bls	.L76
+ARM GAS  /tmp/ccIqjcvN.s 			page 25
 
 
- 1202 0140 B8F1050F 		cmp	r8, #5
- 1203 0144 0DD8     		bhi	.L93
- 133:./User/GaussNewton.c ****             for(uint8_t k = 0; k < 6; k++)
- 1204              		.loc 1 133 13 view .LVU259
- 133:./User/GaussNewton.c ****             for(uint8_t k = 0; k < 6; k++)
- 1205              		.loc 1 133 23 is_stmt 0 view .LVU260
- 1206 0146 4746     		mov	r7, r8
- 133:./User/GaussNewton.c ****             for(uint8_t k = 0; k < 6; k++)
- 1207              		.loc 1 133 27 view .LVU261
- 1208 0148 06EB4602 		add	r2, r6, r6, lsl #1
- 1209 014c 08EB4202 		add	r2, r8, r2, lsl #1
- 1210 0150 354B     		ldr	r3, .L96+12
- 1211 0152 03EBC203 		add	r3, r3, r2, lsl #3
- 1212 0156 0020     		movs	r0, #0
- 1213 0158 0021     		movs	r1, #0
- 1214 015a C3E90001 		strd	r0, [r3]
- 134:./User/GaussNewton.c ****             {
- 1215              		.loc 1 134 13 is_stmt 1 view .LVU262
- 1216              	.LBB36:
- 134:./User/GaussNewton.c ****             {
- 1217              		.loc 1 134 17 view .LVU263
- 1218              	.LVL98:
- 134:./User/GaussNewton.c ****             {
- 1219              		.loc 1 134 25 is_stmt 0 view .LVU264
- 1220 015e 0024     		movs	r4, #0
- 134:./User/GaussNewton.c ****             {
- 1221              		.loc 1 134 13 view .LVU265
- 1222 0160 CBE7     		b	.L80
- 1223              	.LVL99:
- 1224              	.L93:
- 134:./User/GaussNewton.c ****             {
- 1225              		.loc 1 134 13 view .LVU266
- 1226              	.LBE36:
- 1227              	.LBE34:
- 128:./User/GaussNewton.c ****     {
- 1228              		.loc 1 128 33 is_stmt 1 discriminator 2 view .LVU267
- 1229 0162 09F10109 		add	r9, r9, #1
- 1230              	.LVL100:
- 128:./User/GaussNewton.c ****     {
- 1231              		.loc 1 128 33 is_stmt 0 discriminator 2 view .LVU268
- 1232 0166 5FFA89F9 		uxtb	r9, r9
- 1233              	.LVL101:
- 1234              	.L78:
- 128:./User/GaussNewton.c ****     {
- 1235              		.loc 1 128 27 is_stmt 1 discriminator 1 view .LVU269
- 1236 016a B9F1050F 		cmp	r9, #5
- 1237 016e 0AD8     		bhi	.L94
- 130:./User/GaussNewton.c ****         for(uint8_t j = 0; j < 6; j++)
- 1238              		.loc 1 130 9 view .LVU270
- 130:./User/GaussNewton.c ****         for(uint8_t j = 0; j < 6; j++)
- 1239              		.loc 1 130 15 is_stmt 0 view .LVU271
- 1240 0170 4E46     		mov	r6, r9
- 130:./User/GaussNewton.c ****         for(uint8_t j = 0; j < 6; j++)
- 1241              		.loc 1 130 19 view .LVU272
- 1242 0172 2E4B     		ldr	r3, .L96+16
- 1243 0174 03EBC903 		add	r3, r3, r9, lsl #3
- 1244 0178 0020     		movs	r0, #0
-ARM GAS  /tmp/cc6pnpCj.s 			page 29
+ 1009              	.LBE35:
+ 146:./User/GaussNewton.c ****         }
+ 1010              		.loc 1 146 13 discriminator 2 view .LVU284
+ 146:./User/GaussNewton.c ****         }
+ 1011              		.loc 1 146 19 is_stmt 0 discriminator 2 view .LVU285
+ 1012 011c 404B     		ldr	r3, .L89+16
+ 1013              	.LVL66:
+ 146:./User/GaussNewton.c ****         }
+ 1014              		.loc 1 146 19 discriminator 2 view .LVU286
+ 1015 011e 03EB8C03 		add	r3, r3, ip, lsl #2
+ 1016 0122 D3ED007A 		vldr.32	s15, [r3]
+ 146:./User/GaussNewton.c ****         }
+ 1017              		.loc 1 146 31 discriminator 2 view .LVU287
+ 1018 0126 0EEB4E01 		add	r1, lr, lr, lsl #1
+ 1019 012a 4A00     		lsls	r2, r1, #1
+ 1020 012c 6244     		add	r2, r2, ip
+ 1021 012e 3A49     		ldr	r1, .L89+8
+ 1022 0130 01EB8202 		add	r2, r1, r2, lsl #2
+ 1023 0134 92ED007A 		vldr.32	s14, [r2]
+ 146:./User/GaussNewton.c ****         }
+ 1024              		.loc 1 146 45 discriminator 2 view .LVU288
+ 1025 0138 3A4A     		ldr	r2, .L89+20
+ 1026 013a 02EB8E02 		add	r2, r2, lr, lsl #2
+ 1027 013e D2ED006A 		vldr.32	s13, [r2]
+ 146:./User/GaussNewton.c ****         }
+ 1028              		.loc 1 146 35 discriminator 2 view .LVU289
+ 1029 0142 27EE267A 		vmul.f32	s14, s14, s13
+ 146:./User/GaussNewton.c ****         }
+ 1030              		.loc 1 146 23 discriminator 2 view .LVU290
+ 1031 0146 77EE877A 		vadd.f32	s15, s15, s14
+ 1032 014a C3ED007A 		vstr.32	s15, [r3]
+ 139:./User/GaussNewton.c ****         {
+ 1033              		.loc 1 139 36 is_stmt 1 discriminator 2 view .LVU291
+ 1034 014e 0134     		adds	r4, r4, #1
+ 1035              	.LVL67:
+ 139:./User/GaussNewton.c ****         {
+ 1036              		.loc 1 139 36 is_stmt 0 discriminator 2 view .LVU292
+ 1037 0150 E4B2     		uxtb	r4, r4
+ 1038              	.LVL68:
+ 1039              	.L74:
+ 139:./User/GaussNewton.c ****         {
+ 1040              		.loc 1 139 30 is_stmt 1 discriminator 1 view .LVU293
+ 1041 0152 052C     		cmp	r4, #5
+ 1042 0154 0BD8     		bhi	.L86
+ 141:./User/GaussNewton.c ****             for(uint8_t k = 0; k < 6; k++)
+ 1043              		.loc 1 141 13 view .LVU294
+ 141:./User/GaussNewton.c ****             for(uint8_t k = 0; k < 6; k++)
+ 1044              		.loc 1 141 23 is_stmt 0 view .LVU295
+ 1045 0156 A646     		mov	lr, r4
+ 141:./User/GaussNewton.c ****             for(uint8_t k = 0; k < 6; k++)
+ 1046              		.loc 1 141 27 view .LVU296
+ 1047 0158 0CEB4C02 		add	r2, ip, ip, lsl #1
+ 1048 015c 5300     		lsls	r3, r2, #1
+ 1049 015e 2344     		add	r3, r3, r4
+ 1050 0160 2E4A     		ldr	r2, .L89+12
+ 1051 0162 02EB8303 		add	r3, r2, r3, lsl #2
+ 1052 0166 0022     		movs	r2, #0
+ARM GAS  /tmp/ccIqjcvN.s 			page 26
 
 
- 1245 017a 0021     		movs	r1, #0
- 1246 017c C3E90001 		strd	r0, [r3]
- 131:./User/GaussNewton.c ****         {
- 1247              		.loc 1 131 9 is_stmt 1 view .LVU273
- 1248              	.LBB37:
- 131:./User/GaussNewton.c ****         {
- 1249              		.loc 1 131 13 view .LVU274
- 1250              	.LVL102:
- 131:./User/GaussNewton.c ****         {
- 1251              		.loc 1 131 21 is_stmt 0 view .LVU275
- 1252 0180 4FF00008 		mov	r8, #0
- 131:./User/GaussNewton.c ****         {
- 1253              		.loc 1 131 9 view .LVU276
- 1254 0184 DCE7     		b	.L79
- 1255              	.LVL103:
- 1256              	.L94:
- 131:./User/GaussNewton.c ****         {
- 1257              		.loc 1 131 9 view .LVU277
- 1258              	.LBE37:
- 1259              	.LBE33:
- 143:./User/GaussNewton.c **** 
- 1260              		.loc 1 143 5 is_stmt 1 view .LVU278
- 1261 0186 0622     		movs	r2, #6
- 1262 0188 2A49     		ldr	r1, .L96+24
- 1263 018a 2748     		ldr	r0, .L96+12
- 1264 018c FFF7FEFF 		bl	invert_matrix
- 1265              	.LVL104:
- 147:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
- 1266              		.loc 1 147 5 view .LVU279
- 1267              	.LBB38:
- 147:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
- 1268              		.loc 1 147 10 view .LVU280
- 147:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
- 1269              		.loc 1 147 18 is_stmt 0 view .LVU281
- 1270 0190 0026     		movs	r6, #0
- 147:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
- 1271              		.loc 1 147 5 view .LVU282
- 1272 0192 22E0     		b	.L84
- 1273              	.LVL105:
- 1274              	.L85:
- 1275              	.LBB39:
- 149:./User/GaussNewton.c ****         }
- 1276              		.loc 1 149 13 is_stmt 1 discriminator 3 view .LVU283
- 149:./User/GaussNewton.c ****         }
- 1277              		.loc 1 149 18 is_stmt 0 discriminator 3 view .LVU284
- 1278 0194 284D     		ldr	r5, .L96+28
- 1279 0196 05EBC605 		add	r5, r5, r6, lsl #3
- 1280 019a D5E90089 		ldrd	r8, [r5]
- 149:./User/GaussNewton.c ****         }
- 1281              		.loc 1 149 36 discriminator 3 view .LVU285
- 1282 019e 06EB4603 		add	r3, r6, r6, lsl #1
- 1283 01a2 04EB4303 		add	r3, r4, r3, lsl #1
- 1284 01a6 2349     		ldr	r1, .L96+24
- 1285 01a8 01EBC301 		add	r1, r1, r3, lsl #3
- 149:./User/GaussNewton.c ****         }
- 1286              		.loc 1 149 48 discriminator 3 view .LVU286
- 1287 01ac 1F4B     		ldr	r3, .L96+16
-ARM GAS  /tmp/cc6pnpCj.s 			page 30
+ 1053 0168 1A60     		str	r2, [r3]	@ float
+ 142:./User/GaussNewton.c ****             {
+ 1054              		.loc 1 142 13 is_stmt 1 view .LVU297
+ 1055              	.LBB36:
+ 142:./User/GaussNewton.c ****             {
+ 1056              		.loc 1 142 17 view .LVU298
+ 1057              	.LVL69:
+ 142:./User/GaussNewton.c ****             {
+ 1058              		.loc 1 142 25 is_stmt 0 view .LVU299
+ 1059 016a 0023     		movs	r3, #0
+ 142:./User/GaussNewton.c ****             {
+ 1060              		.loc 1 142 13 view .LVU300
+ 1061 016c D4E7     		b	.L75
+ 1062              	.LVL70:
+ 1063              	.L86:
+ 142:./User/GaussNewton.c ****             {
+ 1064              		.loc 1 142 13 view .LVU301
+ 1065              	.LBE36:
+ 1066              	.LBE34:
+ 136:./User/GaussNewton.c ****     {
+ 1067              		.loc 1 136 33 is_stmt 1 discriminator 2 view .LVU302
+ 1068 016e 0135     		adds	r5, r5, #1
+ 1069              	.LVL71:
+ 136:./User/GaussNewton.c ****     {
+ 1070              		.loc 1 136 33 is_stmt 0 discriminator 2 view .LVU303
+ 1071 0170 EDB2     		uxtb	r5, r5
+ 1072              	.LVL72:
+ 1073              	.L73:
+ 136:./User/GaussNewton.c ****     {
+ 1074              		.loc 1 136 27 is_stmt 1 discriminator 1 view .LVU304
+ 1075 0172 052D     		cmp	r5, #5
+ 1076 0174 07D8     		bhi	.L87
+ 138:./User/GaussNewton.c ****         for(uint8_t j = 0; j < 6; j++)
+ 1077              		.loc 1 138 9 view .LVU305
+ 138:./User/GaussNewton.c ****         for(uint8_t j = 0; j < 6; j++)
+ 1078              		.loc 1 138 15 is_stmt 0 view .LVU306
+ 1079 0176 AC46     		mov	ip, r5
+ 138:./User/GaussNewton.c ****         for(uint8_t j = 0; j < 6; j++)
+ 1080              		.loc 1 138 19 view .LVU307
+ 1081 0178 294B     		ldr	r3, .L89+16
+ 1082 017a 03EB8503 		add	r3, r3, r5, lsl #2
+ 1083 017e 0022     		movs	r2, #0
+ 1084 0180 1A60     		str	r2, [r3]	@ float
+ 139:./User/GaussNewton.c ****         {
+ 1085              		.loc 1 139 9 is_stmt 1 view .LVU308
+ 1086              	.LBB37:
+ 139:./User/GaussNewton.c ****         {
+ 1087              		.loc 1 139 13 view .LVU309
+ 1088              	.LVL73:
+ 139:./User/GaussNewton.c ****         {
+ 1089              		.loc 1 139 21 is_stmt 0 view .LVU310
+ 1090 0182 0024     		movs	r4, #0
+ 139:./User/GaussNewton.c ****         {
+ 1091              		.loc 1 139 9 view .LVU311
+ 1092 0184 E5E7     		b	.L74
+ 1093              	.LVL74:
+ 1094              	.L87:
+ARM GAS  /tmp/ccIqjcvN.s 			page 27
 
 
- 1288 01ae 03EBC403 		add	r3, r3, r4, lsl #3
- 149:./User/GaussNewton.c ****         }
- 1289              		.loc 1 149 40 discriminator 3 view .LVU287
- 1290 01b2 D3E90023 		ldrd	r2, [r3]
- 1291 01b6 D1E90001 		ldrd	r0, [r1]
- 1292 01ba FFF7FEFF 		bl	__aeabi_dmul
- 1293              	.LVL106:
- 1294 01be 0246     		mov	r2, r0
- 1295 01c0 0B46     		mov	r3, r1
- 149:./User/GaussNewton.c ****         }
- 1296              		.loc 1 149 22 discriminator 3 view .LVU288
- 1297 01c2 4046     		mov	r0, r8
- 1298 01c4 4946     		mov	r1, r9
- 1299 01c6 FFF7FEFF 		bl	__aeabi_dadd
- 1300              	.LVL107:
- 1301 01ca C5E90001 		strd	r0, [r5]
- 148:./User/GaussNewton.c ****             delta[i] += J_invert[i][j] * Jr_T_R[j];
- 1302              		.loc 1 148 37 is_stmt 1 discriminator 3 view .LVU289
- 1303 01ce 0134     		adds	r4, r4, #1
- 1304              	.LVL108:
- 148:./User/GaussNewton.c ****             delta[i] += J_invert[i][j] * Jr_T_R[j];
- 1305              		.loc 1 148 37 is_stmt 0 discriminator 3 view .LVU290
- 1306 01d0 E4B2     		uxtb	r4, r4
- 1307              	.LVL109:
- 1308              	.L86:
- 148:./User/GaussNewton.c ****             delta[i] += J_invert[i][j] * Jr_T_R[j];
- 1309              		.loc 1 148 31 is_stmt 1 discriminator 1 view .LVU291
- 1310 01d2 052C     		cmp	r4, #5
- 1311 01d4 DED9     		bls	.L85
- 1312              	.LBE39:
- 147:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
- 1313              		.loc 1 147 33 discriminator 2 view .LVU292
- 1314 01d6 0136     		adds	r6, r6, #1
- 1315              	.LVL110:
- 147:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
- 1316              		.loc 1 147 33 is_stmt 0 discriminator 2 view .LVU293
- 1317 01d8 F6B2     		uxtb	r6, r6
- 1318              	.LVL111:
- 1319              	.L84:
- 147:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
- 1320              		.loc 1 147 27 is_stmt 1 discriminator 1 view .LVU294
- 1321 01da 052E     		cmp	r6, #5
- 1322 01dc 01D8     		bhi	.L95
- 1323              	.LBB40:
- 148:./User/GaussNewton.c ****             delta[i] += J_invert[i][j] * Jr_T_R[j];
- 1324              		.loc 1 148 22 is_stmt 0 view .LVU295
- 1325 01de 0024     		movs	r4, #0
- 1326 01e0 F7E7     		b	.L86
- 1327              	.L95:
- 1328              	.LBE40:
- 1329              	.LBE38:
- 1330              	.LBB41:
- 154:./User/GaussNewton.c ****     {
- 1331              		.loc 1 154 18 view .LVU296
- 1332 01e2 0024     		movs	r4, #0
- 1333 01e4 14E0     		b	.L87
- 1334              	.LVL112:
-ARM GAS  /tmp/cc6pnpCj.s 			page 31
+ 139:./User/GaussNewton.c ****         {
+ 1095              		.loc 1 139 9 view .LVU312
+ 1096              	.LBE37:
+ 1097              	.LBE33:
+ 151:./User/GaussNewton.c **** 
+ 1098              		.loc 1 151 5 is_stmt 1 view .LVU313
+ 1099 0186 0622     		movs	r2, #6
+ 1100 0188 2749     		ldr	r1, .L89+24
+ 1101 018a 2448     		ldr	r0, .L89+12
+ 1102 018c FFF7FEFF 		bl	invert_matrix
+ 1103              	.LVL75:
+ 155:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
+ 1104              		.loc 1 155 5 view .LVU314
+ 1105              	.LBB38:
+ 155:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
+ 1106              		.loc 1 155 10 view .LVU315
+ 155:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
+ 1107              		.loc 1 155 18 is_stmt 0 view .LVU316
+ 1108 0190 0024     		movs	r4, #0
+ 155:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
+ 1109              		.loc 1 155 5 view .LVU317
+ 1110 0192 1EE0     		b	.L79
+ 1111              	.LVL76:
+ 1112              	.L80:
+ 1113              	.LBB39:
+ 157:./User/GaussNewton.c ****         }
+ 1114              		.loc 1 157 13 is_stmt 1 discriminator 3 view .LVU318
+ 157:./User/GaussNewton.c ****         }
+ 1115              		.loc 1 157 18 is_stmt 0 discriminator 3 view .LVU319
+ 1116 0194 254A     		ldr	r2, .L89+28
+ 1117 0196 02EB8402 		add	r2, r2, r4, lsl #2
+ 1118 019a D2ED007A 		vldr.32	s15, [r2]
+ 157:./User/GaussNewton.c ****         }
+ 1119              		.loc 1 157 36 discriminator 3 view .LVU320
+ 1120 019e 04EB4400 		add	r0, r4, r4, lsl #1
+ 1121 01a2 4100     		lsls	r1, r0, #1
+ 1122 01a4 1944     		add	r1, r1, r3
+ 1123 01a6 2048     		ldr	r0, .L89+24
+ 1124 01a8 00EB8101 		add	r1, r0, r1, lsl #2
+ 1125 01ac 91ED007A 		vldr.32	s14, [r1]
+ 157:./User/GaussNewton.c ****         }
+ 1126              		.loc 1 157 48 discriminator 3 view .LVU321
+ 1127 01b0 1B49     		ldr	r1, .L89+16
+ 1128 01b2 01EB8301 		add	r1, r1, r3, lsl #2
+ 1129 01b6 D1ED006A 		vldr.32	s13, [r1]
+ 157:./User/GaussNewton.c ****         }
+ 1130              		.loc 1 157 40 discriminator 3 view .LVU322
+ 1131 01ba 27EE267A 		vmul.f32	s14, s14, s13
+ 157:./User/GaussNewton.c ****         }
+ 1132              		.loc 1 157 22 discriminator 3 view .LVU323
+ 1133 01be 77EE877A 		vadd.f32	s15, s15, s14
+ 1134 01c2 C2ED007A 		vstr.32	s15, [r2]
+ 156:./User/GaussNewton.c ****             delta[i] += J_invert[i][j] * Jr_T_R[j];
+ 1135              		.loc 1 156 37 is_stmt 1 discriminator 3 view .LVU324
+ 1136 01c6 0133     		adds	r3, r3, #1
+ 1137              	.LVL77:
+ 156:./User/GaussNewton.c ****             delta[i] += J_invert[i][j] * Jr_T_R[j];
+ARM GAS  /tmp/ccIqjcvN.s 			page 28
 
 
- 1335              	.L88:
- 156:./User/GaussNewton.c ****         //βα更新 
- 1336              		.loc 1 156 9 is_stmt 1 discriminator 3 view .LVU297
- 156:./User/GaussNewton.c ****         //βα更新 
- 1337              		.loc 1 156 29 is_stmt 0 discriminator 3 view .LVU298
- 1338 01e6 E600     		lsls	r6, r4, #3
- 1339 01e8 0C4D     		ldr	r5, .L96
- 1340 01ea 05EBC405 		add	r5, r5, r4, lsl #3
- 156:./User/GaussNewton.c ****         //βα更新 
- 1341              		.loc 1 156 40 discriminator 3 view .LVU299
- 1342 01ee 124B     		ldr	r3, .L96+28
- 1343 01f0 03EBC403 		add	r3, r3, r4, lsl #3
- 156:./User/GaussNewton.c ****         //βα更新 
- 1344              		.loc 1 156 33 discriminator 3 view .LVU300
- 1345 01f4 D3E90023 		ldrd	r2, [r3]
- 1346 01f8 D5E90001 		ldrd	r0, [r5]
- 1347 01fc FFF7FEFF 		bl	__aeabi_dsub
- 1348              	.LVL113:
- 156:./User/GaussNewton.c ****         //βα更新 
- 1349              		.loc 1 156 17 discriminator 3 view .LVU301
- 1350 0200 0E4B     		ldr	r3, .L96+32
- 1351 0202 3344     		add	r3, r3, r6
- 1352 0204 C3E90001 		strd	r0, [r3]
- 158:./User/GaussNewton.c ****     }
- 1353              		.loc 1 158 9 is_stmt 1 discriminator 3 view .LVU302
- 158:./User/GaussNewton.c ****     }
- 1354              		.loc 1 158 23 is_stmt 0 discriminator 3 view .LVU303
- 1355 0208 C5E90001 		strd	r0, [r5]
- 154:./User/GaussNewton.c ****     {
- 1356              		.loc 1 154 33 is_stmt 1 discriminator 3 view .LVU304
- 1357 020c 0134     		adds	r4, r4, #1
- 1358              	.LVL114:
- 154:./User/GaussNewton.c ****     {
- 1359              		.loc 1 154 33 is_stmt 0 discriminator 3 view .LVU305
- 1360 020e E4B2     		uxtb	r4, r4
- 1361              	.LVL115:
- 1362              	.L87:
- 154:./User/GaussNewton.c ****     {
- 1363              		.loc 1 154 27 is_stmt 1 discriminator 1 view .LVU306
- 1364 0210 052C     		cmp	r4, #5
- 1365 0212 E8D9     		bls	.L88
- 1366              	.LBE41:
- 161:./User/GaussNewton.c **** 
- 1367              		.loc 1 161 1 is_stmt 0 view .LVU307
- 1368 0214 05B0     		add	sp, sp, #20
- 1369              	.LCFI11:
- 1370              		.cfi_def_cfa_offset 36
- 1371              		@ sp needed
- 1372 0216 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 1373              	.LVL116:
- 1374              	.L97:
- 161:./User/GaussNewton.c **** 
- 1375              		.loc 1 161 1 view .LVU308
- 1376 021a 00BF     		.align	2
- 1377              	.L96:
- 1378 021c 00000000 		.word	Beta_alpha
- 1379 0220 00000000 		.word	diff
-ARM GAS  /tmp/cc6pnpCj.s 			page 32
+ 1138              		.loc 1 156 37 is_stmt 0 discriminator 3 view .LVU325
+ 1139 01c8 DBB2     		uxtb	r3, r3
+ 1140              	.LVL78:
+ 1141              	.L81:
+ 156:./User/GaussNewton.c ****             delta[i] += J_invert[i][j] * Jr_T_R[j];
+ 1142              		.loc 1 156 31 is_stmt 1 discriminator 1 view .LVU326
+ 1143 01ca 052B     		cmp	r3, #5
+ 1144 01cc E2D9     		bls	.L80
+ 1145              	.LBE39:
+ 155:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
+ 1146              		.loc 1 155 33 discriminator 2 view .LVU327
+ 1147 01ce 0134     		adds	r4, r4, #1
+ 1148              	.LVL79:
+ 155:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
+ 1149              		.loc 1 155 33 is_stmt 0 discriminator 2 view .LVU328
+ 1150 01d0 E4B2     		uxtb	r4, r4
+ 1151              	.LVL80:
+ 1152              	.L79:
+ 155:./User/GaussNewton.c ****         for (uint8_t j = 0; j < 6; j++) {
+ 1153              		.loc 1 155 27 is_stmt 1 discriminator 1 view .LVU329
+ 1154 01d2 052C     		cmp	r4, #5
+ 1155 01d4 01D8     		bhi	.L88
+ 1156              	.LBB40:
+ 156:./User/GaussNewton.c ****             delta[i] += J_invert[i][j] * Jr_T_R[j];
+ 1157              		.loc 1 156 22 is_stmt 0 view .LVU330
+ 1158 01d6 0023     		movs	r3, #0
+ 1159 01d8 F7E7     		b	.L81
+ 1160              	.L88:
+ 1161              	.LBE40:
+ 1162              	.LBE38:
+ 1163              	.LBB41:
+ 162:./User/GaussNewton.c ****     {
+ 1164              		.loc 1 162 18 view .LVU331
+ 1165 01da 0023     		movs	r3, #0
+ 1166 01dc 14E0     		b	.L82
+ 1167              	.LVL81:
+ 1168              	.L83:
+ 164:./User/GaussNewton.c ****         //βα更新 
+ 1169              		.loc 1 164 9 is_stmt 1 discriminator 3 view .LVU332
+ 164:./User/GaussNewton.c ****         //βα更新 
+ 1170              		.loc 1 164 29 is_stmt 0 discriminator 3 view .LVU333
+ 1171 01de 144A     		ldr	r2, .L89+32
+ 1172 01e0 02EB8302 		add	r2, r2, r3, lsl #2
+ 1173 01e4 D2ED007A 		vldr.32	s15, [r2]
+ 164:./User/GaussNewton.c ****         //βα更新 
+ 1174              		.loc 1 164 40 discriminator 3 view .LVU334
+ 1175 01e8 1049     		ldr	r1, .L89+28
+ 1176 01ea 01EB8301 		add	r1, r1, r3, lsl #2
+ 1177 01ee 91ED007A 		vldr.32	s14, [r1]
+ 164:./User/GaussNewton.c ****         //βα更新 
+ 1178              		.loc 1 164 33 discriminator 3 view .LVU335
+ 1179 01f2 77EEC77A 		vsub.f32	s15, s15, s14
+ 164:./User/GaussNewton.c ****         //βα更新 
+ 1180              		.loc 1 164 17 discriminator 3 view .LVU336
+ 1181 01f6 0749     		ldr	r1, .L89+4
+ 1182 01f8 01EB8301 		add	r1, r1, r3, lsl #2
+ 1183 01fc C1ED007A 		vstr.32	s15, [r1]
+ARM GAS  /tmp/ccIqjcvN.s 			page 29
 
 
- 1380 0224 00000000 		.word	Jr
- 1381 0228 00000000 		.word	Jr_T_Jr
- 1382 022c 00000000 		.word	Jr_T_R
- 1383 0230 00000000 		.word	residual
- 1384 0234 00000000 		.word	J_invert
- 1385 0238 00000000 		.word	delta
- 1386 023c 00000000 		.word	Beta
- 1387              		.cfi_endproc
- 1388              	.LFE131:
- 1390              		.global	J_invert
- 1391              		.section	.bss.J_invert,"aw",%nobits
- 1392              		.align	3
- 1395              	J_invert:
- 1396 0000 00000000 		.space	288
- 1396      00000000 
- 1396      00000000 
- 1396      00000000 
- 1396      00000000 
- 1397              		.global	Jr_T_R
- 1398              		.section	.bss.Jr_T_R,"aw",%nobits
- 1399              		.align	3
- 1402              	Jr_T_R:
- 1403 0000 00000000 		.space	48
- 1403      00000000 
- 1403      00000000 
- 1403      00000000 
- 1403      00000000 
- 1404              		.global	Jr_T_Jr
- 1405              		.section	.bss.Jr_T_Jr,"aw",%nobits
- 1406              		.align	3
- 1409              	Jr_T_Jr:
- 1410 0000 00000000 		.space	288
- 1410      00000000 
- 1410      00000000 
- 1410      00000000 
- 1410      00000000 
- 1411              		.global	Jr
- 1412              		.section	.bss.Jr,"aw",%nobits
- 1413              		.align	3
- 1416              	Jr:
- 1417 0000 00000000 		.space	288
- 1417      00000000 
- 1417      00000000 
- 1417      00000000 
- 1417      00000000 
- 1418              		.global	Beta
- 1419              		.section	.bss.Beta,"aw",%nobits
- 1420              		.align	3
- 1423              	Beta:
- 1424 0000 00000000 		.space	48
- 1424      00000000 
- 1424      00000000 
- 1424      00000000 
- 1424      00000000 
- 1425              		.global	Beta_alpha
- 1426              		.section	.bss.Beta_alpha,"aw",%nobits
- 1427              		.align	3
-ARM GAS  /tmp/cc6pnpCj.s 			page 33
+ 166:./User/GaussNewton.c ****     }
+ 1184              		.loc 1 166 9 is_stmt 1 discriminator 3 view .LVU337
+ 166:./User/GaussNewton.c ****     }
+ 1185              		.loc 1 166 23 is_stmt 0 discriminator 3 view .LVU338
+ 1186 0200 C2ED007A 		vstr.32	s15, [r2]
+ 162:./User/GaussNewton.c ****     {
+ 1187              		.loc 1 162 33 is_stmt 1 discriminator 3 view .LVU339
+ 1188 0204 0133     		adds	r3, r3, #1
+ 1189              	.LVL82:
+ 162:./User/GaussNewton.c ****     {
+ 1190              		.loc 1 162 33 is_stmt 0 discriminator 3 view .LVU340
+ 1191 0206 DBB2     		uxtb	r3, r3
+ 1192              	.LVL83:
+ 1193              	.L82:
+ 162:./User/GaussNewton.c ****     {
+ 1194              		.loc 1 162 27 is_stmt 1 discriminator 1 view .LVU341
+ 1195 0208 052B     		cmp	r3, #5
+ 1196 020a E8D9     		bls	.L83
+ 1197              	.LBE41:
+ 169:./User/GaussNewton.c **** 
+ 1198              		.loc 1 169 1 is_stmt 0 view .LVU342
+ 1199 020c 70BD     		pop	{r4, r5, r6, pc}
+ 1200              	.LVL84:
+ 1201              	.L90:
+ 169:./User/GaussNewton.c **** 
+ 1202              		.loc 1 169 1 view .LVU343
+ 1203 020e 00BF     		.align	2
+ 1204              	.L89:
+ 1205 0210 00000000 		.word	diff
+ 1206 0214 00000000 		.word	Beta
+ 1207 0218 00000000 		.word	Jr
+ 1208 021c 00000000 		.word	Jr_T_Jr
+ 1209 0220 00000000 		.word	Jr_T_R
+ 1210 0224 00000000 		.word	residual
+ 1211 0228 00000000 		.word	J_invert
+ 1212 022c 00000000 		.word	delta
+ 1213 0230 00000000 		.word	Beta_alpha
+ 1214              		.cfi_endproc
+ 1215              	.LFE131:
+ 1217              		.section	.text.a_correction,"ax",%progbits
+ 1218              		.align	1
+ 1219              		.global	a_correction
+ 1220              		.syntax unified
+ 1221              		.thumb
+ 1222              		.thumb_func
+ 1224              	a_correction:
+ 1225              	.LVL85:
+ 1226              	.LFB133:
+ 240:./User/GaussNewton.c **** 
+ 241:./User/GaussNewton.c **** 
+ 242:./User/GaussNewton.c **** void a_correction(float ax, float ay, float az)
+ 243:./User/GaussNewton.c **** {
+ 1227              		.loc 1 243 1 is_stmt 1 view -0
+ 1228              		.cfi_startproc
+ 1229              		@ args = 0, pretend = 0, frame = 0
+ 1230              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1231              		@ link register save eliminated.
+ARM GAS  /tmp/ccIqjcvN.s 			page 30
 
 
- 1430              	Beta_alpha:
- 1431 0000 00000000 		.space	48
- 1431      00000000 
- 1431      00000000 
- 1431      00000000 
- 1431      00000000 
- 1432              		.global	delta
- 1433              		.section	.bss.delta,"aw",%nobits
- 1434              		.align	3
- 1437              	delta:
- 1438 0000 00000000 		.space	48
- 1438      00000000 
- 1438      00000000 
- 1438      00000000 
- 1438      00000000 
- 1439              		.global	residual
- 1440              		.section	.bss.residual,"aw",%nobits
- 1441              		.align	3
- 1444              	residual:
- 1445 0000 00000000 		.space	48
- 1445      00000000 
- 1445      00000000 
- 1445      00000000 
- 1445      00000000 
- 1446              		.global	current_index
- 1447              		.section	.bss.current_index,"aw",%nobits
- 1450              	current_index:
- 1451 0000 00       		.space	1
- 1452              		.global	diff
- 1453              		.section	.bss.diff,"aw",%nobits
- 1454              		.align	3
- 1457              	diff:
- 1458 0000 00000000 		.space	144
- 1458      00000000 
- 1458      00000000 
- 1458      00000000 
- 1458      00000000 
- 1459              		.global	measure
- 1460              		.section	.bss.measure,"aw",%nobits
- 1461              		.align	3
- 1464              	measure:
- 1465 0000 00000000 		.space	144
- 1465      00000000 
- 1465      00000000 
- 1465      00000000 
- 1465      00000000 
- 1466              		.global	ideal_a_matrix
- 1467              		.section	.data.ideal_a_matrix,"aw"
- 1468              		.align	3
- 1471              	ideal_a_matrix:
- 1472 0000 00000000 		.word	0
- 1473 0004 00000000 		.word	0
- 1474 0008 00000000 		.word	0
- 1475 000c 00000000 		.word	0
- 1476 0010 1F85EB51 		.word	1374389535
- 1477 0014 B89E2340 		.word	1076076216
- 1478 0018 00000000 		.word	0
-ARM GAS  /tmp/cc6pnpCj.s 			page 34
+ 244:./User/GaussNewton.c ****     aX_correction = (ax - Beta[0])*Beta[3];
+ 1232              		.loc 1 244 5 view .LVU345
+ 1233              		.loc 1 244 31 is_stmt 0 view .LVU346
+ 1234 0000 114B     		ldr	r3, .L92
+ 1235 0002 D3ED007A 		vldr.32	s15, [r3]
+ 1236              		.loc 1 244 25 view .LVU347
+ 1237 0006 30EE670A 		vsub.f32	s0, s0, s15
+ 1238              	.LVL86:
+ 1239              		.loc 1 244 40 view .LVU348
+ 1240 000a D3ED037A 		vldr.32	s15, [r3, #12]
+ 1241              		.loc 1 244 35 view .LVU349
+ 1242 000e 20EE270A 		vmul.f32	s0, s0, s15
+ 1243              		.loc 1 244 19 view .LVU350
+ 1244 0012 0E4A     		ldr	r2, .L92+4
+ 1245 0014 82ED000A 		vstr.32	s0, [r2]
+ 245:./User/GaussNewton.c ****     aY_correction = (ay - Beta[1])*Beta[4];
+ 1246              		.loc 1 245 5 is_stmt 1 view .LVU351
+ 1247              		.loc 1 245 31 is_stmt 0 view .LVU352
+ 1248 0018 D3ED017A 		vldr.32	s15, [r3, #4]
+ 1249              		.loc 1 245 25 view .LVU353
+ 1250 001c 70EEE70A 		vsub.f32	s1, s1, s15
+ 1251              	.LVL87:
+ 1252              		.loc 1 245 40 view .LVU354
+ 1253 0020 D3ED047A 		vldr.32	s15, [r3, #16]
+ 1254              		.loc 1 245 35 view .LVU355
+ 1255 0024 60EEA70A 		vmul.f32	s1, s1, s15
+ 1256              		.loc 1 245 19 view .LVU356
+ 1257 0028 094A     		ldr	r2, .L92+8
+ 1258 002a C2ED000A 		vstr.32	s1, [r2]
+ 246:./User/GaussNewton.c ****     aZ_correction = (az - Beta[2])*Beta[5];
+ 1259              		.loc 1 246 5 is_stmt 1 view .LVU357
+ 1260              		.loc 1 246 31 is_stmt 0 view .LVU358
+ 1261 002e D3ED027A 		vldr.32	s15, [r3, #8]
+ 1262              		.loc 1 246 25 view .LVU359
+ 1263 0032 31EE671A 		vsub.f32	s2, s2, s15
+ 1264              	.LVL88:
+ 1265              		.loc 1 246 40 view .LVU360
+ 1266 0036 D3ED057A 		vldr.32	s15, [r3, #20]
+ 1267              		.loc 1 246 35 view .LVU361
+ 1268 003a 21EE271A 		vmul.f32	s2, s2, s15
+ 1269              		.loc 1 246 19 view .LVU362
+ 1270 003e 054B     		ldr	r3, .L92+12
+ 1271 0040 83ED001A 		vstr.32	s2, [r3]
+ 247:./User/GaussNewton.c **** }
+ 1272              		.loc 1 247 1 view .LVU363
+ 1273 0044 7047     		bx	lr
+ 1274              	.L93:
+ 1275 0046 00BF     		.align	2
+ 1276              	.L92:
+ 1277 0048 00000000 		.word	Beta
+ 1278 004c 00000000 		.word	aX_correction
+ 1279 0050 00000000 		.word	aY_correction
+ 1280 0054 00000000 		.word	aZ_correction
+ 1281              		.cfi_endproc
+ 1282              	.LFE133:
+ 1284              		.global	J_invert
+ 1285              		.section	.bss.J_invert,"aw",%nobits
+ARM GAS  /tmp/ccIqjcvN.s 			page 31
 
 
- 1479 001c 00000000 		.word	0
- 1480 0020 00000000 		.word	0
- 1481 0024 00000000 		.word	0
- 1482 0028 1F85EB51 		.word	1374389535
- 1483 002c B89E23C0 		.word	-1071407432
- 1484 0030 00000000 		.word	0
- 1485 0034 00000000 		.word	0
- 1486 0038 1F85EB51 		.word	1374389535
- 1487 003c B89E2340 		.word	1076076216
- 1488 0040 00000000 		.word	0
- 1489 0044 00000000 		.word	0
- 1490 0048 00000000 		.word	0
- 1491 004c 00000000 		.word	0
- 1492 0050 1F85EB51 		.word	1374389535
- 1493 0054 B89E23C0 		.word	-1071407432
- 1494 0058 00000000 		.word	0
- 1495 005c 00000000 		.word	0
- 1496 0060 1F85EB51 		.word	1374389535
- 1497 0064 B89E2340 		.word	1076076216
- 1498 0068 00000000 		.word	0
- 1499 006c 00000000 		.word	0
- 1500 0070 00000000 		.word	0
- 1501 0074 00000000 		.word	0
- 1502 0078 1F85EB51 		.word	1374389535
- 1503 007c B89E23C0 		.word	-1071407432
- 1504 0080 00000000 		.word	0
- 1505 0084 00000000 		.word	0
- 1506 0088 00000000 		.word	0
- 1507 008c 00000000 		.word	0
- 1508              		.text
- 1509              	.Letext0:
- 1510              		.file 2 "./User/GaussNewton.h"
- 1511              		.file 3 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
- 1512              		.file 4 "/usr/include/newlib/math.h"
- 1513              		.file 5 "<built-in>"
-ARM GAS  /tmp/cc6pnpCj.s 			page 35
+ 1286              		.align	2
+ 1289              	J_invert:
+ 1290 0000 00000000 		.space	144
+ 1290      00000000 
+ 1290      00000000 
+ 1290      00000000 
+ 1290      00000000 
+ 1291              		.global	Jr_T_R
+ 1292              		.section	.bss.Jr_T_R,"aw",%nobits
+ 1293              		.align	2
+ 1296              	Jr_T_R:
+ 1297 0000 00000000 		.space	24
+ 1297      00000000 
+ 1297      00000000 
+ 1297      00000000 
+ 1297      00000000 
+ 1298              		.global	Jr_T_Jr
+ 1299              		.section	.bss.Jr_T_Jr,"aw",%nobits
+ 1300              		.align	2
+ 1303              	Jr_T_Jr:
+ 1304 0000 00000000 		.space	144
+ 1304      00000000 
+ 1304      00000000 
+ 1304      00000000 
+ 1304      00000000 
+ 1305              		.global	Jr
+ 1306              		.section	.bss.Jr,"aw",%nobits
+ 1307              		.align	2
+ 1310              	Jr:
+ 1311 0000 00000000 		.space	144
+ 1311      00000000 
+ 1311      00000000 
+ 1311      00000000 
+ 1311      00000000 
+ 1312              		.global	residual
+ 1313              		.section	.bss.residual,"aw",%nobits
+ 1314              		.align	2
+ 1317              	residual:
+ 1318 0000 00000000 		.space	24
+ 1318      00000000 
+ 1318      00000000 
+ 1318      00000000 
+ 1318      00000000 
+ 1319              		.global	current_index
+ 1320              		.section	.bss.current_index,"aw",%nobits
+ 1323              	current_index:
+ 1324 0000 00       		.space	1
+ 1325              		.global	Beta
+ 1326              		.section	.bss.Beta,"aw",%nobits
+ 1327              		.align	2
+ 1330              	Beta:
+ 1331 0000 00000000 		.space	24
+ 1331      00000000 
+ 1331      00000000 
+ 1331      00000000 
+ 1331      00000000 
+ 1332              		.global	Beta_alpha
+ARM GAS  /tmp/ccIqjcvN.s 			page 32
+
+
+ 1333              		.section	.bss.Beta_alpha,"aw",%nobits
+ 1334              		.align	2
+ 1337              	Beta_alpha:
+ 1338 0000 00000000 		.space	24
+ 1338      00000000 
+ 1338      00000000 
+ 1338      00000000 
+ 1338      00000000 
+ 1339              		.global	delta
+ 1340              		.section	.bss.delta,"aw",%nobits
+ 1341              		.align	2
+ 1344              	delta:
+ 1345 0000 00000000 		.space	24
+ 1345      00000000 
+ 1345      00000000 
+ 1345      00000000 
+ 1345      00000000 
+ 1346              		.global	diff
+ 1347              		.section	.bss.diff,"aw",%nobits
+ 1348              		.align	2
+ 1351              	diff:
+ 1352 0000 00000000 		.space	72
+ 1352      00000000 
+ 1352      00000000 
+ 1352      00000000 
+ 1352      00000000 
+ 1353              		.global	measure
+ 1354              		.section	.bss.measure,"aw",%nobits
+ 1355              		.align	2
+ 1358              	measure:
+ 1359 0000 00000000 		.space	72
+ 1359      00000000 
+ 1359      00000000 
+ 1359      00000000 
+ 1359      00000000 
+ 1360              		.global	ideal_a_matrix
+ 1361              		.section	.data.ideal_a_matrix,"aw"
+ 1362              		.align	2
+ 1365              	ideal_a_matrix:
+ 1366 0000 00000000 		.word	0
+ 1367 0004 00000000 		.word	0
+ 1368 0008 0000803F 		.word	1065353216
+ 1369 000c 00000000 		.word	0
+ 1370 0010 00000000 		.word	0
+ 1371 0014 000080BF 		.word	-1082130432
+ 1372 0018 00000000 		.word	0
+ 1373 001c 0000803F 		.word	1065353216
+ 1374 0020 00000000 		.word	0
+ 1375 0024 00000000 		.word	0
+ 1376 0028 000080BF 		.word	-1082130432
+ 1377 002c 00000000 		.word	0
+ 1378 0030 0000803F 		.word	1065353216
+ 1379 0034 00000000 		.word	0
+ 1380 0038 00000000 		.word	0
+ 1381 003c 000080BF 		.word	-1082130432
+ 1382 0040 00000000 		.word	0
+ 1383 0044 00000000 		.word	0
+ARM GAS  /tmp/ccIqjcvN.s 			page 33
+
+
+ 1384              		.global	invert_flag
+ 1385              		.section	.data.invert_flag,"aw"
+ 1386              		.align	2
+ 1389              	invert_flag:
+ 1390 0000 02000000 		.word	2
+ 1391              		.text
+ 1392              	.Letext0:
+ 1393              		.file 2 "./User/GaussNewton.h"
+ 1394              		.file 3 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
+ARM GAS  /tmp/ccIqjcvN.s 			page 34
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 GaussNewton.c
-     /tmp/cc6pnpCj.s:21     .text.measure_diff_a_init:0000000000000000 $t
-     /tmp/cc6pnpCj.s:27     .text.measure_diff_a_init:0000000000000000 measure_diff_a_init
-     /tmp/cc6pnpCj.s:85     .text.measure_diff_a_init:0000000000000038 $d
-     /tmp/cc6pnpCj.s:1457   .bss.diff:0000000000000000 diff
-     /tmp/cc6pnpCj.s:1464   .bss.measure:0000000000000000 measure
-     /tmp/cc6pnpCj.s:96     .text.DR_a_init:0000000000000000 $t
-     /tmp/cc6pnpCj.s:102    .text.DR_a_init:0000000000000000 DR_a_init
-     /tmp/cc6pnpCj.s:254    .text.DR_a_init:00000000000000f0 $d
-     /tmp/cc6pnpCj.s:1450   .bss.current_index:0000000000000000 current_index
-     /tmp/cc6pnpCj.s:1471   .data.ideal_a_matrix:0000000000000000 ideal_a_matrix
-     /tmp/cc6pnpCj.s:1444   .bss.residual:0000000000000000 residual
-     /tmp/cc6pnpCj.s:264    .text.delta_Beta_init:0000000000000000 $t
-     /tmp/cc6pnpCj.s:270    .text.delta_Beta_init:0000000000000000 delta_Beta_init
-     /tmp/cc6pnpCj.s:317    .text.delta_Beta_init:0000000000000030 $d
-     /tmp/cc6pnpCj.s:1430   .bss.Beta_alpha:0000000000000000 Beta_alpha
-     /tmp/cc6pnpCj.s:1423   .bss.Beta:0000000000000000 Beta
-     /tmp/cc6pnpCj.s:1437   .bss.delta:0000000000000000 delta
-     /tmp/cc6pnpCj.s:324    .text.J_a_init:0000000000000000 $t
-     /tmp/cc6pnpCj.s:330    .text.J_a_init:0000000000000000 J_a_init
-     /tmp/cc6pnpCj.s:400    .text.J_a_init:0000000000000050 $d
-     /tmp/cc6pnpCj.s:1416   .bss.Jr:0000000000000000 Jr
-     /tmp/cc6pnpCj.s:1409   .bss.Jr_T_Jr:0000000000000000 Jr_T_Jr
-     /tmp/cc6pnpCj.s:1395   .bss.J_invert:0000000000000000 J_invert
-     /tmp/cc6pnpCj.s:1402   .bss.Jr_T_R:0000000000000000 Jr_T_R
-     /tmp/cc6pnpCj.s:410    .text.GuassNewton_init:0000000000000000 $t
-     /tmp/cc6pnpCj.s:416    .text.GuassNewton_init:0000000000000000 GuassNewton_init
-     /tmp/cc6pnpCj.s:442    .text.a_correction:0000000000000000 $t
-     /tmp/cc6pnpCj.s:448    .text.a_correction:0000000000000000 a_correction
-     /tmp/cc6pnpCj.s:517    .text.a_correction:0000000000000060 $d
-     /tmp/cc6pnpCj.s:528    .text.invert_matrix:0000000000000000 $t
-     /tmp/cc6pnpCj.s:534    .text.invert_matrix:0000000000000000 invert_matrix
-     /tmp/cc6pnpCj.s:985    .text.invert_matrix:0000000000000244 $d
-     /tmp/cc6pnpCj.s:992    .text.GaussNewton:0000000000000000 $t
-     /tmp/cc6pnpCj.s:998    .text.GaussNewton:0000000000000000 GaussNewton
-     /tmp/cc6pnpCj.s:1378   .text.GaussNewton:000000000000021c $d
-     /tmp/cc6pnpCj.s:1392   .bss.J_invert:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1399   .bss.Jr_T_R:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1406   .bss.Jr_T_Jr:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1413   .bss.Jr:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1420   .bss.Beta:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1427   .bss.Beta_alpha:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1434   .bss.delta:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1441   .bss.residual:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1451   .bss.current_index:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1454   .bss.diff:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1461   .bss.measure:0000000000000000 $d
-     /tmp/cc6pnpCj.s:1468   .data.ideal_a_matrix:0000000000000000 $d
+     /tmp/ccIqjcvN.s:21     .text.measure_diff_a_init:0000000000000000 $t
+     /tmp/ccIqjcvN.s:27     .text.measure_diff_a_init:0000000000000000 measure_diff_a_init
+     /tmp/ccIqjcvN.s:85     .text.measure_diff_a_init:0000000000000034 $d
+     /tmp/ccIqjcvN.s:1351   .bss.diff:0000000000000000 diff
+     /tmp/ccIqjcvN.s:1358   .bss.measure:0000000000000000 measure
+     /tmp/ccIqjcvN.s:91     .text.delta_Beta_init:0000000000000000 $t
+     /tmp/ccIqjcvN.s:97     .text.delta_Beta_init:0000000000000000 delta_Beta_init
+     /tmp/ccIqjcvN.s:176    .text.delta_Beta_init:0000000000000050 $d
+     /tmp/ccIqjcvN.s:1337   .bss.Beta_alpha:0000000000000000 Beta_alpha
+     /tmp/ccIqjcvN.s:1330   .bss.Beta:0000000000000000 Beta
+     /tmp/ccIqjcvN.s:1344   .bss.delta:0000000000000000 delta
+     /tmp/ccIqjcvN.s:183    .text.DR_a_init:0000000000000000 $t
+     /tmp/ccIqjcvN.s:189    .text.DR_a_init:0000000000000000 DR_a_init
+     /tmp/ccIqjcvN.s:289    .text.DR_a_init:00000000000000a0 $d
+     /tmp/ccIqjcvN.s:1323   .bss.current_index:0000000000000000 current_index
+     /tmp/ccIqjcvN.s:1317   .bss.residual:0000000000000000 residual
+     /tmp/ccIqjcvN.s:299    .text.J_a_init:0000000000000000 $t
+     /tmp/ccIqjcvN.s:305    .text.J_a_init:0000000000000000 J_a_init
+     /tmp/ccIqjcvN.s:377    .text.J_a_init:0000000000000048 $d
+     /tmp/ccIqjcvN.s:1310   .bss.Jr:0000000000000000 Jr
+     /tmp/ccIqjcvN.s:1303   .bss.Jr_T_Jr:0000000000000000 Jr_T_Jr
+     /tmp/ccIqjcvN.s:1289   .bss.J_invert:0000000000000000 J_invert
+     /tmp/ccIqjcvN.s:1296   .bss.Jr_T_R:0000000000000000 Jr_T_R
+     /tmp/ccIqjcvN.s:385    .text.GuassNewton_init:0000000000000000 $t
+     /tmp/ccIqjcvN.s:391    .text.GuassNewton_init:0000000000000000 GuassNewton_init
+     /tmp/ccIqjcvN.s:417    .text.invert_matrix:0000000000000000 $t
+     /tmp/ccIqjcvN.s:423    .text.invert_matrix:0000000000000000 invert_matrix
+     /tmp/ccIqjcvN.s:819    .text.invert_matrix:00000000000001b8 $d
+     /tmp/ccIqjcvN.s:1389   .data.invert_flag:0000000000000000 invert_flag
+     /tmp/ccIqjcvN.s:824    .text.GaussNewton:0000000000000000 $t
+     /tmp/ccIqjcvN.s:830    .text.GaussNewton:0000000000000000 GaussNewton
+     /tmp/ccIqjcvN.s:1205   .text.GaussNewton:0000000000000210 $d
+     /tmp/ccIqjcvN.s:1218   .text.a_correction:0000000000000000 $t
+     /tmp/ccIqjcvN.s:1224   .text.a_correction:0000000000000000 a_correction
+     /tmp/ccIqjcvN.s:1277   .text.a_correction:0000000000000048 $d
+     /tmp/ccIqjcvN.s:1286   .bss.J_invert:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1293   .bss.Jr_T_R:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1300   .bss.Jr_T_Jr:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1307   .bss.Jr:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1314   .bss.residual:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1324   .bss.current_index:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1327   .bss.Beta:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1334   .bss.Beta_alpha:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1341   .bss.delta:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1348   .bss.diff:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1355   .bss.measure:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1365   .data.ideal_a_matrix:0000000000000000 ideal_a_matrix
+     /tmp/ccIqjcvN.s:1362   .data.ideal_a_matrix:0000000000000000 $d
+     /tmp/ccIqjcvN.s:1386   .data.invert_flag:0000000000000000 $d
 
 UNDEFINED SYMBOLS
-__aeabi_dsub
-__aeabi_dmul
-__aeabi_dadd
-sqrt
-mpuX_correction
-mpuY_correction
-ARM GAS  /tmp/cc6pnpCj.s 			page 36
-
-
-mpuZ_correction
-__aeabi_dcmpgt
-__aeabi_dcmpeq
-__aeabi_ddiv
-memset
+aX_correction
+aY_correction
+aZ_correction

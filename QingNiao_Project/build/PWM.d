@@ -9,7 +9,8 @@ build/PWM.o: Hardware/PWM.c User/main.h CORE/stm32f4xx.h CORE/core_cm4.h \
  Library/stm32f4xx_spi.h Library/stm32f4xx_syscfg.h \
  Library/stm32f4xx_tim.h Library/stm32f4xx_usart.h \
  Library/stm32f4xx_wwdg.h Library/misc.h Hardware/Delay.h Hardware/gy86.h \
- Hardware/gy86_reg.h Hardware/Serial.h Hardware/Receiver.h Hardware/PWM.h
+ Hardware/gy86_reg.h Hardware/Serial.h Hardware/Receiver.h Hardware/PWM.h \
+ User/GaussNewton.h User/PID_C.hpp
 User/main.h:
 CORE/stm32f4xx.h:
 CORE/core_cm4.h:
@@ -43,3 +44,5 @@ Hardware/gy86_reg.h:
 Hardware/Serial.h:
 Hardware/Receiver.h:
 Hardware/PWM.h:
+User/GaussNewton.h:
+User/PID_C.hpp:

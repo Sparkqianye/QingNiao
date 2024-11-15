@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccw2ISHF.s 			page 1
+ARM GAS  /tmp/cc1E4R0z.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -20,20 +20,14 @@ ARM GAS  /tmp/ccw2ISHF.s 			page 1
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
   19              		.file 1 "./User/main.c"
-  20              		.section	.rodata.main.str1.4,"aMS",%progbits,1
-  21              		.align	2
-  22              	.LC0:
-  23 0000 44617461 		.ascii	"Data:%d\015\012\000"
-  23      3A25640D 
-  23      0A00
-  24              		.section	.text.main,"ax",%progbits
-  25              		.align	1
-  26              		.global	main
-  27              		.syntax unified
-  28              		.thumb
-  29              		.thumb_func
-  31              	main:
-  32              	.LFB123:
+  20              		.section	.text.main,"ax",%progbits
+  21              		.align	1
+  22              		.global	main
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	main:
+  28              	.LFB123:
    1:./User/main.c **** #include "stm32f4xx.h"                  // Device header
    2:./User/main.c **** #include "main.h"
    3:./User/main.c **** 
@@ -45,421 +39,731 @@ ARM GAS  /tmp/ccw2ISHF.s 			page 1
    9:./User/main.c **** uint32_t Data, Duty;
   10:./User/main.c **** 
   11:./User/main.c **** 
-  12:./User/main.c **** double mpuX,mpuY,mpuZ,gyroX,gyroY,gyroZ;
-  13:./User/main.c **** double mpuX_correction,mpuY_correction,mpuZ_correction,gyroX_correction,gyroY_correction,gyroZ_corr
-  14:./User/main.c **** 
+  12:./User/main.c **** int16_t mpuX,mpuY,mpuZ,gyroX,gyroY,gyroZ;
+  13:./User/main.c **** float aX,aY,aZ,gyX,gyY,gyZ;
+  14:./User/main.c **** float aX_correction,aY_correction,aZ_correction,gyroX_correction,gyroY_correction,gyroZ_correction;
   15:./User/main.c **** 
-  16:./User/main.c **** int main(void)
-  17:./User/main.c **** {
-  33              		.loc 1 17 1 view -0
-  34              		.cfi_startproc
-  35              		@ Volatile: function does not return.
-  36              		@ args = 0, pretend = 0, frame = 0
-  37              		@ frame_needed = 0, uses_anonymous_args = 0
-  38 0000 08B5     		push	{r3, lr}
-  39              	.LCFI0:
-ARM GAS  /tmp/ccw2ISHF.s 			page 2
+  16:./User/main.c **** 
+  17:./User/main.c **** //PID 变量
+  18:./User/main.c **** float outer_inputX = 0.0f, outer_SetPointX = 0.0f, inner_inputX = 0.0f, inner_SetPointX = 0.0f;    
+  19:./User/main.c **** float outer_inputY = 0.0f, outer_SetPointY = 0.0f, inner_inputY = 0.0f, inner_SetPointY = 0.0f;    
+  20:./User/main.c **** float outer_inputZ = 0.0f, outer_SetPointZ = 0.0f, inner_inputZ = 0.0f, inner_SetPointZ = 0.0f;    
+  21:./User/main.c **** //dt
+  22:./User/main.c **** float dt_out = 0.0f;
+  23:./User/main.c **** float dt_in = 0.0f;
+  24:./User/main.c **** //PID_output
+  25:./User/main.c **** float PID_out_X = 0.0f, PID_out_Y = 0.0f, PID_out_Z = 0.0f;
+  26:./User/main.c **** 
+  27:./User/main.c **** int main(void)
+  28:./User/main.c **** {
+  29              		.loc 1 28 1 view -0
+  30              		.cfi_startproc
+ARM GAS  /tmp/cc1E4R0z.s 			page 2
 
 
-  40              		.cfi_def_cfa_offset 8
-  41              		.cfi_offset 3, -8
-  42              		.cfi_offset 14, -4
-  18:./User/main.c **** //  LED_Init();
-  19:./User/main.c ****   GY86_Init();
-  43              		.loc 1 19 3 view .LVU1
-  44 0002 FFF7FEFF 		bl	GY86_Init
-  45              	.LVL0:
-  20:./User/main.c ****   Serial_Init();
-  46              		.loc 1 20 3 view .LVU2
-  47 0006 FFF7FEFF 		bl	Serial_Init
-  48              	.LVL1:
-  21:./User/main.c ****   PWM_Init();
-  49              		.loc 1 21 3 view .LVU3
-  50 000a FFF7FEFF 		bl	PWM_Init
-  51              	.LVL2:
-  22:./User/main.c ****   ICTIM2CH1_2_Init();
-  52              		.loc 1 22 3 view .LVU4
-  53 000e FFF7FEFF 		bl	ICTIM2CH1_2_Init
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 20
+  36              		.cfi_offset 4, -20
+  37              		.cfi_offset 5, -16
+  38              		.cfi_offset 6, -12
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 83B0     		sub	sp, sp, #12
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 32
+  29:./User/main.c **** //  LED_Init();
+  30:./User/main.c ****   GY86_Init();
+  44              		.loc 1 30 3 view .LVU1
+  45 0004 FFF7FEFF 		bl	GY86_Init
+  46              	.LVL0:
+  31:./User/main.c ****   Serial_Init();
+  47              		.loc 1 31 3 view .LVU2
+  48 0008 FFF7FEFF 		bl	Serial_Init
+  49              	.LVL1:
+  32:./User/main.c ****   GuassNewton_init();
+  50              		.loc 1 32 3 view .LVU3
+  51 000c FFF7FEFF 		bl	GuassNewton_init
+  52              	.LVL2:
+  53 0010 82E0     		b	.L4
   54              	.LVL3:
-  55              	.L2:
-  23:./User/main.c ****   
-  24:./User/main.c ****   while(1){   
-  56              		.loc 1 24 3 discriminator 1 view .LVU5
-  25:./User/main.c ****     
-  26:./User/main.c **** //  int16_t hmcX,hmcY,hmcZ;
-  27:./User/main.c **** //	HMC5883L_GetData(&hmcX,&hmcY,&hmcZ);
-  28:./User/main.c **** //  Serial_Printf("hmcX = %d\r\n",hmcX);
-  29:./User/main.c **** //  Delay_ms(100);
-  30:./User/main.c **** //  Serial_Printf("hmcY = %d\r\n",hmcY);
-  31:./User/main.c **** //  Delay_ms(100);
-  32:./User/main.c **** //  Serial_Printf("hmcZ = %d\r\n",hmcZ);
-  33:./User/main.c **** //  Delay_ms(100);
-  34:./User/main.c **** //    
-  35:./User/main.c ****   //	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
-  36:./User/main.c **** //	Serial_Printf("mpuX = %d\r\n",mpuX);
-  37:./User/main.c **** //  Delay_ms(100);
-  38:./User/main.c **** //  Serial_Printf("mpuY = %d\r\n",mpuY);
-  39:./User/main.c **** //  Delay_ms(100);
-  40:./User/main.c **** //  Serial_Printf("mpuZ = %d\r\n",mpuZ);
-  41:./User/main.c **** //  Delay_ms(100);
-  42:./User/main.c **** //  Serial_Printf("gyroX = %d\r\n",gyroX);
+  55              	.L3:
+  56              	.LBB2:
+  33:./User/main.c ****   // PWM_Init();
+  34:./User/main.c ****   // ICTIM2CH1_2_Init();
+  35:./User/main.c ****   
+  36:./User/main.c ****   
+  37:./User/main.c ****   while(1){   
+  38:./User/main.c ****    
+  39:./User/main.c **** 
+  40:./User/main.c **** //  int16_t hmcX,hmcY,hmcZ;
+  41:./User/main.c **** //	HMC5883L_GetData(&hmcX,&hmcY,&hmcZ);
+  42:./User/main.c **** //  Serial_Printf("hmcX = %d\r\n",hmcX);
   43:./User/main.c **** //  Delay_ms(100);
-  44:./User/main.c **** //  Serial_Printf("gyroY = %d\r\n",gyroY);
+  44:./User/main.c **** //  Serial_Printf("hmcY = %d\r\n",hmcY);
   45:./User/main.c **** //  Delay_ms(100);
-  46:./User/main.c **** //  Serial_Printf("gyroZ = %d\r\n",gyroZ);
+  46:./User/main.c **** //  Serial_Printf("hmcZ = %d\r\n",hmcZ);
   47:./User/main.c **** //  Delay_ms(100);
-  48:./User/main.c ****     
-  49:./User/main.c ****     
-  50:./User/main.c **** 		Data = (TIM_GetCapture2(TIM2)+1)*10/(TIM_GetCapture1(TIM2)+1);
-  57              		.loc 1 50 3 discriminator 1 view .LVU6
-  58              		.loc 1 50 11 is_stmt 0 discriminator 1 view .LVU7
-  59 0012 4FF08040 		mov	r0, #1073741824
-  60 0016 FFF7FEFF 		bl	TIM_GetCapture2
-  61              	.LVL4:
-  62              		.loc 1 50 35 discriminator 1 view .LVU8
-  63 001a 0130     		adds	r0, r0, #1
-ARM GAS  /tmp/ccw2ISHF.s 			page 3
+  48:./User/main.c **** //    
+  49:./User/main.c **** for(int i=0; i<6;i++){
+  50:./User/main.c ****   	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
+  57              		.loc 1 50 4 discriminator 3 view .LVU4
+  58 0012 424D     		ldr	r5, .L6
+  59 0014 424E     		ldr	r6, .L6+4
+  60 0016 434F     		ldr	r7, .L6+8
+  61 0018 434B     		ldr	r3, .L6+12
+  62 001a 0193     		str	r3, [sp, #4]
+  63 001c 434B     		ldr	r3, .L6+16
+  64 001e 0093     		str	r3, [sp]
+  65 0020 434B     		ldr	r3, .L6+20
+ARM GAS  /tmp/cc1E4R0z.s 			page 3
 
 
-  64 001c 00EB8000 		add	r0, r0, r0, lsl #2
-  65 0020 4400     		lsls	r4, r0, #1
-  66              		.loc 1 50 40 discriminator 1 view .LVU9
-  67 0022 4FF08040 		mov	r0, #1073741824
-  68 0026 FFF7FEFF 		bl	TIM_GetCapture1
-  69              	.LVL5:
-  70              		.loc 1 50 61 discriminator 1 view .LVU10
-  71 002a 0130     		adds	r0, r0, #1
-  72              		.loc 1 50 38 discriminator 1 view .LVU11
-  73 002c B4FBF0F3 		udiv	r3, r4, r0
-  74              		.loc 1 50 8 discriminator 1 view .LVU12
-  75 0030 0E4A     		ldr	r2, .L4
-  76 0032 1360     		str	r3, [r2]
-  51:./User/main.c **** //		Data = TIM_GetCapture1(TIM2);
-  52:./User/main.c **** 	
-  53:./User/main.c **** 		Duty = Data*5/7;
-  77              		.loc 1 53 3 is_stmt 1 discriminator 1 view .LVU13
-  78              		.loc 1 53 14 is_stmt 0 discriminator 1 view .LVU14
-  79 0034 03EB8303 		add	r3, r3, r3, lsl #2
-  80              		.loc 1 53 16 discriminator 1 view .LVU15
-  81 0038 0D48     		ldr	r0, .L4+4
-  82 003a A0FB0320 		umull	r2, r0, r0, r3
-  83 003e 1B1A     		subs	r3, r3, r0
-  84 0040 00EB5300 		add	r0, r0, r3, lsr #1
-  85 0044 8008     		lsrs	r0, r0, #2
-  86              		.loc 1 53 8 discriminator 1 view .LVU16
-  87 0046 0B4C     		ldr	r4, .L4+8
-  88 0048 2060     		str	r0, [r4]
-  54:./User/main.c ****     PWM_SetDuty1(Duty);
-  89              		.loc 1 54 5 is_stmt 1 discriminator 1 view .LVU17
-  90 004a 80B2     		uxth	r0, r0
-  91 004c FFF7FEFF 		bl	PWM_SetDuty1
-  92              	.LVL6:
-  55:./User/main.c **** 		PWM_SetDuty2(Duty);
-  93              		.loc 1 55 3 discriminator 1 view .LVU18
-  94 0050 2088     		ldrh	r0, [r4]
-  95 0052 FFF7FEFF 		bl	PWM_SetDuty2
-  96              	.LVL7:
-  56:./User/main.c **** 		PWM_SetDuty3(Duty);
-  97              		.loc 1 56 3 discriminator 1 view .LVU19
-  98 0056 2088     		ldrh	r0, [r4]
-  99 0058 FFF7FEFF 		bl	PWM_SetDuty3
- 100              	.LVL8:
-  57:./User/main.c **** 		PWM_SetDuty4(Duty);
- 101              		.loc 1 57 3 discriminator 1 view .LVU20
- 102 005c 2088     		ldrh	r0, [r4]
- 103 005e FFF7FEFF 		bl	PWM_SetDuty4
- 104              	.LVL9:
-  58:./User/main.c **** 		
-  59:./User/main.c **** 		Serial_Printf("Data:%d\r\n",Duty);
- 105              		.loc 1 59 3 discriminator 1 view .LVU21
- 106 0062 2168     		ldr	r1, [r4]
- 107 0064 0448     		ldr	r0, .L4+12
- 108 0066 FFF7FEFF 		bl	Serial_Printf
- 109              	.LVL10:
-  24:./User/main.c ****     
- 110              		.loc 1 24 8 discriminator 1 view .LVU22
-ARM GAS  /tmp/ccw2ISHF.s 			page 4
+  66 0022 2A46     		mov	r2, r5
+  67 0024 3146     		mov	r1, r6
+  68 0026 3846     		mov	r0, r7
+  69 0028 FFF7FEFF 		bl	MPU6000_GetData
+  70              	.LVL4:
+  51:./User/main.c ****     aX = (float)mpuX/2048.0f;
+  71              		.loc 1 51 5 discriminator 3 view .LVU5
+  72              		.loc 1 51 10 is_stmt 0 discriminator 3 view .LVU6
+  73 002c B7F90030 		ldrsh	r3, [r7]
+  74 0030 00EE103A 		vmov	s0, r3	@ int
+  75 0034 B8EEC00A 		vcvt.f32.s32	s0, s0
+  76              		.loc 1 51 21 discriminator 3 view .LVU7
+  77 0038 DFED3E7A 		vldr.32	s15, .L6+24
+  78 003c 20EE270A 		vmul.f32	s0, s0, s15
+  79              		.loc 1 51 8 discriminator 3 view .LVU8
+  80 0040 3D4B     		ldr	r3, .L6+28
+  81 0042 83ED000A 		vstr.32	s0, [r3]
+  52:./User/main.c ****     aY = (float)mpuY/2048.0f;
+  82              		.loc 1 52 5 is_stmt 1 discriminator 3 view .LVU9
+  83              		.loc 1 52 10 is_stmt 0 discriminator 3 view .LVU10
+  84 0046 B6F90030 		ldrsh	r3, [r6]
+  85 004a 00EE903A 		vmov	s1, r3	@ int
+  86 004e F8EEE00A 		vcvt.f32.s32	s1, s1
+  87              		.loc 1 52 21 discriminator 3 view .LVU11
+  88 0052 60EEA70A 		vmul.f32	s1, s1, s15
+  89              		.loc 1 52 8 discriminator 3 view .LVU12
+  90 0056 394B     		ldr	r3, .L6+32
+  91 0058 C3ED000A 		vstr.32	s1, [r3]
+  53:./User/main.c ****     aZ = (float)mpuZ/2048.0f;
+  92              		.loc 1 53 5 is_stmt 1 discriminator 3 view .LVU13
+  93              		.loc 1 53 10 is_stmt 0 discriminator 3 view .LVU14
+  94 005c B5F90030 		ldrsh	r3, [r5]
+  95 0060 01EE103A 		vmov	s2, r3	@ int
+  96 0064 B8EEC11A 		vcvt.f32.s32	s2, s2
+  97              		.loc 1 53 21 discriminator 3 view .LVU15
+  98 0068 21EE271A 		vmul.f32	s2, s2, s15
+  99              		.loc 1 53 8 discriminator 3 view .LVU16
+ 100 006c 344B     		ldr	r3, .L6+36
+ 101 006e 83ED001A 		vstr.32	s2, [r3]
+  54:./User/main.c ****     DR_a_init(aX, aY, aZ);
+ 102              		.loc 1 54 5 is_stmt 1 discriminator 3 view .LVU17
+ 103 0072 FFF7FEFF 		bl	DR_a_init
+ 104              	.LVL5:
+  49:./User/main.c ****   	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
+ 105              		.loc 1 49 19 discriminator 3 view .LVU18
+ 106 0076 0134     		adds	r4, r4, #1
+ 107              	.LVL6:
+ 108              	.L2:
+  49:./User/main.c ****   	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
+ 109              		.loc 1 49 15 discriminator 1 view .LVU19
+ 110 0078 052C     		cmp	r4, #5
+ 111 007a CADD     		ble	.L3
+ 112              	.LBE2:
+  55:./User/main.c **** }
+  56:./User/main.c **** 
+  57:./User/main.c ****     GaussNewton();
+ 113              		.loc 1 57 5 view .LVU20
+ARM GAS  /tmp/cc1E4R0z.s 			page 4
 
 
- 111 006a D2E7     		b	.L2
- 112              	.L5:
- 113              		.align	2
- 114              	.L4:
- 115 006c 00000000 		.word	Data
- 116 0070 25499224 		.word	613566757
- 117 0074 00000000 		.word	Duty
- 118 0078 00000000 		.word	.LC0
- 119              		.cfi_endproc
- 120              	.LFE123:
- 122              		.section	.text.TimingDelay_Decrement,"ax",%progbits
- 123              		.align	1
- 124              		.global	TimingDelay_Decrement
- 125              		.syntax unified
- 126              		.thumb
- 127              		.thumb_func
- 129              	TimingDelay_Decrement:
- 130              	.LFB125:
-  60:./User/main.c **** //    PWM_SetDuty1(10);//PC6
-  61:./User/main.c **** //    PWM_SetDuty2(12);//PC7
-  62:./User/main.c **** //    PWM_SetDuty3(14);//PC8
-  63:./User/main.c **** //    PWM_SetDuty4(8);//PC9
-  64:./User/main.c ****     
-  65:./User/main.c ****     
-  66:./User/main.c **** //    Serial_Printf("TIM2_CH1_2:\r\n");//PA0
-  67:./User/main.c **** //    Serial_Printf("CH1:%d\r\n",TIM_GetCapture1(TIM2));
-  68:./User/main.c **** //    Serial_Printf("CH2:%d\r\n",TIM_GetCapture2(TIM2));
-  69:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture1(TIM2)+1)));
-  70:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n",(TIM_GetCapture2(TIM2)+1)*100/(TIM_GetCapture1(TIM2)+1));
-  71:./User/main.c **** //    
-  72:./User/main.c **** //    Serial_Printf("TIM5_CH1_2:\r\n");//PA1
-  73:./User/main.c **** //    Serial_Printf("CH1:%d\r\n",TIM_GetCapture1(TIM5));
-  74:./User/main.c **** //    Serial_Printf("CH2:%d\r\n",TIM_GetCapture2(TIM5));
-  75:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture2(TIM5)+1)));
-  76:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n",(TIM_GetCapture1(TIM5)+1)*100/(TIM_GetCapture2(TIM5)+1));
-  77:./User/main.c **** //    
-  78:./User/main.c **** //    Serial_Printf("TIM4_CH1_2:\r\n");//PB6
-  79:./User/main.c **** //    Serial_Printf("CH1:%d\r\n",TIM_GetCapture1(TIM4));
-  80:./User/main.c **** //    Serial_Printf("CH2:%d\r\n",TIM_GetCapture2(TIM4));
-  81:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture1(TIM4)+1)));
-  82:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n",(TIM_GetCapture2(TIM4)+1)*100/(TIM_GetCapture1(TIM4)+1));
-  83:./User/main.c ****     
-  84:./User/main.c **** //    Serial_Printf("TIM4_CH3_4:\r\n");//PB8
-  85:./User/main.c **** //    Serial_Printf("CH3:%d\r\n",TIM_GetCapture3(TIM4));
-  86:./User/main.c **** //    Serial_Printf("CH4:%d\r\n",TIM_GetCapture4(TIM4));
-  87:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture3(TIM4)+1)));
-  88:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n\r\n",((TIM_GetCapture4(TIM4)+1)*100/(TIM_GetCapture3(TIM4)+1))
-  89:./User/main.c **** //    Delay_s(2);
-  90:./User/main.c **** //    Serial_Printf("TIM2_CH3_4:\r\n");//PA2
-  91:./User/main.c **** //    Serial_Printf("CH3:%d\r\n",TIM_GetCapture3(TIM2));
-  92:./User/main.c **** //    Serial_Printf("CH4:%d\r\n",TIM_GetCapture4(TIM2));
-  93:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture3(TIM2)+1)));
-  94:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n\r\n",((TIM_GetCapture4(TIM2)+1)*100/(TIM_GetCapture3(TIM2)+1))
-  95:./User/main.c ****     //PWM: PC6789   TIM3_CH1234
-  96:./User/main.c ****     //考虑改为：PA0--TIM2CH1  PA1--TIM5CH2  PA2--TIM2CH3  PA3--TIM5CH4  PB8--TIM4CH3  PB6--TIM
-  97:./User/main.c ****     
-  98:./User/main.c ****     
-ARM GAS  /tmp/ccw2ISHF.s 			page 5
+ 114 007c FFF7FEFF 		bl	GaussNewton
+ 115              	.LVL7:
+  58:./User/main.c ****     a_correction(aX, aY, aZ);
+ 116              		.loc 1 58 5 view .LVU21
+ 117 0080 2F4B     		ldr	r3, .L6+36
+ 118 0082 93ED001A 		vldr.32	s2, [r3]
+ 119 0086 2D4B     		ldr	r3, .L6+32
+ 120 0088 D3ED000A 		vldr.32	s1, [r3]
+ 121 008c 2A4B     		ldr	r3, .L6+28
+ 122 008e 93ED000A 		vldr.32	s0, [r3]
+ 123 0092 FFF7FEFF 		bl	a_correction
+ 124              	.LVL8:
+  59:./User/main.c ****     // Serial_Printf("correction successful\r\n");
+  60:./User/main.c ****     // Delay_ms(100);
+  61:./User/main.c **** 
+  62:./User/main.c ****     //将Roll角作为outer_inputX,将接收机数据（解析出来的目标Roll角度）作为out
+  63:./User/main.c ****     //将陀螺仪测得的Roll角速度作为inner_inputX，在函数内计算外环输出，放�
+  64:./User/main.c ****     //输出结果（Roll角角加速度）放进PID_out_X
+  65:./User/main.c ****     PIDX_get(PID_out_X, dt_out, dt_in, outer_inputX, outer_SetPointX,
+ 125              		.loc 1 65 5 view .LVU22
+ 126 0096 2B4D     		ldr	r5, .L6+40
+ 127 0098 2B4C     		ldr	r4, .L6+44
+ 128              	.LVL9:
+ 129              		.loc 1 65 5 is_stmt 0 view .LVU23
+ 130 009a 2C4B     		ldr	r3, .L6+48
+ 131 009c 93ED003A 		vldr.32	s6, [r3]
+ 132 00a0 2B4B     		ldr	r3, .L6+52
+ 133 00a2 D3ED002A 		vldr.32	s5, [r3]
+ 134 00a6 2B4B     		ldr	r3, .L6+56
+ 135 00a8 93ED002A 		vldr.32	s4, [r3]
+ 136 00ac 2A4B     		ldr	r3, .L6+60
+ 137 00ae D3ED001A 		vldr.32	s3, [r3]
+ 138 00b2 95ED001A 		vldr.32	s2, [r5]
+ 139 00b6 D4ED000A 		vldr.32	s1, [r4]
+ 140 00ba 284B     		ldr	r3, .L6+64
+ 141 00bc 93ED000A 		vldr.32	s0, [r3]
+ 142 00c0 FFF7FEFF 		bl	PIDX_get
+ 143              	.LVL10:
+  66:./User/main.c ****               inner_inputX, inner_SetPointX);
+  67:./User/main.c **** 
+  68:./User/main.c ****     //将Pitch角作为outer_inputY,将接收机数据（解析出来的目标Pitch角度）作为o
+  69:./User/main.c ****     //将陀螺仪测得的Pitch角速度作为inner_inputY，在函数内计算外环输出，放�
+  70:./User/main.c ****     //输出结果（Pitch角角加速度）放进PID_out_Y
+  71:./User/main.c ****     PIDY_get(PID_out_Y, dt_out, dt_in, outer_inputY, outer_SetPointY,
+ 144              		.loc 1 71 5 is_stmt 1 view .LVU24
+ 145 00c4 264B     		ldr	r3, .L6+68
+ 146 00c6 93ED003A 		vldr.32	s6, [r3]
+ 147 00ca 264B     		ldr	r3, .L6+72
+ 148 00cc D3ED002A 		vldr.32	s5, [r3]
+ 149 00d0 254B     		ldr	r3, .L6+76
+ 150 00d2 93ED002A 		vldr.32	s4, [r3]
+ 151 00d6 254B     		ldr	r3, .L6+80
+ 152 00d8 D3ED001A 		vldr.32	s3, [r3]
+ 153 00dc 95ED001A 		vldr.32	s2, [r5]
+ 154 00e0 D4ED000A 		vldr.32	s1, [r4]
+ 155 00e4 224B     		ldr	r3, .L6+84
+ 156 00e6 93ED000A 		vldr.32	s0, [r3]
+ARM GAS  /tmp/cc1E4R0z.s 			page 5
 
 
-  99:./User/main.c ****   }
- 100:./User/main.c ****   
- 101:./User/main.c **** }
- 102:./User/main.c **** 
- 103:./User/main.c **** 
- 104:./User/main.c **** /**
- 105:./User/main.c ****   * @brief  Inserts a delay time.
- 106:./User/main.c ****   * @param  nTime: specifies the delay time length, in milliseconds.
- 107:./User/main.c ****   * @retval None
- 108:./User/main.c ****   */
- 109:./User/main.c **** void Delay(__IO uint32_t nTime)
- 110:./User/main.c **** { 
- 111:./User/main.c ****   uwTimingDelay = nTime;
- 112:./User/main.c **** 
- 113:./User/main.c ****   while(uwTimingDelay != 0);
- 114:./User/main.c **** }
- 115:./User/main.c **** 
- 116:./User/main.c **** /**
- 117:./User/main.c ****   * @brief  Decrements the TimingDelay variable.
- 118:./User/main.c ****   * @param  None
- 119:./User/main.c ****   * @retval None
- 120:./User/main.c ****   */
- 121:./User/main.c **** void TimingDelay_Decrement(void)
- 122:./User/main.c **** {
- 131              		.loc 1 122 1 view -0
- 132              		.cfi_startproc
- 133              		@ args = 0, pretend = 0, frame = 0
- 134              		@ frame_needed = 0, uses_anonymous_args = 0
- 135              		@ link register save eliminated.
- 123:./User/main.c ****   if (uwTimingDelay != 0x00)
- 136              		.loc 1 123 3 view .LVU24
- 137              		.loc 1 123 21 is_stmt 0 view .LVU25
- 138 0000 034B     		ldr	r3, .L8
- 139 0002 1B68     		ldr	r3, [r3]
- 140              		.loc 1 123 6 view .LVU26
- 141 0004 1BB1     		cbz	r3, .L6
- 124:./User/main.c ****   { 
- 125:./User/main.c ****     uwTimingDelay--;
- 142              		.loc 1 125 5 is_stmt 1 view .LVU27
- 143              		.loc 1 125 18 is_stmt 0 view .LVU28
- 144 0006 024A     		ldr	r2, .L8
- 145 0008 1368     		ldr	r3, [r2]
- 146 000a 013B     		subs	r3, r3, #1
- 147 000c 1360     		str	r3, [r2]
- 148              	.L6:
- 126:./User/main.c ****   }
- 127:./User/main.c **** }
- 149              		.loc 1 127 1 view .LVU29
- 150 000e 7047     		bx	lr
- 151              	.L9:
- 152              		.align	2
- 153              	.L8:
- 154 0010 00000000 		.word	uwTimingDelay
- 155              		.cfi_endproc
- 156              	.LFE125:
- 158              		.global	gyroZ_correction
- 159              		.section	.bss.gyroZ_correction,"aw",%nobits
-ARM GAS  /tmp/ccw2ISHF.s 			page 6
+ 157 00ea FFF7FEFF 		bl	PIDY_get
+ 158              	.LVL11:
+  72:./User/main.c ****               inner_inputY, inner_SetPointY);
+  73:./User/main.c **** 
+  74:./User/main.c ****     //将Yaw角作为outer_inputZ,将接收机数据（解析出来的目标Yaw角度）作为outer
+  75:./User/main.c ****     //将陀螺仪测得的Yaw角速度作为inner_inputZ，在函数内计算外环输出，放进
+  76:./User/main.c ****     //输出结果（Yaw角角加速度）放进PID_out_Z
+  77:./User/main.c ****     PIDZ_get(PID_out_Z, dt_out, dt_in, outer_inputZ, outer_SetPointZ,
+ 159              		.loc 1 77 5 view .LVU25
+ 160 00ee 214B     		ldr	r3, .L6+88
+ 161 00f0 93ED003A 		vldr.32	s6, [r3]
+ 162 00f4 204B     		ldr	r3, .L6+92
+ 163 00f6 D3ED002A 		vldr.32	s5, [r3]
+ 164 00fa 204B     		ldr	r3, .L6+96
+ 165 00fc 93ED002A 		vldr.32	s4, [r3]
+ 166 0100 1F4B     		ldr	r3, .L6+100
+ 167 0102 D3ED001A 		vldr.32	s3, [r3]
+ 168 0106 95ED001A 		vldr.32	s2, [r5]
+ 169 010a D4ED000A 		vldr.32	s1, [r4]
+ 170 010e 1D4B     		ldr	r3, .L6+104
+ 171 0110 93ED000A 		vldr.32	s0, [r3]
+ 172 0114 FFF7FEFF 		bl	PIDZ_get
+ 173              	.LVL12:
+  37:./User/main.c ****    
+ 174              		.loc 1 37 8 view .LVU26
+ 175              	.L4:
+  37:./User/main.c ****    
+ 176              		.loc 1 37 3 view .LVU27
+  49:./User/main.c ****   	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
+ 177              		.loc 1 49 1 view .LVU28
+ 178              	.LBB3:
+  49:./User/main.c ****   	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
+ 179              		.loc 1 49 5 view .LVU29
+  49:./User/main.c ****   	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
+ 180              		.loc 1 49 9 is_stmt 0 view .LVU30
+ 181 0118 0024     		movs	r4, #0
+  49:./User/main.c ****   	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
+ 182              		.loc 1 49 1 view .LVU31
+ 183 011a ADE7     		b	.L2
+ 184              	.L7:
+ 185              		.align	2
+ 186              	.L6:
+ 187 011c 00000000 		.word	mpuZ
+ 188 0120 00000000 		.word	mpuY
+ 189 0124 00000000 		.word	mpuX
+ 190 0128 00000000 		.word	gyroZ
+ 191 012c 00000000 		.word	gyroY
+ 192 0130 00000000 		.word	gyroX
+ 193 0134 0000003A 		.word	973078528
+ 194 0138 00000000 		.word	aX
+ 195 013c 00000000 		.word	aY
+ 196 0140 00000000 		.word	aZ
+ 197 0144 00000000 		.word	dt_in
+ 198 0148 00000000 		.word	dt_out
+ 199 014c 00000000 		.word	inner_SetPointX
+ 200 0150 00000000 		.word	inner_inputX
+ 201 0154 00000000 		.word	outer_SetPointX
+ARM GAS  /tmp/cc1E4R0z.s 			page 6
 
 
- 160              		.align	3
- 163              	gyroZ_correction:
- 164 0000 00000000 		.space	8
- 164      00000000 
- 165              		.global	gyroY_correction
- 166              		.section	.bss.gyroY_correction,"aw",%nobits
- 167              		.align	3
- 170              	gyroY_correction:
- 171 0000 00000000 		.space	8
- 171      00000000 
- 172              		.global	gyroX_correction
- 173              		.section	.bss.gyroX_correction,"aw",%nobits
- 174              		.align	3
- 177              	gyroX_correction:
- 178 0000 00000000 		.space	8
- 178      00000000 
- 179              		.global	mpuZ_correction
- 180              		.section	.bss.mpuZ_correction,"aw",%nobits
- 181              		.align	3
- 184              	mpuZ_correction:
- 185 0000 00000000 		.space	8
- 185      00000000 
- 186              		.global	mpuY_correction
- 187              		.section	.bss.mpuY_correction,"aw",%nobits
- 188              		.align	3
- 191              	mpuY_correction:
- 192 0000 00000000 		.space	8
- 192      00000000 
- 193              		.global	mpuX_correction
- 194              		.section	.bss.mpuX_correction,"aw",%nobits
- 195              		.align	3
- 198              	mpuX_correction:
- 199 0000 00000000 		.space	8
- 199      00000000 
- 200              		.global	gyroZ
- 201              		.section	.bss.gyroZ,"aw",%nobits
- 202              		.align	3
- 205              	gyroZ:
- 206 0000 00000000 		.space	8
- 206      00000000 
- 207              		.global	gyroY
- 208              		.section	.bss.gyroY,"aw",%nobits
- 209              		.align	3
- 212              	gyroY:
- 213 0000 00000000 		.space	8
- 213      00000000 
- 214              		.global	gyroX
- 215              		.section	.bss.gyroX,"aw",%nobits
- 216              		.align	3
- 219              	gyroX:
- 220 0000 00000000 		.space	8
- 220      00000000 
- 221              		.global	mpuZ
- 222              		.section	.bss.mpuZ,"aw",%nobits
- 223              		.align	3
- 226              	mpuZ:
- 227 0000 00000000 		.space	8
-ARM GAS  /tmp/ccw2ISHF.s 			page 7
+ 202 0158 00000000 		.word	outer_inputX
+ 203 015c 00000000 		.word	PID_out_X
+ 204 0160 00000000 		.word	inner_SetPointY
+ 205 0164 00000000 		.word	inner_inputY
+ 206 0168 00000000 		.word	outer_SetPointY
+ 207 016c 00000000 		.word	outer_inputY
+ 208 0170 00000000 		.word	PID_out_Y
+ 209 0174 00000000 		.word	inner_SetPointZ
+ 210 0178 00000000 		.word	inner_inputZ
+ 211 017c 00000000 		.word	outer_SetPointZ
+ 212 0180 00000000 		.word	outer_inputZ
+ 213 0184 00000000 		.word	PID_out_Z
+ 214              	.LBE3:
+ 215              		.cfi_endproc
+ 216              	.LFE123:
+ 218              		.section	.text.TimingDelay_Decrement,"ax",%progbits
+ 219              		.align	1
+ 220              		.global	TimingDelay_Decrement
+ 221              		.syntax unified
+ 222              		.thumb
+ 223              		.thumb_func
+ 225              	TimingDelay_Decrement:
+ 226              	.LFB125:
+  78:./User/main.c ****               inner_inputZ, inner_SetPointZ);
+  79:./User/main.c **** 
+  80:./User/main.c **** 
+  81:./User/main.c ****  //Delay_ms(100);
+  82:./User/main.c **** //  Serial_Printf("gyroX = %d\r\n",gyroX);
+  83:./User/main.c **** //  //Delay_ms(100);
+  84:./User/main.c **** //  Serial_Printf("gyroY = %d\r\n",gyroY);
+  85:./User/main.c **** //  //Delay_ms(100);
+  86:./User/main.c **** //  Serial_Printf("gyroZ = %d\r\n",gyroZ);
+  87:./User/main.c **** //  //Delay_ms(100);
+  88:./User/main.c ****     
+  89:./User/main.c ****     
+  90:./User/main.c **** 		//Data = (TIM_GetCapture2(TIM2)+1)*10/(TIM_GetCapture1(TIM2)+1);
+  91:./User/main.c **** //		Data = TIM_GetCapture1(TIM2);
+  92:./User/main.c **** 	
+  93:./User/main.c **** 		// Duty = Data*5/7;
+  94:./User/main.c ****     // PWM_SetDuty1(Duty);
+  95:./User/main.c **** 		// PWM_SetDuty2(Duty);
+  96:./User/main.c **** 		// PWM_SetDuty3(Duty);
+  97:./User/main.c **** 		// PWM_SetDuty4(Duty);
+  98:./User/main.c **** 		
+  99:./User/main.c **** 		// Serial_Printf("Data:%d\r\n",Duty);
+ 100:./User/main.c **** //    PWM_SetDuty1(10);//PC6
+ 101:./User/main.c **** //    PWM_SetDuty2(12);//PC7
+ 102:./User/main.c **** //    PWM_SetDuty3(14);//PC8
+ 103:./User/main.c **** //    PWM_SetDuty4(8);//PC9
+ 104:./User/main.c ****     
+ 105:./User/main.c ****     
+ 106:./User/main.c **** //    Serial_Printf("TIM2_CH1_2:\r\n");//PA0
+ 107:./User/main.c **** //    Serial_Printf("CH1:%d\r\n",TIM_GetCapture1(TIM2));
+ 108:./User/main.c **** //    Serial_Printf("CH2:%d\r\n",TIM_GetCapture2(TIM2));
+ 109:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture1(TIM2)+1)));
+ 110:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n",(TIM_GetCapture2(TIM2)+1)*100/(TIM_GetCapture1(TIM2)+1));
+ 111:./User/main.c **** //    
+ARM GAS  /tmp/cc1E4R0z.s 			page 7
 
 
- 227      00000000 
- 228              		.global	mpuY
- 229              		.section	.bss.mpuY,"aw",%nobits
- 230              		.align	3
- 233              	mpuY:
- 234 0000 00000000 		.space	8
- 234      00000000 
- 235              		.global	mpuX
- 236              		.section	.bss.mpuX,"aw",%nobits
- 237              		.align	3
- 240              	mpuX:
- 241 0000 00000000 		.space	8
- 241      00000000 
- 242              		.global	Duty
- 243              		.section	.bss.Duty,"aw",%nobits
- 244              		.align	2
- 247              	Duty:
- 248 0000 00000000 		.space	4
- 249              		.global	Data
- 250              		.section	.bss.Data,"aw",%nobits
- 251              		.align	2
- 254              	Data:
- 255 0000 00000000 		.space	4
- 256              		.global	RCC_Clocks
- 257              		.section	.bss.RCC_Clocks,"aw",%nobits
- 258              		.align	2
- 261              	RCC_Clocks:
- 262 0000 00000000 		.space	16
- 262      00000000 
- 262      00000000 
- 262      00000000 
- 263              		.section	.bss.uwTimingDelay,"aw",%nobits
- 264              		.align	2
- 267              	uwTimingDelay:
- 268 0000 00000000 		.space	4
- 269              		.text
- 270              	.Letext0:
- 271              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
- 272              		.file 3 "./CORE/stm32f4xx.h"
- 273              		.file 4 "./Library/stm32f4xx_rcc.h"
- 274              		.file 5 "./Hardware/Serial.h"
- 275              		.file 6 "./Hardware/PWM.h"
- 276              		.file 7 "./Library/stm32f4xx_tim.h"
- 277              		.file 8 "./Hardware/Receiver.h"
- 278              		.file 9 "./Hardware/gy86.h"
-ARM GAS  /tmp/ccw2ISHF.s 			page 8
+ 112:./User/main.c **** //    Serial_Printf("TIM5_CH1_2:\r\n");//PA1
+ 113:./User/main.c **** //    Serial_Printf("CH1:%d\r\n",TIM_GetCapture1(TIM5));
+ 114:./User/main.c **** //    Serial_Printf("CH2:%d\r\n",TIM_GetCapture2(TIM5));
+ 115:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture2(TIM5)+1)));
+ 116:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n",(TIM_GetCapture1(TIM5)+1)*100/(TIM_GetCapture2(TIM5)+1));
+ 117:./User/main.c **** //    
+ 118:./User/main.c **** //    Serial_Printf("TIM4_CH1_2:\r\n");//PB6
+ 119:./User/main.c **** //    Serial_Printf("CH1:%d\r\n",TIM_GetCapture1(TIM4));
+ 120:./User/main.c **** //    Serial_Printf("CH2:%d\r\n",TIM_GetCapture2(TIM4));
+ 121:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture1(TIM4)+1)));
+ 122:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n",(TIM_GetCapture2(TIM4)+1)*100/(TIM_GetCapture1(TIM4)+1));
+ 123:./User/main.c ****     
+ 124:./User/main.c **** //    Serial_Printf("TIM4_CH3_4:\r\n");//PB8
+ 125:./User/main.c **** //    Serial_Printf("CH3:%d\r\n",TIM_GetCapture3(TIM4));
+ 126:./User/main.c **** //    Serial_Printf("CH4:%d\r\n",TIM_GetCapture4(TIM4));
+ 127:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture3(TIM4)+1)));
+ 128:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n\r\n",((TIM_GetCapture4(TIM4)+1)*100/(TIM_GetCapture3(TIM4)+1))
+ 129:./User/main.c **** //    Delay_s(2);
+ 130:./User/main.c **** //    Serial_Printf("TIM2_CH3_4:\r\n");//PA2
+ 131:./User/main.c **** //    Serial_Printf("CH3:%d\r\n",TIM_GetCapture3(TIM2));
+ 132:./User/main.c **** //    Serial_Printf("CH4:%d\r\n",TIM_GetCapture4(TIM2));
+ 133:./User/main.c **** //    Serial_Printf("Freq:%d   ",(1000000 / (TIM_GetCapture3(TIM2)+1)));
+ 134:./User/main.c **** //    Serial_Printf("Duty:%d\r\n\r\n\r\n",((TIM_GetCapture4(TIM2)+1)*100/(TIM_GetCapture3(TIM2)+1))
+ 135:./User/main.c ****     //PWM: PC6789   TIM3_CH1234
+ 136:./User/main.c ****     //考虑改为：PA0--TIM2CH1  PA1--TIM5CH2  PA2--TIM2CH3  PA3--TIM5CH4  PB8--TIM4CH3  PB6--TIM
+ 137:./User/main.c ****     
+ 138:./User/main.c ****     
+ 139:./User/main.c ****   }
+ 140:./User/main.c ****   
+ 141:./User/main.c **** }
+ 142:./User/main.c **** 
+ 143:./User/main.c **** 
+ 144:./User/main.c **** /**
+ 145:./User/main.c ****   * @brief  Inserts a delay time.
+ 146:./User/main.c ****   * @param  nTime: specifies the delay time length, in milliseconds.
+ 147:./User/main.c ****   * @retval None
+ 148:./User/main.c ****   */
+ 149:./User/main.c **** void Delay(__IO uint32_t nTime)
+ 150:./User/main.c **** { 
+ 151:./User/main.c ****   uwTimingDelay = nTime;
+ 152:./User/main.c **** 
+ 153:./User/main.c ****   while(uwTimingDelay != 0);
+ 154:./User/main.c **** }
+ 155:./User/main.c **** 
+ 156:./User/main.c **** /**
+ 157:./User/main.c ****   * @brief  Decrements the TimingDelay variable.
+ 158:./User/main.c ****   * @param  None
+ 159:./User/main.c ****   * @retval None
+ 160:./User/main.c ****   */
+ 161:./User/main.c **** void TimingDelay_Decrement(void)
+ 162:./User/main.c **** {
+ 227              		.loc 1 162 1 is_stmt 1 view -0
+ 228              		.cfi_startproc
+ 229              		@ args = 0, pretend = 0, frame = 0
+ 230              		@ frame_needed = 0, uses_anonymous_args = 0
+ 231              		@ link register save eliminated.
+ 163:./User/main.c ****   if (uwTimingDelay != 0x00)
+ARM GAS  /tmp/cc1E4R0z.s 			page 8
+
+
+ 232              		.loc 1 163 3 view .LVU33
+ 233              		.loc 1 163 21 is_stmt 0 view .LVU34
+ 234 0000 034B     		ldr	r3, .L10
+ 235 0002 1B68     		ldr	r3, [r3]
+ 236              		.loc 1 163 6 view .LVU35
+ 237 0004 1BB1     		cbz	r3, .L8
+ 164:./User/main.c ****   { 
+ 165:./User/main.c ****     uwTimingDelay--;
+ 238              		.loc 1 165 5 is_stmt 1 view .LVU36
+ 239              		.loc 1 165 18 is_stmt 0 view .LVU37
+ 240 0006 024A     		ldr	r2, .L10
+ 241 0008 1368     		ldr	r3, [r2]
+ 242 000a 013B     		subs	r3, r3, #1
+ 243 000c 1360     		str	r3, [r2]
+ 244              	.L8:
+ 166:./User/main.c ****   }
+ 167:./User/main.c **** }
+ 245              		.loc 1 167 1 view .LVU38
+ 246 000e 7047     		bx	lr
+ 247              	.L11:
+ 248              		.align	2
+ 249              	.L10:
+ 250 0010 00000000 		.word	uwTimingDelay
+ 251              		.cfi_endproc
+ 252              	.LFE125:
+ 254              		.global	PID_out_Z
+ 255              		.section	.bss.PID_out_Z,"aw",%nobits
+ 256              		.align	2
+ 259              	PID_out_Z:
+ 260 0000 00000000 		.space	4
+ 261              		.global	PID_out_Y
+ 262              		.section	.bss.PID_out_Y,"aw",%nobits
+ 263              		.align	2
+ 266              	PID_out_Y:
+ 267 0000 00000000 		.space	4
+ 268              		.global	PID_out_X
+ 269              		.section	.bss.PID_out_X,"aw",%nobits
+ 270              		.align	2
+ 273              	PID_out_X:
+ 274 0000 00000000 		.space	4
+ 275              		.global	dt_in
+ 276              		.section	.bss.dt_in,"aw",%nobits
+ 277              		.align	2
+ 280              	dt_in:
+ 281 0000 00000000 		.space	4
+ 282              		.global	dt_out
+ 283              		.section	.bss.dt_out,"aw",%nobits
+ 284              		.align	2
+ 287              	dt_out:
+ 288 0000 00000000 		.space	4
+ 289              		.global	inner_SetPointZ
+ 290              		.section	.bss.inner_SetPointZ,"aw",%nobits
+ 291              		.align	2
+ 294              	inner_SetPointZ:
+ 295 0000 00000000 		.space	4
+ 296              		.global	inner_inputZ
+ 297              		.section	.bss.inner_inputZ,"aw",%nobits
+ARM GAS  /tmp/cc1E4R0z.s 			page 9
+
+
+ 298              		.align	2
+ 301              	inner_inputZ:
+ 302 0000 00000000 		.space	4
+ 303              		.global	outer_SetPointZ
+ 304              		.section	.bss.outer_SetPointZ,"aw",%nobits
+ 305              		.align	2
+ 308              	outer_SetPointZ:
+ 309 0000 00000000 		.space	4
+ 310              		.global	outer_inputZ
+ 311              		.section	.bss.outer_inputZ,"aw",%nobits
+ 312              		.align	2
+ 315              	outer_inputZ:
+ 316 0000 00000000 		.space	4
+ 317              		.global	inner_SetPointY
+ 318              		.section	.bss.inner_SetPointY,"aw",%nobits
+ 319              		.align	2
+ 322              	inner_SetPointY:
+ 323 0000 00000000 		.space	4
+ 324              		.global	inner_inputY
+ 325              		.section	.bss.inner_inputY,"aw",%nobits
+ 326              		.align	2
+ 329              	inner_inputY:
+ 330 0000 00000000 		.space	4
+ 331              		.global	outer_SetPointY
+ 332              		.section	.bss.outer_SetPointY,"aw",%nobits
+ 333              		.align	2
+ 336              	outer_SetPointY:
+ 337 0000 00000000 		.space	4
+ 338              		.global	outer_inputY
+ 339              		.section	.bss.outer_inputY,"aw",%nobits
+ 340              		.align	2
+ 343              	outer_inputY:
+ 344 0000 00000000 		.space	4
+ 345              		.global	inner_SetPointX
+ 346              		.section	.bss.inner_SetPointX,"aw",%nobits
+ 347              		.align	2
+ 350              	inner_SetPointX:
+ 351 0000 00000000 		.space	4
+ 352              		.global	inner_inputX
+ 353              		.section	.bss.inner_inputX,"aw",%nobits
+ 354              		.align	2
+ 357              	inner_inputX:
+ 358 0000 00000000 		.space	4
+ 359              		.global	outer_SetPointX
+ 360              		.section	.bss.outer_SetPointX,"aw",%nobits
+ 361              		.align	2
+ 364              	outer_SetPointX:
+ 365 0000 00000000 		.space	4
+ 366              		.global	outer_inputX
+ 367              		.section	.bss.outer_inputX,"aw",%nobits
+ 368              		.align	2
+ 371              	outer_inputX:
+ 372 0000 00000000 		.space	4
+ 373              		.global	gyroZ_correction
+ 374              		.section	.bss.gyroZ_correction,"aw",%nobits
+ 375              		.align	2
+ 378              	gyroZ_correction:
+ARM GAS  /tmp/cc1E4R0z.s 			page 10
+
+
+ 379 0000 00000000 		.space	4
+ 380              		.global	gyroY_correction
+ 381              		.section	.bss.gyroY_correction,"aw",%nobits
+ 382              		.align	2
+ 385              	gyroY_correction:
+ 386 0000 00000000 		.space	4
+ 387              		.global	gyroX_correction
+ 388              		.section	.bss.gyroX_correction,"aw",%nobits
+ 389              		.align	2
+ 392              	gyroX_correction:
+ 393 0000 00000000 		.space	4
+ 394              		.global	aZ_correction
+ 395              		.section	.bss.aZ_correction,"aw",%nobits
+ 396              		.align	2
+ 399              	aZ_correction:
+ 400 0000 00000000 		.space	4
+ 401              		.global	aY_correction
+ 402              		.section	.bss.aY_correction,"aw",%nobits
+ 403              		.align	2
+ 406              	aY_correction:
+ 407 0000 00000000 		.space	4
+ 408              		.global	aX_correction
+ 409              		.section	.bss.aX_correction,"aw",%nobits
+ 410              		.align	2
+ 413              	aX_correction:
+ 414 0000 00000000 		.space	4
+ 415              		.global	gyZ
+ 416              		.section	.bss.gyZ,"aw",%nobits
+ 417              		.align	2
+ 420              	gyZ:
+ 421 0000 00000000 		.space	4
+ 422              		.global	gyY
+ 423              		.section	.bss.gyY,"aw",%nobits
+ 424              		.align	2
+ 427              	gyY:
+ 428 0000 00000000 		.space	4
+ 429              		.global	gyX
+ 430              		.section	.bss.gyX,"aw",%nobits
+ 431              		.align	2
+ 434              	gyX:
+ 435 0000 00000000 		.space	4
+ 436              		.global	aZ
+ 437              		.section	.bss.aZ,"aw",%nobits
+ 438              		.align	2
+ 441              	aZ:
+ 442 0000 00000000 		.space	4
+ 443              		.global	aY
+ 444              		.section	.bss.aY,"aw",%nobits
+ 445              		.align	2
+ 448              	aY:
+ 449 0000 00000000 		.space	4
+ 450              		.global	aX
+ 451              		.section	.bss.aX,"aw",%nobits
+ 452              		.align	2
+ 455              	aX:
+ 456 0000 00000000 		.space	4
+ 457              		.global	gyroZ
+ARM GAS  /tmp/cc1E4R0z.s 			page 11
+
+
+ 458              		.section	.bss.gyroZ,"aw",%nobits
+ 459              		.align	1
+ 462              	gyroZ:
+ 463 0000 0000     		.space	2
+ 464              		.global	gyroY
+ 465              		.section	.bss.gyroY,"aw",%nobits
+ 466              		.align	1
+ 469              	gyroY:
+ 470 0000 0000     		.space	2
+ 471              		.global	gyroX
+ 472              		.section	.bss.gyroX,"aw",%nobits
+ 473              		.align	1
+ 476              	gyroX:
+ 477 0000 0000     		.space	2
+ 478              		.global	mpuZ
+ 479              		.section	.bss.mpuZ,"aw",%nobits
+ 480              		.align	1
+ 483              	mpuZ:
+ 484 0000 0000     		.space	2
+ 485              		.global	mpuY
+ 486              		.section	.bss.mpuY,"aw",%nobits
+ 487              		.align	1
+ 490              	mpuY:
+ 491 0000 0000     		.space	2
+ 492              		.global	mpuX
+ 493              		.section	.bss.mpuX,"aw",%nobits
+ 494              		.align	1
+ 497              	mpuX:
+ 498 0000 0000     		.space	2
+ 499              		.global	Duty
+ 500              		.section	.bss.Duty,"aw",%nobits
+ 501              		.align	2
+ 504              	Duty:
+ 505 0000 00000000 		.space	4
+ 506              		.global	Data
+ 507              		.section	.bss.Data,"aw",%nobits
+ 508              		.align	2
+ 511              	Data:
+ 512 0000 00000000 		.space	4
+ 513              		.global	RCC_Clocks
+ 514              		.section	.bss.RCC_Clocks,"aw",%nobits
+ 515              		.align	2
+ 518              	RCC_Clocks:
+ 519 0000 00000000 		.space	16
+ 519      00000000 
+ 519      00000000 
+ 519      00000000 
+ 520              		.section	.bss.uwTimingDelay,"aw",%nobits
+ 521              		.align	2
+ 524              	uwTimingDelay:
+ 525 0000 00000000 		.space	4
+ 526              		.text
+ 527              	.Letext0:
+ 528              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
+ 529              		.file 3 "./Library/stm32f4xx_rcc.h"
+ 530              		.file 4 "./User/GaussNewton.h"
+ 531              		.file 5 "./User/PID_C.hpp"
+ARM GAS  /tmp/cc1E4R0z.s 			page 12
+
+
+ 532              		.file 6 "./Hardware/gy86.h"
+ 533              		.file 7 "./Hardware/Serial.h"
+ARM GAS  /tmp/cc1E4R0z.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccw2ISHF.s:21     .rodata.main.str1.4:0000000000000000 $d
-     /tmp/ccw2ISHF.s:25     .text.main:0000000000000000 $t
-     /tmp/ccw2ISHF.s:31     .text.main:0000000000000000 main
-     /tmp/ccw2ISHF.s:115    .text.main:000000000000006c $d
-     /tmp/ccw2ISHF.s:254    .bss.Data:0000000000000000 Data
-     /tmp/ccw2ISHF.s:247    .bss.Duty:0000000000000000 Duty
-     /tmp/ccw2ISHF.s:123    .text.TimingDelay_Decrement:0000000000000000 $t
-     /tmp/ccw2ISHF.s:129    .text.TimingDelay_Decrement:0000000000000000 TimingDelay_Decrement
-     /tmp/ccw2ISHF.s:154    .text.TimingDelay_Decrement:0000000000000010 $d
-     /tmp/ccw2ISHF.s:267    .bss.uwTimingDelay:0000000000000000 uwTimingDelay
-     /tmp/ccw2ISHF.s:163    .bss.gyroZ_correction:0000000000000000 gyroZ_correction
-     /tmp/ccw2ISHF.s:160    .bss.gyroZ_correction:0000000000000000 $d
-     /tmp/ccw2ISHF.s:170    .bss.gyroY_correction:0000000000000000 gyroY_correction
-     /tmp/ccw2ISHF.s:167    .bss.gyroY_correction:0000000000000000 $d
-     /tmp/ccw2ISHF.s:177    .bss.gyroX_correction:0000000000000000 gyroX_correction
-     /tmp/ccw2ISHF.s:174    .bss.gyroX_correction:0000000000000000 $d
-     /tmp/ccw2ISHF.s:184    .bss.mpuZ_correction:0000000000000000 mpuZ_correction
-     /tmp/ccw2ISHF.s:181    .bss.mpuZ_correction:0000000000000000 $d
-     /tmp/ccw2ISHF.s:191    .bss.mpuY_correction:0000000000000000 mpuY_correction
-     /tmp/ccw2ISHF.s:188    .bss.mpuY_correction:0000000000000000 $d
-     /tmp/ccw2ISHF.s:198    .bss.mpuX_correction:0000000000000000 mpuX_correction
-     /tmp/ccw2ISHF.s:195    .bss.mpuX_correction:0000000000000000 $d
-     /tmp/ccw2ISHF.s:205    .bss.gyroZ:0000000000000000 gyroZ
-     /tmp/ccw2ISHF.s:202    .bss.gyroZ:0000000000000000 $d
-     /tmp/ccw2ISHF.s:212    .bss.gyroY:0000000000000000 gyroY
-     /tmp/ccw2ISHF.s:209    .bss.gyroY:0000000000000000 $d
-     /tmp/ccw2ISHF.s:219    .bss.gyroX:0000000000000000 gyroX
-     /tmp/ccw2ISHF.s:216    .bss.gyroX:0000000000000000 $d
-     /tmp/ccw2ISHF.s:226    .bss.mpuZ:0000000000000000 mpuZ
-     /tmp/ccw2ISHF.s:223    .bss.mpuZ:0000000000000000 $d
-     /tmp/ccw2ISHF.s:233    .bss.mpuY:0000000000000000 mpuY
-     /tmp/ccw2ISHF.s:230    .bss.mpuY:0000000000000000 $d
-     /tmp/ccw2ISHF.s:240    .bss.mpuX:0000000000000000 mpuX
-     /tmp/ccw2ISHF.s:237    .bss.mpuX:0000000000000000 $d
-     /tmp/ccw2ISHF.s:244    .bss.Duty:0000000000000000 $d
-     /tmp/ccw2ISHF.s:251    .bss.Data:0000000000000000 $d
-     /tmp/ccw2ISHF.s:261    .bss.RCC_Clocks:0000000000000000 RCC_Clocks
-     /tmp/ccw2ISHF.s:258    .bss.RCC_Clocks:0000000000000000 $d
-     /tmp/ccw2ISHF.s:264    .bss.uwTimingDelay:0000000000000000 $d
+     /tmp/cc1E4R0z.s:21     .text.main:0000000000000000 $t
+     /tmp/cc1E4R0z.s:27     .text.main:0000000000000000 main
+     /tmp/cc1E4R0z.s:187    .text.main:000000000000011c $d
+     /tmp/cc1E4R0z.s:483    .bss.mpuZ:0000000000000000 mpuZ
+     /tmp/cc1E4R0z.s:490    .bss.mpuY:0000000000000000 mpuY
+     /tmp/cc1E4R0z.s:497    .bss.mpuX:0000000000000000 mpuX
+     /tmp/cc1E4R0z.s:462    .bss.gyroZ:0000000000000000 gyroZ
+     /tmp/cc1E4R0z.s:469    .bss.gyroY:0000000000000000 gyroY
+     /tmp/cc1E4R0z.s:476    .bss.gyroX:0000000000000000 gyroX
+     /tmp/cc1E4R0z.s:455    .bss.aX:0000000000000000 aX
+     /tmp/cc1E4R0z.s:448    .bss.aY:0000000000000000 aY
+     /tmp/cc1E4R0z.s:441    .bss.aZ:0000000000000000 aZ
+     /tmp/cc1E4R0z.s:280    .bss.dt_in:0000000000000000 dt_in
+     /tmp/cc1E4R0z.s:287    .bss.dt_out:0000000000000000 dt_out
+     /tmp/cc1E4R0z.s:350    .bss.inner_SetPointX:0000000000000000 inner_SetPointX
+     /tmp/cc1E4R0z.s:357    .bss.inner_inputX:0000000000000000 inner_inputX
+     /tmp/cc1E4R0z.s:364    .bss.outer_SetPointX:0000000000000000 outer_SetPointX
+     /tmp/cc1E4R0z.s:371    .bss.outer_inputX:0000000000000000 outer_inputX
+     /tmp/cc1E4R0z.s:273    .bss.PID_out_X:0000000000000000 PID_out_X
+     /tmp/cc1E4R0z.s:322    .bss.inner_SetPointY:0000000000000000 inner_SetPointY
+     /tmp/cc1E4R0z.s:329    .bss.inner_inputY:0000000000000000 inner_inputY
+     /tmp/cc1E4R0z.s:336    .bss.outer_SetPointY:0000000000000000 outer_SetPointY
+     /tmp/cc1E4R0z.s:343    .bss.outer_inputY:0000000000000000 outer_inputY
+     /tmp/cc1E4R0z.s:266    .bss.PID_out_Y:0000000000000000 PID_out_Y
+     /tmp/cc1E4R0z.s:294    .bss.inner_SetPointZ:0000000000000000 inner_SetPointZ
+     /tmp/cc1E4R0z.s:301    .bss.inner_inputZ:0000000000000000 inner_inputZ
+     /tmp/cc1E4R0z.s:308    .bss.outer_SetPointZ:0000000000000000 outer_SetPointZ
+     /tmp/cc1E4R0z.s:315    .bss.outer_inputZ:0000000000000000 outer_inputZ
+     /tmp/cc1E4R0z.s:259    .bss.PID_out_Z:0000000000000000 PID_out_Z
+     /tmp/cc1E4R0z.s:219    .text.TimingDelay_Decrement:0000000000000000 $t
+     /tmp/cc1E4R0z.s:225    .text.TimingDelay_Decrement:0000000000000000 TimingDelay_Decrement
+     /tmp/cc1E4R0z.s:250    .text.TimingDelay_Decrement:0000000000000010 $d
+     /tmp/cc1E4R0z.s:524    .bss.uwTimingDelay:0000000000000000 uwTimingDelay
+     /tmp/cc1E4R0z.s:256    .bss.PID_out_Z:0000000000000000 $d
+     /tmp/cc1E4R0z.s:263    .bss.PID_out_Y:0000000000000000 $d
+     /tmp/cc1E4R0z.s:270    .bss.PID_out_X:0000000000000000 $d
+     /tmp/cc1E4R0z.s:277    .bss.dt_in:0000000000000000 $d
+     /tmp/cc1E4R0z.s:284    .bss.dt_out:0000000000000000 $d
+     /tmp/cc1E4R0z.s:291    .bss.inner_SetPointZ:0000000000000000 $d
+     /tmp/cc1E4R0z.s:298    .bss.inner_inputZ:0000000000000000 $d
+     /tmp/cc1E4R0z.s:305    .bss.outer_SetPointZ:0000000000000000 $d
+     /tmp/cc1E4R0z.s:312    .bss.outer_inputZ:0000000000000000 $d
+     /tmp/cc1E4R0z.s:319    .bss.inner_SetPointY:0000000000000000 $d
+     /tmp/cc1E4R0z.s:326    .bss.inner_inputY:0000000000000000 $d
+     /tmp/cc1E4R0z.s:333    .bss.outer_SetPointY:0000000000000000 $d
+     /tmp/cc1E4R0z.s:340    .bss.outer_inputY:0000000000000000 $d
+     /tmp/cc1E4R0z.s:347    .bss.inner_SetPointX:0000000000000000 $d
+     /tmp/cc1E4R0z.s:354    .bss.inner_inputX:0000000000000000 $d
+     /tmp/cc1E4R0z.s:361    .bss.outer_SetPointX:0000000000000000 $d
+     /tmp/cc1E4R0z.s:368    .bss.outer_inputX:0000000000000000 $d
+     /tmp/cc1E4R0z.s:378    .bss.gyroZ_correction:0000000000000000 gyroZ_correction
+     /tmp/cc1E4R0z.s:375    .bss.gyroZ_correction:0000000000000000 $d
+     /tmp/cc1E4R0z.s:385    .bss.gyroY_correction:0000000000000000 gyroY_correction
+     /tmp/cc1E4R0z.s:382    .bss.gyroY_correction:0000000000000000 $d
+     /tmp/cc1E4R0z.s:392    .bss.gyroX_correction:0000000000000000 gyroX_correction
+ARM GAS  /tmp/cc1E4R0z.s 			page 14
+
+
+     /tmp/cc1E4R0z.s:389    .bss.gyroX_correction:0000000000000000 $d
+     /tmp/cc1E4R0z.s:399    .bss.aZ_correction:0000000000000000 aZ_correction
+     /tmp/cc1E4R0z.s:396    .bss.aZ_correction:0000000000000000 $d
+     /tmp/cc1E4R0z.s:406    .bss.aY_correction:0000000000000000 aY_correction
+     /tmp/cc1E4R0z.s:403    .bss.aY_correction:0000000000000000 $d
+     /tmp/cc1E4R0z.s:413    .bss.aX_correction:0000000000000000 aX_correction
+     /tmp/cc1E4R0z.s:410    .bss.aX_correction:0000000000000000 $d
+     /tmp/cc1E4R0z.s:420    .bss.gyZ:0000000000000000 gyZ
+     /tmp/cc1E4R0z.s:417    .bss.gyZ:0000000000000000 $d
+     /tmp/cc1E4R0z.s:427    .bss.gyY:0000000000000000 gyY
+     /tmp/cc1E4R0z.s:424    .bss.gyY:0000000000000000 $d
+     /tmp/cc1E4R0z.s:434    .bss.gyX:0000000000000000 gyX
+     /tmp/cc1E4R0z.s:431    .bss.gyX:0000000000000000 $d
+     /tmp/cc1E4R0z.s:438    .bss.aZ:0000000000000000 $d
+     /tmp/cc1E4R0z.s:445    .bss.aY:0000000000000000 $d
+     /tmp/cc1E4R0z.s:452    .bss.aX:0000000000000000 $d
+     /tmp/cc1E4R0z.s:459    .bss.gyroZ:0000000000000000 $d
+     /tmp/cc1E4R0z.s:466    .bss.gyroY:0000000000000000 $d
+     /tmp/cc1E4R0z.s:473    .bss.gyroX:0000000000000000 $d
+     /tmp/cc1E4R0z.s:480    .bss.mpuZ:0000000000000000 $d
+     /tmp/cc1E4R0z.s:487    .bss.mpuY:0000000000000000 $d
+     /tmp/cc1E4R0z.s:494    .bss.mpuX:0000000000000000 $d
+     /tmp/cc1E4R0z.s:504    .bss.Duty:0000000000000000 Duty
+     /tmp/cc1E4R0z.s:501    .bss.Duty:0000000000000000 $d
+     /tmp/cc1E4R0z.s:511    .bss.Data:0000000000000000 Data
+     /tmp/cc1E4R0z.s:508    .bss.Data:0000000000000000 $d
+     /tmp/cc1E4R0z.s:518    .bss.RCC_Clocks:0000000000000000 RCC_Clocks
+     /tmp/cc1E4R0z.s:515    .bss.RCC_Clocks:0000000000000000 $d
+     /tmp/cc1E4R0z.s:521    .bss.uwTimingDelay:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 GY86_Init
 Serial_Init
-PWM_Init
-ICTIM2CH1_2_Init
-TIM_GetCapture2
-TIM_GetCapture1
-PWM_SetDuty1
-PWM_SetDuty2
-PWM_SetDuty3
-PWM_SetDuty4
-Serial_Printf
+GuassNewton_init
+MPU6000_GetData
+DR_a_init
+GaussNewton
+a_correction
+PIDX_get
+PIDY_get
+PIDZ_get

@@ -9,20 +9,34 @@ extern void LED_Init(void);
 uint32_t Data, Duty;
 
 
-double mpuX,mpuY,mpuZ,gyroX,gyroY,gyroZ;
-double mpuX_correction,mpuY_correction,mpuZ_correction,gyroX_correction,gyroY_correction,gyroZ_correction;
+int16_t mpuX,mpuY,mpuZ,gyroX,gyroY,gyroZ;
+float aX,aY,aZ,gyX,gyY,gyZ;
+float aX_correction,aY_correction,aZ_correction,gyroX_correction,gyroY_correction,gyroZ_correction;
 
+
+//PID 变量
+float outer_inputX = 0.0f, outer_SetPointX = 0.0f, inner_inputX = 0.0f, inner_SetPointX = 0.0f;     //Roll
+float outer_inputY = 0.0f, outer_SetPointY = 0.0f, inner_inputY = 0.0f, inner_SetPointY = 0.0f;     //Pitch
+float outer_inputZ = 0.0f, outer_SetPointZ = 0.0f, inner_inputZ = 0.0f, inner_SetPointZ = 0.0f;     //Yaw
+//dt
+float dt_out = 0.0f;
+float dt_in = 0.0f;
+//PID_output
+float PID_out_X = 0.0f, PID_out_Y = 0.0f, PID_out_Z = 0.0f;
 
 int main(void)
 {
 //  LED_Init();
   GY86_Init();
   Serial_Init();
-  PWM_Init();
-  ICTIM2CH1_2_Init();
+  GuassNewton_init();
+  // PWM_Init();
+  // ICTIM2CH1_2_Init();
+  
   
   while(1){   
-    
+   
+
 //  int16_t hmcX,hmcY,hmcZ;
 //	HMC5883L_GetData(&hmcX,&hmcY,&hmcZ);
 //  Serial_Printf("hmcX = %d\r\n",hmcX);
@@ -32,31 +46,57 @@ int main(void)
 //  Serial_Printf("hmcZ = %d\r\n",hmcZ);
 //  Delay_ms(100);
 //    
-  //	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
-//	Serial_Printf("mpuX = %d\r\n",mpuX);
-//  Delay_ms(100);
-//  Serial_Printf("mpuY = %d\r\n",mpuY);
-//  Delay_ms(100);
-//  Serial_Printf("mpuZ = %d\r\n",mpuZ);
-//  Delay_ms(100);
+for(int i=0; i<6;i++){
+  	MPU6000_GetData(&mpuX,&mpuY,&mpuZ,&gyroX,&gyroY,&gyroZ);
+    aX = (float)mpuX/2048.0f;
+    aY = (float)mpuY/2048.0f;
+    aZ = (float)mpuZ/2048.0f;
+    DR_a_init(aX, aY, aZ);
+}
+
+    GaussNewton();
+    a_correction(aX, aY, aZ);
+    // Serial_Printf("correction successful\r\n");
+    // Delay_ms(100);
+
+    //将Roll角作为outer_inputX,将接收机数据（解析出来的目标Roll角度）作为outer_SetPointX，
+    //将陀螺仪测得的Roll角速度作为inner_inputX，在函数内计算外环输出，放进inner_SetPointX,
+    //输出结果（Roll角角加速度）放进PID_out_X
+    PIDX_get(PID_out_X, dt_out, dt_in, outer_inputX, outer_SetPointX,
+              inner_inputX, inner_SetPointX);
+
+    //将Pitch角作为outer_inputY,将接收机数据（解析出来的目标Pitch角度）作为outer_SetPointY，
+    //将陀螺仪测得的Pitch角速度作为inner_inputY，在函数内计算外环输出，放进inner_SetPointY,
+    //输出结果（Pitch角角加速度）放进PID_out_Y
+    PIDY_get(PID_out_Y, dt_out, dt_in, outer_inputY, outer_SetPointY,
+              inner_inputY, inner_SetPointY);
+
+    //将Yaw角作为outer_inputZ,将接收机数据（解析出来的目标Yaw角度）作为outer_SetPointZ，
+    //将陀螺仪测得的Yaw角速度作为inner_inputZ，在函数内计算外环输出，放进inner_SetPointZ,
+    //输出结果（Yaw角角加速度）放进PID_out_Z
+    PIDZ_get(PID_out_Z, dt_out, dt_in, outer_inputZ, outer_SetPointZ,
+              inner_inputZ, inner_SetPointZ);
+
+
+ //Delay_ms(100);
 //  Serial_Printf("gyroX = %d\r\n",gyroX);
-//  Delay_ms(100);
+//  //Delay_ms(100);
 //  Serial_Printf("gyroY = %d\r\n",gyroY);
-//  Delay_ms(100);
+//  //Delay_ms(100);
 //  Serial_Printf("gyroZ = %d\r\n",gyroZ);
-//  Delay_ms(100);
+//  //Delay_ms(100);
     
     
-		Data = (TIM_GetCapture2(TIM2)+1)*10/(TIM_GetCapture1(TIM2)+1);
+		//Data = (TIM_GetCapture2(TIM2)+1)*10/(TIM_GetCapture1(TIM2)+1);
 //		Data = TIM_GetCapture1(TIM2);
 	
-		Duty = Data*5/7;
-    PWM_SetDuty1(Duty);
-		PWM_SetDuty2(Duty);
-		PWM_SetDuty3(Duty);
-		PWM_SetDuty4(Duty);
+		// Duty = Data*5/7;
+    // PWM_SetDuty1(Duty);
+		// PWM_SetDuty2(Duty);
+		// PWM_SetDuty3(Duty);
+		// PWM_SetDuty4(Duty);
 		
-		Serial_Printf("Data:%d\r\n",Duty);
+		// Serial_Printf("Data:%d\r\n",Duty);
 //    PWM_SetDuty1(10);//PC6
 //    PWM_SetDuty2(12);//PC7
 //    PWM_SetDuty3(14);//PC8

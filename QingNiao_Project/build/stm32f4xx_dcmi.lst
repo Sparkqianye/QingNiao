@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccIWpMQ6.s 			page 1
+ARM GAS  /tmp/cc36QAUU.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
   28:./Library/stm32f4xx_dcmi.c ****   
   29:./Library/stm32f4xx_dcmi.c ****       (#) DCMI pins configuration 
   30:./Library/stm32f4xx_dcmi.c ****         (++) Connect the involved DCMI pins to AF13 using the following function 
-ARM GAS  /tmp/ccIWpMQ6.s 			page 2
+ARM GAS  /tmp/cc36QAUU.s 			page 2
 
 
   31:./Library/stm32f4xx_dcmi.c ****             GPIO_PinAFConfig(GPIOx, GPIO_PinSourcex, GPIO_AF_DCMI); 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
   85:./Library/stm32f4xx_dcmi.c **** 
   86:./Library/stm32f4xx_dcmi.c **** /** @defgroup DCMI 
   87:./Library/stm32f4xx_dcmi.c ****   * @brief DCMI driver modules
-ARM GAS  /tmp/ccIWpMQ6.s 			page 3
+ARM GAS  /tmp/cc36QAUU.s 			page 3
 
 
   88:./Library/stm32f4xx_dcmi.c ****   * @{
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
   46              		.loc 1 124 3 is_stmt 1 view .LVU7
   47              		.loc 1 124 14 is_stmt 0 view .LVU8
   48 000c 9A61     		str	r2, [r3, #24]
-ARM GAS  /tmp/ccIWpMQ6.s 			page 4
+ARM GAS  /tmp/cc36QAUU.s 			page 4
 
 
  125:./Library/stm32f4xx_dcmi.c ****   DCMI->ESUR = 0x0;
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
   91              	.LVL1:
  139:./Library/stm32f4xx_dcmi.c ****   
  140:./Library/stm32f4xx_dcmi.c ****   /* Check the parameters */
-ARM GAS  /tmp/ccIWpMQ6.s 			page 5
+ARM GAS  /tmp/cc36QAUU.s 			page 5
 
 
  141:./Library/stm32f4xx_dcmi.c ****   assert_param(IS_DCMI_CAPTURE_MODE(DCMI_InitStruct->DCMI_CaptureMode));
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  123              		.loc 1 163 37 view .LVU37
  124 001e 8588     		ldrh	r5, [r0, #4]
  164:./Library/stm32f4xx_dcmi.c ****                      DCMI_InitStruct->DCMI_VSPolarity |
-ARM GAS  /tmp/ccIWpMQ6.s 			page 6
+ARM GAS  /tmp/cc36QAUU.s 			page 6
 
 
  125              		.loc 1 164 37 view .LVU38
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  176:./Library/stm32f4xx_dcmi.c ****   * @retval None
  177:./Library/stm32f4xx_dcmi.c ****   */
  178:./Library/stm32f4xx_dcmi.c **** void DCMI_StructInit(DCMI_InitTypeDef* DCMI_InitStruct)
-ARM GAS  /tmp/ccIWpMQ6.s 			page 7
+ARM GAS  /tmp/cc36QAUU.s 			page 7
 
 
  179:./Library/stm32f4xx_dcmi.c **** {
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  193:./Library/stm32f4xx_dcmi.c ****   * @note   This function should be called before to enable and start the DCMI interface.   
  194:./Library/stm32f4xx_dcmi.c ****   * @param  DCMI_CROPInitStruct:  pointer to a DCMI_CROPInitTypeDef structure that 
  195:./Library/stm32f4xx_dcmi.c ****   *         contains the configuration information for the DCMI peripheral CROP mode.
-ARM GAS  /tmp/ccIWpMQ6.s 			page 8
+ARM GAS  /tmp/cc36QAUU.s 			page 8
 
 
  196:./Library/stm32f4xx_dcmi.c ****   * @retval None
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  249              	DCMI_CROPCmd:
  250              	.LVL9:
  251              	.LFB127:
-ARM GAS  /tmp/ccIWpMQ6.s 			page 9
+ARM GAS  /tmp/cc36QAUU.s 			page 9
 
 
  208:./Library/stm32f4xx_dcmi.c **** 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  282 001c 00000550 		.word	1342504960
  283              		.cfi_endproc
  284              	.LFE127:
-ARM GAS  /tmp/ccIWpMQ6.s 			page 10
+ARM GAS  /tmp/cc36QAUU.s 			page 10
 
 
  286              		.section	.text.DCMI_SetEmbeddedSynchroCodes,"ax",%progbits
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  323              	.L18:
  324 001c 00000550 		.word	1342504960
  325              		.cfi_endproc
-ARM GAS  /tmp/ccIWpMQ6.s 			page 11
+ARM GAS  /tmp/cc36QAUU.s 			page 11
 
 
  326              	.LFE128:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  360              		.loc 1 267 14 view .LVU107
  361 0012 23F00803 		bic	r3, r3, #8
  362 0016 1360     		str	r3, [r2]
-ARM GAS  /tmp/ccIWpMQ6.s 			page 12
+ARM GAS  /tmp/cc36QAUU.s 			page 12
 
 
  268:./Library/stm32f4xx_dcmi.c ****   }
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  389              		.loc 1 297 6 is_stmt 0 view .LVU112
  390 0000 28B1     		cbz	r0, .L26
  298:./Library/stm32f4xx_dcmi.c ****   {
-ARM GAS  /tmp/ccIWpMQ6.s 			page 13
+ARM GAS  /tmp/cc36QAUU.s 			page 13
 
 
  299:./Library/stm32f4xx_dcmi.c ****     /* Enable the DCMI by setting ENABLE bit */
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  429              		@ frame_needed = 0, uses_anonymous_args = 0
  430              		@ link register save eliminated.
  317:./Library/stm32f4xx_dcmi.c ****   /* Check the parameters */
-ARM GAS  /tmp/ccIWpMQ6.s 			page 14
+ARM GAS  /tmp/cc36QAUU.s 			page 14
 
 
  318:./Library/stm32f4xx_dcmi.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  336:./Library/stm32f4xx_dcmi.c ****   */
  337:./Library/stm32f4xx_dcmi.c **** uint32_t DCMI_ReadData(void)
  338:./Library/stm32f4xx_dcmi.c **** {
-ARM GAS  /tmp/ccIWpMQ6.s 			page 15
+ARM GAS  /tmp/cc36QAUU.s 			page 15
 
 
  469              		.loc 1 338 1 is_stmt 1 view -0
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  367:./Library/stm32f4xx_dcmi.c ****   *          This parameter can be: ENABLE or DISABLE.
  368:./Library/stm32f4xx_dcmi.c ****   * @retval None
  369:./Library/stm32f4xx_dcmi.c ****   */
-ARM GAS  /tmp/ccIWpMQ6.s 			page 16
+ARM GAS  /tmp/cc36QAUU.s 			page 16
 
 
  370:./Library/stm32f4xx_dcmi.c **** void DCMI_ITConfig(uint16_t DCMI_IT, FunctionalState NewState)
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  534 001a 00BF     		.align	2
  535              	.L41:
  536 001c 00000550 		.word	1342504960
-ARM GAS  /tmp/ccIWpMQ6.s 			page 17
+ARM GAS  /tmp/cc36QAUU.s 			page 17
 
 
  537              		.cfi_endproc
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  561 0000 030B     		lsrs	r3, r0, #12
  562              	.LVL19:
  563              		.loc 1 418 6 view .LVU157
-ARM GAS  /tmp/ccIWpMQ6.s 			page 18
+ARM GAS  /tmp/cc36QAUU.s 			page 18
 
 
  564 0002 05D1     		bne	.L44
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  597              	.LVL26:
  598              	.L49:
  424:./Library/stm32f4xx_dcmi.c ****   }
-ARM GAS  /tmp/ccIWpMQ6.s 			page 19
+ARM GAS  /tmp/cc36QAUU.s 			page 19
 
 
  599              		.loc 1 424 5 is_stmt 1 view .LVU171
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  454:./Library/stm32f4xx_dcmi.c **** void DCMI_ClearFlag(uint16_t DCMI_FLAG)
  455:./Library/stm32f4xx_dcmi.c **** {
  632              		.loc 1 455 1 is_stmt 1 view -0
-ARM GAS  /tmp/ccIWpMQ6.s 			page 20
+ARM GAS  /tmp/cc36QAUU.s 			page 20
 
 
  633              		.cfi_startproc
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  666              		.loc 1 478 3 view .LVU184
  479:./Library/stm32f4xx_dcmi.c ****   uint32_t itstatus = 0;
  667              		.loc 1 479 3 view .LVU185
-ARM GAS  /tmp/ccIWpMQ6.s 			page 21
+ARM GAS  /tmp/cc36QAUU.s 			page 21
 
 
  480:./Library/stm32f4xx_dcmi.c ****   
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  496:./Library/stm32f4xx_dcmi.c **** 
  497:./Library/stm32f4xx_dcmi.c **** /**
  498:./Library/stm32f4xx_dcmi.c ****   * @brief  Clears the DCMI's interrupt pending bits.
-ARM GAS  /tmp/ccIWpMQ6.s 			page 22
+ARM GAS  /tmp/cc36QAUU.s 			page 22
 
 
  499:./Library/stm32f4xx_dcmi.c ****   * @param  DCMI_IT: specifies the DCMI interrupt pending bit to clear.
@@ -1299,54 +1299,54 @@ ARM GAS  /tmp/ccIWpMQ6.s 			page 1
  728              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
  729              		.file 3 "./CORE/stm32f4xx.h"
  730              		.file 4 "./Library/stm32f4xx_dcmi.h"
-ARM GAS  /tmp/ccIWpMQ6.s 			page 23
+ARM GAS  /tmp/cc36QAUU.s 			page 23
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_dcmi.c
-     /tmp/ccIWpMQ6.s:21     .text.DCMI_DeInit:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:27     .text.DCMI_DeInit:0000000000000000 DCMI_DeInit
-     /tmp/ccIWpMQ6.s:63     .text.DCMI_DeInit:0000000000000018 $d
-     /tmp/ccIWpMQ6.s:68     .text.DCMI_Init:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:74     .text.DCMI_Init:0000000000000000 DCMI_Init
-     /tmp/ccIWpMQ6.s:153    .text.DCMI_Init:0000000000000044 $d
-     /tmp/ccIWpMQ6.s:158    .text.DCMI_StructInit:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:164    .text.DCMI_StructInit:0000000000000000 DCMI_StructInit
-     /tmp/ccIWpMQ6.s:200    .text.DCMI_CROPConfig:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:206    .text.DCMI_CROPConfig:0000000000000000 DCMI_CROPConfig
-     /tmp/ccIWpMQ6.s:238    .text.DCMI_CROPConfig:0000000000000018 $d
-     /tmp/ccIWpMQ6.s:243    .text.DCMI_CROPCmd:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:249    .text.DCMI_CROPCmd:0000000000000000 DCMI_CROPCmd
-     /tmp/ccIWpMQ6.s:282    .text.DCMI_CROPCmd:000000000000001c $d
-     /tmp/ccIWpMQ6.s:287    .text.DCMI_SetEmbeddedSynchroCodes:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:293    .text.DCMI_SetEmbeddedSynchroCodes:0000000000000000 DCMI_SetEmbeddedSynchroCodes
-     /tmp/ccIWpMQ6.s:324    .text.DCMI_SetEmbeddedSynchroCodes:000000000000001c $d
-     /tmp/ccIWpMQ6.s:329    .text.DCMI_JPEGCmd:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:335    .text.DCMI_JPEGCmd:0000000000000000 DCMI_JPEGCmd
-     /tmp/ccIWpMQ6.s:368    .text.DCMI_JPEGCmd:000000000000001c $d
-     /tmp/ccIWpMQ6.s:373    .text.DCMI_Cmd:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:379    .text.DCMI_Cmd:0000000000000000 DCMI_Cmd
-     /tmp/ccIWpMQ6.s:412    .text.DCMI_Cmd:000000000000001c $d
-     /tmp/ccIWpMQ6.s:417    .text.DCMI_CaptureCmd:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:423    .text.DCMI_CaptureCmd:0000000000000000 DCMI_CaptureCmd
-     /tmp/ccIWpMQ6.s:456    .text.DCMI_CaptureCmd:000000000000001c $d
-     /tmp/ccIWpMQ6.s:461    .text.DCMI_ReadData:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:467    .text.DCMI_ReadData:0000000000000000 DCMI_ReadData
-     /tmp/ccIWpMQ6.s:483    .text.DCMI_ReadData:0000000000000008 $d
-     /tmp/ccIWpMQ6.s:488    .text.DCMI_ITConfig:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:494    .text.DCMI_ITConfig:0000000000000000 DCMI_ITConfig
-     /tmp/ccIWpMQ6.s:536    .text.DCMI_ITConfig:000000000000001c $d
-     /tmp/ccIWpMQ6.s:541    .text.DCMI_GetFlagStatus:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:547    .text.DCMI_GetFlagStatus:0000000000000000 DCMI_GetFlagStatus
-     /tmp/ccIWpMQ6.s:618    .text.DCMI_GetFlagStatus:0000000000000024 $d
-     /tmp/ccIWpMQ6.s:623    .text.DCMI_ClearFlag:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:629    .text.DCMI_ClearFlag:0000000000000000 DCMI_ClearFlag
-     /tmp/ccIWpMQ6.s:647    .text.DCMI_ClearFlag:0000000000000008 $d
-     /tmp/ccIWpMQ6.s:652    .text.DCMI_GetITStatus:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:658    .text.DCMI_GetITStatus:0000000000000000 DCMI_GetITStatus
-     /tmp/ccIWpMQ6.s:694    .text.DCMI_GetITStatus:0000000000000010 $d
-     /tmp/ccIWpMQ6.s:699    .text.DCMI_ClearITPendingBit:0000000000000000 $t
-     /tmp/ccIWpMQ6.s:705    .text.DCMI_ClearITPendingBit:0000000000000000 DCMI_ClearITPendingBit
-     /tmp/ccIWpMQ6.s:722    .text.DCMI_ClearITPendingBit:0000000000000008 $d
+     /tmp/cc36QAUU.s:21     .text.DCMI_DeInit:0000000000000000 $t
+     /tmp/cc36QAUU.s:27     .text.DCMI_DeInit:0000000000000000 DCMI_DeInit
+     /tmp/cc36QAUU.s:63     .text.DCMI_DeInit:0000000000000018 $d
+     /tmp/cc36QAUU.s:68     .text.DCMI_Init:0000000000000000 $t
+     /tmp/cc36QAUU.s:74     .text.DCMI_Init:0000000000000000 DCMI_Init
+     /tmp/cc36QAUU.s:153    .text.DCMI_Init:0000000000000044 $d
+     /tmp/cc36QAUU.s:158    .text.DCMI_StructInit:0000000000000000 $t
+     /tmp/cc36QAUU.s:164    .text.DCMI_StructInit:0000000000000000 DCMI_StructInit
+     /tmp/cc36QAUU.s:200    .text.DCMI_CROPConfig:0000000000000000 $t
+     /tmp/cc36QAUU.s:206    .text.DCMI_CROPConfig:0000000000000000 DCMI_CROPConfig
+     /tmp/cc36QAUU.s:238    .text.DCMI_CROPConfig:0000000000000018 $d
+     /tmp/cc36QAUU.s:243    .text.DCMI_CROPCmd:0000000000000000 $t
+     /tmp/cc36QAUU.s:249    .text.DCMI_CROPCmd:0000000000000000 DCMI_CROPCmd
+     /tmp/cc36QAUU.s:282    .text.DCMI_CROPCmd:000000000000001c $d
+     /tmp/cc36QAUU.s:287    .text.DCMI_SetEmbeddedSynchroCodes:0000000000000000 $t
+     /tmp/cc36QAUU.s:293    .text.DCMI_SetEmbeddedSynchroCodes:0000000000000000 DCMI_SetEmbeddedSynchroCodes
+     /tmp/cc36QAUU.s:324    .text.DCMI_SetEmbeddedSynchroCodes:000000000000001c $d
+     /tmp/cc36QAUU.s:329    .text.DCMI_JPEGCmd:0000000000000000 $t
+     /tmp/cc36QAUU.s:335    .text.DCMI_JPEGCmd:0000000000000000 DCMI_JPEGCmd
+     /tmp/cc36QAUU.s:368    .text.DCMI_JPEGCmd:000000000000001c $d
+     /tmp/cc36QAUU.s:373    .text.DCMI_Cmd:0000000000000000 $t
+     /tmp/cc36QAUU.s:379    .text.DCMI_Cmd:0000000000000000 DCMI_Cmd
+     /tmp/cc36QAUU.s:412    .text.DCMI_Cmd:000000000000001c $d
+     /tmp/cc36QAUU.s:417    .text.DCMI_CaptureCmd:0000000000000000 $t
+     /tmp/cc36QAUU.s:423    .text.DCMI_CaptureCmd:0000000000000000 DCMI_CaptureCmd
+     /tmp/cc36QAUU.s:456    .text.DCMI_CaptureCmd:000000000000001c $d
+     /tmp/cc36QAUU.s:461    .text.DCMI_ReadData:0000000000000000 $t
+     /tmp/cc36QAUU.s:467    .text.DCMI_ReadData:0000000000000000 DCMI_ReadData
+     /tmp/cc36QAUU.s:483    .text.DCMI_ReadData:0000000000000008 $d
+     /tmp/cc36QAUU.s:488    .text.DCMI_ITConfig:0000000000000000 $t
+     /tmp/cc36QAUU.s:494    .text.DCMI_ITConfig:0000000000000000 DCMI_ITConfig
+     /tmp/cc36QAUU.s:536    .text.DCMI_ITConfig:000000000000001c $d
+     /tmp/cc36QAUU.s:541    .text.DCMI_GetFlagStatus:0000000000000000 $t
+     /tmp/cc36QAUU.s:547    .text.DCMI_GetFlagStatus:0000000000000000 DCMI_GetFlagStatus
+     /tmp/cc36QAUU.s:618    .text.DCMI_GetFlagStatus:0000000000000024 $d
+     /tmp/cc36QAUU.s:623    .text.DCMI_ClearFlag:0000000000000000 $t
+     /tmp/cc36QAUU.s:629    .text.DCMI_ClearFlag:0000000000000000 DCMI_ClearFlag
+     /tmp/cc36QAUU.s:647    .text.DCMI_ClearFlag:0000000000000008 $d
+     /tmp/cc36QAUU.s:652    .text.DCMI_GetITStatus:0000000000000000 $t
+     /tmp/cc36QAUU.s:658    .text.DCMI_GetITStatus:0000000000000000 DCMI_GetITStatus
+     /tmp/cc36QAUU.s:694    .text.DCMI_GetITStatus:0000000000000010 $d
+     /tmp/cc36QAUU.s:699    .text.DCMI_ClearITPendingBit:0000000000000000 $t
+     /tmp/cc36QAUU.s:705    .text.DCMI_ClearITPendingBit:0000000000000000 DCMI_ClearITPendingBit
+     /tmp/cc36QAUU.s:722    .text.DCMI_ClearITPendingBit:0000000000000008 $d
 
 NO UNDEFINED SYMBOLS

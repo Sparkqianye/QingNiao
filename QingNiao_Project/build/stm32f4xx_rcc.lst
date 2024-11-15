@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccybMCCA.s 			page 1
+ARM GAS  /tmp/ccuKD78v.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
   28:./Library/stm32f4xx_rcc.c ****     [..]          
   29:./Library/stm32f4xx_rcc.c ****       Once the device started from reset, the user application has to:
   30:./Library/stm32f4xx_rcc.c ****       (+) Configure the clock source to be used to drive the System clock
-ARM GAS  /tmp/ccybMCCA.s 			page 2
+ARM GAS  /tmp/ccuKD78v.s 			page 2
 
 
   31:./Library/stm32f4xx_rcc.c ****           (if the application needs higher frequency/performance)
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
   85:./Library/stm32f4xx_rcc.c **** 
   86:./Library/stm32f4xx_rcc.c **** /* --- CFGR Register ---*/
   87:./Library/stm32f4xx_rcc.c **** /* Alias word address of I2SSRC bit */
-ARM GAS  /tmp/ccybMCCA.s 			page 3
+ARM GAS  /tmp/ccuKD78v.s 			page 3
 
 
   88:./Library/stm32f4xx_rcc.c **** #define CFGR_OFFSET               (RCC_OFFSET + 0x08)
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  142:./Library/stm32f4xx_rcc.c **** #define BDCR_ADDRESS              (PERIPH_BASE + BDCR_OFFSET)
  143:./Library/stm32f4xx_rcc.c **** 
  144:./Library/stm32f4xx_rcc.c **** /* Private macro -------------------------------------------------------------*/
-ARM GAS  /tmp/ccybMCCA.s 			page 4
+ARM GAS  /tmp/ccuKD78v.s 			page 4
 
 
  145:./Library/stm32f4xx_rcc.c **** /* Private variables ---------------------------------------------------------*/
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  199:./Library/stm32f4xx_rcc.c ****           clock (through a configurable prescaler) on PC9 pin.
  200:./Library/stm32f4xx_rcc.c ****  @endverbatim
  201:./Library/stm32f4xx_rcc.c ****   * @{
-ARM GAS  /tmp/ccybMCCA.s 			page 5
+ARM GAS  /tmp/ccuKD78v.s 			page 5
 
 
  202:./Library/stm32f4xx_rcc.c ****   */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
   54 001a 074A     		ldr	r2, .L2+4
   55 001c 5A60     		str	r2, [r3, #4]
  231:./Library/stm32f4xx_rcc.c **** 
-ARM GAS  /tmp/ccybMCCA.s 			page 6
+ARM GAS  /tmp/ccuKD78v.s 			page 6
 
 
  232:./Library/stm32f4xx_rcc.c **** #if defined(STM32F40_41xxx) || defined(STM32F427_437xx) || defined(STM32F429_439xx) || defined(STM3
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
   87              		.thumb
   88              		.thumb_func
   90              	RCC_HSEConfig:
-ARM GAS  /tmp/ccybMCCA.s 			page 7
+ARM GAS  /tmp/ccuKD78v.s 			page 7
 
 
   91              	.LVL0:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  113              		.cfi_endproc
  114              	.LFE124:
  116              		.section	.text.RCC_AdjustHSICalibrationValue,"ax",%progbits
-ARM GAS  /tmp/ccybMCCA.s 			page 8
+ARM GAS  /tmp/ccuKD78v.s 			page 8
 
 
  117              		.align	1
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  126              		.loc 1 333 1 is_stmt 1 view -0
  127              		.cfi_startproc
  128              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccybMCCA.s 			page 9
+ARM GAS  /tmp/ccuKD78v.s 			page 9
 
 
  129              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  351:./Library/stm32f4xx_rcc.c ****   * @brief  Enables or disables the Internal High Speed oscillator (HSI).
  352:./Library/stm32f4xx_rcc.c ****   * @note   The HSI is stopped by hardware when entering STOP and STANDBY modes.
  353:./Library/stm32f4xx_rcc.c ****   *         It is used (enabled by hardware) as system clock source after startup
-ARM GAS  /tmp/ccybMCCA.s 			page 10
+ARM GAS  /tmp/ccuKD78v.s 			page 10
 
 
  354:./Library/stm32f4xx_rcc.c ****   *         from Reset, wakeup from STOP and STANDBY mode, or in case of failure
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  381:./Library/stm32f4xx_rcc.c ****   *         (to be done once after reset).  
  382:./Library/stm32f4xx_rcc.c ****   * @note   After enabling the LSE (RCC_LSE_ON or RCC_LSE_Bypass), the application
  383:./Library/stm32f4xx_rcc.c ****   *         software should wait on LSERDY flag to be set indicating that LSE clock
-ARM GAS  /tmp/ccybMCCA.s 			page 11
+ARM GAS  /tmp/ccuKD78v.s 			page 11
 
 
  384:./Library/stm32f4xx_rcc.c ****   *         is stable and can be used to clock the RTC.
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  223              		.loc 1 411 7 is_stmt 1 view .LVU54
  224 001e 7047     		bx	lr
  225              	.L15:
-ARM GAS  /tmp/ccybMCCA.s 			page 12
+ARM GAS  /tmp/ccuKD78v.s 			page 12
 
 
  412:./Library/stm32f4xx_rcc.c ****     case RCC_LSE_Bypass:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  437:./Library/stm32f4xx_rcc.c **** 
  438:./Library/stm32f4xx_rcc.c ****   *(__IO uint32_t *) CSR_LSION_BB = (uint32_t)NewState;
  257              		.loc 1 438 3 view .LVU61
-ARM GAS  /tmp/ccybMCCA.s 			page 13
+ARM GAS  /tmp/ccuKD78v.s 			page 13
 
 
  258              		.loc 1 438 35 is_stmt 0 view .LVU62
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  473:./Library/stm32f4xx_rcc.c ****   *
  474:./Library/stm32f4xx_rcc.c ****   * @note   If the USB OTG FS is used in your application, you have to set the
  475:./Library/stm32f4xx_rcc.c ****   *         PLLQ parameter correctly to have 48 MHz clock for the USB. However,
-ARM GAS  /tmp/ccybMCCA.s 			page 14
+ARM GAS  /tmp/ccuKD78v.s 			page 14
 
 
  476:./Library/stm32f4xx_rcc.c ****   *         the SDIO and RNG need a frequency lower than or equal to 48 MHz to work
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  530:./Library/stm32f4xx_rcc.c ****   * @retval None
  531:./Library/stm32f4xx_rcc.c ****   */
  532:./Library/stm32f4xx_rcc.c **** void RCC_PLLConfig(uint32_t RCC_PLLSource, uint32_t PLLM, uint32_t PLLN, uint32_t PLLP, uint32_t PL
-ARM GAS  /tmp/ccybMCCA.s 			page 15
+ARM GAS  /tmp/ccuKD78v.s 			page 15
 
 
  533:./Library/stm32f4xx_rcc.c **** {
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  324              		.thumb_func
  326              	RCC_PLLCmd:
  327              	.LVL12:
-ARM GAS  /tmp/ccybMCCA.s 			page 16
+ARM GAS  /tmp/ccuKD78v.s 			page 16
 
 
  328              	.LFB131:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  570:./Library/stm32f4xx_rcc.c ****   * @note   This function must be used only when the PLLI2S is disabled.
  571:./Library/stm32f4xx_rcc.c ****   * @note   PLLI2S clock source is common with the main PLL (configured in 
  572:./Library/stm32f4xx_rcc.c ****   *         RCC_PLLConfig function )  
-ARM GAS  /tmp/ccybMCCA.s 			page 17
+ARM GAS  /tmp/ccuKD78v.s 			page 17
 
 
  573:./Library/stm32f4xx_rcc.c ****   *             
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  594:./Library/stm32f4xx_rcc.c **** #endif /* STM32F40_41xxx || STM32F401xx */
  595:./Library/stm32f4xx_rcc.c **** 
  596:./Library/stm32f4xx_rcc.c **** #if defined(STM32F411xE)
-ARM GAS  /tmp/ccybMCCA.s 			page 18
+ARM GAS  /tmp/ccuKD78v.s 			page 18
 
 
  597:./Library/stm32f4xx_rcc.c **** /**
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  651:./Library/stm32f4xx_rcc.c ****   *          This parameter must be a number between 2 and 15.
  652:./Library/stm32f4xx_rcc.c ****   *                 
  653:./Library/stm32f4xx_rcc.c ****   * @param  PLLI2SR: specifies the division factor for I2S clock
-ARM GAS  /tmp/ccybMCCA.s 			page 19
+ARM GAS  /tmp/ccuKD78v.s 			page 19
 
 
  654:./Library/stm32f4xx_rcc.c ****   *          This parameter must be a number between 2 and 7.
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  708:./Library/stm32f4xx_rcc.c ****   /* Check the parameters */
  709:./Library/stm32f4xx_rcc.c ****   assert_param(IS_RCC_PLLI2SM_VALUE(PLLI2SM));
  710:./Library/stm32f4xx_rcc.c ****   assert_param(IS_RCC_PLLI2SN_VALUE(PLLI2SN));
-ARM GAS  /tmp/ccybMCCA.s 			page 20
+ARM GAS  /tmp/ccuKD78v.s 			page 20
 
 
  711:./Library/stm32f4xx_rcc.c ****   assert_param(IS_RCC_PLLI2SP_VALUE(PLLI2SP));
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  738:./Library/stm32f4xx_rcc.c ****   * @note   This function must be used only when the PLLSAI is disabled.
  739:./Library/stm32f4xx_rcc.c ****   * @note   PLLSAI clock source is common with the main PLL (configured in 
  740:./Library/stm32f4xx_rcc.c ****   *         RCC_PLLConfig function )  
-ARM GAS  /tmp/ccybMCCA.s 			page 21
+ARM GAS  /tmp/ccuKD78v.s 			page 21
 
 
  741:./Library/stm32f4xx_rcc.c ****   *
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  795:./Library/stm32f4xx_rcc.c ****   *         This parameter must be a number between 2 and 15.
  796:./Library/stm32f4xx_rcc.c ****   *   
  797:./Library/stm32f4xx_rcc.c ****   * @retval None
-ARM GAS  /tmp/ccybMCCA.s 			page 22
+ARM GAS  /tmp/ccuKD78v.s 			page 22
 
 
  798:./Library/stm32f4xx_rcc.c ****   */
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  432 0000 0906     		lsls	r1, r1, #24
  433              	.LVL17:
  434              		.loc 1 841 36 view .LVU103
-ARM GAS  /tmp/ccybMCCA.s 			page 23
+ARM GAS  /tmp/ccuKD78v.s 			page 23
 
 
  435 0002 41EA8011 		orr	r1, r1, r0, lsl #6
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  473 0006 00BF     		.align	2
  474              	.L38:
  475 0008 00004742 		.word	1111949312
-ARM GAS  /tmp/ccybMCCA.s 			page 24
+ARM GAS  /tmp/ccuKD78v.s 			page 24
 
 
  476              		.cfi_endproc
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  516              	.LVL20:
  517              	.LFB137:
  878:./Library/stm32f4xx_rcc.c **** 
-ARM GAS  /tmp/ccybMCCA.s 			page 25
+ARM GAS  /tmp/ccuKD78v.s 			page 25
 
 
  879:./Library/stm32f4xx_rcc.c **** /**
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  539              		.loc 1 911 10 view .LVU127
  540 000a 1843     		orrs	r0, r0, r3
  541              	.LVL24:
-ARM GAS  /tmp/ccybMCCA.s 			page 26
+ARM GAS  /tmp/ccuKD78v.s 			page 26
 
 
  912:./Library/stm32f4xx_rcc.c ****   
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  566              		@ args = 0, pretend = 0, frame = 0
  567              		@ frame_needed = 0, uses_anonymous_args = 0
  568              		@ link register save eliminated.
-ARM GAS  /tmp/ccybMCCA.s 			page 27
+ARM GAS  /tmp/ccuKD78v.s 			page 27
 
 
  944:./Library/stm32f4xx_rcc.c ****   uint32_t tmpreg = 0;
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  603              		.syntax unified
  604              		.thumb
  605              		.thumb_func
-ARM GAS  /tmp/ccybMCCA.s 			page 28
+ARM GAS  /tmp/ccuKD78v.s 			page 28
 
 
  607              	RCC_SYSCLKConfig:
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1016:./Library/stm32f4xx_rcc.c ****  |---------------|----------------|----------------|-----------------|-----------------|
 1017:./Library/stm32f4xx_rcc.c ****  |3WS(4CPU cycle)|90 < HCLK <= 120|72 < HCLK <= 96 |66 < HCLK <= 88  |60 < HCLK <= 80  |
 1018:./Library/stm32f4xx_rcc.c ****  |---------------|----------------|----------------|-----------------|-----------------|
-ARM GAS  /tmp/ccybMCCA.s 			page 29
+ARM GAS  /tmp/ccuKD78v.s 			page 29
 
 
 1019:./Library/stm32f4xx_rcc.c ****  |4WS(5CPU cycle)|120< HCLK <= 150|96 < HCLK <= 120|88 < HCLK <= 110 |80 < HCLK <= 100 |
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1073:./Library/stm32f4xx_rcc.c ****  +-------------------------------------------------------------------------------------+
 1074:./Library/stm32f4xx_rcc.c **** 
 1075:./Library/stm32f4xx_rcc.c ****       (#) For STM32F410xx/STM32F411xE devices, the maximum frequency of the SYSCLK and HCLK is 100 
-ARM GAS  /tmp/ccybMCCA.s 			page 30
+ARM GAS  /tmp/ccuKD78v.s 			page 30
 
 
 1076:./Library/stm32f4xx_rcc.c ****           PCLK2 100 MHz and PCLK1 50 MHz. Depending on the device voltage range, the maximum 
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1130:./Library/stm32f4xx_rcc.c ****   *         If a clock source which is not yet ready is selected, the switch will
 1131:./Library/stm32f4xx_rcc.c ****   *         occur when the clock source will be ready. 
 1132:./Library/stm32f4xx_rcc.c ****   *         You can use RCC_GetSYSCLKSource() function to know which clock is
-ARM GAS  /tmp/ccybMCCA.s 			page 31
+ARM GAS  /tmp/ccuKD78v.s 			page 31
 
 
 1133:./Library/stm32f4xx_rcc.c ****   *         currently used as system clock source. 
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  637              	.L50:
  638 0010 00380240 		.word	1073887232
  639              		.cfi_endproc
-ARM GAS  /tmp/ccybMCCA.s 			page 32
+ARM GAS  /tmp/ccuKD78v.s 			page 32
 
 
  640              	.LFE139:
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1178:./Library/stm32f4xx_rcc.c ****   * @note   Depending on the device voltage range, the software has to set correctly
 1179:./Library/stm32f4xx_rcc.c ****   *         these bits to ensure that HCLK not exceed the maximum allowed frequency
 1180:./Library/stm32f4xx_rcc.c ****   *         (for more details refer to section above
-ARM GAS  /tmp/ccybMCCA.s 			page 33
+ARM GAS  /tmp/ccuKD78v.s 			page 33
 
 
 1181:./Library/stm32f4xx_rcc.c ****   *           "CPU, AHB and APB busses clocks configuration functions")
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  702 000a 9360     		str	r3, [r2, #8]
 1213:./Library/stm32f4xx_rcc.c **** }
  703              		.loc 1 1213 1 view .LVU172
-ARM GAS  /tmp/ccybMCCA.s 			page 34
+ARM GAS  /tmp/ccuKD78v.s 			page 34
 
 
  704 000c 7047     		bx	lr
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  736 0004 23F4E053 		bic	r3, r3, #7168
  737              	.LVL40:
 1238:./Library/stm32f4xx_rcc.c **** 
-ARM GAS  /tmp/ccybMCCA.s 			page 35
+ARM GAS  /tmp/ccuKD78v.s 			page 35
 
 
 1239:./Library/stm32f4xx_rcc.c ****   /* Set PPRE1[2:0] bits according to RCC_HCLK value */
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1263:./Library/stm32f4xx_rcc.c ****   assert_param(IS_RCC_PCLK(RCC_HCLK));
  770              		.loc 1 1263 3 view .LVU187
 1264:./Library/stm32f4xx_rcc.c **** 
-ARM GAS  /tmp/ccybMCCA.s 			page 36
+ARM GAS  /tmp/ccuKD78v.s 			page 36
 
 
 1265:./Library/stm32f4xx_rcc.c ****   tmpreg = RCC->CFGR;
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1286:./Library/stm32f4xx_rcc.c ****   * @note     If SYSCLK source is PLL, function returns values based on HSE_VALUE(**) 
 1287:./Library/stm32f4xx_rcc.c ****   *           or HSI_VALUE(*) multiplied/divided by the PLL factors.         
 1288:./Library/stm32f4xx_rcc.c ****   * @note     (*) HSI_VALUE is a constant defined in stm32f4xx.h file (default value
-ARM GAS  /tmp/ccybMCCA.s 			page 37
+ARM GAS  /tmp/ccuKD78v.s 			page 37
 
 
 1289:./Library/stm32f4xx_rcc.c ****   *               16 MHz) but the real value may vary depending on the variations
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  828 000e 082B     		cmp	r3, #8
  829 0010 24D0     		beq	.L66
  830 0012 13B1     		cbz	r3, .L72
-ARM GAS  /tmp/ccybMCCA.s 			page 38
+ARM GAS  /tmp/ccuKD78v.s 			page 38
 
 
 1321:./Library/stm32f4xx_rcc.c ****   {
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1375:./Library/stm32f4xx_rcc.c ****   default:
 1376:./Library/stm32f4xx_rcc.c ****     RCC_Clocks->SYSCLK_Frequency = HSI_VALUE;
  831              		.loc 1 1376 5 view .LVU204
-ARM GAS  /tmp/ccybMCCA.s 			page 39
+ARM GAS  /tmp/ccuKD78v.s 			page 39
 
 
  832              		.loc 1 1376 34 is_stmt 0 view .LVU205
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  872 0030 4360     		str	r3, [r0, #4]
 1387:./Library/stm32f4xx_rcc.c **** 
 1388:./Library/stm32f4xx_rcc.c ****   /* Get PCLK1 prescaler */
-ARM GAS  /tmp/ccybMCCA.s 			page 40
+ARM GAS  /tmp/ccuKD78v.s 			page 40
 
 
 1389:./Library/stm32f4xx_rcc.c ****   tmp = RCC->CFGR & RCC_CFGR_PPRE1;
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  914              		.loc 1 1401 1 view .LVU242
  915 0050 5DF8044B 		ldr	r4, [sp], #4
  916              	.LCFI1:
-ARM GAS  /tmp/ccybMCCA.s 			page 41
+ARM GAS  /tmp/ccuKD78v.s 			page 41
 
 
  917              		.cfi_remember_state
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  956              		.loc 1 1339 42 view .LVU257
  957 0072 0D4A     		ldr	r2, .L73
  958              	.LVL72:
-ARM GAS  /tmp/ccybMCCA.s 			page 42
+ARM GAS  /tmp/ccuKD78v.s 			page 42
 
 
 1339:./Library/stm32f4xx_rcc.c ****     }
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1344:./Library/stm32f4xx_rcc.c ****     }
  997              		.loc 1 1344 72 view .LVU274
  998 009c C2F38812 		ubfx	r2, r2, #6, #9
-ARM GAS  /tmp/ccybMCCA.s 			page 43
+ARM GAS  /tmp/ccuKD78v.s 			page 43
 
 
 1344:./Library/stm32f4xx_rcc.c ****     }
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1431:./Library/stm32f4xx_rcc.c ****           RCC_APB2PeriphClockLPModeCmd() and RCC_APB1PeriphClockLPModeCmd() functions.  
 1432:./Library/stm32f4xx_rcc.c **** 
 1433:./Library/stm32f4xx_rcc.c **** @endverbatim
-ARM GAS  /tmp/ccybMCCA.s 			page 44
+ARM GAS  /tmp/ccuKD78v.s 			page 44
 
 
 1434:./Library/stm32f4xx_rcc.c ****   * @{
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1473:./Library/stm32f4xx_rcc.c **** 
 1474:./Library/stm32f4xx_rcc.c ****     /* Clear RTCPRE[4:0] bits */
 1475:./Library/stm32f4xx_rcc.c ****     tmpreg &= ~RCC_CFGR_RTCPRE;
-ARM GAS  /tmp/ccybMCCA.s 			page 45
+ARM GAS  /tmp/ccuKD78v.s 			page 45
 
 
 1476:./Library/stm32f4xx_rcc.c **** 
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1073              	.L79:
  1074 002e 00BF     		.align	2
  1075              	.L78:
-ARM GAS  /tmp/ccybMCCA.s 			page 46
+ARM GAS  /tmp/ccuKD78v.s 			page 46
 
 
  1076 0030 00380240 		.word	1073887232
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1502:./Library/stm32f4xx_rcc.c **** 
 1503:./Library/stm32f4xx_rcc.c **** /**
 1504:./Library/stm32f4xx_rcc.c ****   * @brief  Forces or releases the Backup domain reset.
-ARM GAS  /tmp/ccybMCCA.s 			page 47
+ARM GAS  /tmp/ccuKD78v.s 			page 47
 
 
 1505:./Library/stm32f4xx_rcc.c ****   * @note   This function resets the RTC peripheral (including the backup registers)
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1532:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_I2SCLKSource_Ext: External clock mapped on the I2S_CKIN pin
 1533:./Library/stm32f4xx_rcc.c ****   *                                        used as I2S clock source
 1534:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_I2SCLKSource_PLL: PLL clock used as I2S clock source
-ARM GAS  /tmp/ccybMCCA.s 			page 48
+ARM GAS  /tmp/ccuKD78v.s 			page 48
 
 
 1535:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_I2SCLKSource_HSI_HSE: HSI or HSE depends on PLLSRC used as I2S clock source
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1589:./Library/stm32f4xx_rcc.c ****   }
 1590:./Library/stm32f4xx_rcc.c ****   else
 1591:./Library/stm32f4xx_rcc.c ****   {
-ARM GAS  /tmp/ccybMCCA.s 			page 49
+ARM GAS  /tmp/ccuKD78v.s 			page 49
 
 
 1592:./Library/stm32f4xx_rcc.c ****     /* Clear SAI2 clock source selection bits */
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1646:./Library/stm32f4xx_rcc.c ****   uint32_t tmpreg = 0;
 1647:./Library/stm32f4xx_rcc.c ****   
 1648:./Library/stm32f4xx_rcc.c ****   /* Check the parameters */
-ARM GAS  /tmp/ccybMCCA.s 			page 50
+ARM GAS  /tmp/ccuKD78v.s 			page 50
 
 
 1649:./Library/stm32f4xx_rcc.c ****   assert_param(IS_RCC_SAIBCLK_SOURCE(RCC_SAIBlockBCLKSource));
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1149              		.cfi_startproc
  1150              		@ args = 0, pretend = 0, frame = 0
  1151              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccybMCCA.s 			page 51
+ARM GAS  /tmp/ccuKD78v.s 			page 51
 
 
  1152              		@ link register save eliminated.
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1733:./Library/stm32f4xx_rcc.c ****   
 1734:./Library/stm32f4xx_rcc.c ****   tmpreg = RCC->DCKCFGR;
 1735:./Library/stm32f4xx_rcc.c **** 
-ARM GAS  /tmp/ccybMCCA.s 			page 52
+ARM GAS  /tmp/ccuKD78v.s 			page 52
 
 
 1736:./Library/stm32f4xx_rcc.c ****   /* Clear RCC_DCKCFGR_SAI1ASRC[1:0] bits */
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1790:./Library/stm32f4xx_rcc.c ****   * @param  RCC_PLLI2SDivQ: specifies the PLLI2S division factor for SAI1 clock .
 1791:./Library/stm32f4xx_rcc.c ****   *          This parameter must be a number between 1 and 32.
 1792:./Library/stm32f4xx_rcc.c ****   *          SAI1 clock frequency = f(PLLI2S_Q) / RCC_PLLI2SDivQ 
-ARM GAS  /tmp/ccybMCCA.s 			page 53
+ARM GAS  /tmp/ccuKD78v.s 			page 53
 
 
 1793:./Library/stm32f4xx_rcc.c ****   *              
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1210              	.LFE149:
  1212              		.section	.text.RCC_SAIPLLSAIClkDivConfig,"ax",%progbits
  1213              		.align	1
-ARM GAS  /tmp/ccybMCCA.s 			page 54
+ARM GAS  /tmp/ccuKD78v.s 			page 54
 
 
  1214              		.global	RCC_SAIPLLSAIClkDivConfig
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1241              	.LVL97:
  1242              		.loc 1 1841 10 view .LVU334
  1243 000c 43EA0023 		orr	r3, r3, r0, lsl #8
-ARM GAS  /tmp/ccybMCCA.s 			page 55
+ARM GAS  /tmp/ccuKD78v.s 			page 55
 
 
  1244              	.LVL98:
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1875:./Library/stm32f4xx_rcc.c **** }
 1876:./Library/stm32f4xx_rcc.c **** 
 1877:./Library/stm32f4xx_rcc.c **** /**
-ARM GAS  /tmp/ccybMCCA.s 			page 56
+ARM GAS  /tmp/ccuKD78v.s 			page 56
 
 
 1878:./Library/stm32f4xx_rcc.c ****   * @brief  Configures the SAI clock Divider coming from PLL.
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1270              		@ frame_needed = 0, uses_anonymous_args = 0
  1271              		@ link register save eliminated.
 1929:./Library/stm32f4xx_rcc.c ****   uint32_t tmpreg = 0;
-ARM GAS  /tmp/ccybMCCA.s 			page 57
+ARM GAS  /tmp/ccuKD78v.s 			page 57
 
 
  1272              		.loc 1 1929 3 view .LVU339
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 1949:./Library/stm32f4xx_rcc.c ****   * @note   This function must be called before enabling the DFSDM APB clock.
 1950:./Library/stm32f4xx_rcc.c ****   * @param  RCC_DFSDMCLKSource: specifies the DFSDM clock source.
 1951:./Library/stm32f4xx_rcc.c ****   *          This parameter can be one of the following values:
-ARM GAS  /tmp/ccybMCCA.s 			page 58
+ARM GAS  /tmp/ccuKD78v.s 			page 58
 
 
 1952:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_DFSDMCLKSource_APB: APB clock used as DFSDM clock source.
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2006:./Library/stm32f4xx_rcc.c **** /**
 2007:./Library/stm32f4xx_rcc.c ****   * @brief  Configures the DFSDM Audio clock source (DFSDMACLK).
 2008:./Library/stm32f4xx_rcc.c ****   * @note   This function must be called before enabling the DFSDM APB clock.
-ARM GAS  /tmp/ccybMCCA.s 			page 59
+ARM GAS  /tmp/ccuKD78v.s 			page 59
 
 
 2009:./Library/stm32f4xx_rcc.c ****   * @param  RCC_DFSDM2ACLKSource: specifies the DFSDM clock source.
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2058:./Library/stm32f4xx_rcc.c ****   assert_param(IS_RCC_TIMCLK_PRESCALER(RCC_TIMCLKPrescaler));
  1314              		.loc 1 2058 3 view .LVU351
 2059:./Library/stm32f4xx_rcc.c **** 
-ARM GAS  /tmp/ccybMCCA.s 			page 60
+ARM GAS  /tmp/ccuKD78v.s 			page 60
 
 
 2060:./Library/stm32f4xx_rcc.c ****   *(__IO uint32_t *) DCKCFGR_TIMPRE_BB = RCC_TIMCLKPrescaler;
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2093:./Library/stm32f4xx_rcc.c ****   * @param  NewState: new state of the specified peripheral clock.
 2094:./Library/stm32f4xx_rcc.c ****   *          This parameter can be: ENABLE or DISABLE.
 2095:./Library/stm32f4xx_rcc.c ****   * @retval None
-ARM GAS  /tmp/ccybMCCA.s 			page 61
+ARM GAS  /tmp/ccuKD78v.s 			page 61
 
 
 2096:./Library/stm32f4xx_rcc.c ****   */
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1377              		.thumb
  1378              		.thumb_func
  1380              	RCC_AHB2PeriphClockCmd:
-ARM GAS  /tmp/ccybMCCA.s 			page 62
+ARM GAS  /tmp/ccuKD78v.s 			page 62
 
 
  1381              	.LVL105:
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1405 000e 536B     		ldr	r3, [r2, #52]
  1406              		.loc 1 2141 18 view .LVU377
  1407 0010 23EA0003 		bic	r3, r3, r0
-ARM GAS  /tmp/ccybMCCA.s 			page 63
+ARM GAS  /tmp/ccuKD78v.s 			page 63
 
 
  1408 0014 5363     		str	r3, [r2, #52]
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2178:./Library/stm32f4xx_rcc.c ****   * @note   After reset, the peripheral clock (used for registers read/write access)
 2179:./Library/stm32f4xx_rcc.c ****   *         is disabled and the application software has to enable this clock before 
 2180:./Library/stm32f4xx_rcc.c ****   *         using it. 
-ARM GAS  /tmp/ccybMCCA.s 			page 64
+ARM GAS  /tmp/ccuKD78v.s 			page 64
 
 
 2181:./Library/stm32f4xx_rcc.c ****   * @param  RCC_APB1Periph: specifies the APB1 peripheral to gates its clock.
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1438              		.loc 1 2224 5 is_stmt 1 view .LVU384
  1439              		.loc 1 2224 8 is_stmt 0 view .LVU385
  1440 0002 054A     		ldr	r2, .L114
-ARM GAS  /tmp/ccybMCCA.s 			page 65
+ARM GAS  /tmp/ccuKD78v.s 			page 65
 
 
  1441 0004 136C     		ldr	r3, [r2, #64]
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2249:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_APB2Periph_SYSCFG: SYSCFG clock
 2250:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_APB2Periph_EXTIT:  EXTIIT clock
 2251:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_APB2Periph_TIM9:   TIM9 clock
-ARM GAS  /tmp/ccybMCCA.s 			page 66
+ARM GAS  /tmp/ccuKD78v.s 			page 66
 
 
 2252:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_APB2Periph_TIM10:  TIM10 clock
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1498 0014 5364     		str	r3, [r2, #68]
 2281:./Library/stm32f4xx_rcc.c ****   }
 2282:./Library/stm32f4xx_rcc.c **** }
-ARM GAS  /tmp/ccybMCCA.s 			page 67
+ARM GAS  /tmp/ccuKD78v.s 			page 67
 
 
  1499              		.loc 1 2282 1 view .LVU402
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2314:./Library/stm32f4xx_rcc.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  1524              		.loc 1 2314 3 view .LVU405
 2315:./Library/stm32f4xx_rcc.c **** 
-ARM GAS  /tmp/ccybMCCA.s 			page 68
+ARM GAS  /tmp/ccuKD78v.s 			page 68
 
 
 2316:./Library/stm32f4xx_rcc.c ****   if (NewState != DISABLE)
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2334:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_AHB2Periph_OTG_FS: USB OTG FS clock
 2335:./Library/stm32f4xx_rcc.c ****   * @param  NewState: new state of the specified peripheral reset.
 2336:./Library/stm32f4xx_rcc.c ****   *          This parameter can be: ENABLE or DISABLE.
-ARM GAS  /tmp/ccybMCCA.s 			page 69
+ARM GAS  /tmp/ccuKD78v.s 			page 69
 
 
 2337:./Library/stm32f4xx_rcc.c ****   * @retval None
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1601              		.syntax unified
  1602              		.thumb
  1603              		.thumb_func
-ARM GAS  /tmp/ccybMCCA.s 			page 70
+ARM GAS  /tmp/ccuKD78v.s 			page 70
 
 
  1605              	RCC_APB1PeriphResetCmd:
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2405:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_APB1Periph_I2C1:   I2C1 clock
 2406:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_APB1Periph_I2C2:   I2C2 clock
 2407:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_APB1Periph_I2C3:   I2C3 clock
-ARM GAS  /tmp/ccybMCCA.s 			page 71
+ARM GAS  /tmp/ccuKD78v.s 			page 71
 
 
 2408:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_APB1Periph_FMPI2C1:FMPI2C1 clock
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1636              	.L135:
  1637              		.align	2
  1638              	.L134:
-ARM GAS  /tmp/ccybMCCA.s 			page 72
+ARM GAS  /tmp/ccuKD78v.s 			page 72
 
 
  1639 0018 00380240 		.word	1073887232
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1658              		.loc 1 2470 3 view .LVU440
 2471:./Library/stm32f4xx_rcc.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  1659              		.loc 1 2471 3 view .LVU441
-ARM GAS  /tmp/ccybMCCA.s 			page 73
+ARM GAS  /tmp/ccuKD78v.s 			page 73
 
 
 2472:./Library/stm32f4xx_rcc.c ****   if (NewState != DISABLE)
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2490:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_AHB1Periph_GPIOA:       GPIOA clock
 2491:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_AHB1Periph_GPIOB:       GPIOB clock 
 2492:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_AHB1Periph_GPIOC:       GPIOC clock
-ARM GAS  /tmp/ccybMCCA.s 			page 74
+ARM GAS  /tmp/ccuKD78v.s 			page 74
 
 
 2493:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_AHB1Periph_GPIOD:       GPIOD clock
@@ -4438,7 +4438,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1717              		.loc 1 2527 5 is_stmt 1 view .LVU459
  1718              		.loc 1 2527 8 is_stmt 0 view .LVU460
  1719 000c 024A     		ldr	r2, .L144
-ARM GAS  /tmp/ccybMCCA.s 			page 75
+ARM GAS  /tmp/ccuKD78v.s 			page 75
 
 
  1720 000e 136D     		ldr	r3, [r2, #80]
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1750              		.loc 1 2553 3 view .LVU466
  1751              		.loc 1 2553 6 is_stmt 0 view .LVU467
  1752 0000 21B1     		cbz	r1, .L147
-ARM GAS  /tmp/ccybMCCA.s 			page 76
+ARM GAS  /tmp/ccuKD78v.s 			page 76
 
 
 2554:./Library/stm32f4xx_rcc.c ****   {
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2575:./Library/stm32f4xx_rcc.c ****   *          This parameter can be: ENABLE or DISABLE.
 2576:./Library/stm32f4xx_rcc.c ****   * @retval None
 2577:./Library/stm32f4xx_rcc.c ****   */
-ARM GAS  /tmp/ccybMCCA.s 			page 77
+ARM GAS  /tmp/ccuKD78v.s 			page 77
 
 
 2578:./Library/stm32f4xx_rcc.c **** void RCC_AHB3PeriphClockLPModeCmd(uint32_t RCC_AHB3Periph, FunctionalState NewState)
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2632:./Library/stm32f4xx_rcc.c ****   *          This parameter can be: ENABLE or DISABLE.
 2633:./Library/stm32f4xx_rcc.c ****   * @retval None
 2634:./Library/stm32f4xx_rcc.c ****   */
-ARM GAS  /tmp/ccybMCCA.s 			page 78
+ARM GAS  /tmp/ccuKD78v.s 			page 78
 
 
 2635:./Library/stm32f4xx_rcc.c **** void RCC_APB1PeriphClockLPModeCmd(uint32_t RCC_APB1Periph, FunctionalState NewState)
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1830              	RCC_APB2PeriphClockLPModeCmd:
  1831              	.LVL115:
  1832              	.LFB164:
-ARM GAS  /tmp/ccybMCCA.s 			page 79
+ARM GAS  /tmp/ccuKD78v.s 			page 79
 
 
 2649:./Library/stm32f4xx_rcc.c **** 
@@ -4738,7 +4738,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2693:./Library/stm32f4xx_rcc.c ****   {
 2694:./Library/stm32f4xx_rcc.c ****     RCC->APB2LPENR |= RCC_APB2Periph;
  1843              		.loc 1 2694 5 is_stmt 1 view .LVU492
-ARM GAS  /tmp/ccybMCCA.s 			page 80
+ARM GAS  /tmp/ccuKD78v.s 			page 80
 
 
  1844              		.loc 1 2694 8 is_stmt 0 view .LVU493
@@ -4798,7 +4798,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1882              		@ link register save eliminated.
 2713:./Library/stm32f4xx_rcc.c ****   /* Check the parameters */
 2714:./Library/stm32f4xx_rcc.c ****   assert_param(IS_RCC_LSE_MODE(RCC_Mode));
-ARM GAS  /tmp/ccybMCCA.s 			page 81
+ARM GAS  /tmp/ccuKD78v.s 			page 81
 
 
  1883              		.loc 1 2714 3 view .LVU500
@@ -4858,7 +4858,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2734:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_LPTIM1CLKSOURCE_LSI:  LPTIM1 clock from LSI selected.
 2735:./Library/stm32f4xx_rcc.c ****   *            @arg RCC_LPTIM1CLKSOURCE_LSE:  LPTIM1 clock from LSE selected.
 2736:./Library/stm32f4xx_rcc.c ****   * @retval None
-ARM GAS  /tmp/ccybMCCA.s 			page 82
+ARM GAS  /tmp/ccuKD78v.s 			page 82
 
 
 2737:./Library/stm32f4xx_rcc.c ****   */
@@ -4918,7 +4918,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2791:./Library/stm32f4xx_rcc.c **** #if defined(STM32F469_479xx) 
 2792:./Library/stm32f4xx_rcc.c ****   if(RCC_ClockSource == RCC_48MHZCLKSource_PLLSAI)
 2793:./Library/stm32f4xx_rcc.c ****   {
-ARM GAS  /tmp/ccybMCCA.s 			page 83
+ARM GAS  /tmp/ccuKD78v.s 			page 83
 
 
 2794:./Library/stm32f4xx_rcc.c ****     SET_BIT(RCC->DCKCFGR, RCC_DCKCFGR_CK48MSEL);
@@ -4978,7 +4978,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2848:./Library/stm32f4xx_rcc.c ****   }
 2849:./Library/stm32f4xx_rcc.c ****   else
 2850:./Library/stm32f4xx_rcc.c ****   {
-ARM GAS  /tmp/ccybMCCA.s 			page 84
+ARM GAS  /tmp/ccuKD78v.s 			page 84
 
 
 2851:./Library/stm32f4xx_rcc.c ****     CLEAR_BIT(RCC->DCKCFGR2, RCC_DCKCFGR2_SDIOSEL);
@@ -5038,7 +5038,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2905:./Library/stm32f4xx_rcc.c ****   if(RCC_ClockSource == RCC_SPDIFRXCLKSource_PLLI2SP)
 2906:./Library/stm32f4xx_rcc.c ****   {
 2907:./Library/stm32f4xx_rcc.c ****     SET_BIT(RCC->DCKCFGR2, RCC_DCKCFGR2_SPDIFRXSEL);
-ARM GAS  /tmp/ccybMCCA.s 			page 85
+ARM GAS  /tmp/ccuKD78v.s 			page 85
 
 
 2908:./Library/stm32f4xx_rcc.c ****   }
@@ -5098,7 +5098,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 2962:./Library/stm32f4xx_rcc.c **** /**
 2963:./Library/stm32f4xx_rcc.c ****   * @}
 2964:./Library/stm32f4xx_rcc.c ****   */
-ARM GAS  /tmp/ccybMCCA.s 			page 86
+ARM GAS  /tmp/ccuKD78v.s 			page 86
 
 
 2965:./Library/stm32f4xx_rcc.c **** 
@@ -5158,7 +5158,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 3019:./Library/stm32f4xx_rcc.c ****   * @param  NewState: new state of the specified RCC interrupts.
 3020:./Library/stm32f4xx_rcc.c ****   *          This parameter can be: ENABLE or DISABLE.
 3021:./Library/stm32f4xx_rcc.c ****   * @retval None
-ARM GAS  /tmp/ccybMCCA.s 			page 87
+ARM GAS  /tmp/ccuKD78v.s 			page 87
 
 
 3022:./Library/stm32f4xx_rcc.c ****   */
@@ -5218,7 +5218,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  1957              		.thumb_func
  1959              	RCC_GetFlagStatus:
  1960              	.LVL118:
-ARM GAS  /tmp/ccybMCCA.s 			page 88
+ARM GAS  /tmp/ccuKD78v.s 			page 88
 
 
  1961              	.LFB167:
@@ -5278,7 +5278,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 3075:./Library/stm32f4xx_rcc.c ****   else if (tmp == 2)          /* The flag to check is in BDCR register */
  1979              		.loc 1 3075 8 is_stmt 1 view .LVU525
  1980              		.loc 1 3075 11 is_stmt 0 view .LVU526
-ARM GAS  /tmp/ccybMCCA.s 			page 89
+ARM GAS  /tmp/ccuKD78v.s 			page 89
 
 
  1981 0006 022B     		cmp	r3, #2
@@ -5338,7 +5338,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  2018              	.LVL128:
  2019              	.L179:
 3077:./Library/stm32f4xx_rcc.c ****   }
-ARM GAS  /tmp/ccybMCCA.s 			page 90
+ARM GAS  /tmp/ccuKD78v.s 			page 90
 
 
  2020              		.loc 1 3077 5 is_stmt 1 view .LVU541
@@ -5398,7 +5398,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  303:./Library/stm32f4xx_rcc.c ****   ErrorStatus status = ERROR;
  2064              		.loc 1 303 3 view .LVU549
  303:./Library/stm32f4xx_rcc.c ****   ErrorStatus status = ERROR;
-ARM GAS  /tmp/ccybMCCA.s 			page 91
+ARM GAS  /tmp/ccuKD78v.s 			page 91
 
 
  2065              		.loc 1 303 17 is_stmt 0 view .LVU550
@@ -5458,7 +5458,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  2103 0028 0120     		movs	r0, #1
  2104              	.L185:
  2105              	.LVL137:
-ARM GAS  /tmp/ccybMCCA.s 			page 92
+ARM GAS  /tmp/ccuKD78v.s 			page 92
 
 
  321:./Library/stm32f4xx_rcc.c **** }
@@ -5518,7 +5518,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  2148              		.global	RCC_GetITStatus
  2149              		.syntax unified
  2150              		.thumb
-ARM GAS  /tmp/ccybMCCA.s 			page 93
+ARM GAS  /tmp/ccuKD78v.s 			page 93
 
 
  2151              		.thumb_func
@@ -5578,7 +5578,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
 3139:./Library/stm32f4xx_rcc.c ****     bitstatus = RESET;
  2177              		.loc 1 3139 15 view .LVU582
  2178 000c 0020     		movs	r0, #0
-ARM GAS  /tmp/ccybMCCA.s 			page 94
+ARM GAS  /tmp/ccuKD78v.s 			page 94
 
 
  2179              	.LVL141:
@@ -5638,7 +5638,7 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  2208 0000 014B     		ldr	r3, .L196
  2209 0002 9873     		strb	r0, [r3, #14]
 3167:./Library/stm32f4xx_rcc.c **** }
-ARM GAS  /tmp/ccybMCCA.s 			page 95
+ARM GAS  /tmp/ccuKD78v.s 			page 95
 
 
  2210              		.loc 1 3167 1 view .LVU589
@@ -5662,161 +5662,161 @@ ARM GAS  /tmp/ccybMCCA.s 			page 1
  2228              		.file 2 "/usr/lib/gcc/arm-none-eabi/12.2.1/include/stdint.h"
  2229              		.file 3 "./CORE/stm32f4xx.h"
  2230              		.file 4 "./Library/stm32f4xx_rcc.h"
-ARM GAS  /tmp/ccybMCCA.s 			page 96
+ARM GAS  /tmp/ccuKD78v.s 			page 96
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_rcc.c
-     /tmp/ccybMCCA.s:21     .text.RCC_DeInit:0000000000000000 $t
-     /tmp/ccybMCCA.s:27     .text.RCC_DeInit:0000000000000000 RCC_DeInit
-     /tmp/ccybMCCA.s:77     .text.RCC_DeInit:0000000000000034 $d
-     /tmp/ccybMCCA.s:84     .text.RCC_HSEConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:90     .text.RCC_HSEConfig:0000000000000000 RCC_HSEConfig
-     /tmp/ccybMCCA.s:112    .text.RCC_HSEConfig:000000000000000c $d
-     /tmp/ccybMCCA.s:117    .text.RCC_AdjustHSICalibrationValue:0000000000000000 $t
-     /tmp/ccybMCCA.s:123    .text.RCC_AdjustHSICalibrationValue:0000000000000000 RCC_AdjustHSICalibrationValue
-     /tmp/ccybMCCA.s:154    .text.RCC_AdjustHSICalibrationValue:0000000000000010 $d
-     /tmp/ccybMCCA.s:159    .text.RCC_HSICmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:165    .text.RCC_HSICmd:0000000000000000 RCC_HSICmd
-     /tmp/ccybMCCA.s:183    .text.RCC_HSICmd:0000000000000008 $d
-     /tmp/ccybMCCA.s:188    .text.RCC_LSEConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:194    .text.RCC_LSEConfig:0000000000000000 RCC_LSEConfig
-     /tmp/ccybMCCA.s:237    .text.RCC_LSEConfig:000000000000002c $d
-     /tmp/ccybMCCA.s:242    .text.RCC_LSICmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:248    .text.RCC_LSICmd:0000000000000000 RCC_LSICmd
-     /tmp/ccybMCCA.s:266    .text.RCC_LSICmd:0000000000000008 $d
-     /tmp/ccybMCCA.s:271    .text.RCC_PLLConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:277    .text.RCC_PLLConfig:0000000000000000 RCC_PLLConfig
-     /tmp/ccybMCCA.s:315    .text.RCC_PLLConfig:000000000000001c $d
-     /tmp/ccybMCCA.s:320    .text.RCC_PLLCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:326    .text.RCC_PLLCmd:0000000000000000 RCC_PLLCmd
-     /tmp/ccybMCCA.s:344    .text.RCC_PLLCmd:0000000000000008 $d
-     /tmp/ccybMCCA.s:349    .text.RCC_PLLI2SConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:355    .text.RCC_PLLI2SConfig:0000000000000000 RCC_PLLI2SConfig
-     /tmp/ccybMCCA.s:379    .text.RCC_PLLI2SConfig:0000000000000010 $d
-     /tmp/ccybMCCA.s:384    .text.RCC_PLLI2SCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:390    .text.RCC_PLLI2SCmd:0000000000000000 RCC_PLLI2SCmd
-     /tmp/ccybMCCA.s:408    .text.RCC_PLLI2SCmd:0000000000000008 $d
-     /tmp/ccybMCCA.s:413    .text.RCC_PLLSAIConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:419    .text.RCC_PLLSAIConfig:0000000000000000 RCC_PLLSAIConfig
-     /tmp/ccybMCCA.s:446    .text.RCC_PLLSAIConfig:0000000000000014 $d
-     /tmp/ccybMCCA.s:451    .text.RCC_PLLSAICmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:457    .text.RCC_PLLSAICmd:0000000000000000 RCC_PLLSAICmd
-     /tmp/ccybMCCA.s:475    .text.RCC_PLLSAICmd:0000000000000008 $d
-     /tmp/ccybMCCA.s:480    .text.RCC_ClockSecuritySystemCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:486    .text.RCC_ClockSecuritySystemCmd:0000000000000000 RCC_ClockSecuritySystemCmd
-     /tmp/ccybMCCA.s:504    .text.RCC_ClockSecuritySystemCmd:0000000000000008 $d
-     /tmp/ccybMCCA.s:509    .text.RCC_MCO1Config:0000000000000000 $t
-     /tmp/ccybMCCA.s:515    .text.RCC_MCO1Config:0000000000000000 RCC_MCO1Config
-     /tmp/ccybMCCA.s:550    .text.RCC_MCO1Config:0000000000000010 $d
-     /tmp/ccybMCCA.s:555    .text.RCC_MCO2Config:0000000000000000 $t
-     /tmp/ccybMCCA.s:561    .text.RCC_MCO2Config:0000000000000000 RCC_MCO2Config
-     /tmp/ccybMCCA.s:596    .text.RCC_MCO2Config:0000000000000010 $d
-     /tmp/ccybMCCA.s:601    .text.RCC_SYSCLKConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:607    .text.RCC_SYSCLKConfig:0000000000000000 RCC_SYSCLKConfig
-     /tmp/ccybMCCA.s:638    .text.RCC_SYSCLKConfig:0000000000000010 $d
-     /tmp/ccybMCCA.s:643    .text.RCC_GetSYSCLKSource:0000000000000000 $t
-     /tmp/ccybMCCA.s:649    .text.RCC_GetSYSCLKSource:0000000000000000 RCC_GetSYSCLKSource
-     /tmp/ccybMCCA.s:666    .text.RCC_GetSYSCLKSource:000000000000000c $d
-     /tmp/ccybMCCA.s:671    .text.RCC_HCLKConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:677    .text.RCC_HCLKConfig:0000000000000000 RCC_HCLKConfig
-     /tmp/ccybMCCA.s:708    .text.RCC_HCLKConfig:0000000000000010 $d
-     /tmp/ccybMCCA.s:713    .text.RCC_PCLK1Config:0000000000000000 $t
-ARM GAS  /tmp/ccybMCCA.s 			page 97
+     /tmp/ccuKD78v.s:21     .text.RCC_DeInit:0000000000000000 $t
+     /tmp/ccuKD78v.s:27     .text.RCC_DeInit:0000000000000000 RCC_DeInit
+     /tmp/ccuKD78v.s:77     .text.RCC_DeInit:0000000000000034 $d
+     /tmp/ccuKD78v.s:84     .text.RCC_HSEConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:90     .text.RCC_HSEConfig:0000000000000000 RCC_HSEConfig
+     /tmp/ccuKD78v.s:112    .text.RCC_HSEConfig:000000000000000c $d
+     /tmp/ccuKD78v.s:117    .text.RCC_AdjustHSICalibrationValue:0000000000000000 $t
+     /tmp/ccuKD78v.s:123    .text.RCC_AdjustHSICalibrationValue:0000000000000000 RCC_AdjustHSICalibrationValue
+     /tmp/ccuKD78v.s:154    .text.RCC_AdjustHSICalibrationValue:0000000000000010 $d
+     /tmp/ccuKD78v.s:159    .text.RCC_HSICmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:165    .text.RCC_HSICmd:0000000000000000 RCC_HSICmd
+     /tmp/ccuKD78v.s:183    .text.RCC_HSICmd:0000000000000008 $d
+     /tmp/ccuKD78v.s:188    .text.RCC_LSEConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:194    .text.RCC_LSEConfig:0000000000000000 RCC_LSEConfig
+     /tmp/ccuKD78v.s:237    .text.RCC_LSEConfig:000000000000002c $d
+     /tmp/ccuKD78v.s:242    .text.RCC_LSICmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:248    .text.RCC_LSICmd:0000000000000000 RCC_LSICmd
+     /tmp/ccuKD78v.s:266    .text.RCC_LSICmd:0000000000000008 $d
+     /tmp/ccuKD78v.s:271    .text.RCC_PLLConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:277    .text.RCC_PLLConfig:0000000000000000 RCC_PLLConfig
+     /tmp/ccuKD78v.s:315    .text.RCC_PLLConfig:000000000000001c $d
+     /tmp/ccuKD78v.s:320    .text.RCC_PLLCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:326    .text.RCC_PLLCmd:0000000000000000 RCC_PLLCmd
+     /tmp/ccuKD78v.s:344    .text.RCC_PLLCmd:0000000000000008 $d
+     /tmp/ccuKD78v.s:349    .text.RCC_PLLI2SConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:355    .text.RCC_PLLI2SConfig:0000000000000000 RCC_PLLI2SConfig
+     /tmp/ccuKD78v.s:379    .text.RCC_PLLI2SConfig:0000000000000010 $d
+     /tmp/ccuKD78v.s:384    .text.RCC_PLLI2SCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:390    .text.RCC_PLLI2SCmd:0000000000000000 RCC_PLLI2SCmd
+     /tmp/ccuKD78v.s:408    .text.RCC_PLLI2SCmd:0000000000000008 $d
+     /tmp/ccuKD78v.s:413    .text.RCC_PLLSAIConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:419    .text.RCC_PLLSAIConfig:0000000000000000 RCC_PLLSAIConfig
+     /tmp/ccuKD78v.s:446    .text.RCC_PLLSAIConfig:0000000000000014 $d
+     /tmp/ccuKD78v.s:451    .text.RCC_PLLSAICmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:457    .text.RCC_PLLSAICmd:0000000000000000 RCC_PLLSAICmd
+     /tmp/ccuKD78v.s:475    .text.RCC_PLLSAICmd:0000000000000008 $d
+     /tmp/ccuKD78v.s:480    .text.RCC_ClockSecuritySystemCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:486    .text.RCC_ClockSecuritySystemCmd:0000000000000000 RCC_ClockSecuritySystemCmd
+     /tmp/ccuKD78v.s:504    .text.RCC_ClockSecuritySystemCmd:0000000000000008 $d
+     /tmp/ccuKD78v.s:509    .text.RCC_MCO1Config:0000000000000000 $t
+     /tmp/ccuKD78v.s:515    .text.RCC_MCO1Config:0000000000000000 RCC_MCO1Config
+     /tmp/ccuKD78v.s:550    .text.RCC_MCO1Config:0000000000000010 $d
+     /tmp/ccuKD78v.s:555    .text.RCC_MCO2Config:0000000000000000 $t
+     /tmp/ccuKD78v.s:561    .text.RCC_MCO2Config:0000000000000000 RCC_MCO2Config
+     /tmp/ccuKD78v.s:596    .text.RCC_MCO2Config:0000000000000010 $d
+     /tmp/ccuKD78v.s:601    .text.RCC_SYSCLKConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:607    .text.RCC_SYSCLKConfig:0000000000000000 RCC_SYSCLKConfig
+     /tmp/ccuKD78v.s:638    .text.RCC_SYSCLKConfig:0000000000000010 $d
+     /tmp/ccuKD78v.s:643    .text.RCC_GetSYSCLKSource:0000000000000000 $t
+     /tmp/ccuKD78v.s:649    .text.RCC_GetSYSCLKSource:0000000000000000 RCC_GetSYSCLKSource
+     /tmp/ccuKD78v.s:666    .text.RCC_GetSYSCLKSource:000000000000000c $d
+     /tmp/ccuKD78v.s:671    .text.RCC_HCLKConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:677    .text.RCC_HCLKConfig:0000000000000000 RCC_HCLKConfig
+     /tmp/ccuKD78v.s:708    .text.RCC_HCLKConfig:0000000000000010 $d
+     /tmp/ccuKD78v.s:713    .text.RCC_PCLK1Config:0000000000000000 $t
+ARM GAS  /tmp/ccuKD78v.s 			page 97
 
 
-     /tmp/ccybMCCA.s:719    .text.RCC_PCLK1Config:0000000000000000 RCC_PCLK1Config
-     /tmp/ccybMCCA.s:750    .text.RCC_PCLK1Config:0000000000000010 $d
-     /tmp/ccybMCCA.s:755    .text.RCC_PCLK2Config:0000000000000000 $t
-     /tmp/ccybMCCA.s:761    .text.RCC_PCLK2Config:0000000000000000 RCC_PCLK2Config
-     /tmp/ccybMCCA.s:792    .text.RCC_PCLK2Config:0000000000000010 $d
-     /tmp/ccybMCCA.s:797    .text.RCC_GetClocksFreq:0000000000000000 $t
-     /tmp/ccybMCCA.s:803    .text.RCC_GetClocksFreq:0000000000000000 RCC_GetClocksFreq
-     /tmp/ccybMCCA.s:1007   .text.RCC_GetClocksFreq:00000000000000a8 $d
-     /tmp/ccybMCCA.s:2223   .data.APBAHBPrescTable:0000000000000000 APBAHBPrescTable
-     /tmp/ccybMCCA.s:1015   .text.RCC_RTCCLKConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:1021   .text.RCC_RTCCLKConfig:0000000000000000 RCC_RTCCLKConfig
-     /tmp/ccybMCCA.s:1076   .text.RCC_RTCCLKConfig:0000000000000030 $d
-     /tmp/ccybMCCA.s:1081   .text.RCC_RTCCLKCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1087   .text.RCC_RTCCLKCmd:0000000000000000 RCC_RTCCLKCmd
-     /tmp/ccybMCCA.s:1105   .text.RCC_RTCCLKCmd:0000000000000008 $d
-     /tmp/ccybMCCA.s:1110   .text.RCC_BackupResetCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1116   .text.RCC_BackupResetCmd:0000000000000000 RCC_BackupResetCmd
-     /tmp/ccybMCCA.s:1134   .text.RCC_BackupResetCmd:0000000000000008 $d
-     /tmp/ccybMCCA.s:1139   .text.RCC_I2SCLKConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:1145   .text.RCC_I2SCLKConfig:0000000000000000 RCC_I2SCLKConfig
-     /tmp/ccybMCCA.s:1163   .text.RCC_I2SCLKConfig:0000000000000008 $d
-     /tmp/ccybMCCA.s:1168   .text.RCC_SAIPLLI2SClkDivConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:1174   .text.RCC_SAIPLLI2SClkDivConfig:0000000000000000 RCC_SAIPLLI2SClkDivConfig
-     /tmp/ccybMCCA.s:1208   .text.RCC_SAIPLLI2SClkDivConfig:0000000000000014 $d
-     /tmp/ccybMCCA.s:1213   .text.RCC_SAIPLLSAIClkDivConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:1219   .text.RCC_SAIPLLSAIClkDivConfig:0000000000000000 RCC_SAIPLLSAIClkDivConfig
-     /tmp/ccybMCCA.s:1253   .text.RCC_SAIPLLSAIClkDivConfig:0000000000000018 $d
-     /tmp/ccybMCCA.s:1258   .text.RCC_LTDCCLKDivConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:1264   .text.RCC_LTDCCLKDivConfig:0000000000000000 RCC_LTDCCLKDivConfig
-     /tmp/ccybMCCA.s:1295   .text.RCC_LTDCCLKDivConfig:0000000000000014 $d
-     /tmp/ccybMCCA.s:1300   .text.RCC_TIMCLKPresConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:1306   .text.RCC_TIMCLKPresConfig:0000000000000000 RCC_TIMCLKPresConfig
-     /tmp/ccybMCCA.s:1324   .text.RCC_TIMCLKPresConfig:0000000000000008 $d
-     /tmp/ccybMCCA.s:1329   .text.RCC_AHB1PeriphClockCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1335   .text.RCC_AHB1PeriphClockCmd:0000000000000000 RCC_AHB1PeriphClockCmd
-     /tmp/ccybMCCA.s:1369   .text.RCC_AHB1PeriphClockCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1374   .text.RCC_AHB2PeriphClockCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1380   .text.RCC_AHB2PeriphClockCmd:0000000000000000 RCC_AHB2PeriphClockCmd
-     /tmp/ccybMCCA.s:1414   .text.RCC_AHB2PeriphClockCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1419   .text.RCC_APB1PeriphClockCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1425   .text.RCC_APB1PeriphClockCmd:0000000000000000 RCC_APB1PeriphClockCmd
-     /tmp/ccybMCCA.s:1459   .text.RCC_APB1PeriphClockCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1464   .text.RCC_APB2PeriphClockCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1470   .text.RCC_APB2PeriphClockCmd:0000000000000000 RCC_APB2PeriphClockCmd
-     /tmp/ccybMCCA.s:1504   .text.RCC_APB2PeriphClockCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1509   .text.RCC_AHB1PeriphResetCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1515   .text.RCC_AHB1PeriphResetCmd:0000000000000000 RCC_AHB1PeriphResetCmd
-     /tmp/ccybMCCA.s:1549   .text.RCC_AHB1PeriphResetCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1554   .text.RCC_AHB2PeriphResetCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1560   .text.RCC_AHB2PeriphResetCmd:0000000000000000 RCC_AHB2PeriphResetCmd
-     /tmp/ccybMCCA.s:1594   .text.RCC_AHB2PeriphResetCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1599   .text.RCC_APB1PeriphResetCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1605   .text.RCC_APB1PeriphResetCmd:0000000000000000 RCC_APB1PeriphResetCmd
-     /tmp/ccybMCCA.s:1639   .text.RCC_APB1PeriphResetCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1644   .text.RCC_APB2PeriphResetCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1650   .text.RCC_APB2PeriphResetCmd:0000000000000000 RCC_APB2PeriphResetCmd
-     /tmp/ccybMCCA.s:1684   .text.RCC_APB2PeriphResetCmd:0000000000000018 $d
-ARM GAS  /tmp/ccybMCCA.s 			page 98
+     /tmp/ccuKD78v.s:719    .text.RCC_PCLK1Config:0000000000000000 RCC_PCLK1Config
+     /tmp/ccuKD78v.s:750    .text.RCC_PCLK1Config:0000000000000010 $d
+     /tmp/ccuKD78v.s:755    .text.RCC_PCLK2Config:0000000000000000 $t
+     /tmp/ccuKD78v.s:761    .text.RCC_PCLK2Config:0000000000000000 RCC_PCLK2Config
+     /tmp/ccuKD78v.s:792    .text.RCC_PCLK2Config:0000000000000010 $d
+     /tmp/ccuKD78v.s:797    .text.RCC_GetClocksFreq:0000000000000000 $t
+     /tmp/ccuKD78v.s:803    .text.RCC_GetClocksFreq:0000000000000000 RCC_GetClocksFreq
+     /tmp/ccuKD78v.s:1007   .text.RCC_GetClocksFreq:00000000000000a8 $d
+     /tmp/ccuKD78v.s:2223   .data.APBAHBPrescTable:0000000000000000 APBAHBPrescTable
+     /tmp/ccuKD78v.s:1015   .text.RCC_RTCCLKConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:1021   .text.RCC_RTCCLKConfig:0000000000000000 RCC_RTCCLKConfig
+     /tmp/ccuKD78v.s:1076   .text.RCC_RTCCLKConfig:0000000000000030 $d
+     /tmp/ccuKD78v.s:1081   .text.RCC_RTCCLKCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1087   .text.RCC_RTCCLKCmd:0000000000000000 RCC_RTCCLKCmd
+     /tmp/ccuKD78v.s:1105   .text.RCC_RTCCLKCmd:0000000000000008 $d
+     /tmp/ccuKD78v.s:1110   .text.RCC_BackupResetCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1116   .text.RCC_BackupResetCmd:0000000000000000 RCC_BackupResetCmd
+     /tmp/ccuKD78v.s:1134   .text.RCC_BackupResetCmd:0000000000000008 $d
+     /tmp/ccuKD78v.s:1139   .text.RCC_I2SCLKConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:1145   .text.RCC_I2SCLKConfig:0000000000000000 RCC_I2SCLKConfig
+     /tmp/ccuKD78v.s:1163   .text.RCC_I2SCLKConfig:0000000000000008 $d
+     /tmp/ccuKD78v.s:1168   .text.RCC_SAIPLLI2SClkDivConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:1174   .text.RCC_SAIPLLI2SClkDivConfig:0000000000000000 RCC_SAIPLLI2SClkDivConfig
+     /tmp/ccuKD78v.s:1208   .text.RCC_SAIPLLI2SClkDivConfig:0000000000000014 $d
+     /tmp/ccuKD78v.s:1213   .text.RCC_SAIPLLSAIClkDivConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:1219   .text.RCC_SAIPLLSAIClkDivConfig:0000000000000000 RCC_SAIPLLSAIClkDivConfig
+     /tmp/ccuKD78v.s:1253   .text.RCC_SAIPLLSAIClkDivConfig:0000000000000018 $d
+     /tmp/ccuKD78v.s:1258   .text.RCC_LTDCCLKDivConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:1264   .text.RCC_LTDCCLKDivConfig:0000000000000000 RCC_LTDCCLKDivConfig
+     /tmp/ccuKD78v.s:1295   .text.RCC_LTDCCLKDivConfig:0000000000000014 $d
+     /tmp/ccuKD78v.s:1300   .text.RCC_TIMCLKPresConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:1306   .text.RCC_TIMCLKPresConfig:0000000000000000 RCC_TIMCLKPresConfig
+     /tmp/ccuKD78v.s:1324   .text.RCC_TIMCLKPresConfig:0000000000000008 $d
+     /tmp/ccuKD78v.s:1329   .text.RCC_AHB1PeriphClockCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1335   .text.RCC_AHB1PeriphClockCmd:0000000000000000 RCC_AHB1PeriphClockCmd
+     /tmp/ccuKD78v.s:1369   .text.RCC_AHB1PeriphClockCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1374   .text.RCC_AHB2PeriphClockCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1380   .text.RCC_AHB2PeriphClockCmd:0000000000000000 RCC_AHB2PeriphClockCmd
+     /tmp/ccuKD78v.s:1414   .text.RCC_AHB2PeriphClockCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1419   .text.RCC_APB1PeriphClockCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1425   .text.RCC_APB1PeriphClockCmd:0000000000000000 RCC_APB1PeriphClockCmd
+     /tmp/ccuKD78v.s:1459   .text.RCC_APB1PeriphClockCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1464   .text.RCC_APB2PeriphClockCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1470   .text.RCC_APB2PeriphClockCmd:0000000000000000 RCC_APB2PeriphClockCmd
+     /tmp/ccuKD78v.s:1504   .text.RCC_APB2PeriphClockCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1509   .text.RCC_AHB1PeriphResetCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1515   .text.RCC_AHB1PeriphResetCmd:0000000000000000 RCC_AHB1PeriphResetCmd
+     /tmp/ccuKD78v.s:1549   .text.RCC_AHB1PeriphResetCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1554   .text.RCC_AHB2PeriphResetCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1560   .text.RCC_AHB2PeriphResetCmd:0000000000000000 RCC_AHB2PeriphResetCmd
+     /tmp/ccuKD78v.s:1594   .text.RCC_AHB2PeriphResetCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1599   .text.RCC_APB1PeriphResetCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1605   .text.RCC_APB1PeriphResetCmd:0000000000000000 RCC_APB1PeriphResetCmd
+     /tmp/ccuKD78v.s:1639   .text.RCC_APB1PeriphResetCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1644   .text.RCC_APB2PeriphResetCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1650   .text.RCC_APB2PeriphResetCmd:0000000000000000 RCC_APB2PeriphResetCmd
+     /tmp/ccuKD78v.s:1684   .text.RCC_APB2PeriphResetCmd:0000000000000018 $d
+ARM GAS  /tmp/ccuKD78v.s 			page 98
 
 
-     /tmp/ccybMCCA.s:1689   .text.RCC_AHB1PeriphClockLPModeCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1695   .text.RCC_AHB1PeriphClockLPModeCmd:0000000000000000 RCC_AHB1PeriphClockLPModeCmd
-     /tmp/ccybMCCA.s:1729   .text.RCC_AHB1PeriphClockLPModeCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1734   .text.RCC_AHB2PeriphClockLPModeCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1740   .text.RCC_AHB2PeriphClockLPModeCmd:0000000000000000 RCC_AHB2PeriphClockLPModeCmd
-     /tmp/ccybMCCA.s:1774   .text.RCC_AHB2PeriphClockLPModeCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1779   .text.RCC_APB1PeriphClockLPModeCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1785   .text.RCC_APB1PeriphClockLPModeCmd:0000000000000000 RCC_APB1PeriphClockLPModeCmd
-     /tmp/ccybMCCA.s:1819   .text.RCC_APB1PeriphClockLPModeCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1824   .text.RCC_APB2PeriphClockLPModeCmd:0000000000000000 $t
-     /tmp/ccybMCCA.s:1830   .text.RCC_APB2PeriphClockLPModeCmd:0000000000000000 RCC_APB2PeriphClockLPModeCmd
-     /tmp/ccybMCCA.s:1864   .text.RCC_APB2PeriphClockLPModeCmd:0000000000000018 $d
-     /tmp/ccybMCCA.s:1869   .text.RCC_LSEModeConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:1875   .text.RCC_LSEModeConfig:0000000000000000 RCC_LSEModeConfig
-     /tmp/ccybMCCA.s:1905   .text.RCC_LSEModeConfig:000000000000001c $d
-     /tmp/ccybMCCA.s:1910   .text.RCC_ITConfig:0000000000000000 $t
-     /tmp/ccybMCCA.s:1916   .text.RCC_ITConfig:0000000000000000 RCC_ITConfig
-     /tmp/ccybMCCA.s:1948   .text.RCC_ITConfig:0000000000000018 $d
-     /tmp/ccybMCCA.s:1953   .text.RCC_GetFlagStatus:0000000000000000 $t
-     /tmp/ccybMCCA.s:1959   .text.RCC_GetFlagStatus:0000000000000000 RCC_GetFlagStatus
-     /tmp/ccybMCCA.s:2040   .text.RCC_GetFlagStatus:0000000000000030 $d
-     /tmp/ccybMCCA.s:2045   .text.RCC_WaitForHSEStartUp:0000000000000000 $t
-     /tmp/ccybMCCA.s:2051   .text.RCC_WaitForHSEStartUp:0000000000000000 RCC_WaitForHSEStartUp
-     /tmp/ccybMCCA.s:2117   .text.RCC_ClearFlag:0000000000000000 $t
-     /tmp/ccybMCCA.s:2123   .text.RCC_ClearFlag:0000000000000000 RCC_ClearFlag
-     /tmp/ccybMCCA.s:2142   .text.RCC_ClearFlag:000000000000000c $d
-     /tmp/ccybMCCA.s:2147   .text.RCC_GetITStatus:0000000000000000 $t
-     /tmp/ccybMCCA.s:2153   .text.RCC_GetITStatus:0000000000000000 RCC_GetITStatus
-     /tmp/ccybMCCA.s:2186   .text.RCC_GetITStatus:0000000000000010 $d
-     /tmp/ccybMCCA.s:2191   .text.RCC_ClearITPendingBit:0000000000000000 $t
-     /tmp/ccybMCCA.s:2197   .text.RCC_ClearITPendingBit:0000000000000000 RCC_ClearITPendingBit
-     /tmp/ccybMCCA.s:2215   .text.RCC_ClearITPendingBit:0000000000000008 $d
-     /tmp/ccybMCCA.s:2220   .data.APBAHBPrescTable:0000000000000000 $d
+     /tmp/ccuKD78v.s:1689   .text.RCC_AHB1PeriphClockLPModeCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1695   .text.RCC_AHB1PeriphClockLPModeCmd:0000000000000000 RCC_AHB1PeriphClockLPModeCmd
+     /tmp/ccuKD78v.s:1729   .text.RCC_AHB1PeriphClockLPModeCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1734   .text.RCC_AHB2PeriphClockLPModeCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1740   .text.RCC_AHB2PeriphClockLPModeCmd:0000000000000000 RCC_AHB2PeriphClockLPModeCmd
+     /tmp/ccuKD78v.s:1774   .text.RCC_AHB2PeriphClockLPModeCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1779   .text.RCC_APB1PeriphClockLPModeCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1785   .text.RCC_APB1PeriphClockLPModeCmd:0000000000000000 RCC_APB1PeriphClockLPModeCmd
+     /tmp/ccuKD78v.s:1819   .text.RCC_APB1PeriphClockLPModeCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1824   .text.RCC_APB2PeriphClockLPModeCmd:0000000000000000 $t
+     /tmp/ccuKD78v.s:1830   .text.RCC_APB2PeriphClockLPModeCmd:0000000000000000 RCC_APB2PeriphClockLPModeCmd
+     /tmp/ccuKD78v.s:1864   .text.RCC_APB2PeriphClockLPModeCmd:0000000000000018 $d
+     /tmp/ccuKD78v.s:1869   .text.RCC_LSEModeConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:1875   .text.RCC_LSEModeConfig:0000000000000000 RCC_LSEModeConfig
+     /tmp/ccuKD78v.s:1905   .text.RCC_LSEModeConfig:000000000000001c $d
+     /tmp/ccuKD78v.s:1910   .text.RCC_ITConfig:0000000000000000 $t
+     /tmp/ccuKD78v.s:1916   .text.RCC_ITConfig:0000000000000000 RCC_ITConfig
+     /tmp/ccuKD78v.s:1948   .text.RCC_ITConfig:0000000000000018 $d
+     /tmp/ccuKD78v.s:1953   .text.RCC_GetFlagStatus:0000000000000000 $t
+     /tmp/ccuKD78v.s:1959   .text.RCC_GetFlagStatus:0000000000000000 RCC_GetFlagStatus
+     /tmp/ccuKD78v.s:2040   .text.RCC_GetFlagStatus:0000000000000030 $d
+     /tmp/ccuKD78v.s:2045   .text.RCC_WaitForHSEStartUp:0000000000000000 $t
+     /tmp/ccuKD78v.s:2051   .text.RCC_WaitForHSEStartUp:0000000000000000 RCC_WaitForHSEStartUp
+     /tmp/ccuKD78v.s:2117   .text.RCC_ClearFlag:0000000000000000 $t
+     /tmp/ccuKD78v.s:2123   .text.RCC_ClearFlag:0000000000000000 RCC_ClearFlag
+     /tmp/ccuKD78v.s:2142   .text.RCC_ClearFlag:000000000000000c $d
+     /tmp/ccuKD78v.s:2147   .text.RCC_GetITStatus:0000000000000000 $t
+     /tmp/ccuKD78v.s:2153   .text.RCC_GetITStatus:0000000000000000 RCC_GetITStatus
+     /tmp/ccuKD78v.s:2186   .text.RCC_GetITStatus:0000000000000010 $d
+     /tmp/ccuKD78v.s:2191   .text.RCC_ClearITPendingBit:0000000000000000 $t
+     /tmp/ccuKD78v.s:2197   .text.RCC_ClearITPendingBit:0000000000000000 RCC_ClearITPendingBit
+     /tmp/ccuKD78v.s:2215   .text.RCC_ClearITPendingBit:0000000000000008 $d
+     /tmp/ccuKD78v.s:2220   .data.APBAHBPrescTable:0000000000000000 $d
 
 NO UNDEFINED SYMBOLS
